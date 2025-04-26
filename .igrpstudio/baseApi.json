@@ -1,0 +1,14 @@
+{
+  "type": "springboot",
+  "name": "simple",
+  "group": "cv.igrp",
+  "artifact": "simple",
+  "packageName": "simple",
+  "database": "Postgresql",
+  "projectStructureStyle": "domain",
+  "enableObservability": true,
+  "enableEntityRevision": true,
+  "igrpCoreVersion": "0.0.1-alpha",
+  "springBootVersion": "3.4.3",
+  "enableGraalVm": false
+}
