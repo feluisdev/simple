@@ -32,9 +32,9 @@ public class ListaDeUtentesQueryHandler implements QueryHandler<ListaDeUtentesQu
     @IgrpQueryHandler
     public ResponseEntity<Page<UtenteResponseDTO>> handle(ListaDeUtentesQuery query) {
         // TODO: Implement the query handling logic here
-        Specification<Utente> spec = filtroUtente.aplicarFiltros(query);
+        Specification<Utente> specFiltro = filtroUtente.aplicarFiltros(query);
 
-        Page<Utente> listaUtentePag = utenteRepository.findAll(spec, query.getPageable());
+        Page<Utente> listaUtentePag = utenteRepository.findAll(specFiltro, query.getPageable());
 
         Page<UtenteResponseDTO> responsePage = listaUtentePag.map(u ->
                 utenteMapper.toUtenteResponseDTO(u)
