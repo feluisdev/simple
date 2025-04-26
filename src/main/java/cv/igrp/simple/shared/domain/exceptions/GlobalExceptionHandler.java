@@ -37,6 +37,40 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(problem.getStatus()).body(problem);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<IgrpProblem<Map<String, String>>> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        BindingResult bindingResult = ex.getBindingResult();
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            //System.out.println("erros:::::::::: "+fieldError.getDefaultMessage());
+        }
+        IgrpProblem<Map<String, String>> problem = new IgrpProblem<>(
+                HttpStatus.BAD_REQUEST,
+                "Erros de validação entrada",
+                errors
+        );
+        return ResponseEntity
+                .status(problem.getStatus())
+                .body(problem);
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity<IgrpProblem<Map<String, String>>> handleDateTimeParseException(DateTimeParseException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("dataNascimento", "Formato de data inválido. Use o formato yyyy-MM-dd");
+
+        IgrpProblem<Map<String, String>> problem = new IgrpProblem<>(
+                HttpStatus.BAD_REQUEST,
+                "Erro de formatação de data",
+                errors
+        );
+
+        return ResponseEntity
+                .status(problem.getStatus())
+                .body(problem);
+    }
+
 
 
 }

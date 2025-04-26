@@ -1,0 +1,1 @@
+{"type":"enum","module":"utente","name":"TipoUtente","values":[{"name":"Cidadao","attributes":["cidadao","Cidadão"]},{"name":"Empresa","attributes":["empresa","Empresa"]},{"name":"Camara_Municpal","attributes":["camara","Câmara Municipal"]}],"attributes":[{"type":"string","name":"Code"},{"type":"string","name":"Description"}]}
