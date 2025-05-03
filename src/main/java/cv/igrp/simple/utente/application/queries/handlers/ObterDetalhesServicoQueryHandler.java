@@ -11,6 +11,7 @@ import cv.igrp.simple.utente.domain.models.Utente;
 import cv.igrp.simple.utente.domain.models.UtenteServico;
 import cv.igrp.simple.utente.domain.service.UtenteService;
 import cv.igrp.simple.utente.infrastructure.persistence.UtenteServicoRepository;
+import jakarta.persistence.EntityManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,14 @@ public class ObterDetalhesServicoQueryHandler implements QueryHandler<ObterDetal
 
    private final ServicoMapper utenteServicoMapper;
 
-   public ObterDetalhesServicoQueryHandler(UtenteService utenteService, UtenteServicoRepository utenteServicoRepository, ServicoMapper utenteServicoMapper) {
+   private final EntityManager entityManager;
+
+   public ObterDetalhesServicoQueryHandler(UtenteService utenteService, UtenteServicoRepository utenteServicoRepository, ServicoMapper utenteServicoMapper, EntityManager entityManager) {
 
        this.utenteService = utenteService;
        this.utenteServicoRepository = utenteServicoRepository;
        this.utenteServicoMapper = utenteServicoMapper;
+       this.entityManager = entityManager;
    }
 
    @IgrpQueryHandler
@@ -41,7 +45,9 @@ public class ObterDetalhesServicoQueryHandler implements QueryHandler<ObterDetal
 
       Utente utente = utenteService.obterUtentePorId(utenteId);
 
-      Optional<UtenteServico> optionalUtenteServico = utenteServicoRepository.findByIdAndUtenteId_Id(servicoId, utenteId);
+      //Optional<UtenteServico> optionalUtenteServico = utenteServicoRepository.findByIdAndUtenteId_Id(servicoId, utenteId);
+
+      Optional<UtenteServico> optionalUtenteServico = utenteServicoRepository.buscarPorServicoEUtente(servicoId, utenteId);
 
       if (optionalUtenteServico.isEmpty()) {
 

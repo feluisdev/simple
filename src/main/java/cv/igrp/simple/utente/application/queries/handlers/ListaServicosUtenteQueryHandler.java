@@ -44,7 +44,6 @@ public class ListaServicosUtenteQueryHandler implements QueryHandler<ListaServic
 
       Specification<UtenteServico> spec = filtroUtenteServico.aplicarFiltros(query);
 
-      //Page<UtenteServico> pageServicos = utenteServicoRepository.findByUtenteId_Id(utenteId, query.getPageable());
       Page<UtenteServico> pageServicos = utenteServicoRepository.findAll(spec, query.getPageable());
 
 
