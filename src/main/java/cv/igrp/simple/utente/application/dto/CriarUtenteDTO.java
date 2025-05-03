@@ -6,17 +6,19 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import cv.igrp.simple.utente.application.dto.validator.ICriarUtenteDTOValidator;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
+@ICriarUtenteDTOValidator
 @IgrpDTO
 public class CriarUtenteDTO {
 
   @NotNull(message = "The field <tipoUtente> is required.")
+  
   private TipoUtente tipoUtente;
-
   @NotBlank(message = "The field <nome> is required.")
 	@Size(min = 3, message = "The field length <nome> must be at least 3 characters.")
   
