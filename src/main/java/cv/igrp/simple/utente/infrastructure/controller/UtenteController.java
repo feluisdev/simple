@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.CommandBus;
 import cv.igrp.framework.core.domain.QueryBus;
 import cv.igrp.simple.utente.application.commands.commands.*;
@@ -29,6 +31,8 @@ import cv.igrp.simple.utente.application.dto.UpdateUtenteDTO;
 @RequestMapping(path = "utentes/v1")
 @Tag(name = "Utente", description = "endpoint para gestao de utente")
 public class UtenteController {
+
+   private static final Logger LOGGER = LoggerFactory.getLogger(UtenteController.class);
 
   
   private final CommandBus commandBus;
@@ -69,9 +73,11 @@ public class UtenteController {
     @RequestParam(value = "documento", required = false) String documento,
     @RequestParam(value = "estado", required = false) String estado,@ParameterObject Pageable pageable)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "UtenteController", "listaDeUtentes");
       final var query = new ListaDeUtentesQuery(tipo, numeroUtente, nome, nif, documento, estado,pageable);
       ResponseEntity<Page<UtenteResponseDTO>> response = queryBus.handle(query);
-       return ResponseEntity.status(response.getStatusCode())
+      LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "UtenteController", "listaDeUtentes");
+      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }
@@ -97,11 +103,13 @@ public class UtenteController {
   )
   
   public ResponseEntity<UtenteResponseDTO> obterUtente(
-    @PathVariable(value = "id") String id)
+    @PathVariable(value = "id") Integer id)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "UtenteController", "obterUtente");
       final var query = new ObterUtenteQuery(id);
       ResponseEntity<UtenteResponseDTO> response = queryBus.handle(query);
-       return ResponseEntity.status(response.getStatusCode())
+      LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "UtenteController", "obterUtente");
+      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }
@@ -128,8 +136,10 @@ public class UtenteController {
   public ResponseEntity<UtenteResponseDTO> criarUtente(@Valid @RequestBody CriarUtenteDTO utenteDTO
     )
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "UtenteController", "criarUtente");
       final var command = new CriarUtenteCommand(utenteDTO);
        ResponseEntity<UtenteResponseDTO> response = commandBus.send(command);
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "UtenteController", "criarUtente");
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
@@ -156,10 +166,12 @@ public class UtenteController {
   )
   
   public ResponseEntity<UtenteResponseDTO> atualizarUtente(@Valid @RequestBody UpdateUtenteDTO atualizarUtenteRequest
-    , @PathVariable(value = "id") String id)
+    , @PathVariable(value = "id") Integer id)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "UtenteController", "atualizarUtente");
       final var command = new AtualizarUtenteCommand(atualizarUtenteRequest, id);
        ResponseEntity<UtenteResponseDTO> response = commandBus.send(command);
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "UtenteController", "atualizarUtente");
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
@@ -186,10 +198,12 @@ public class UtenteController {
   )
   
   public ResponseEntity<String> inativarUtente(
-    @PathVariable(value = "id") String id)
+    @PathVariable(value = "id") Integer id)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "UtenteController", "inativarUtente");
       final var command = new InativarUtenteCommand(id);
        ResponseEntity<String> response = commandBus.send(command);
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "UtenteController", "inativarUtente");
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());

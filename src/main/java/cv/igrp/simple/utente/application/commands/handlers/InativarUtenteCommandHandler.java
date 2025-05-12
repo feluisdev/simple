@@ -29,7 +29,7 @@ public class InativarUtenteCommandHandler implements CommandHandler<InativarUten
    @IgrpCommandHandler
    public ResponseEntity<String> handle(InativarUtenteCommand command) {
       // TODO: Implement the command handling logic here
-      Integer idUtente = Integer.parseInt(command.getId());
+      Integer idUtente = command.getId();
       Utente utente = utenteService.obterUtentePorId(idUtente);
       utente.setEstado(Estado.INATIVO);
       utenteRepository.save(utente);

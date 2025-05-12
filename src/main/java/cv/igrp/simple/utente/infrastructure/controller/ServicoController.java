@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.CommandBus;
 import cv.igrp.framework.core.domain.QueryBus;
 import cv.igrp.simple.utente.application.commands.commands.*;
@@ -29,6 +31,8 @@ import cv.igrp.simple.utente.application.dto.ServicoAssociadoResponseDTO;
 @RequestMapping(path = "utentes/v1")
 @Tag(name = "Servico", description = "serviços de um utente")
 public class ServicoController {
+
+   private static final Logger LOGGER = LoggerFactory.getLogger(ServicoController.class);
 
   
   private final CommandBus commandBus;
@@ -68,9 +72,11 @@ public class ServicoController {
     @RequestParam(value = "dataInicio", required = false) String dataInicio,
     @RequestParam(value = "dataFIm", required = false) String dataFIm, @PathVariable(value = "utenteId") String utenteId,@ParameterObject Pageable pageable)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "listaServicosUtente");
       final var query = new ListaServicosUtenteQuery(Tipo, Estado, dataInicio, dataFIm, utenteId,pageable);
       ResponseEntity<Page<ServicoResponseDTO>> response = queryBus.handle(query);
-       return ResponseEntity.status(response.getStatusCode())
+      LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "ServicoController", "listaServicosUtente");
+      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }
@@ -96,10 +102,12 @@ public class ServicoController {
   )
   
   public ResponseEntity<ServicoAssociadoResponseDTO> adicionarServicoUtente(@Valid @RequestBody AdicionarServicoDTO adicionarServicoUtenteRequest
-    , @PathVariable(value = "utenteId") String utenteId,@PathVariable(value = "servicoId") String servicoId)
+    , @PathVariable(value = "utenteId") Integer utenteId,@PathVariable(value = "servicoId") Integer servicoId)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "adicionarServicoUtente");
       final var command = new AdicionarServicoUtenteCommand(adicionarServicoUtenteRequest, utenteId, servicoId);
        ResponseEntity<ServicoAssociadoResponseDTO> response = commandBus.send(command);
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "ServicoController", "adicionarServicoUtente");
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
@@ -126,11 +134,13 @@ public class ServicoController {
   )
   
   public ResponseEntity<ServicoResponseDTO> obterDetalhesServico(
-    @PathVariable(value = "utenteId") String utenteId,@PathVariable(value = "servicoId") String servicoId)
+    @PathVariable(value = "utenteId") Integer utenteId,@PathVariable(value = "servicoId") Integer servicoId)
   {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "obterDetalhesServico");
       final var query = new ObterDetalhesServicoQuery(utenteId, servicoId);
       ResponseEntity<ServicoResponseDTO> response = queryBus.handle(query);
-       return ResponseEntity.status(response.getStatusCode())
+      LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "ServicoController", "obterDetalhesServico");
+      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }

@@ -40,8 +40,8 @@ public class ObterDetalhesServicoQueryHandler implements QueryHandler<ObterDetal
    @IgrpQueryHandler
    public ResponseEntity<ServicoResponseDTO> handle(ObterDetalhesServicoQuery query) {
       // TODO: Implement the query handling logic here
-      Integer utenteId = Integer.parseInt(query.getUtenteId());
-      Integer servicoId = Integer.parseInt(query.getServicoId());
+      Integer utenteId = query.getUtenteId();
+      Integer servicoId = query.getServicoId();
 
       Utente utente = utenteService.obterUtentePorId(utenteId);
 

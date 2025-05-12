@@ -14,6 +14,7 @@ public class ServicoMapper {
         dto.setTipo(servico.getObjetoTipo());
         dto.setDescricao(servico.getDescricao());
         dto.setReferencia(servico.getReferencia());
+        dto.setObjetoID(servico.getObjetoId());
 
         dto.setDataInicio(servico.getDataInicio() != null ? servico.getDataInicio().toString() : null);
         dto.setDataFim(servico.getDataFim() != null ? servico.getDataFim().toString() : null);

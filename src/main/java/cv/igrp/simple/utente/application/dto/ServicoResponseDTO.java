@@ -30,6 +30,9 @@ public class ServicoResponseDTO {
   private String referencia;
   
   
+  private Integer objetoID;
+  
+  
   private String dataInicio;
   
   

@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ObterUtenteQuery implements Query {
 
-  @NotBlank(message = "The field <id> is required.")
-  private String id;
+  @NotNull(message = "The field <id> is required.")
+  private Integer id;
 
 }

@@ -31,7 +31,7 @@ public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUt
    @IgrpCommandHandler
    public ResponseEntity<UtenteResponseDTO> handle(AtualizarUtenteCommand command) {
       // TODO: Implement the command handling logic here
-      Integer idUtente = Integer.parseInt(command.getId());
+      Integer idUtente = command.getId();
       Utente utente = utenteService.obterUtentePorId(idUtente);
       var dto = command.getUpdateutente();
 

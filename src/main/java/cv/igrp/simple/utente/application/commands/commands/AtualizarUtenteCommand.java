@@ -14,7 +14,7 @@ public class AtualizarUtenteCommand implements Command {
 
   
   private UpdateUtenteDTO updateutente;
-  @NotBlank(message = "The field <id> is required.")
-  private String id;
+  @NotNull(message = "The field <id> is required.")
+  private Integer id;
 
 }

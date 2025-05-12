@@ -17,15 +17,13 @@ public interface UtenteServicoRepository extends
     JpaRepository<UtenteServico, Integer>,
     JpaSpecificationExecutor<UtenteServico>
 {
-    Page<UtenteServico> findByUtenteId_Id(Integer utenteId, Pageable pageable);
-
-    Optional<UtenteServico> findByIdAndUtenteId_Id(Integer servicoId, Integer utenteId);
-
     @Query("SELECT us FROM UtenteServico us WHERE us.id = :servicoId AND us.utenteId.id = :utenteId")
     Optional<UtenteServico> buscarPorServicoEUtente(@Param("servicoId") Integer servicoId, @Param("utenteId") Integer utenteId);
 
     @Query("SELECT us FROM UtenteServico us WHERE us.utenteId.id = :utenteId")
     Page<UtenteServico> buscarServicosPorUtenteId(@Param("utenteId") Integer utenteId, Pageable pageable);
+
+
 
 
 }

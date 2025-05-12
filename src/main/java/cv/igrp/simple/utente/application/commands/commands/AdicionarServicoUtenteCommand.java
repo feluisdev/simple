@@ -14,9 +14,9 @@ public class AdicionarServicoUtenteCommand implements Command {
 
   
   private AdicionarServicoDTO adicionarservico;
-  @NotBlank(message = "The field <utenteId> is required.")
-  private String utenteId;
-  @NotBlank(message = "The field <servicoId> is required.")
-  private String servicoId;
+  @NotNull(message = "The field <utenteId> is required.")
+  private Integer utenteId;
+  @NotNull(message = "The field <servicoId> is required.")
+  private Integer servicoId;
 
 }
