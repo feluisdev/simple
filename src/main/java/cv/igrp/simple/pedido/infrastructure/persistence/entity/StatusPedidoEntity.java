@@ -46,7 +46,7 @@ public class StatusPedidoEntity extends AuditEntity {
 
   
     @Column(name="ordem")
-    private String ordem;
+    private Integer ordem;
 
   
     @Column(name="visivel_portal")
