@@ -5,7 +5,6 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.List;
 
 
@@ -24,58 +23,58 @@ public class TipoPedidoEntity extends AuditEntity {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
+  
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+  @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     private CategoriaPedidoEntity categoriaId;
-
-
     @NotBlank(message = "nome is mandatory")
-    @Column(name = "nome", nullable = false)
+    @Column(name="nome", nullable = false)
     private String nome;
 
-
+  
     @NotBlank(message = "codigo is mandatory")
-    @Column(name = "codigo", nullable = false)
+    @Column(name="codigo", nullable = false)
     private String codigo;
 
-
-    @Column(name = "descricao")
+  
+    @Column(name="descricao")
     private String descricao;
 
-
-    @Column(name = "prazo_estimado")
+  
+    @Column(name="prazo_estimado")
     private Integer prazoEstimado;
 
-
-    @Column(name = "valor_base")
+  
+    @Column(name="valor_base")
     private Integer valorBase;
 
-
-    @Column(name = "requer_vistoria")
+  
+    @Column(name="requer_vistoria")
     private boolean requerVistoria;
 
-
-    @Column(name = "requer_analise_tecnica")
+  
+    @Column(name="requer_analise_tecnica")
     private boolean requerAnaliseTecnica;
 
-
-    @Column(name = "requer_aprovacao")
+  
+    @Column(name="requer_aprovacao")
     private boolean requerAprovacao;
 
-
-    @Column(name = "disponivel_portal")
+  
+    @Column(name="disponivel_portal")
     private boolean disponivelPortal;
 
-
-    @Column(name = "ativo")
+  
+    @Column(name="ativo")
     private boolean ativo;
 
-    @OneToMany(mappedBy = "tipoPedidoId")
-    private List<PedidoEntity> pedidos;
+     @OneToMany(mappedBy = "tipoPedidoId")
+private List<PedidoEntity> pedidos;
 
-    @OneToMany(mappedBy = "tipoPedidoId")
-    private List<EtapaProcessoEntity> tipospedidos;
+   @OneToMany(mappedBy = "tipoPedidoId")
+private List<EtapaProcessoEntity> etapasprocessos;
 
 
 }

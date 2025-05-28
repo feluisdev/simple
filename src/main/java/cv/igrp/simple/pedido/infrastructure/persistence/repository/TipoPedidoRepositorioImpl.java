@@ -24,4 +24,11 @@ public class TipoPedidoRepositorioImpl implements TipoPedidoRepository {
         jpTipoPedidoEntityRepository.save(entity);
 
     }
+
+    @Override
+    public TipoPedido getById(Integer id) {
+        var entity = jpTipoPedidoEntityRepository.findById(id).orElseThrow();
+
+        return tipoPedidoMapper.toDomain(entity);
+    }
 }

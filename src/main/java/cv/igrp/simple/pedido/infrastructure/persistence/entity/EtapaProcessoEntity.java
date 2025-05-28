@@ -5,7 +5,6 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.List;
 
 
@@ -24,54 +23,55 @@ public class EtapaProcessoEntity extends AuditEntity {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
+  
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+  @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_pedido_id", referencedColumnName = "id")
     private TipoPedidoEntity tipoPedidoId;
 
-
     @NotBlank(message = "codigo is mandatory")
-    @Column(name = "codigo", nullable = false)
+    @Column(name="codigo", nullable = false)
     private String codigo;
 
-
-    @Column(name = "nome")
+  
+    @Column(name="nome")
     private String nome;
 
-
-    @Column(name = "descricao")
+  
+    @Column(name="descricao")
     private String descricao;
 
-
-    @Column(name = "ordem")
+  
+    @Column(name="ordem")
     private Integer ordem;
 
-
-    @Column(name = "tempo_estimado")
+  
+    @Column(name="tempo_estimado")
     private Integer tempoEstimado;
 
-
-    @Column(name = "requer_documento")
+  
+    @Column(name="requer_documento")
     private boolean requerDocumento;
 
-
-    @Column(name = "requer_pagamento")
+  
+    @Column(name="requer_pagamento")
     private boolean requerPagamento;
 
-
-    @Column(name = "requer_aprovacao")
+  
+    @Column(name="requer_aprovacao")
     private boolean requerAprovacao;
 
+  
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+  @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "etapa_anterior_id", referencedColumnName = "id")
-    private EtapaProcessoEntity etapaAnteriorId;
+    private EtapaProcessoEntity etapaAnteriorId;   @OneToMany(mappedBy = "etapaAnteriorId")
+private List<EtapaProcessoEntity> etapasanteriores;
 
-    @OneToMany(mappedBy = "etapaAnteriorId")
-    private List<EtapaProcessoEntity> etapasanteriores;
-
-    @OneToMany(mappedBy = "etapaAtualId")
-    private List<PedidoEntity> pedidos;
+   @OneToMany(mappedBy = "etapaAtualId")
+private List<PedidoEntity> pedidos;
 
 
 }

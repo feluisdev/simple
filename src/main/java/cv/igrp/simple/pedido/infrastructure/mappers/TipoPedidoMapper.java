@@ -17,6 +17,9 @@ public class TipoPedidoMapper {
     public TipoPedidoEntity toEntity(TipoPedido tipoPedido) {
         TipoPedidoEntity entity = new TipoPedidoEntity();
 
+        if(tipoPedido.getId()!=null){
+            entity.setId(tipoPedido.getId());
+        }
         entity.setCodigo(tipoPedido.getCodigo());
         entity.setNome(tipoPedido.getNome());
         entity.setDescricao(tipoPedido.getDescricao());
@@ -36,6 +39,7 @@ public class TipoPedidoMapper {
 
     public TipoPedido toDomain(TipoPedidoEntity entity) {
         return new TipoPedido(
+                entity.getId(),
                 entity.getCodigo(),
                 entity.getNome(),
                 entity.getDescricao(),
@@ -46,7 +50,8 @@ public class TipoPedidoMapper {
                 entity.isRequerAprovacao(),
                 entity.isDisponivelPortal(),
                 entity.isAtivo(),
-                categoriaMapper.toDomain(entity.getCategoriaId())
+                categoriaMapper.toDomain(entity.getCategoriaId()),
+                null
         );
     }
 }

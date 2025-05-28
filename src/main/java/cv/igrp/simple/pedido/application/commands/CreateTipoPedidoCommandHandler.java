@@ -35,6 +35,7 @@ public class CreateTipoPedidoCommandHandler implements CommandHandler<CreateTipo
       CategoriaPedido categoriaPedido = categoriaPedidoRepository.getById(dto.getCategoriaId());
 
     TipoPedido tipoPedido = new TipoPedido(
+            null,
               dto.getCodigo(),
               dto.getNome(),
               dto.getDescricao(),
@@ -45,7 +46,8 @@ public class CreateTipoPedidoCommandHandler implements CommandHandler<CreateTipo
               dto.isRequerAprovacao(),
               dto.isDisponivelPortal(),
                true,
-              categoriaPedido
+              categoriaPedido,
+            null
       );
 
 
