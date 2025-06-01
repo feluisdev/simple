@@ -51,7 +51,7 @@ public class UtenteMapper {
         utente.setNomePai(dto.getNomePai());
         utente.setNome(dto.getNome());
         utente.setNomeMae(dto.getNome_mae());
-        utente.setDataNascimento(LocalDate.parse(dto.getDataNascimento(), FORMATADOR));
+        utente.setDataNascimento(dto.getDataNascimento());
         utente.setEmail(dto.getEmail());
 
         return utente;

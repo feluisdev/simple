@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.utente.application.dto.validator.ICriarUtenteDTOValidator;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
+import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,7 +38,7 @@ public class CriarUtenteDTO {
   private String nomePai;
   
   
-  private String dataNascimento;
+  private LocalDate dataNascimento;
   @NotBlank(message = "The field <telefone> is required.")
   
   private String telefone;
