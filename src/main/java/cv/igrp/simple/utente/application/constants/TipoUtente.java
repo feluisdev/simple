@@ -6,16 +6,16 @@ import lombok.Getter;
 public enum TipoUtente {
 
   CIDADAO(
-    "cidadao", 
+    "CIDADAO", 
     "Cidadão"
   ),
     EMPRESA(
-    "empresa", 
+    "EMPRESA", 
     "Empresa"
   ),
-    CAMARA_MUNICPAL(
-    "camara", 
-    "Câmara Municipal"
+    SERV_PUBLICO(
+    "SERV_PUBLICO", 
+    "Servidor Público"
   )
   ;
 

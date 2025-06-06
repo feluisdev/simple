@@ -23,8 +23,21 @@ public class UpdateUtenteDTO {
   
   
   private String telefone;
-  @Email(message = "Invalid email format for field <email>.")
-  
+
+  @Email(message = "Invalid email format for field <email>.")  
   private String email;
+
+  private String cxPostal;
+
+  private String nomeMae;
+
+  private String nomePai;
+
+  private String nif;
+
+  private String bi;
+
+  @NotBlank(message = "The field <tipoUtente> is required.")
+  private String tipoUtente;
 
 }

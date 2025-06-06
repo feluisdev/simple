@@ -49,4 +49,6 @@ public class CriarUtenteDTO {
   
   private String email;
 
+  private String cxPostal;
+
 }

@@ -83,5 +83,6 @@ private List<UtenteServico> servicos;
     @Column(name="email")
     private String email;
 
-  
+    @Column(name="cx_postal")
+    private String cxPostal;
 }
