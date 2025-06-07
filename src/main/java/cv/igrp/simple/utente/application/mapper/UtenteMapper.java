@@ -30,11 +30,14 @@ public class UtenteMapper {
         dto.setBi(utente.getBi());
         dto.setNomeMae(utente.getNomeMae());
         dto.setNomePai(utente.getNomePai()); // Esse campo parece não estar presente na entidade — confirme se existe
-        dto.setDataNascimento(utente.getDataNascimento().toString());
+        // Verificar se dataNascimento é null antes de chamar toString()
+        LocalDate dataNascimento = utente.getDataNascimento();
+        dto.setDataNascimento(dataNascimento != null ? dataNascimento.toString() : null);
         dto.setEstado(utente.getEstado());
         dto.setMorada(utente.getMorada());
         dto.setTelefone(utente.getTelefone());
         dto.setEmail(utente.getEmail());
+        dto.setCxPostal(utente.getCxPostal());
         return dto;
 
     }
@@ -53,6 +56,7 @@ public class UtenteMapper {
         utente.setNomeMae(dto.getNome_mae());
         utente.setDataNascimento(dto.getDataNascimento());
         utente.setEmail(dto.getEmail());
+        utente.setCxPostal(dto.getCxPostal());
 
         return utente;
     }

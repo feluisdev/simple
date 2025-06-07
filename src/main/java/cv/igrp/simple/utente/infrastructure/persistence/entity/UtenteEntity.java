@@ -1,17 +1,17 @@
-package cv.igrp.simple.utente.domain.models;
+package cv.igrp.simple.utente.infrastructure.persistence.entity;
 
 import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import cv.igrp.simple.utente.application.constants.Estado;
 import java.util.List;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
+import cv.igrp.simple.utente.domain.models.UtenteServico;
 
-@Audited
+
 @Getter
 @Setter
 @ToString
@@ -20,7 +20,7 @@ import cv.igrp.simple.utente.application.constants.TipoUtente;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cm_utente")
-public class Utente extends AuditEntity {
+public class UtenteEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,6 @@ public class Utente extends AuditEntity {
     private Integer id;
 
   
-
     @NotBlank(message = "nrUtente is mandatory")
     @Column(name="nrutente", nullable = false)
     private String nrUtente;
@@ -75,6 +74,7 @@ public class Utente extends AuditEntity {
 
   @OneToMany(mappedBy = "utenteId", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 private List<UtenteServico> servicos;
+
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_utente")
     private TipoUtente tipoUtente;
@@ -83,6 +83,9 @@ private List<UtenteServico> servicos;
     @Column(name="email")
     private String email;
 
-    @Column(name="cx_postal")
+  
+    @Column(name="cxpostal")
     private String cxPostal;
+
+  
 }

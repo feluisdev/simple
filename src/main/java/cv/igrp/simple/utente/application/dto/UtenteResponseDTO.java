@@ -60,5 +60,8 @@ public class UtenteResponseDTO {
   
   
   private String updatedAt;
+  
+  
+  private String cxPostal;
 
 }
