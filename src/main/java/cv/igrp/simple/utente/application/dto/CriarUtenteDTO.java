@@ -48,7 +48,8 @@ public class CriarUtenteDTO {
   @Email(message = "Invalid email format for field <email>.")
   
   private String email;
-
+  
+  
   private String cxPostal;
 
 }

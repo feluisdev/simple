@@ -54,11 +54,14 @@ public class UtenteResponseDTO {
   
   
   private String morada;
-
-  private String cxPostal;  
   
-  private String createdAt;  
+  
+  private String createdAt;
+  
   
   private String updatedAt;
+  
+  
+  private String cxPostal;
 
 }

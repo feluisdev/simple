@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-
+import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,21 +23,29 @@ public class UpdateUtenteDTO {
   
   
   private String telefone;
-
-  @Email(message = "Invalid email format for field <email>.")  
+  @Email(message = "Invalid email format for field <email>.")
+  
   private String email;
-
-  private String cxPostal;
-
+  
+  
   private String nomeMae;
-
+  
+  
   private String nomePai;
-
+  
+  
   private String nif;
-
+  
+  
   private String bi;
-
-  @NotBlank(message = "The field <tipoUtente> is required.")
+  
+  
   private String tipoUtente;
+  
+  
+  private String cxPostal;
+  
+  
+  private LocalDate dataNascimento;
 
 }
