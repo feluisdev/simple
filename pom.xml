@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>
+		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cv.igrp</groupId>
@@ -144,6 +144,17 @@
 		  <artifactId>opentelemetry-exporter-zipkin</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>cv.igrp.platform</groupId>
+			<artifactId>file-manager-core</artifactId>
+			<version>0.0.1-alpha</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cv.igrp.platform</groupId>
+			<artifactId>file-manager-minio</artifactId>
+			<version>0.0.1-alpha</version>
+		</dependency>
   
   </dependencies>
 	<build>
