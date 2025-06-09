@@ -15,7 +15,7 @@ public enum TipoUtente {
     EMPRESA(
     "EMPRESA", "Empresa"
   ),
-    SERVIDORPUBLICO(
+    SERV_PUBLICO(
     "SERV_PUBLICO", "Servidor Público"
   )
   ;
