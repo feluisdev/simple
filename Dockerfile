@@ -1,5 +1,5 @@
 FROM maven:3.9.9-eclipse-temurin-24-alpine AS build
-ENV APP_HOME=app
+ENV APP_HOME=/app
 
 COPY src $APP_HOME/src
 COPY pom.xml $APP_HOME/pom.xml
