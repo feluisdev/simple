@@ -32,7 +32,7 @@ public class CriarUtenteDTO {
   private String bi;
   
   
-  private String nome_mae;
+  private String nomeMae;
   
   
   private String nomePai;

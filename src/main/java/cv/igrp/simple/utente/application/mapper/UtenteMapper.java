@@ -53,7 +53,7 @@ public class UtenteMapper {
         utente.setTipoUtente(dto.getTipoUtente());
         utente.setNomePai(dto.getNomePai());
         utente.setNome(dto.getNome());
-        utente.setNomeMae(dto.getNome_mae());
+        utente.setNomeMae(dto.getNomeMae());
         utente.setDataNascimento(dto.getDataNascimento());
         utente.setEmail(dto.getEmail());
         utente.setCxPostal(dto.getCxPostal());
