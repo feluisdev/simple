@@ -1,4 +1,4 @@
-FROM maven:3.9.9-eclipse-temurin-24-alpine AS build
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 ENV APP_HOME=/app
 
 COPY src $APP_HOME/src
@@ -9,7 +9,7 @@ WORKDIR $APP_HOME
 RUN mvn package -DskipTests
 
 
-FROM maven:3.9.9-eclipse-temurin-24-alpine
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
