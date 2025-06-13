@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.utente.application.constants.Estado;
+import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
 @Data
 @NoArgsConstructor
@@ -26,13 +27,13 @@ public class UtenteResponseDTO {
   private TipoUtente tipoUtente;
   
   
-  private String nrUtente;
+  private String numero;
   
   
   private String nif;
   
   
-  private String bi;
+  private String identificacao;
   
   
   private String nomeMae;
@@ -62,6 +63,12 @@ public class UtenteResponseDTO {
   private String updatedAt;
   
   
-  private String cxPostal;
+  private String caixaPostal;
+  
+  
+  private String departamentoResponsavel;
+  
+  
+  private TipoIdentificacao tipoIdentificacao;
 
 }

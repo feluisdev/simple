@@ -5,10 +5,10 @@ import cv.igrp.framework.stereotype.IgrpQueryHandler;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.application.mapper.UtenteMapper;
 import cv.igrp.simple.utente.application.queries.queries.ObterUtenteQuery;
-import cv.igrp.simple.utente.domain.models.Utente;
-import cv.igrp.simple.utente.domain.models.UtenteServico;
+import cv.igrp.simple.utente.domain.models.UtenteEntity;
+import cv.igrp.simple.utente.domain.models.UtenteServicoEntity;
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteRepository;
+import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class ObterUtenteQueryHandler implements QueryHandler<ObterUtenteQuery, R
       // TODO: Implement the query handling logic here
      Integer idUtente = Integer.valueOf(query.getId());
 
-     Utente utente = utenteService.obterUtentePorId(idUtente);
+     UtenteEntity utente = utenteService.obterUtentePorId(idUtente);
 
       UtenteResponseDTO responseDTO = utenteMapper.toUtenteResponseDTO(utente);
 

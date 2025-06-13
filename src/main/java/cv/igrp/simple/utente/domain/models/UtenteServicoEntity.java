@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cm_utente_objeto")
-public class UtenteServico extends AuditEntity {
+public class UtenteServicoEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +43,11 @@ public class UtenteServico extends AuditEntity {
     private String referencia;
 
   
-    @Column(name="datainicio")
+    @Column(name="data_inicio")
     private LocalDate dataInicio;
 
   
-    @Column(name="datafim")
+    @Column(name="data_fim")
     private LocalDate dataFim;
 
   
@@ -61,7 +61,8 @@ public class UtenteServico extends AuditEntity {
 
      @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "utente_id")
-   private Utente utenteId;
+   @Audited(targetAuditMode = org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED)
+   private UtenteEntity utenteId;
 
 
 }

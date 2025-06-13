@@ -1,4 +1,4 @@
-package cv.igrp.simple.utente.infrastructure.persistence.entity;
+package cv.igrp.simple.utente.domain.models;
 
 import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
@@ -23,6 +23,7 @@ public class TipoUtenteEntity extends AuditEntity {
     private Integer id;
 
   
+
     @NotBlank(message = "codigo is mandatory")
     @Column(name="codigo", nullable = false)
     private String codigo;

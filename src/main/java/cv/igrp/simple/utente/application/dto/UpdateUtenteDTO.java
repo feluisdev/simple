@@ -6,6 +6,9 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import cv.igrp.simple.utente.application.constants.Estado;
+import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
+import cv.igrp.simple.utente.application.constants.TipoUtente;
 import java.time.LocalDate;
 @Data
 @NoArgsConstructor
@@ -14,12 +17,21 @@ import java.time.LocalDate;
 @IgrpDTO
 public class UpdateUtenteDTO {
 
+  
+  
+  private TipoUtente tipoUtente;
+  
+  
+  private TipoIdentificacao tipoIdentificacao;
+  
+  
+  private String identificacao;
   @NotBlank(message = "The field <nome> is required.")
   
   private String nome;
   
   
-  private String morada;
+  private String endereco;
   
   
   private String telefone;
@@ -28,24 +40,24 @@ public class UpdateUtenteDTO {
   private String email;
   
   
+  private String nif;
+  
+  
+  private LocalDate dataNascimento;
+  
+  
+  private Estado estado;
+  
+  
   private String nomeMae;
   
   
   private String nomePai;
   
   
-  private String nif;
+  private String caixaPostal;
   
   
-  private String bi;
-  
-  
-  private String tipoUtente;
-  
-  
-  private String cxPostal;
-  
-  
-  private LocalDate dataNascimento;
+  private String departamentoResponsavel;
 
 }
