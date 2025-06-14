@@ -1,0 +1,1 @@
+{"type":"dto","module":"pedidos","name":"EvolucaoMensalAvaliacoesDTO","attributes":[{"name":"mes","type":"integer","nullable":false},{"name":"ano","type":"integer","nullable":false},{"name":"mediaAvaliacao","type":"decimal","nullable":false},{"name":"totalAvaliacoes","type":"integer","nullable":false}]}
