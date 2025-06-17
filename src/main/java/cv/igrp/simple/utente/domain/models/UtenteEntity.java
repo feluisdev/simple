@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import cv.igrp.simple.utente.application.constants.Estado;
 import java.util.List;
+import cv.igrp.simple.utente.application.constants.GeneroTipo;
 
 
 @Getter
@@ -93,9 +94,6 @@ public class UtenteEntity extends AuditEntity {
     private Estado estado;
 
   
-    @NotNull(message = "servicos is mandatory")
-
-
   @OneToMany(mappedBy = "utenteId", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 private List<UtenteServicoEntity> servicos;
     @Column(name="caixa_postal")
@@ -108,6 +106,15 @@ private List<UtenteServicoEntity> servicos;
   
     @Column(name="telemovel")
     private String telemovel;
+
+  
+    @Enumerated(EnumType.STRING)
+    @Column(name="genero")
+    private GeneroTipo genero;
+
+  
+    @Column(name="nacionalidade")
+    private String nacionalidade;
 
   
 }

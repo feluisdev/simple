@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.api;
+package cv.igrp.simple.configuracoes.infrastructure.controller;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.CreateCategoriasServicosCommand;
 import cv.igrp.simple.configuracoes.application.commands.commands.InativarCategoriasServicosCommand;
@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/configuracoes/categorias-servicos")
+@RequestMapping("configuracoes/v1/categorias-servicos")
 @RequiredArgsConstructor
 public class CategoriasServicosController {
 

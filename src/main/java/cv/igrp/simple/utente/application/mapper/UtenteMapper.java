@@ -3,6 +3,7 @@ package cv.igrp.simple.utente.application.mapper;
 import cv.igrp.simple.utente.application.constants.Estado;
 import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import cv.igrp.simple.utente.application.dto.CriarUtenteDTO;
+import cv.igrp.simple.utente.application.dto.UpdateUtenteDTO;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.domain.models.UtenteEntity;
 import org.springframework.stereotype.Component;
@@ -41,9 +42,11 @@ public class UtenteMapper {
         dto.setEmail(utente.getEmail());
         dto.setCaixaPostal(utente.getCaixaPostal());
         dto.setDepartamentoResponsavel(utente.getDepartamentoResponsavel());
+        dto.setTelemovel(utente.getTelemovel());
+        dto.setGenero(utente.getGenero());
+        dto.setNacionalidade(utente.getNacionalidade());
 
         return dto;
-
     }
 
     public UtenteEntity toUtente(CriarUtenteDTO dto){
@@ -63,9 +66,35 @@ public class UtenteMapper {
         utente.setCaixaPostal(dto.getCaixaPostal());
         utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
         utente.setIdentificacao(dto.getIdentificacao());
-
+        utente.setTelemovel(dto.getTelemovel());
+        utente.setGenero(dto.getGenero());
+        utente.setNacionalidade(dto.getNacionalidade());
 
         return utente;
     }
+
+
+    public UtenteEntity toUpdateUtente(UpdateUtenteDTO dto) {
+        UtenteEntity utente = new UtenteEntity();
+        utente.setNome(dto.getNome());
+        utente.setTelefone(dto.getTelefone());
+        utente.setEmail(dto.getEmail());
+        utente.setEndereco(dto.getEndereco());
+        utente.setEstado(dto.getEstado());
+        utente.setDataNascimento(dto.getDataNascimento());
+        utente.setIdentificacao(dto.getIdentificacao());
+        utente.setTipoIdentificacao(dto.getTipoIdentificacao());
+        utente.setCaixaPostal(dto.getCaixaPostal());
+        utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
+        utente.setTipoUtente(dto.getTipoUtente());
+        utente.setNomeMae(dto.getNomeMae());
+        utente.setNomePai(dto.getNomePai());
+        utente.setNif(dto.getNif());
+        utente.setTelemovel(dto.getTelemovel());
+        utente.setGenero(dto.getGenero());
+        utente.setNacionalidade(dto.getNacionalidade());
+
+        return utente;
+     }
 
 }

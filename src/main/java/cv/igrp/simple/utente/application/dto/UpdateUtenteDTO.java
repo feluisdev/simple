@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.utente.application.constants.Estado;
+import cv.igrp.simple.utente.application.constants.GeneroTipo;
 import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
 import java.time.LocalDate;
@@ -59,5 +60,14 @@ public class UpdateUtenteDTO {
   
   
   private String departamentoResponsavel;
+  
+  
+  private GeneroTipo genero;
+  
+  
+  private String nacionalidade;
+  
+  
+  private String telemovel;
 
 }

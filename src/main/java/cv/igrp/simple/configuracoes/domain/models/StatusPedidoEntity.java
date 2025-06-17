@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "status_pedido")
+@Table(name = "cm_status_pedido")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

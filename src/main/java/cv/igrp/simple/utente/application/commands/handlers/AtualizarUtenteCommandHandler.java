@@ -5,6 +5,7 @@ import cv.igrp.framework.stereotype.IgrpCommandHandler;
 import cv.igrp.simple.utente.application.commands.commands.AtualizarUtenteCommand;
 import cv.igrp.simple.utente.application.constants.Estado;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
+import cv.igrp.simple.utente.application.dto.UpdateUtenteDTO;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.application.mapper.UtenteMapper;
 import cv.igrp.simple.utente.domain.models.UtenteEntity;
@@ -40,26 +41,14 @@ public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUt
       UtenteEntity utente = utenteService.obterUtentePorId(idUtente);
       var dto = command.getUpdateutente();
 
-      utente.setNome(dto.getNome());
-      utente.setTelefone(dto.getTelefone());
-      utente.setEmail(dto.getEmail());
-      utente.setEndereco(dto.getEndereco());
-      utente.setEstado(dto.getEstado());
-      utente.setDataNascimento(dto.getDataNascimento());
-      utente.setIdentificacao(dto.getIdentificacao());
-      utente.setTipoIdentificacao(dto.getTipoIdentificacao());
-      utente.setCaixaPostal(dto.getCaixaPostal());
-      utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
-      utente.setTipoUtente(dto.getTipoUtente());
-      utente.setNomeMae(dto.getNomeMae());
-      utente.setNomePai(dto.getNomePai());
-      utente.setNif(dto.getNif());
-      
+      utente = utenteMapper.toUpdateUtente(dto);      
 
       var utenteUpdated = utenteRepository.save(utente);
       UtenteResponseDTO responseDTO = utenteMapper.toUtenteResponseDTO(utenteUpdated);
 
       return ResponseEntity.ok(responseDTO);
    }
+
+   
 
 }

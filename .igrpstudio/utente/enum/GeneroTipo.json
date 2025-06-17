@@ -1,0 +1,1 @@
+{"type":"enum","module":"utente","name":"GeneroTipo","values":[{"name":"MASCULINO","attributes":["MASCULINO","Masculino"]},{"name":"FEMININO","attributes":["FEMININO","Feminino"]}],"attributes":[{"type":"string","name":"Code"},{"type":"string","name":"Description"}]}

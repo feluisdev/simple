@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.api;
+package cv.igrp.simple.configuracoes.infrastructure.controller;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.CreateTiposServicosCommand;
 import cv.igrp.simple.configuracoes.application.commands.commands.InativarTiposServicosCommand;
@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/configuracoes/tipos-servicos")
+@RequestMapping("configuracoes/v1/tipos-servicos")
 @RequiredArgsConstructor
 public class TiposServicosController {
 

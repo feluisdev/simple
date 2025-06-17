@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.api;
+package cv.igrp.simple.configuracoes.infrastructure.controller;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.CreateStatusPedidoCommand;
 import cv.igrp.simple.configuracoes.application.commands.commands.InativarStatusPedidoCommand;
@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/configuracoes/status-pedido")
+@RequestMapping("configuracoes/v1/status-pedido")
 @RequiredArgsConstructor
 public class StatusPedidoController {
 
