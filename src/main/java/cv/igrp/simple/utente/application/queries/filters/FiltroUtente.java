@@ -3,13 +3,13 @@ package cv.igrp.simple.utente.application.queries.filters;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import cv.igrp.simple.utente.domain.models.Utente;
+import cv.igrp.simple.utente.domain.models.UtenteEntity;
 
 @Component
 public class FiltroUtente {
 
-    public Specification<Utente> aplicarFiltros(ListaDeUtentesQuery query) {
-        Specification<Utente> spec = Specification.where(null);
+    public Specification<UtenteEntity> aplicarFiltros(ListaDeUtentesQuery query) {
+        Specification<UtenteEntity> spec = Specification.where(null);
 
         if (query.getTipo() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->

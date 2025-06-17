@@ -5,22 +5,23 @@ import cv.igrp.framework.stereotype.IgrpCommandHandler;
 import cv.igrp.simple.utente.application.commands.commands.CriarUtenteCommand;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.application.mapper.UtenteMapper;
-import cv.igrp.simple.utente.domain.models.Utente;
+import cv.igrp.simple.utente.domain.models.UtenteEntity;
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteRepository;
+import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CriarUtenteCommandHandler implements CommandHandler<CriarUtenteCommand, ResponseEntity<UtenteResponseDTO>> {
 
-   private final UtenteRepository utenteRepository;
+   private final UtenteEntityRepository utenteRepository;
 
    private final UtenteService numeroUtenteService;
    private final UtenteMapper utenteMapper;
 
 
-   public CriarUtenteCommandHandler(UtenteRepository utenteRepository, UtenteService numeroUtenteService, UtenteMapper utenteMapper) {
+   public CriarUtenteCommandHandler(UtenteEntityRepository utenteRepository, UtenteService numeroUtenteService, UtenteMapper utenteMapper) {
 
        this.utenteRepository = utenteRepository;
        this.numeroUtenteService = numeroUtenteService;
@@ -30,9 +31,9 @@ public class CriarUtenteCommandHandler implements CommandHandler<CriarUtenteComm
    @IgrpCommandHandler
    public ResponseEntity<UtenteResponseDTO> handle(CriarUtenteCommand command) {
       // TODO: Implement the command handling logic here
-      Utente utente = utenteMapper.toUtente(command.getCriarutente());
+      UtenteEntity utente = utenteMapper.toUtente(command.getCriarutente());
       String numeroUtente = numeroUtenteService.geraNumeroUtente();
-      utente.setNrUtente(numeroUtente);
+      utente.setNumero(numeroUtente);
 
       var utenteSaved =  utenteRepository.save(utente);
 

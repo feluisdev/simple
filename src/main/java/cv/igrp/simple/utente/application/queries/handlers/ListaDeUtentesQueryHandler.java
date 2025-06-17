@@ -6,8 +6,9 @@ import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.application.mapper.UtenteMapper;
 import cv.igrp.simple.utente.application.queries.filters.FiltroUtente;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
-import cv.igrp.simple.utente.domain.models.Utente;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteRepository;
+import cv.igrp.simple.utente.domain.models.UtenteEntity;
+import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,11 @@ public class ListaDeUtentesQueryHandler implements QueryHandler<ListaDeUtentesQu
 
     private final UtenteMapper utenteMapper;
 
-    private final UtenteRepository utenteRepository;
+    private final UtenteEntityRepository utenteRepository;
 
     private final FiltroUtente filtroUtente;
 
-    public ListaDeUtentesQueryHandler(UtenteMapper utenteMapper, UtenteRepository utenteRepository, FiltroUtente filtroUtente) {
+    public ListaDeUtentesQueryHandler(UtenteMapper utenteMapper, UtenteEntityRepository utenteRepository, FiltroUtente filtroUtente) {
 
         this.utenteMapper = utenteMapper;
         this.utenteRepository = utenteRepository;
@@ -32,9 +33,9 @@ public class ListaDeUtentesQueryHandler implements QueryHandler<ListaDeUtentesQu
     @IgrpQueryHandler
     public ResponseEntity<Page<UtenteResponseDTO>> handle(ListaDeUtentesQuery query) {
         // TODO: Implement the query handling logic here
-        Specification<Utente> specFiltro = filtroUtente.aplicarFiltros(query);
+        Specification<UtenteEntity> specFiltro = filtroUtente.aplicarFiltros(query);
 
-        Page<Utente> listaUtentePag = utenteRepository.findAll(specFiltro, query.getPageable());
+        Page<UtenteEntity> listaUtentePag = utenteRepository.findAll(specFiltro, query.getPageable());
 
         Page<UtenteResponseDTO> responsePage = listaUtentePag.map(u ->
                 utenteMapper.toUtenteResponseDTO(u)

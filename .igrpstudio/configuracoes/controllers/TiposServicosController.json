@@ -1,0 +1,166 @@
+{
+    "type": "controller",
+    "name": "TiposServicos",
+    "module": "configuracoes",
+    "description": "Tipos de Serviços",
+    "basePath": "tipos-servicos",
+    "actions": [
+        {
+            "actionName": "listarTipos",
+            "method": "GET",
+            "responses": {
+                "200": {
+                    "name": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "TiposServicosResponse",
+                                "name": "data",
+                                "collectionType": "page",
+                                "objectType": "dto",
+                                "module": "configuracoes"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "actionName": "obterTipo",
+            "method": "GET",
+            "path": "/{id}",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "name": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "TiposServicosResponse",
+                                "name": "data",
+                                "collectionType": "none",
+                                "objectType": "dto",
+                                "module": "configuracoes"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "actionName": "criarTipo",
+            "method": "POST",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "collectionType": "none",
+                            "name": "data",
+                            "type": "CriarTiposServicos",
+                            "objectType": "dto",
+                            "module": "configuracoes"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "name": "Created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "TiposServicosResponse",
+                                "name": "data",
+                                "collectionType": "none",
+                                "objectType": "dto",
+                                "module": "configuracoes"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "actionName": "atualizarTipo",
+            "method": "PUT",
+            "path": "/{id}",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "collectionType": "none",
+                            "name": "data",
+                            "type": "UpdateTiposServicos",
+                            "objectType": "dto",
+                            "module": "configuracoes"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "name": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "TiposServicosResponse",
+                                "name": "data",
+                                "collectionType": "none",
+                                "objectType": "dto",
+                                "module": "configuracoes"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "actionName": "inativarTipo",
+            "method": "DELETE",
+            "path": "/{id}",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "name": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string",
+                                "name": "data",
+                                "collectionType": "none"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

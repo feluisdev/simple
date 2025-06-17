@@ -2,8 +2,8 @@ package cv.igrp.simple.utente.domain.service;
 
 import cv.igrp.simple.shared.domain.exceptions.IgrpProblem;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
-import cv.igrp.simple.utente.domain.models.Utente;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteRepository;
+import cv.igrp.simple.utente.domain.models.UtenteEntity;
+import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.Optional;
 @Service
 public class UtenteService {
 
-    private final UtenteRepository utenteRepository;
+    private final UtenteEntityRepository utenteRepository;
 
-    public UtenteService(UtenteRepository utenteRepository) {
+    public UtenteService(UtenteEntityRepository utenteRepository) {
         this.utenteRepository = utenteRepository;
     }
 
@@ -25,9 +25,9 @@ public class UtenteService {
         return "N" + novoId;
     }
 
-    public Utente obterUtentePorId(int idUtente) {
+    public UtenteEntity obterUtentePorId(int idUtente) {
 
-        Optional<Utente> utente = utenteRepository.findById(idUtente);
+        Optional<UtenteEntity> utente = utenteRepository.findById(idUtente);
 
         return utente.orElseThrow(() -> new IgrpResponseStatusException(new IgrpProblem<>(
                 HttpStatus.NOT_FOUND,

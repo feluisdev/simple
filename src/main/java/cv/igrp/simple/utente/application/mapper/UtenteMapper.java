@@ -1,9 +1,11 @@
 package cv.igrp.simple.utente.application.mapper;
 
 import cv.igrp.simple.utente.application.constants.Estado;
+import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import cv.igrp.simple.utente.application.dto.CriarUtenteDTO;
+import cv.igrp.simple.utente.application.dto.UpdateUtenteDTO;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
-import cv.igrp.simple.utente.domain.models.Utente;
+import cv.igrp.simple.utente.domain.models.UtenteEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,7 +17,7 @@ public class UtenteMapper {
 
     private static final DateTimeFormatter FORMATADOR = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public UtenteResponseDTO toUtenteResponseDTO(Utente utente){
+    public UtenteResponseDTO toUtenteResponseDTO(UtenteEntity utente){
 
         if (utente == null) {
             return null;
@@ -25,40 +27,74 @@ public class UtenteMapper {
         dto.setId(utente.getId());
         dto.setTipoUtente(utente.getTipoUtente());
         dto.setNome(utente.getNome());
-        dto.setNrUtente(utente.getNrUtente());
+        dto.setNumero(utente.getNumero());
         dto.setNif(utente.getNif());
-        dto.setBi(utente.getBi());
+        dto.setTipoIdentificacao(utente.getTipoIdentificacao());
+        dto.setIdentificacao(utente.getIdentificacao());
         dto.setNomeMae(utente.getNomeMae());
         dto.setNomePai(utente.getNomePai()); // Esse campo parece não estar presente na entidade — confirme se existe
         // Verificar se dataNascimento é null antes de chamar toString()
         LocalDate dataNascimento = utente.getDataNascimento();
         dto.setDataNascimento(dataNascimento != null ? dataNascimento.toString() : null);
         dto.setEstado(utente.getEstado());
-        dto.setMorada(utente.getMorada());
+        dto.setMorada(utente.getEndereco());
         dto.setTelefone(utente.getTelefone());
         dto.setEmail(utente.getEmail());
-        dto.setCxPostal(utente.getCxPostal());
-        return dto;
+        dto.setCaixaPostal(utente.getCaixaPostal());
+        dto.setDepartamentoResponsavel(utente.getDepartamentoResponsavel());
+        dto.setTelemovel(utente.getTelemovel());
+        dto.setGenero(utente.getGenero());
+        dto.setNacionalidade(utente.getNacionalidade());
 
+        return dto;
     }
 
-    public Utente toUtente(CriarUtenteDTO dto){
-        Utente utente = new Utente();
+    public UtenteEntity toUtente(CriarUtenteDTO dto){
+        UtenteEntity utente = new UtenteEntity();
         utente.setNome(dto.getNome());
-        utente.setBi(dto.getBi());
+        utente.setTipoIdentificacao(dto.getTipoIdentificacao());
         utente.setNif(dto.getNif());
         utente.setEstado(Estado.ATIVO);
         utente.setTelefone(dto.getTelefone());
-        utente.setMorada(dto.getMorada());
+        utente.setEndereco(dto.getEndereco());
         utente.setTipoUtente(dto.getTipoUtente());
         utente.setNomePai(dto.getNomePai());
         utente.setNome(dto.getNome());
         utente.setNomeMae(dto.getNomeMae());
         utente.setDataNascimento(dto.getDataNascimento());
         utente.setEmail(dto.getEmail());
-        utente.setCxPostal(dto.getCxPostal());
+        utente.setCaixaPostal(dto.getCaixaPostal());
+        utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
+        utente.setIdentificacao(dto.getIdentificacao());
+        utente.setTelemovel(dto.getTelemovel());
+        utente.setGenero(dto.getGenero());
+        utente.setNacionalidade(dto.getNacionalidade());
 
         return utente;
     }
+
+
+    public UtenteEntity toUpdateUtente(UpdateUtenteDTO dto) {
+        UtenteEntity utente = new UtenteEntity();
+        utente.setNome(dto.getNome());
+        utente.setTelefone(dto.getTelefone());
+        utente.setEmail(dto.getEmail());
+        utente.setEndereco(dto.getEndereco());
+        utente.setEstado(dto.getEstado());
+        utente.setDataNascimento(dto.getDataNascimento());
+        utente.setIdentificacao(dto.getIdentificacao());
+        utente.setTipoIdentificacao(dto.getTipoIdentificacao());
+        utente.setCaixaPostal(dto.getCaixaPostal());
+        utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
+        utente.setTipoUtente(dto.getTipoUtente());
+        utente.setNomeMae(dto.getNomeMae());
+        utente.setNomePai(dto.getNomePai());
+        utente.setNif(dto.getNif());
+        utente.setTelemovel(dto.getTelemovel());
+        utente.setGenero(dto.getGenero());
+        utente.setNacionalidade(dto.getNacionalidade());
+
+        return utente;
+     }
 
 }

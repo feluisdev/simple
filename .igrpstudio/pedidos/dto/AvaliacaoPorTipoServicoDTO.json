@@ -1,0 +1,1 @@
+{"type":"dto","module":"pedidos","name":"AvaliacaoPorTipoServicoDTO","attributes":[{"name":"tipoServicoId","type":"integer","nullable":false},{"name":"tipoServicoNome","type":"string","nullable":false},{"name":"mediaAvaliacao","type":"decimal","nullable":false},{"name":"totalAvaliacoes","type":"integer","nullable":false}]}
