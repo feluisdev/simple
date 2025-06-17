@@ -37,7 +37,7 @@ public class UtenteMapper {
         LocalDate dataNascimento = utente.getDataNascimento();
         dto.setDataNascimento(dataNascimento != null ? dataNascimento.toString() : null);
         dto.setEstado(utente.getEstado());
-        dto.setMorada(utente.getEndereco());
+        dto.setEndereco(utente.getEndereco());
         dto.setTelefone(utente.getTelefone());
         dto.setEmail(utente.getEmail());
         dto.setCaixaPostal(utente.getCaixaPostal());

@@ -36,13 +36,32 @@ public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUt
 
    @IgrpCommandHandler
    public ResponseEntity<UtenteResponseDTO> handle(AtualizarUtenteCommand command) {
-      // TODO: Implement the command handling logic here
+      // Obter o ID do utente a ser atualizado
       Integer idUtente = command.getId();
+      // Buscar o utente existente pelo ID
       UtenteEntity utente = utenteService.obterUtentePorId(idUtente);
       var dto = command.getUpdateutente();
 
-      utente = utenteMapper.toUpdateUtente(dto);      
-
+      // Atualizar os campos do utente existente com os dados do DTO
+      if (dto.getNome() != null) utente.setNome(dto.getNome());
+      if (dto.getTelefone() != null) utente.setTelefone(dto.getTelefone());
+      if (dto.getEmail() != null) utente.setEmail(dto.getEmail());
+      if (dto.getEndereco() != null) utente.setEndereco(dto.getEndereco());
+      if (dto.getEstado() != null) utente.setEstado(dto.getEstado());
+      if (dto.getDataNascimento() != null) utente.setDataNascimento(dto.getDataNascimento());
+      if (dto.getIdentificacao() != null) utente.setIdentificacao(dto.getIdentificacao());
+      if (dto.getTipoIdentificacao() != null) utente.setTipoIdentificacao(dto.getTipoIdentificacao());
+      if (dto.getCaixaPostal() != null) utente.setCaixaPostal(dto.getCaixaPostal());
+      if (dto.getDepartamentoResponsavel() != null) utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
+      if (dto.getTipoUtente() != null) utente.setTipoUtente(dto.getTipoUtente());
+      if (dto.getNomeMae() != null) utente.setNomeMae(dto.getNomeMae());
+      if (dto.getNomePai() != null) utente.setNomePai(dto.getNomePai());
+      if (dto.getNif() != null) utente.setNif(dto.getNif());
+      if (dto.getTelemovel() != null) utente.setTelemovel(dto.getTelemovel());
+      if (dto.getGenero() != null) utente.setGenero(dto.getGenero());
+      if (dto.getNacionalidade() != null) utente.setNacionalidade(dto.getNacionalidade());
+      
+      // Salvar a entidade atualizada
       var utenteUpdated = utenteRepository.save(utente);
       UtenteResponseDTO responseDTO = utenteMapper.toUtenteResponseDTO(utenteUpdated);
 
