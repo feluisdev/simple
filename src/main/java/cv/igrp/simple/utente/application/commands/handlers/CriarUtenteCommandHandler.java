@@ -30,7 +30,7 @@ public class CriarUtenteCommandHandler implements CommandHandler<CriarUtenteComm
 
    @IgrpCommandHandler
    public ResponseEntity<UtenteResponseDTO> handle(CriarUtenteCommand command) {
-      // TODO: Implement the command handling logic here
+
       UtenteEntity utente = utenteMapper.toUtente(command.getCriarutente());
       String numeroUtente = numeroUtenteService.geraNumeroUtente();
       utente.setNumero(numeroUtente);
