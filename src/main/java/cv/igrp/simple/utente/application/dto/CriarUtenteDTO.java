@@ -47,10 +47,10 @@ public class CriarUtenteDTO {
   @NotBlank(message = "The field <telefone> is required.")
   
   private String telefone;
-  @NotBlank(message = "The field <endereco> is required.")
   
   private String endereco;
   @Email(message = "Invalid email format for field <email>.")
+  @NotNull(message = "The field <email> is required.")
   
   private String email;
   

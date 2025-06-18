@@ -30,28 +30,28 @@ public class UtenteEntity extends AuditEntity {
     private Integer id;
 
   
+
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_utente")
     private TipoUtente tipoUtente;
 
-  
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_identificacao")
     private TipoIdentificacao tipoIdentificacao;
 
-  
+    @NotBlank(message = "identificacao is mandatory")
     @Column(name="identificacao")
     private String identificacao;
 
-  
+    @NotBlank(message = "numero is mandatory")
     @Column(name="numero")
     private String numero;
 
-  
+    @NotBlank(message = "nome is mandatory")
     @Column(name="nome")
     private String nome;
 
-  
+    @NotBlank(message = "nif is mandatory")
     @Column(name="nif")
     private String nif;
 
@@ -60,25 +60,20 @@ public class UtenteEntity extends AuditEntity {
     private String email;
 
   
-    @NotNull(message = "dataNascimento is mandatory")
+  
     @Column(name="data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
   
 
-    @NotBlank(message = "nomeMae is mandatory")
     @Column(name="nome_mae", nullable = false)
     private String nomeMae;
 
   
-
-    @NotBlank(message = "nomePai is mandatory")
     @Column(name="nome_pai", nullable = false)
     private String nomePai;
 
   
-
-    @NotBlank(message = "endereco is mandatory")
     @Column(name="endereco", nullable = false)
     private String endereco;
 

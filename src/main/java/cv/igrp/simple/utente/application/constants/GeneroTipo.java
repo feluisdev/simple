@@ -14,6 +14,9 @@ public enum GeneroTipo {
   ),
     FEMININO(
     "FEMININO", "Feminino"
+  ),
+  NA(
+    "NA", "Não Aplicável"
   )
   ;
 
