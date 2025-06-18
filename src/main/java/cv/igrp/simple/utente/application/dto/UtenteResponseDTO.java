@@ -55,7 +55,7 @@ public class UtenteResponseDTO {
   private String email;
   
   
-  private String morada;
+  private String endereco;
   
   
   private String createdAt;

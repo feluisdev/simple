@@ -20,6 +20,7 @@ public class UtenteService {
 
     public String geraNumeroUtente(){
 
+        //todo, handle logic to generate numero utente
         Integer ultimoId = utenteRepository.findMaxId().orElse(0);
         Integer novoId = ultimoId + 1;
         return "N" + novoId;

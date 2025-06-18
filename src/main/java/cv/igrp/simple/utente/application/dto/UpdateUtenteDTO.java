@@ -20,34 +20,27 @@ public class UpdateUtenteDTO {
 
   
   
+  @NotNull(message = "The field <tipoUtente> is required.")
+  
   private TipoUtente tipoUtente;
-  
-  
-  private TipoIdentificacao tipoIdentificacao;
-  
-  
-  private String identificacao;
   @NotBlank(message = "The field <nome> is required.")
+	@Size(min = 3, message = "The field length <nome> must be at least 3 characters.")
   
   private String nome;
-  
-  
-  private String endereco;
-  
-  
-  private String telefone;
-  @Email(message = "Invalid email format for field <email>.")
-  
-  private String email;
-  
+  @NotBlank(message = "The field <nif> is required.")
   
   private String nif;
+  @NotNull(message = "The field <tipoIdentificacao> is required.")
   
-  
-  private LocalDate dataNascimento;
-  
+  private TipoIdentificacao tipoIdentificacao;
+
+  @NotNull(message = "The field <estado> is required.")
   
   private Estado estado;
+
+  @NotBlank(message = "The field <identificacao> is required.")
+  
+  private String identificacao;
   
   
   private String nomeMae;
@@ -56,7 +49,22 @@ public class UpdateUtenteDTO {
   private String nomePai;
   
   
+  private LocalDate dataNascimento;
+  @NotBlank(message = "The field <telefone> is required.")
+  
+  private String telefone;
+  @NotBlank(message = "The field <endereco> is required.")
+  
+  private String endereco;
+  @Email(message = "Invalid email format for field <email>.")
+  
+  private String email;
+  
+  
   private String caixaPostal;
+  
+  
+  private String telemovel;
   
   
   private String departamentoResponsavel;
@@ -67,7 +75,5 @@ public class UpdateUtenteDTO {
   
   private String nacionalidade;
   
-  
-  private String telemovel;
 
 }
