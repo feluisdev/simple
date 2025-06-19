@@ -1,7 +1,7 @@
 package cv.igrp.simple.configuracoes.application.commands.handlers;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.InativarTiposServicosCommand;
-import cv.igrp.simple.configuracoes.domain.models.TiposServicosEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.TiposServicosEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.TiposServicosRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package cv.igrp.simple.configuracoes.infrastructure.persistence;
 
-import cv.igrp.simple.configuracoes.domain.models.TiposServicosEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.TiposServicosEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

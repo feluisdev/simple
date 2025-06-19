@@ -1,7 +1,7 @@
 package cv.igrp.simple.configuracoes.application.commands.handlers;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.InativarCategoriasServicosCommand;
-import cv.igrp.simple.configuracoes.domain.models.CategoriasServicosEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriasServicosEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.CategoriasServicosRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;

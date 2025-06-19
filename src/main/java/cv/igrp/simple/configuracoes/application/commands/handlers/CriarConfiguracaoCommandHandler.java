@@ -3,7 +3,7 @@ package cv.igrp.simple.configuracoes.application.commands.handlers;
 import cv.igrp.simple.configuracoes.application.commands.commands.CriarConfiguracaoCommand;
 import cv.igrp.simple.configuracoes.application.constants.Estado;
 import cv.igrp.simple.configuracoes.application.dto.ConfiguracoesResponseDTO;
-import cv.igrp.simple.configuracoes.domain.models.ConfiguracoesEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.ConfiguracoesEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.ConfiguracoesRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package cv.igrp.simple.configuracoes.application.commands.handlers;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.InativarStatusPedidoCommand;
-import cv.igrp.simple.configuracoes.domain.models.StatusPedidoEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;

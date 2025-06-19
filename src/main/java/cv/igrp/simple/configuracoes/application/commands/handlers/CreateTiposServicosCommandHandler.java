@@ -1,8 +1,8 @@
 package cv.igrp.simple.configuracoes.application.commands.handlers;
 
 import cv.igrp.simple.configuracoes.application.commands.commands.CreateTiposServicosCommand;
-import cv.igrp.simple.configuracoes.domain.models.CategoriasServicosEntity;
-import cv.igrp.simple.configuracoes.domain.models.TiposServicosEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriasServicosEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.TiposServicosEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.CategoriasServicosRepository;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.TiposServicosRepository;
 import cv.igrp.framework.core.domain.CommandHandler;

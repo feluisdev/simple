@@ -1,6 +1,6 @@
 package cv.igrp.simple.configuracoes.infrastructure.persistence;
 
-import cv.igrp.simple.configuracoes.domain.models.StatusPedidoEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

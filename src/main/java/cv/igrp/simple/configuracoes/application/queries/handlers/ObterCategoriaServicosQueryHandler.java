@@ -2,7 +2,7 @@ package cv.igrp.simple.configuracoes.application.queries.handlers;
 
 import cv.igrp.simple.configuracoes.application.dto.CategoriasServicosResponseDTO;
 import cv.igrp.simple.configuracoes.application.queries.queries.ObterCategoriaServicosQuery;
-import cv.igrp.simple.configuracoes.domain.models.CategoriasServicosEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriasServicosEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.CategoriasServicosRepository;
 import cv.igrp.framework.core.domain.QueryHandler;
 import lombok.RequiredArgsConstructor;

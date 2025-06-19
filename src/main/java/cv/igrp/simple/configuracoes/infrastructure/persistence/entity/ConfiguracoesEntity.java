@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.domain.models;
+package cv.igrp.simple.configuracoes.infrastructure.persistence.entity;
 
 import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.simple.configuracoes.application.constants.Estado;

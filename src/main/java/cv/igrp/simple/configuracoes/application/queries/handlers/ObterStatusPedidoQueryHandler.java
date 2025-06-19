@@ -2,7 +2,7 @@ package cv.igrp.simple.configuracoes.application.queries.handlers;
 
 import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
 import cv.igrp.simple.configuracoes.application.queries.queries.ObterStatusPedidoQuery;
-import cv.igrp.simple.configuracoes.domain.models.StatusPedidoEntity;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.QueryHandler;
 import lombok.RequiredArgsConstructor;
