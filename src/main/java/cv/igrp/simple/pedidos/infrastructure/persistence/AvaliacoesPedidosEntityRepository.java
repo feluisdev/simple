@@ -12,7 +12,6 @@ import java.util.UUID;
 
 
 @Repository
-@RepositoryRestResource(path = "avaliacoesPedidosEntity")
 public interface AvaliacoesPedidosEntityRepository extends
     JpaRepository<AvaliacoesPedidosEntity, Integer>,
     JpaSpecificationExecutor<AvaliacoesPedidosEntity>,

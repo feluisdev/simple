@@ -11,7 +11,6 @@ import java.util.Optional;
 
 
 @Repository
-@RepositoryRestResource(path = "etapasPedidosEntity")
 public interface EtapasPedidosEntityRepository extends
     JpaRepository<EtapasPedidosEntity, Integer>,
     JpaSpecificationExecutor<EtapasPedidosEntity>

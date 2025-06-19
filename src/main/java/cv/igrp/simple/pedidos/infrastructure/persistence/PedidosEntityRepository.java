@@ -11,7 +11,6 @@ import java.util.Optional;
 
 
 @Repository
-@RepositoryRestResource(path = "pedidosEntity")
 public interface PedidosEntityRepository extends
     JpaRepository<PedidosEntity, Integer>,
     JpaSpecificationExecutor<PedidosEntity>
