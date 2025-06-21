@@ -11,8 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import cv.igrp.simple.configuracoes.application.dto.TiposServicosResponseDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -21,23 +20,32 @@ public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTip
 
    private static final Logger LOGGER = LoggerFactory.getLogger(CreateTipoServicoCommandHandler.class);
 
-
    private final TipoServicoRepository tipoServicoRepository;
    private final CategoriaServicoRepository categoriaServicoRepository;
 
    public CreateTipoServicoCommandHandler(TipoServicoRepository tipoServicoRepository, CategoriaServicoRepository categoriaServicoRepository) {
-
        this.tipoServicoRepository = tipoServicoRepository;
        this.categoriaServicoRepository = categoriaServicoRepository;
    }
 
    @IgrpCommandHandler
+   @Transactional
    public ResponseEntity<Map<String, ?>> handle(CreateTipoServicoCommand command) {
+      LOGGER.info("Iniciando criação de novo tipo de serviço com o comando: {}", command);
       var dto = command.getCriartiposservicos();
 
-      CategoriaServico categoria = categoriaServicoRepository.findById(dto.getCategoriaId())
-              .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+      // Verificar se já existe um TipoServico com o mesmo código
+      tipoServicoRepository.findByCodigo(dto.getCodigo()).ifPresent(existingTipoServico -> {
+         LOGGER.warn("Tentativa de criar TipoServico com código já existente: {}", dto.getCodigo());
+         throw new BusinessException("Já existe um tipo de serviço com o código: " + dto.getCodigo());
+      });
 
+      // Buscar a CategoriaServico
+      CategoriaServico categoria = categoriaServicoRepository.findById(dto.getCategoriaId())
+              .orElseThrow(() -> {
+                 LOGGER.error("Categoria com ID {} não encontrada para o TipoServico {}", dto.getCategoriaId(), dto.getCodigo());
+                 return new BusinessException("Categoria não encontrada com o ID: " + dto.getCategoriaId());
+              });
 
       TipoServico tipoServico = TipoServico.criar(
               dto.getCodigo(),
@@ -52,19 +60,16 @@ public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTip
               categoria
       );
 
-       var tipoServicoSaved = tipoServicoRepository.save(tipoServico);
-
+      var tipoServicoSaved = tipoServicoRepository.save(tipoServico);
+      LOGGER.info("Tipo de serviço criado com sucesso: {}", tipoServicoSaved.getId());
 
       var response = Map.of(
-              "id", tipoServicoSaved.getId()
-
+              "id", tipoServicoSaved.getId(),
+              "tipoServicoUuid", tipoServicoSaved.getTipoServicoUuid().toString()
       );
 
       return ResponseEntity
               .status(HttpStatus.CREATED)
               .body(response);
-
-
    }
-
 }

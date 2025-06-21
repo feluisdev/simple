@@ -12,7 +12,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class InativarTipoServicoCommand implements Command {
 
-  @NotBlank(message = "The field <tipoServicoId> is required.")
-  private String tipoServicoId;
+  @NotNull(message = "ID do Tipo de Serviço não pode ser nulo.")
+  private Integer tipoServicoId;
 
+  // Construtor para facilitar a criação nos controllers
+  public InativarTipoServicoCommand(Integer tipoServicoId) {
+    this.tipoServicoId = tipoServicoId;
+  }
 }

@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategoriaFilter {
-
+public class TipoServicoFilter {
     private String nome;
     private String codigo;
-    private Boolean estado; // Adicionado para filtrar por ativo/inativo
+    private Boolean estado;
+    private Integer categoriaId;
     private Integer pageNumber;
     private Integer pageSize;
 }
