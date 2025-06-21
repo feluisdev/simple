@@ -14,9 +14,9 @@ import lombok.AllArgsConstructor;
 @IgrpDTO
 public class CriarTiposServicosDTO {
 
-  @NotNull(message = "The field <categoria_id> is required.")
+  @NotNull(message = "The field <categoriaId> is required.")
   
-  private Integer categoria_id;
+  private Integer categoriaId;
   @NotBlank(message = "The field <codigo> is required.")
 	@Size(min = 2, message = "The field length <codigo> must be at least 2 characters.")
 	@Size(max = 20, message = "The field length <codigo> cannot be more than 20 characters.")
@@ -32,22 +32,22 @@ public class CriarTiposServicosDTO {
   private String descricao;
   
   
-  private Integer prazo_estimado;
+  private Integer prazoEstimado;
   
   
-  private Double valor_base;
+  private Double valorBase;
   
   
-  private boolean requer_vistoria;
+  private boolean requerVistoria;
   
   
-  private boolean requer_analise_tec;
+  private boolean requerAnaliseTec;
   
   
-  private boolean requer_aprovacao;
+  private boolean requerAprovacao;
   
   
-  private boolean disponivel_portal;
+  private boolean disponivelPortal;
   
   
   private boolean ativo;

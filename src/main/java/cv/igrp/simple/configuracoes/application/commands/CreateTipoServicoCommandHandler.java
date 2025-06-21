@@ -45,10 +45,10 @@ public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTip
               dto.getDescricao(),
               dto.getPrazoEstimado(),
               dto.getValorBase(),
-              Boolean.TRUE.equals(dto.getRequerVistoria()),
-              Boolean.TRUE.equals(dto.getRequerAnaliseTec()),
-              Boolean.TRUE.equals(dto.getRequerAprovacao()),
-              Boolean.TRUE.equals(dto.getDisponivelPortal()),
+              dto.isRequerVistoria(),
+              dto.isRequerAnaliseTec(),
+              dto.isRequerAprovacao(),
+              dto.isDisponivelPortal(),
               categoria
       );
 
