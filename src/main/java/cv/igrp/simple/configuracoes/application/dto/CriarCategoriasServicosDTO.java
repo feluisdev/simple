@@ -1,28 +1,41 @@
 package cv.igrp.simple.configuracoes.application.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import cv.igrp.framework.stereotype.IgrpDTO;
+import jakarta.validation.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+
+@IgrpDTO
 public class CriarCategoriasServicosDTO {
-    @NotBlank(message = "O nome é obrigatório")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
-    private String nome;
-    
-    private String descricao;
-    
-    private String icone;
-    
-    private String cor;
-    
-    private Integer ordem;
-    
-    private Boolean ativo;
+
+  @NotBlank(message = "The field <nome> is required.")
+	@Size(min = 3, message = "The field length <nome> must be at least 3 characters.")
+	@Size(max = 100, message = "The field length <nome> cannot be more than 100 characters.")
+  
+  private String nome;
+  @NotBlank(message = "The field <codigo> is required.")
+  
+  private String codigo;
+  
+  
+  private String descricao;
+  
+  
+  private String icone;
+  
+  
+  private String cor;
+  
+  
+  private Integer ordem;
+  
+  
+  private boolean ativo;
+
 }

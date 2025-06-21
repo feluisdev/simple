@@ -32,7 +32,7 @@ public class TipoServicoEntity extends AuditEntity {
 
   
     @NotBlank(message = "codigo is mandatory")
-    @Column(name="codigo", nullable = false)
+    @Column(name="codigo", unique = true, nullable = false)
     private String codigo;
 
   

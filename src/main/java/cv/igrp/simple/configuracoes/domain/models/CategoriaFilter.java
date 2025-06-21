@@ -8,6 +8,7 @@ import lombok.Setter;
 public class CategoriaFilter {
 
     private String nome;
+    private String codigo;
     private Integer pageNumber;
     private Integer pageSize;
 }

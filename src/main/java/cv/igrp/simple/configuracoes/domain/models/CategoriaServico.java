@@ -11,6 +11,7 @@ public class CategoriaServico {
     private Integer id;
     private String nome;
     private String descricao;
+    private String codigo;
     private String icone;
     private String cor;
     private Integer ordem;
@@ -25,9 +26,10 @@ public class CategoriaServico {
     private CategoriaServico(Integer id, String nome, String descricao, String icone,
                              String cor, Integer ordem,
                              boolean estado, CategoriaUuid categoriaUuid,
-                             List<TipoServico> tiposServico ) {
+                             List<TipoServico> tiposServico, String codigo ) {
         this.id = id;
         this.nome = nome;
+        this.codigo = codigo;
         this.descricao = descricao;
         this.icone= icone;
         this.cor = cor;
@@ -39,7 +41,7 @@ public class CategoriaServico {
 
     public static CategoriaServico criar(String nome,
                                          String descricao, String icon,
-                                         String cor) {
+                                         String cor, String codigo) {
 
         var ordem = 1;
 
@@ -52,7 +54,8 @@ public class CategoriaServico {
                 ordem,
                 true,
                 CategoriaUuid.gerar(),
-                null
+                null,
+                codigo
         );
     }
 
@@ -65,7 +68,8 @@ public class CategoriaServico {
                                                Integer ordem,
                                                boolean estado,
                                                CategoriaUuid categoriaUuid,
-                                               List<TipoServico> tiposServico) {
+                                               List<TipoServico> tiposServico,
+                                               String codigo) {
         return new CategoriaServico(
                 id,
                 nome,
@@ -75,7 +79,8 @@ public class CategoriaServico {
                 ordem,
                 estado,
                 categoriaUuid,
-                tiposServico
+                tiposServico,
+                codigo
         );
     }
 

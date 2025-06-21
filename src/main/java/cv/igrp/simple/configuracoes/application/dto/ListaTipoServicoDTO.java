@@ -6,18 +6,31 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import cv.igrp.simple.configuracoes.application.dto.ListaCategoriaDTO;
-import cv.igrp.simple.shared.application.dto.PageDTO;
-import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
 @IgrpDTO
-public class WrapperListaCategoriaServicoDTO extends PageDTO{
+public class ListaTipoServicoDTO {
 
   
-  @Valid
-  private List<ListaCategoriaDTO> content;
+  
+  private Integer id;
+  
+  
+  private String tipoServicoId;
+  
+  
+  private String codigo;
+  
+  
+  private String nome;
+  
+  
+  private String categoria;
+  
+  
+  private String estado;
 
 }

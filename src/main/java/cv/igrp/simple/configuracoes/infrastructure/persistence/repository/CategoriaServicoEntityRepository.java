@@ -12,7 +12,6 @@ import java.util.Optional;
 
 
 @Repository
-@RepositoryRestResource(path = "categoriaServicoEntity")
 public interface CategoriaServicoEntityRepository extends
     JpaRepository<CategoriaServicoEntity, Integer>,
     JpaSpecificationExecutor<CategoriaServicoEntity>

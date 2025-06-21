@@ -1,5 +1,7 @@
 package cv.igrp.simple.configuracoes.application.queries;
+import cv.igrp.simple.configuracoes.application.constants.Estado;
 import cv.igrp.simple.configuracoes.application.dto.CategoriasServicosResponseDTO;
+import cv.igrp.simple.configuracoes.application.dto.ListaCategoriaDTO;
 import cv.igrp.simple.configuracoes.domain.models.CategoriaFilter;
 import cv.igrp.simple.configuracoes.domain.repository.CategoriaServicoRepository;
 import org.slf4j.Logger;
@@ -30,6 +32,7 @@ public class ListaCategoriaServicoQueryHandler implements QueryHandler<ListaCate
 
      var filter = new CategoriaFilter();
      filter.setNome(query.getNome());
+     filter.setCodigo(query.getCodigo());
      filter.setPageSize(Integer.parseInt(query.getTamanho()));
      filter.setPageNumber(Integer.parseInt(query.getPagina()));
 
@@ -37,14 +40,11 @@ public class ListaCategoriaServicoQueryHandler implements QueryHandler<ListaCate
 
        var listaDTO = categorias.stream()
                .map(categoria -> {
-                   var dto = new CategoriasServicosResponseDTO();
+                   var dto = new ListaCategoriaDTO();
                    dto.setId(categoria.getId());
                    dto.setNome(categoria.getNome());
-                   dto.setDescricao(categoria.getDescricao());
-                   dto.setIcone(categoria.getIcone());
-                   dto.setCor(categoria.getCor());
-                   dto.setOrdem(categoria.getOrdem());
-                   dto.setAtivo(categoria.isEstado()); // campo "estado" no domínio → "ativo" no DTO
+                   dto.setCodigo(categoria.getCodigo());
+                   dto.setEstado(categoria.isEstado()? Estado.ATIVO.getCode() : Estado.INATIVO.getCode()); // campo "estado" no domínio → "ativo" no DTO
                    return dto;
                })
                .toList();

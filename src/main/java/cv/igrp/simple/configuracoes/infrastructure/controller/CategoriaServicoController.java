@@ -22,6 +22,7 @@ import cv.igrp.simple.configuracoes.application.queries.*;
 import cv.igrp.simple.configuracoes.application.dto.CriarCategoriasServicosDTO;
 import java.util.Map;
 import cv.igrp.simple.configuracoes.application.dto.WrapperListaCategoriaServicoDTO;
+import cv.igrp.simple.configuracoes.application.dto.CategoriasServicosResponseDTO;
 
 @IgrpController
 @RestController
@@ -98,17 +99,123 @@ public class CategoriaServicoController {
   
   public ResponseEntity<WrapperListaCategoriaServicoDTO> listaCategoriaServico(
     @RequestParam(value = "nome", required = false) String nome,
+    @RequestParam(value = "codigo", required = false) String codigo,
     @RequestParam(value = "pagina", required = false, defaultValue = "0") String pagina,
     @RequestParam(value = "tamanho", required = false, defaultValue = "20") String tamanho)
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "CategoriaServicoController", "listaCategoriaServico");
-      final var query = new ListaCategoriaServicoQuery(nome, pagina, tamanho);
+      final var query = new ListaCategoriaServicoQuery(nome, codigo, pagina, tamanho);
 
       ResponseEntity<WrapperListaCategoriaServicoDTO> response = queryBus.handle(query);
 
       LOGGER.debug("Operation finished");
 
       return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @PutMapping(
+    value = "{categoriaServicoId}"
+  )
+  @Operation(
+    summary = "PUT method to handle operations for updateCategoriaServico",
+    description = "PUT method to handle operations for updateCategoriaServico",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = CategoriasServicosResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<CategoriasServicosResponseDTO> updateCategoriaServico(
+    @PathVariable(value = "categoriaServicoId") String categoriaServicoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "CategoriaServicoController", "updateCategoriaServico");
+      final var command = new UpdateCategoriaServicoCommand(categoriaServicoId);
+
+       ResponseEntity<CategoriasServicosResponseDTO> response = commandBus.send(command);
+
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "CategoriaServicoController", "updateCategoriaServico");
+
+        return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "{categoriaServicoId}"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getCategoriaServico",
+    description = "GET method to handle operations for getCategoriaServico",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = CategoriasServicosResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<CategoriasServicosResponseDTO> getCategoriaServico(
+    @PathVariable(value = "categoriaServicoId") String categoriaServicoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "CategoriaServicoController", "getCategoriaServico");
+      final var query = new GetCategoriaServicoQuery(categoriaServicoId);
+
+      ResponseEntity<CategoriasServicosResponseDTO> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @DeleteMapping(
+    value = "{categoriaServicoId}"
+  )
+  @Operation(
+    summary = "DELETE method to handle operations for InativarCategoriaServico",
+    description = "DELETE method to handle operations for InativarCategoriaServico",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = String.class,
+                  type = "String")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<Map<String, ?>> inativarCategoriaServico(
+    @PathVariable(value = "categoriaServicoId") String categoriaServicoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "CategoriaServicoController", "InativarCategoriaServico");
+      final var command = new InativarCategoriaServicoCommand(categoriaServicoId);
+
+       ResponseEntity<Map<String, ?>> response = commandBus.send(command);
+
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "CategoriaServicoController", "InativarCategoriaServico");
+
+        return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }

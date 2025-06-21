@@ -34,6 +34,11 @@ public class CategoriaServicoEntity extends AuditEntity {
     private String nome;
 
   
+    @NotBlank(message = "codigo is mandatory")
+    @Column(name="codigo", unique = true, nullable = false)
+    private String codigo;
+
+  
     @NotBlank(message = "descricao is mandatory")
     @Column(name="descricao", nullable = false)
     private String descricao;

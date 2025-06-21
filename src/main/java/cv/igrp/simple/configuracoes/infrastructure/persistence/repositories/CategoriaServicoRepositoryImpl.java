@@ -56,6 +56,11 @@ public class CategoriaServicoRepositoryImpl implements CategoriaServicoRepositor
                     cb.like(cb.lower(root.get("nome")), "%" + filter.getNome().toLowerCase() + "%")
             );
         }
+
+        if (filter.getCodigo() != null) {
+            spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("codigo"), filter.getCodigo()));
+        }
        var page = jpaCategoriaServicoEntityRepository.findAll(spec, pageable);
 
         return page.getContent().stream()

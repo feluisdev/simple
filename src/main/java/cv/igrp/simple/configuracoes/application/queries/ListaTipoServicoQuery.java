@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListaCategoriaServicoQuery implements Query {
+public class ListaTipoServicoQuery implements Query {
 
   @NotBlank(message = "The field <nome> is required.")
   private String nome;

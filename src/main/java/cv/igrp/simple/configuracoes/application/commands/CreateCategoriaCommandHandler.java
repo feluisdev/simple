@@ -36,7 +36,8 @@ public class CreateCategoriaCommandHandler implements CommandHandler<CreateCateg
               dto.getNome(),
               dto.getDescricao(),
               dto.getIcone(),
-              dto.getCor()
+              dto.getCor(),
+              dto.getCodigo()
       );
 
       var categoriaSaved = categoriaServicoRepository.save(categoria);

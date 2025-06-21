@@ -20,6 +20,7 @@ public class CategoriaMapper {
         entity.setCor(domain.getCor());
         entity.setOrdem(domain.getOrdem());
         entity.setEstado(domain.isEstado());
+        entity.setCodigo(domain.getCodigo());
         entity.setCategoriaUuid(domain.getCategoriaUuid().getValue());
 
         entity.setTiposservicos(null);
@@ -39,7 +40,8 @@ public class CategoriaMapper {
                 entity.getOrdem(),
                 entity.isEstado(),
                 CategoriaUuid.from(entity.getCategoriaUuid()),
-                null
+                null,
+                entity.getCodigo()
         );
     }
 }
