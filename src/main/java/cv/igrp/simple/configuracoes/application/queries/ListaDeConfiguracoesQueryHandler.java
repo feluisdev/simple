@@ -1,7 +1,6 @@
-package cv.igrp.simple.configuracoes.application.queries.handlers;
+package cv.igrp.simple.configuracoes.application.queries;
 
 import cv.igrp.simple.configuracoes.application.dto.ConfiguracoesResponseDTO;
-import cv.igrp.simple.configuracoes.application.queries.queries.ListaDeConfiguracoesQuery;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.ConfiguracoesEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.ConfiguracoesRepository;
 import cv.igrp.framework.core.domain.QueryHandler;

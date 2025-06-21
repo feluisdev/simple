@@ -1,13 +1,13 @@
 package cv.igrp.simple.configuracoes.infrastructure.controller;
 
-import cv.igrp.simple.configuracoes.application.commands.commands.AtualizarConfiguracaoCommand;
-import cv.igrp.simple.configuracoes.application.commands.commands.CriarConfiguracaoCommand;
-import cv.igrp.simple.configuracoes.application.commands.commands.InativarConfiguracaoCommand;
+import cv.igrp.simple.configuracoes.application.commands.AtualizarConfiguracaoCommand;
+import cv.igrp.simple.configuracoes.application.commands.CriarConfiguracaoCommand;
+import cv.igrp.simple.configuracoes.application.commands.InativarConfiguracaoCommand;
 import cv.igrp.simple.configuracoes.application.dto.ConfiguracoesResponseDTO;
 import cv.igrp.simple.configuracoes.application.dto.CriarConfiguracoesDTO;
 import cv.igrp.simple.configuracoes.application.dto.UpdateConfiguracoesDTO;
-import cv.igrp.simple.configuracoes.application.queries.queries.ListaDeConfiguracoesQuery;
-import cv.igrp.simple.configuracoes.application.queries.queries.ObterConfiguracaoQuery;
+import cv.igrp.simple.configuracoes.application.queries.ListaDeConfiguracoesQuery;
+import cv.igrp.simple.configuracoes.application.queries.ObterConfiguracaoQuery;
 import cv.igrp.framework.core.domain.CommandBus;
 import cv.igrp.framework.core.domain.QueryBus;
 import jakarta.validation.Valid;

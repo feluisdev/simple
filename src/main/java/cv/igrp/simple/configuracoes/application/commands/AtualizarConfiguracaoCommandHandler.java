@@ -1,6 +1,5 @@
-package cv.igrp.simple.configuracoes.application.commands.handlers;
+package cv.igrp.simple.configuracoes.application.commands;
 
-import cv.igrp.simple.configuracoes.application.commands.commands.AtualizarConfiguracaoCommand;
 import cv.igrp.simple.configuracoes.application.dto.ConfiguracoesResponseDTO;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.ConfiguracoesEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.ConfiguracoesRepository;

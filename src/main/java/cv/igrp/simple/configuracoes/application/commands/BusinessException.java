@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.application.commands.handlers;
+package cv.igrp.simple.configuracoes.application.commands;
 
 public class BusinessException {
 

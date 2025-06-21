@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.application.commands.commands;
+package cv.igrp.simple.configuracoes.application.commands;
 
 import cv.igrp.framework.core.domain.Command;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InativarCategoriasServicosCommand implements Command {
+public class InativarStatusPedidoCommand implements Command {
 
     @NotNull(message = "O ID é obrigatório")
     private Integer id;

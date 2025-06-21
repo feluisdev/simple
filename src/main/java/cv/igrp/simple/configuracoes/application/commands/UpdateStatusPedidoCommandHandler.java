@@ -1,6 +1,5 @@
-package cv.igrp.simple.configuracoes.application.commands.handlers;
+package cv.igrp.simple.configuracoes.application.commands;
 
-import cv.igrp.simple.configuracoes.application.commands.commands.UpdateStatusPedidoCommand;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.CommandHandler;

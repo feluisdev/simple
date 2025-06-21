@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.application.queries.queries;
+package cv.igrp.simple.configuracoes.application.queries;
 
 import cv.igrp.framework.core.domain.Query;
 import jakarta.validation.constraints.NotNull;
@@ -10,10 +10,12 @@ import org.springframework.data.domain.Pageable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListaDeCategoriasServicosQuery implements Query {
+public class ListaDeConfiguracoesQuery implements Query {
 
-  private String nome;
-  private Boolean ativo;
+  private String chave;
+  private String grupo;
+  private String tipo;
+  private String estado;
   
   @NotNull(message = "The field <pageable> is required.")
   private Pageable pageable;

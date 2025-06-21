@@ -1,8 +1,7 @@
-package cv.igrp.simple.configuracoes.application.commands.commands;
+package cv.igrp.simple.configuracoes.application.commands;
 
 import cv.igrp.framework.core.domain.Command;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,13 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpdateTiposServicosCommand implements Command {
+public class UpdateStatusPedidoCommand implements Command {
 
     @NotNull(message = "O ID é obrigatório")
     private Integer id;
-
-    @Positive(message = "O ID da categoria deve ser um número positivo")
-    private Integer categoriaId;
 
     @Size(min = 2, max = 20, message = "O código deve ter entre 2 e 20 caracteres")
     private String codigo;
@@ -29,17 +25,13 @@ public class UpdateTiposServicosCommand implements Command {
 
     private String descricao;
 
-    private Integer prazoEstimado;
+    @Size(max = 20, message = "A cor deve ter no máximo 20 caracteres")
+    private String cor;
 
-    private Double valorBase;
+    @Size(max = 50, message = "O ícone deve ter no máximo 50 caracteres")
+    private String icone;
 
-    private Boolean requerVistoria;
+    private Integer ordem;
 
-    private Boolean requerAnaliseTec;
-
-    private Boolean requerAprovacao;
-
-    private Boolean disponivelPortal;
-
-    private Boolean ativo;
+    private Boolean visivelPortal;
 }

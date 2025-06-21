@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.application.commands.commands;
+package cv.igrp.simple.configuracoes.application.commands;
 
 import cv.igrp.simple.configuracoes.application.constants.Estado;
 import cv.igrp.framework.core.domain.Command;

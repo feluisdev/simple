@@ -1,13 +1,13 @@
 package cv.igrp.simple.configuracoes.infrastructure.controller;
 
-import cv.igrp.simple.configuracoes.application.commands.commands.CreateStatusPedidoCommand;
-import cv.igrp.simple.configuracoes.application.commands.commands.InativarStatusPedidoCommand;
-import cv.igrp.simple.configuracoes.application.commands.commands.UpdateStatusPedidoCommand;
+import cv.igrp.simple.configuracoes.application.commands.CreateStatusPedidoCommand;
+import cv.igrp.simple.configuracoes.application.commands.InativarStatusPedidoCommand;
+import cv.igrp.simple.configuracoes.application.commands.UpdateStatusPedidoCommand;
 import cv.igrp.simple.configuracoes.application.dto.CreateStatusPedidoDTO;
 import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
 import cv.igrp.simple.configuracoes.application.dto.UpdateStatusPedidoDTO;
-import cv.igrp.simple.configuracoes.application.queries.queries.ListaDeStatusPedidoQuery;
-import cv.igrp.simple.configuracoes.application.queries.queries.ObterStatusPedidoQuery;
+import cv.igrp.simple.configuracoes.application.queries.ListaDeStatusPedidoQuery;
+import cv.igrp.simple.configuracoes.application.queries.ObterStatusPedidoQuery;
 import cv.igrp.framework.core.domain.CommandBus;
 import cv.igrp.framework.core.domain.QueryBus;
 import jakarta.validation.Valid;

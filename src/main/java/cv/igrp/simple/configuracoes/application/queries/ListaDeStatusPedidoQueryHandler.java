@@ -1,7 +1,6 @@
-package cv.igrp.simple.configuracoes.application.queries.handlers;
+package cv.igrp.simple.configuracoes.application.queries;
 
 import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
-import cv.igrp.simple.configuracoes.application.queries.queries.ListaDeStatusPedidoQuery;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.QueryHandler;
