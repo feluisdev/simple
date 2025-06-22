@@ -29,7 +29,7 @@ public class InativarCategoriaServicoCommandHandler implements CommandHandler<In
       LOGGER.info("Iniciando inativação de categoria de serviço com o comando: {}", command);
       String categoriaId = command.getCategoriaServicoId();
 
-      CategoriaServico categoria = categoriaServicoRepository.findByUuId(UUID.fromString(categoriaId))
+      CategoriaServico categoria = categoriaServicoRepository.findWithTiposByCategoriaUuid(UUID.fromString(categoriaId))
               .orElseThrow(() -> {
                  LOGGER.warn("Categoria de serviço com ID {} não encontrada para inativação.", categoriaId);
                  return new IllegalArgumentException("Categoria de Serviço não encontrada com o ID: " + categoriaId);

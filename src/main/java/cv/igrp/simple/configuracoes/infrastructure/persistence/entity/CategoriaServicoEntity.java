@@ -8,6 +8,8 @@ import java.util.UUID;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.ColumnDefault;
 import java.util.List;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 @Getter
@@ -65,6 +67,7 @@ public class CategoriaServicoEntity extends AuditEntity {
   
 
 
-  @OneToMany(mappedBy = "categoriaId", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "categoriaId", fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
 private List<TipoServicoEntity> tiposservicos;
 }

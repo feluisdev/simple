@@ -2,6 +2,7 @@ package cv.igrp.simple.configuracoes.domain.repository;
 
 import cv.igrp.simple.configuracoes.domain.models.CategoriaFilter;
 import cv.igrp.simple.configuracoes.domain.models.CategoriaServico;
+import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriaServicoEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,8 @@ public interface CategoriaServicoRepository {
     Optional<CategoriaServico> findById(Integer categoriaId);
 
     Optional<CategoriaServico> findByUuId(UUID categoriaId);
+
+    Optional<CategoriaServico> findWithTiposByCategoriaUuid(UUID categoriaId);
 
     List<CategoriaServico> getAll(CategoriaFilter filter);
 

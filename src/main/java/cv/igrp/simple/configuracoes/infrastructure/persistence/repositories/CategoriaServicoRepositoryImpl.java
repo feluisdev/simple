@@ -50,6 +50,12 @@ public class CategoriaServicoRepositoryImpl implements CategoriaServicoRepositor
     }
 
     @Override
+    public Optional<CategoriaServico> findWithTiposByCategoriaUuid(UUID categoriaId) {
+        return jpaCategoriaServicoEntityRepository.findWithTiposByCategoriaUuid(categoriaId)
+                .map(categoriaMapper::toDomain);
+    }
+
+    @Override
     public List<CategoriaServico> getAll(CategoriaFilter filter) {
 
         var pageable = PageRequest.of(
