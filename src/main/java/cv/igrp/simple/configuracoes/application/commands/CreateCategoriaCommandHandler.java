@@ -30,7 +30,13 @@ public class CreateCategoriaCommandHandler implements CommandHandler<CreateCateg
    @IgrpCommandHandler
    public ResponseEntity<Map<String, ?>> handle(CreateCategoriaCommand command) {
 
+      LOGGER.info("Iniciando criação de nova categoria de serviço com o comando: {}", command);
       var dto = command.getCriarcategoriasservicos();
+
+      categoriaServicoRepository.findByCodigo(dto.getCodigo()).ifPresent(existingCategoria -> {
+         LOGGER.warn("Tentativa de criar categoria com código já existente: {}", dto.getCodigo());
+         throw new IllegalArgumentException("Já existe uma categoria de serviço com o código: " + dto.getCodigo());
+      });
 
       var categoria =  CategoriaServico.criar(
               dto.getNome(),
@@ -41,35 +47,16 @@ public class CreateCategoriaCommandHandler implements CommandHandler<CreateCateg
       );
 
       var categoriaSaved = categoriaServicoRepository.save(categoria);
-
+      LOGGER.info("Categoria de serviço criada com sucesso: {}", categoriaSaved.getId());
 
       var response = Map.of(
-              "id", categoriaSaved.getId()
-
+              "id", categoriaSaved.getId(),
+              "categoriaUuid", categoriaSaved.getCategoriaUuid().getValue()
       );
 
       return ResponseEntity
               .status(HttpStatus.CREATED)
               .body(response);
-
-    /* return ResponseEntity.status(HttpStatus.CREATED)
-             .body(toDto(categoriaSaved));*/
-
-
-   }
-
-   private CategoriasServicosResponseDTO toDto(CategoriaServico categoriaServico){
-
-      var dto = new CategoriasServicosResponseDTO();
-      dto.setId(categoriaServico.getId());
-      dto.setNome(categoriaServico.getNome());
-      dto.setDescricao(categoriaServico.getDescricao());
-      dto.setOrdem(categoriaServico.getOrdem());
-      dto.setAtivo(categoriaServico.isEstado());
-      dto.setIcone(categoriaServico.getIcone());
-      dto.setCor(categoriaServico.getCor());
-
-      return dto;
 
    }
 

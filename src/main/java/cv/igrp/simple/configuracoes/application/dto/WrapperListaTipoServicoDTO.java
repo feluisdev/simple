@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.configuracoes.application.dto.ListaTipoServicoDTO;
 import cv.igrp.simple.shared.application.dto.PageDTO;
+import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +18,6 @@ public class WrapperListaTipoServicoDTO extends PageDTO{
 
   
   @Valid
-  private ListaTipoServicoDTO content;
+  private List<ListaTipoServicoDTO> content;
 
 }

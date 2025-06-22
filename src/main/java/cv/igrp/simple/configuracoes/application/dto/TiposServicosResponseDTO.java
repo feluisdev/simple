@@ -1,26 +1,54 @@
 package cv.igrp.simple.configuracoes.application.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import cv.igrp.framework.stereotype.IgrpDTO;
+import jakarta.validation.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+
+@IgrpDTO
 public class TiposServicosResponseDTO {
-    private Integer id;
-    private Integer categoriaId;
-    private String codigo;
-    private String nome;
-    private String descricao;
-    private Integer prazoEstimado;
-    private Double valorBase;
-    private Boolean requerVistoria;
-    private Boolean requerAnaliseTec;
-    private Boolean requerAprovacao;
-    private Boolean disponivelPortal;
-    private Boolean ativo;
-    private CategoriasServicosResponseDTO categoria;
+
+  
+  
+  private Integer id;
+  
+  
+  private String categoriaId;
+  
+  
+  private String codigo;
+  
+  
+  private String nome;
+  
+  
+  private String descricao;
+  
+  
+  private Integer prazoEstimado;
+  
+  
+  private Double valorBase;
+  
+  
+  private boolean requerVistoria;
+  
+  
+  private boolean requerAnaliseTec;
+  
+  
+  private boolean requerAprovacao;
+  
+  
+  private boolean disponivelPortal;
+  
+  
+  private boolean ativo;
+
 }

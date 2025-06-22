@@ -21,8 +21,8 @@ import cv.igrp.simple.configuracoes.application.queries.*;
 
 import cv.igrp.simple.configuracoes.application.dto.CriarTiposServicosDTO;
 import java.util.Map;
-import cv.igrp.simple.configuracoes.application.dto.WrapperListaTipoServicoDTO;
 import cv.igrp.simple.configuracoes.application.dto.TiposServicosResponseDTO;
+import cv.igrp.simple.configuracoes.application.dto.WrapperListaTipoServicoDTO;
 
 @IgrpController
 @RestController
@@ -74,43 +74,6 @@ public class TipoServicoController {
        LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "TipoServicoController", "createTipoServico");
 
         return ResponseEntity.status(response.getStatusCode())
-              .headers(response.getHeaders())
-              .body(response.getBody());
-  }
-
-  @GetMapping(
-  )
-  @Operation(
-    summary = "GET method to handle operations for listaTipoServico",
-    description = "GET method to handle operations for listaTipoServico",
-    responses = {
-      @ApiResponse(
-          responseCode = "200",
-          description = "",
-          content = @Content(
-              mediaType = "application/json",
-              schema = @Schema(
-                  implementation = WrapperListaTipoServicoDTO.class,
-                  type = "object")
-          )
-      )
-    }
-  )
-  
-  public ResponseEntity<WrapperListaTipoServicoDTO> listaTipoServico(
-    @RequestParam(value = "nome", required = false) String nome,
-    @RequestParam(value = "codigo", required = false) String codigo,
-    @RequestParam(value = "pagina", required = false, defaultValue = "0") String pagina,
-    @RequestParam(value = "tamanho", required = false, defaultValue = "20") String tamanho)
-  {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "TipoServicoController", "listaTipoServico");
-      final var query = new ListaTipoServicoQuery(nome, codigo, pagina, tamanho);
-
-      ResponseEntity<WrapperListaTipoServicoDTO> response = queryBus.handle(query);
-
-      LOGGER.debug("Operation finished");
-
-      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }
@@ -216,6 +179,44 @@ public class TipoServicoController {
        LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "TipoServicoController", "InativarTipoServico");
 
         return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+  )
+  @Operation(
+    summary = "GET method to handle operations for listaTipoServico",
+    description = "GET method to handle operations for listaTipoServico",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = WrapperListaTipoServicoDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<WrapperListaTipoServicoDTO> listaTipoServico(
+    @RequestParam(value = "nome", required = false) String nome,
+    @RequestParam(value = "codigo", required = false) String codigo,
+    @RequestParam(value = "categoriaId", required = false) String categoriaId,
+    @RequestParam(value = "pagina", required = false, defaultValue = "0") String pagina,
+    @RequestParam(value = "tamanho", required = false, defaultValue = "20") String tamanho)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "TipoServicoController", "listaTipoServico");
+      final var query = new ListaTipoServicoQuery(nome, codigo, categoriaId, pagina, tamanho);
+
+      ResponseEntity<WrapperListaTipoServicoDTO> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }

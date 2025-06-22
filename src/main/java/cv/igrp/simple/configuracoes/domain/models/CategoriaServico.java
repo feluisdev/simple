@@ -1,6 +1,7 @@
 package cv.igrp.simple.configuracoes.domain.models;
 import cv.igrp.simple.configuracoes.domain.valueobject.CategoriaUuid;
 import lombok.Getter;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,16 @@ public class CategoriaServico {
     private List<TipoServico> tiposServico;
 
     private CategoriaServico() {
+        // Construtor privado para JPA e frameworks de mapeamento
     }
+
     private CategoriaServico(Integer id, String nome, String descricao, String icone,
                              String cor, Integer ordem,
                              boolean estado, CategoriaUuid categoriaUuid,
                              List<TipoServico> tiposServico, String codigo ) {
+
+        validarCamposObrigatorios(nome, codigo);
+
         this.id = id;
         this.nome = nome;
         this.codigo = codigo;
@@ -43,7 +49,8 @@ public class CategoriaServico {
                                          String descricao, String icon,
                                          String cor, String codigo) {
 
-        var ordem = 1;
+        validarCamposObrigatorios(nome, codigo);
+        var ordem = 1; // Ordem padrão para novas categorias
 
         return new CategoriaServico(
                 null, // ID será atribuído pela persistência
@@ -52,9 +59,9 @@ public class CategoriaServico {
                 icon,
                 cor,
                 ordem,
-                true,
+                true, // Nova categoria sempre ativa
                 CategoriaUuid.gerar(),
-                null,
+                new ArrayList<>(), // Inicializa a lista de tipos de serviço vazia
                 codigo
         );
     }
@@ -70,6 +77,11 @@ public class CategoriaServico {
                                                CategoriaUuid categoriaUuid,
                                                List<TipoServico> tiposServico,
                                                String codigo) {
+
+        validarCamposObrigatorios(nome, codigo);
+        Assert.notNull(id, "ID não pode ser nulo ao reconstruir CategoriaServico");
+        Assert.notNull(categoriaUuid, "CategoriaUuid não pode ser nulo ao reconstruir CategoriaServico");
+
         return new CategoriaServico(
                 id,
                 nome,
@@ -84,6 +96,28 @@ public class CategoriaServico {
         );
     }
 
+    public void inativar() {
+        this.estado = false;
+    }
 
+    public void ativar() {
+        this.estado = true;
+    }
+
+    public void atualizarDados(String nome, String descricao, String icone, String cor, Integer ordem) {
+        //validarCamposObrigatorios(nome, this.codigo); // Valida nome, mas usa o código existente
+        this.nome = nome;
+        this.descricao = descricao;
+        this.icone = icone;
+        this.cor = cor;
+        this.ordem = ordem;
+        this.codigo = codigo;
+    }
+
+
+    private static void validarCamposObrigatorios(String nome, String codigo) {
+        Assert.hasText(nome, "Nome da categoria não pode ser vazio ou nulo.");
+        Assert.hasText(codigo, "Código da categoria não pode ser vazio ou nulo.");
+    }
 
 }

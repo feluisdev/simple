@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface CategoriaServicoRepository {
 
@@ -15,5 +16,11 @@ public interface CategoriaServicoRepository {
 
     Optional<CategoriaServico> findById(Integer categoriaId);
 
+    Optional<CategoriaServico> findByUuId(UUID categoriaId);
+
     List<CategoriaServico> getAll(CategoriaFilter filter);
+
+    Optional<CategoriaServico> findByCodigo(String codigo);
+
+
 }

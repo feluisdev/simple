@@ -17,6 +17,8 @@ public class ListaTipoServicoQuery implements Query {
   private String nome;
   @NotBlank(message = "The field <codigo> is required.")
   private String codigo;
+  @NotBlank(message = "The field <categoriaId> is required.")
+  private String categoriaId;
   @NotBlank(message = "The field <pagina> is required.")
   private String pagina;
   @NotBlank(message = "The field <tamanho> is required.")

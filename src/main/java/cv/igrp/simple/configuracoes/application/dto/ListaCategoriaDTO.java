@@ -19,6 +19,9 @@ public class ListaCategoriaDTO {
   private Integer id;
   
   
+  private String categoriaId;
+  
+  
   private String nome;
   
   

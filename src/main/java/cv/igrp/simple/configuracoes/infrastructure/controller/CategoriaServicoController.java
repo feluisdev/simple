@@ -135,11 +135,11 @@ public class CategoriaServicoController {
     }
   )
   
-  public ResponseEntity<CategoriasServicosResponseDTO> updateCategoriaServico(
-    @PathVariable(value = "categoriaServicoId") String categoriaServicoId)
+  public ResponseEntity<CategoriasServicosResponseDTO> updateCategoriaServico(@Valid @RequestBody CriarCategoriasServicosDTO updateCategoriaServicoRequest
+    , @PathVariable(value = "categoriaServicoId") String categoriaServicoId)
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "CategoriaServicoController", "updateCategoriaServico");
-      final var command = new UpdateCategoriaServicoCommand(categoriaServicoId);
+      final var command = new UpdateCategoriaServicoCommand(updateCategoriaServicoRequest, categoriaServicoId);
 
        ResponseEntity<CategoriasServicosResponseDTO> response = commandBus.send(command);
 

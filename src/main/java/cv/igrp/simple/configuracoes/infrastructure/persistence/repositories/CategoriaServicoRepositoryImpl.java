@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Repository
@@ -43,6 +44,12 @@ public class CategoriaServicoRepositoryImpl implements CategoriaServicoRepositor
     }
 
     @Override
+    public Optional<CategoriaServico> findByUuId(UUID categoriaId) {
+        return jpaCategoriaServicoEntityRepository.findByCategoriaUuid(categoriaId)
+                .map(categoriaMapper::toDomain);
+    }
+
+    @Override
     public List<CategoriaServico> getAll(CategoriaFilter filter) {
 
         var pageable = PageRequest.of(
@@ -66,5 +73,11 @@ public class CategoriaServicoRepositoryImpl implements CategoriaServicoRepositor
         return page.getContent().stream()
                 .map(categoriaMapper::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<CategoriaServico> findByCodigo(String codigo) {
+        return jpaCategoriaServicoEntityRepository.findByCodigo(codigo)
+                .map(categoriaMapper::toDomain);
     }
 }

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import cv.igrp.simple.configuracoes.application.dto.TiposServicosResponseDTO;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTipoServicoCommand, ResponseEntity<Map<String, ?>>> {
@@ -33,11 +34,16 @@ public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTip
 
    @IgrpCommandHandler
    public ResponseEntity<Map<String, ?>> handle(CreateTipoServicoCommand command) {
+      LOGGER.info("Iniciando criação de novo tipo de serviço com o comando: {}", command);
       var dto = command.getCriartiposservicos();
 
-      CategoriaServico categoria = categoriaServicoRepository.findById(dto.getCategoriaId())
-              .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+      tipoServicoRepository.findByCodigo(dto.getCodigo()).ifPresent(existingTipoServico -> {
+         LOGGER.warn("Tentativa de criar TipoServico com código já existente: {}", dto.getCodigo());
+         throw new IllegalArgumentException("Já existe um tipo de serviço com o código: " + dto.getCodigo());
+      });
 
+      CategoriaServico categoria = categoriaServicoRepository.findByUuId(UUID.fromString(dto.getCategoriaId()))
+              .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
 
       TipoServico tipoServico = TipoServico.criar(
               dto.getCodigo(),
@@ -56,9 +62,8 @@ public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTip
 
 
       var response = Map.of(
-              "id", tipoServicoSaved.getId()
-
-      );
+              "id", tipoServicoSaved.getId(),
+              "tipoServicoUuid", tipoServicoSaved.getTipoServicoUuid().getValue().toString());
 
       return ResponseEntity
               .status(HttpStatus.CREATED)
