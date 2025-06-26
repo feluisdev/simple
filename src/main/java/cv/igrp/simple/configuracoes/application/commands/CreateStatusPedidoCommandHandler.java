@@ -1,7 +1,6 @@
 package cv.igrp.simple.configuracoes.application.commands;
 
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CreateStatusPedidoCommandHandler implements CommandHandler<CreateStatusPedidoCommand, Integer> {
 
-    private final StatusPedidoRepository repository;
+    //private final StatusPedidoRepository repository;
 
     @Override
     @Transactional
     public Integer handle(CreateStatusPedidoCommand command) {
         // Verificar se já existe um status com o mesmo código
-        if (repository.existsByCodigo(command.getCodigo())) {
+       /* if (repository.existsByCodigo(command.getCodigo())) {
             throw new IllegalStateException("Já existe um status de pedido com o código " + command.getCodigo());
         }
 
@@ -33,6 +32,9 @@ public class CreateStatusPedidoCommandHandler implements CommandHandler<CreateSt
                 .build();
 
         StatusPedidoEntity savedEntity = repository.save(entity);
-        return savedEntity.getId();
+        return savedEntity.getId();*/
+
+        return  null;
     }
+
 }

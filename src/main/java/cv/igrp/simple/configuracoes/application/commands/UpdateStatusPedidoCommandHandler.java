@@ -1,7 +1,6 @@
 package cv.igrp.simple.configuracoes.application.commands;
 
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;
 
@@ -14,13 +13,13 @@ import org.springframework.util.StringUtils;
 @RequiredArgsConstructor
 public class UpdateStatusPedidoCommandHandler implements CommandHandler<UpdateStatusPedidoCommand, Void> {
 
-    private final StatusPedidoRepository repository;
+    //private final StatusPedidoRepository repository;
 
     @Override
     @Transactional
     public Void handle(UpdateStatusPedidoCommand command) {
         // Buscar a entidade existente
-        StatusPedidoEntity entity = repository.findById(command.getId())
+      /*  StatusPedidoEntity entity = repository.findById(command.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Status de pedido não encontrado"));
 
         // Verificar se o código foi alterado e se já existe outro status com o mesmo código
@@ -55,7 +54,8 @@ public class UpdateStatusPedidoCommandHandler implements CommandHandler<UpdateSt
         }
 
         // Salvar as alterações
-        repository.save(entity);
+        repository.save(entity);*/
         return null;
     }
+
 }

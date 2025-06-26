@@ -34,7 +34,7 @@ public class StatusPedidoResponseDTO {
   private String icone;
   
   
-  private boolean final;
+  private boolean fim;
   
   
   private boolean ativo;

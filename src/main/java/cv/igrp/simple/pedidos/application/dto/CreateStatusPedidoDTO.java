@@ -31,7 +31,7 @@ public class CreateStatusPedidoDTO {
   private String icone;
   
   
-  private boolean final;
+  private boolean fim;
   
   
   private boolean ativo;

@@ -2,7 +2,6 @@ package cv.igrp.simple.configuracoes.application.queries;
 
 import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.QueryHandler;
 import lombok.RequiredArgsConstructor;
 
@@ -19,11 +18,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ListaDeStatusPedidoQueryHandler implements QueryHandler<ListaDeStatusPedidoQuery, Page<StatusPedidoResponseDTO>> {
 
-    private final StatusPedidoRepository repository;
+    //private final StatusPedidoRepository repository;
 
     @Override
     public Page<StatusPedidoResponseDTO> handle(ListaDeStatusPedidoQuery query) {
-        Specification<StatusPedidoEntity> spec = Specification.where(null);
+       /* Specification<StatusPedidoEntity> spec = Specification.where(null);
 
         if (StringUtils.hasText(query.getCodigo())) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
@@ -65,6 +64,9 @@ public class ListaDeStatusPedidoQueryHandler implements QueryHandler<ListaDeStat
                 .icone(entity.getIcone())
                 .ordem(entity.getOrdem())
                 .visivelPortal(entity.getVisivelPortal())
-                .build();
+                .build();*/
+        return null;
     }
+
+
 }

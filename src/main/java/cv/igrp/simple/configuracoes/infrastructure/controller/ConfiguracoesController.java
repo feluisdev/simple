@@ -1,90 +1,84 @@
 package cv.igrp.simple.configuracoes.infrastructure.controller;
 
-import cv.igrp.simple.configuracoes.application.commands.AtualizarConfiguracaoCommand;
-import cv.igrp.simple.configuracoes.application.commands.CriarConfiguracaoCommand;
-import cv.igrp.simple.configuracoes.application.commands.InativarConfiguracaoCommand;
-import cv.igrp.simple.configuracoes.application.dto.ConfiguracoesResponseDTO;
-import cv.igrp.simple.configuracoes.application.dto.CriarConfiguracoesDTO;
-import cv.igrp.simple.configuracoes.application.dto.UpdateConfiguracoesDTO;
-import cv.igrp.simple.configuracoes.application.queries.ListaDeConfiguracoesQuery;
-import cv.igrp.simple.configuracoes.application.queries.ObterConfiguracaoQuery;
-import cv.igrp.framework.core.domain.CommandBus;
-import cv.igrp.framework.core.domain.QueryBus;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
+import cv.igrp.framework.stereotype.IgrpController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import cv.igrp.framework.core.domain.CommandBus;
+import cv.igrp.framework.core.domain.QueryBus;
+import cv.igrp.simple.configuracoes.application.commands.*;
+import cv.igrp.simple.configuracoes.application.queries.*;
 
+
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import cv.igrp.simple.configuracoes.application.dto.ConfiguracoesResponseDTO;
+
+@IgrpController
 @RestController
-@RequestMapping("configuracoes/v1")
-@RequiredArgsConstructor
+@RequestMapping(path = "configuracoes/v1")
+@Tag(name = "Configuracoes", description = "endpoint para gestao de configuracoes")
 public class ConfiguracoesController {
 
-    private final CommandBus commandBus;
-    private final QueryBus queryBus;
+  private static final Logger LOGGER = LoggerFactory.getLogger(ConfiguracoesController.class);
 
-    @GetMapping
-    public ResponseEntity<Page<ConfiguracoesResponseDTO>> listaDeConfiguracoes(
-            @RequestParam(required = false) String chave,
-            @RequestParam(required = false) String grupo,
-            @RequestParam(required = false) String tipo,
-            @RequestParam(required = false) String estado,
-            Pageable pageable) {
+  
+  private final CommandBus commandBus;
+  private final QueryBus queryBus;
 
-        ListaDeConfiguracoesQuery query = new ListaDeConfiguracoesQuery(chave, grupo, tipo, estado, pageable);
-        Page<ConfiguracoesResponseDTO> result = queryBus.handle(query);
-        return ResponseEntity.ok(result);
+  
+  public ConfiguracoesController(
+    CommandBus commandBus, QueryBus queryBus
+  ) {
+    this.commandBus = commandBus;
+    this.queryBus = queryBus;
+  }
+
+  @GetMapping(
+  )
+  @Operation(
+    summary = "GET method to handle operations for listaDeConfiguracoes",
+    description = "GET method to handle operations for listaDeConfiguracoes",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = ConfiguracoesResponseDTO.class,
+                  type = "object")
+          )
+      )
     }
+  )
+  
+  public ResponseEntity<Page<ConfiguracoesResponseDTO>> listaDeConfiguracoes(
+    @RequestParam(value = "chave", required = false) String chave,
+    @RequestParam(value = "grupo", required = false) String grupo,
+    @RequestParam(value = "tipo", required = false) String tipo,
+    @RequestParam(value = "estado", required = false) String estado,@ParameterObject Pageable pageable)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ConfiguracoesController", "listaDeConfiguracoes");
+      final var query = new ListaDeConfiguracoesQuery(chave, grupo, tipo, estado,pageable);
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ConfiguracoesResponseDTO> obterConfiguracao(@PathVariable Integer id) {
-        ObterConfiguracaoQuery query = new ObterConfiguracaoQuery(id);
-        ConfiguracoesResponseDTO result = queryBus.handle(query);
-        return ResponseEntity.ok(result);
-    }
+      ResponseEntity<Page<ConfiguracoesResponseDTO>> response = queryBus.handle(query);
 
-    @PostMapping
-    public ResponseEntity<ConfiguracoesResponseDTO> criarConfiguracao(@Valid @RequestBody CriarConfiguracoesDTO dto) {
-        CriarConfiguracaoCommand command = CriarConfiguracaoCommand.builder()
-                .chave(dto.getChave())
-                .valor(dto.getValor())
-                .descricao(dto.getDescricao())
-                .tipo(dto.getTipo())
-                .grupo(dto.getGrupo())
-                .editavel(dto.getEditavel())
-                .build();
+      LOGGER.debug("Operation finished");
 
-        ConfiguracoesResponseDTO result = commandBus.send(command);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
-    }
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ConfiguracoesResponseDTO> atualizarConfiguracao(
-            @PathVariable Integer id,
-            @Valid @RequestBody UpdateConfiguracoesDTO dto) {
-
-        AtualizarConfiguracaoCommand command = AtualizarConfiguracaoCommand.builder()
-                .id(id)
-                .chave(dto.getChave())
-                .valor(dto.getValor())
-                .descricao(dto.getDescricao())
-                .tipo(dto.getTipo())
-                .grupo(dto.getGrupo())
-                .editavel(dto.getEditavel())
-                .estado(dto.getEstado())
-                .build();
-
-        ConfiguracoesResponseDTO result = commandBus.send(command);
-        return ResponseEntity.ok(result);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> inativarConfiguracao(@PathVariable Integer id) {
-        InativarConfiguracaoCommand command = new InativarConfiguracaoCommand(id);
-        String result = commandBus.send(command);
-        return ResponseEntity.ok(result);
-    }
 }
