@@ -4,10 +4,12 @@ import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.UUID;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import org.hibernate.annotations.ColumnDefault;
+import java.util.List;
 
 
 @Getter
@@ -26,6 +28,10 @@ public class PedidoEntity extends AuditEntity {
     private Integer id;
 
   
+    @Column(name="pedido_uuid")
+    private UUID pedidoUuid;
+
+  
     @NotBlank(message = "codigoAcompanhamento is mandatory")
     @Column(name="codigo_acompanhamento", unique = true, nullable = false, length=20)
     private String codigoAcompanhamento;
@@ -36,9 +42,9 @@ public class PedidoEntity extends AuditEntity {
     private Integer tipoServicoId;
 
   
-    @NotNull(message = "cidadaoId is mandatory")
-    @Column(name="cidadao_id", nullable = false)
-    private Integer cidadaoId;
+    @NotNull(message = "utenteId is mandatory")
+    @Column(name="utente_id", nullable = false)
+    private Integer utenteId;
 
   
     @NotNull(message = "userCriacaoId is mandatory")
@@ -90,5 +96,19 @@ public class PedidoEntity extends AuditEntity {
     @Column(name="valor_total")
     private Double valorTotal;
 
-  
+
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+private List<AvaliacaoPedidoEntity> avaliacoes;
+
+
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+private List<HistoricoPedidoEntity> historicopedidos;
+
+
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+private List<PagamentoPedidoEntity> pagamentos;
+
+
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+private List<DocumentoPedidoEntity> documentos;
 }

@@ -4,6 +4,7 @@ import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.UUID;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
@@ -23,6 +24,10 @@ public class EtapaPedidoEntity extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
+
+  
+    @Column(name="etapa_uuid")
+    private UUID etapaUuid;
 
   
     @NotBlank(message = "codigo is mandatory")

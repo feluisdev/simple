@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -24,9 +25,8 @@ public class HistoricoPedidoEntity extends AuditEntity {
     private Integer id;
 
   
-    @NotNull(message = "pedidoId is mandatory")
-    @Column(name="pedido_id", nullable = false)
-    private Integer pedidoId;
+    @Column(name="historico_uuid")
+    private String historicoUuid;
 
   
     @NotNull(message = "statusId is mandatory")
@@ -51,5 +51,9 @@ public class HistoricoPedidoEntity extends AuditEntity {
     @Column(name="observacao")
     private String observacao;
 
-  
+     @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "pedido_id")
+   private PedidoEntity pedidoId;
+
+
 }

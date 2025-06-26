@@ -7,6 +7,7 @@ import lombok.*;
 import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 
 
 @Getter
@@ -25,8 +26,8 @@ public class PagamentoPedidoEntity extends AuditEntity {
     private Integer id;
 
   
-    @Column(name="pedido_id")
-    private Integer pedidoId;
+    @Column(name="pagamento_uuid")
+    private String pagamentoUuid;
 
   
     @NotNull(message = "dataPagamento is mandatory")
@@ -55,5 +56,9 @@ public class PagamentoPedidoEntity extends AuditEntity {
     @Column(name="valor")
     private Double valor;
 
-  
+     @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "pedido_id")
+   private PedidoEntity pedidoId;
+
+
 }

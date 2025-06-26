@@ -4,8 +4,10 @@ import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.UUID;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -24,9 +26,8 @@ public class AvaliacaoPedidoEntity extends AuditEntity {
     private Integer id;
 
   
-    @NotNull(message = "pedidoId is mandatory")
-    @Column(name="pedido_id", unique = true, nullable = false)
-    private Integer pedidoId;
+    @Column(name="avaliacao_uuid")
+    private UUID avaliacaoUuid;
 
   
     @NotNull(message = "nota is mandatory")
@@ -47,5 +48,9 @@ public class AvaliacaoPedidoEntity extends AuditEntity {
     @Column(name="user_id", nullable = false)
     private Integer userId;
 
-  
+     @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "pedido_id")
+   private PedidoEntity pedidoId;
+
+
 }
