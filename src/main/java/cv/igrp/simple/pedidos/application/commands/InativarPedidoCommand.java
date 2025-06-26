@@ -1,4 +1,4 @@
-package cv.igrp.simple.configuracoes.application.commands;
+package cv.igrp.simple.pedidos.application.commands;
 
 import cv.igrp.framework.core.domain.Command;
 import jakarta.validation.constraints.*;
@@ -10,9 +10,9 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InativarStatusPedidoCommand implements Command {
+public class InativarPedidoCommand implements Command {
 
-  @NotBlank(message = "The field <statusPedidoId> is required.")
-  private String statusPedidoId;
+  @NotBlank(message = "The field <pedidoId> is required.")
+  private String pedidoId;
 
 }

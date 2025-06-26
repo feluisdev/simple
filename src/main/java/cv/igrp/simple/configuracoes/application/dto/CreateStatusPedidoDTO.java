@@ -1,37 +1,39 @@
 package cv.igrp.simple.configuracoes.application.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import cv.igrp.framework.stereotype.IgrpDTO;
+import jakarta.validation.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+
+@IgrpDTO
 public class CreateStatusPedidoDTO {
 
-    @NotBlank(message = "O código é obrigatório")
-    @Size(min = 2, max = 20, message = "O código deve ter entre 2 e 20 caracteres")
-    private String codigo;
+  
+  
+  private String codigo;
+  
+  
+  private String nome;
+  
+  
+  private String descricao;
+  
+  
+  private String cor;
+  
+  
+  private String icone;
+  
+  
+  private boolean fim;
+  
+  
+  private boolean ativo;
 
-    @NotBlank(message = "O nome é obrigatório")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
-    private String nome;
-
-    private String descricao;
-
-    @Size(max = 20, message = "A cor deve ter no máximo 20 caracteres")
-    private String cor;
-
-    @Size(max = 50, message = "O ícone deve ter no máximo 50 caracteres")
-    private String icone;
-
-    private Integer ordem;
-
-    @NotNull(message = "A visibilidade no portal é obrigatória")
-    private Boolean visivelPortal;
 }

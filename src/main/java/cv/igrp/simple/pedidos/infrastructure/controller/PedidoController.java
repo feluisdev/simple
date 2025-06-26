@@ -21,10 +21,12 @@ import cv.igrp.simple.pedidos.application.queries.*;
 
 import cv.igrp.simple.pedidos.application.dto.PedidoRequestDTO;
 import java.util.Map;
+import java.util.List;
+import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
 
 @IgrpController
 @RestController
-@RequestMapping(path = "v1/pedidos")
+@RequestMapping(path = "api/v1/pedidos")
 @Tag(name = "Pedido", description = "Gerenciamento de Pedidos")
 public class PedidoController {
 
@@ -70,6 +72,185 @@ public class PedidoController {
        ResponseEntity<Map<String, ?>> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PedidoController", "createPedido");
+
+        return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+  )
+  @Operation(
+    summary = "GET method to handle operations for listPedido",
+    description = "GET method to handle operations for listPedido",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = PedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<List<PedidoResponseDTO>> listPedido(
+    @RequestParam(value = "pedidoId", required = false) String pedidoId,
+    @RequestParam(value = "tipoServicoId", required = false) String tipoServicoId,
+    @RequestParam(value = "codigoAcompanhamento", required = false) String codigoAcompanhamento,
+    @RequestParam(value = "utenteId", required = false) String utenteId,
+    @RequestParam(value = "pagina", defaultValue = "0") String pagina,
+    @RequestParam(value = "tamanho", defaultValue = "20") String tamanho)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "listPedido");
+      final var query = new ListPedidoQuery(pedidoId, tipoServicoId, codigoAcompanhamento, utenteId, pagina, tamanho);
+
+      ResponseEntity<List<PedidoResponseDTO>> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "{pedidoId}"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getPedidoById",
+    description = "GET method to handle operations for getPedidoById",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = PedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<PedidoResponseDTO> getPedidoById(
+    @PathVariable(value = "pedidoId") String pedidoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "getPedidoById");
+      final var query = new GetPedidoByIdQuery(pedidoId);
+
+      ResponseEntity<PedidoResponseDTO> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "codigo/{codigoAcompanhamento}"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getPedidoByCodigoAcompanhamento",
+    description = "GET method to handle operations for getPedidoByCodigoAcompanhamento",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = PedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<PedidoResponseDTO> getPedidoByCodigoAcompanhamento(
+    @PathVariable(value = "codigoAcompanhamento") String codigoAcompanhamento)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "getPedidoByCodigoAcompanhamento");
+      final var query = new GetPedidoByCodigoAcompanhamentoQuery(codigoAcompanhamento);
+
+      ResponseEntity<PedidoResponseDTO> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @PutMapping(
+    value = "{pedidoId}"
+  )
+  @Operation(
+    summary = "PUT method to handle operations for updatePedido",
+    description = "PUT method to handle operations for updatePedido",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = PedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<PedidoResponseDTO> updatePedido(@Valid @RequestBody PedidoRequestDTO updatePedidoRequest
+    , @PathVariable(value = "pedidoId") String pedidoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "updatePedido");
+      final var command = new UpdatePedidoCommand(updatePedidoRequest, pedidoId);
+
+       ResponseEntity<PedidoResponseDTO> response = commandBus.send(command);
+
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PedidoController", "updatePedido");
+
+        return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @DeleteMapping(
+    value = "{pedidoId}"
+  )
+  @Operation(
+    summary = "DELETE method to handle operations for inativarPedido",
+    description = "DELETE method to handle operations for inativarPedido",
+    responses = {
+      @ApiResponse(
+          responseCode = "204",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = String.class,
+                  type = "String")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<Map<String, ?>> inativarPedido(
+    @PathVariable(value = "pedidoId") String pedidoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "inativarPedido");
+      final var command = new InativarPedidoCommand(pedidoId);
+
+       ResponseEntity<Map<String, ?>> response = commandBus.send(command);
+
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PedidoController", "inativarPedido");
 
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
