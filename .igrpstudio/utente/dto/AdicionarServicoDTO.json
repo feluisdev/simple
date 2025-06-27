@@ -1,0 +1,1 @@
+{"type":"dto","module":"utente","name":"AdicionarServico","template":"classic","enableCustonValidation":false,"attributes":[{"name":"tipoServico","objectType":"java","type":"string","required":true,"before":false,"after":false,"positive":false,"isEmail":false,"isUrl":false,"primaryKey":false}],"id":"8ktsbuwu6s"}

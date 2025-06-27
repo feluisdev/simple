@@ -1,0 +1,1 @@
+{"type":"enum","module":"utente","name":"Estado","values":[{"name":"Ativo","attributes":["ativo","indica que esta ativo"]},{"name":"Inativo","attributes":["inativo","indica que esta inativo"]}],"attributes":[{"type":"string","name":"Code"},{"type":"string","name":"Description"}]}

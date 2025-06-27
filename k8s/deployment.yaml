@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-utente
+  labels:
+    app: simple-utente
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-utente
+  template:
+    metadata:
+      labels:
+        app: simple-utente
+    spec:
+      containers:
+        - name: simple-utente
+          image: registry.nosi.cv/igrp-simple-servico/simple-utente:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://sumpleu-cnpg-cluster-rw:5432/simple_u_db"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "postgres"
+          
