@@ -20,7 +20,7 @@ build_docker_image_dev:
     #- version/demo-stable
   script:
     - apk add --no-cache git
-    - git clone https://$GIT_USERNAME:$GIT_PASSWORD@git-az.nosi.cv/simple-servico/$REGISTRY_PROJECT/simple-backend.git .
+    - git clone https://$GIT_USERNAME:$GIT_PASSWORD@git-az.nosi.cv/simple-servico/backends/simple-backend.git .
     - docker login $REGISTRY_URL -u "$REGISTRY_USERNAME" -p "$REGISTRY_PASSWORD" 
     - docker build -t $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:$CI_PIPELINE_ID .
     - docker tag $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:$CI_PIPELINE_ID $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:latest
