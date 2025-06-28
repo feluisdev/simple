@@ -2,6 +2,7 @@ package cv.igrp.simple.configuracoes.domain.repository;
 
 import cv.igrp.simple.configuracoes.domain.models.CategoriaFilter;
 import cv.igrp.simple.configuracoes.domain.models.CategoriaServico;
+import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriaServicoEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -24,6 +25,8 @@ public interface CategoriaServicoRepository {
     List<CategoriaServico> getAll(CategoriaFilter filter);
 
     Optional<CategoriaServico> findByCodigo(String codigo);
+
+    List<CategoriaServico> getByAtivo(boolean ativo);
 
 
 }

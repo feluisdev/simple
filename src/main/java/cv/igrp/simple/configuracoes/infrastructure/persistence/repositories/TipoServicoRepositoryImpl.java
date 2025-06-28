@@ -100,4 +100,9 @@ public class TipoServicoRepositoryImpl implements TipoServicoRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TipoServico> getByAtivo(boolean ativo) {
+        return List.of();
+    }
+
 }

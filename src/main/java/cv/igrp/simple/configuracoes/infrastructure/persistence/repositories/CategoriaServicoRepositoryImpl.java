@@ -86,4 +86,9 @@ public class CategoriaServicoRepositoryImpl implements CategoriaServicoRepositor
         return jpaCategoriaServicoEntityRepository.findByCodigo(codigo)
                 .map(categoriaMapper::toDomain);
     }
+
+    @Override
+    public List<CategoriaServico> getByAtivo(boolean ativo) {
+        return List.of();
+    }
 }

@@ -1,5 +1,6 @@
 package cv.igrp.simple.configuracoes.domain.repository;
 
+import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
 import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.configuracoes.domain.models.TipoServicoFilter;
 
@@ -18,4 +19,6 @@ public interface TipoServicoRepository {
     Optional<TipoServico> findByCodigo(String codigo);
 
     List<TipoServico> getAll(TipoServicoFilter filter);
+
+    List<TipoServico> getByAtivo(boolean ativo);
 }
