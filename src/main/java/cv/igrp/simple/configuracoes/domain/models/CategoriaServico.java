@@ -1,6 +1,5 @@
 package cv.igrp.simple.configuracoes.domain.models;
 
-import cv.igrp.simple.configuracoes.domain.valueobject.CategoriaUuid;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 import org.springframework.util.Assert;
