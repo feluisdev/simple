@@ -257,4 +257,74 @@ public class PedidoController {
               .body(response.getBody());
   }
 
+  @GetMapping(
+    value = "utente/{utenteId}"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getPedidoByUtente",
+    description = "GET method to handle operations for getPedidoByUtente",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = PedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<PedidoResponseDTO> getPedidoByUtente(
+    @PathVariable(value = "utenteId") String utenteId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "getPedidoByUtente");
+      final var query = new GetPedidoByUtenteQuery(utenteId);
+
+      ResponseEntity<PedidoResponseDTO> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @PatchMapping(
+    value = "/{pedidoId}/status/{statusId}"
+  )
+  @Operation(
+    summary = "PATCH method to handle operations for updateStatusPedido",
+    description = "PATCH method to handle operations for updateStatusPedido",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = PedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<PedidoResponseDTO> updateStatusPedido(
+    @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "statusId") String statusId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "updateStatusPedido");
+      final var command = new UpdateStatusPedidoCommand(pedidoId, statusId);
+
+       ResponseEntity<PedidoResponseDTO> response = commandBus.send(command);
+
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PedidoController", "updateStatusPedido");
+
+        return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
 }
