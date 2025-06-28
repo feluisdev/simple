@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateStatusPedidoCommand implements Command {
+public class UpdateStatusCommand implements Command {
 
   @NotBlank(message = "The field <pedidoId> is required.")
   private String pedidoId;

@@ -3,7 +3,6 @@ package cv.igrp.simple.pedidos.application.commands;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import cv.igrp.simple.configuracoes.application.commands.UpdateStatusPedidoCommandHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,10 +13,10 @@ import cv.igrp.simple.pedidos.application.commands.*;
 import cv.igrp.simple.pedidos.application.commands.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UpdateStatusPedidoCommandHandlerTest {
+public class UpdateStatusCommandHandlerTest {
 
     @InjectMocks
-    private UpdateStatusPedidoCommandHandler updateStatusPedidoCommandHandler;
+    private UpdateStatusCommandHandler updateStatusCommandHandler;
 
     @BeforeEach
     void setUp() {
@@ -29,10 +28,10 @@ public class UpdateStatusPedidoCommandHandlerTest {
         // TODO: Implement unit test for handle method
         // Example:
         // Given
-        // UpdateStatusPedidoCommand command = new UpdateStatusPedidoCommand(...);
+        // UpdateStatusCommand command = new UpdateStatusCommand(...);
         //
         // When
-        // ResponseEntity<PedidoResponseDTO> response = updateStatusPedidoCommandHandler.handle(command);
+        // ResponseEntity<PedidoResponseDTO> response = updateStatusCommandHandler.handle(command);
         //
         // Then
         // assertNotNull(response);

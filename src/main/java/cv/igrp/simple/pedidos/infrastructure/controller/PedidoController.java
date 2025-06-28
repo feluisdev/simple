@@ -296,8 +296,8 @@ public class PedidoController {
     value = "/{pedidoId}/status/{statusId}"
   )
   @Operation(
-    summary = "PATCH method to handle operations for updateStatusPedido",
-    description = "PATCH method to handle operations for updateStatusPedido",
+    summary = "PATCH method to handle operations for updateStatus",
+    description = "PATCH method to handle operations for updateStatus",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -312,15 +312,15 @@ public class PedidoController {
     }
   )
   
-  public ResponseEntity<PedidoResponseDTO> updateStatusPedido(
+  public ResponseEntity<PedidoResponseDTO> updateStatus(
     @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "statusId") String statusId)
   {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "updateStatusPedido");
-      final var command = new UpdateStatusPedidoCommand(pedidoId, statusId);
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "updateStatus");
+      final var command = new UpdateStatusCommand(pedidoId, statusId);
 
        ResponseEntity<PedidoResponseDTO> response = commandBus.send(command);
 
-       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PedidoController", "updateStatusPedido");
+       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PedidoController", "updateStatus");
 
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())

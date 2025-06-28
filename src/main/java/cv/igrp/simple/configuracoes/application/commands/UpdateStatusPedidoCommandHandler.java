@@ -1,61 +1,39 @@
 package cv.igrp.simple.configuracoes.application.commands;
 
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.framework.core.domain.CommandHandler;
+import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
+import cv.igrp.simple.configuracoes.domain.repository.StatusPedidoRepository;
+import cv.igrp.simple.configuracoes.infrastructure.mappers.StatusPedidoMapper;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 @Service
 @RequiredArgsConstructor
-public class UpdateStatusPedidoCommandHandler implements CommandHandler<UpdateStatusPedidoCommand, Void> {
+public class UpdateStatusPedidoCommandHandler implements CommandHandler<UpdateStatusPedidoCommand, ResponseEntity<StatusPedidoResponseDTO>> {
 
-    //private final StatusPedidoRepository repository;
+    private final StatusPedidoRepository repository;
+
+    private final StatusPedidoMapper statusPedidoMapper;
 
     @Override
     @Transactional
-    public Void handle(UpdateStatusPedidoCommand command) {
-        // Buscar a entidade existente
-      /*  StatusPedidoEntity entity = repository.findById(command.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Status de pedido não encontrado"));
+    public ResponseEntity<StatusPedidoResponseDTO> handle(UpdateStatusPedidoCommand command) {
+        var dto = command.getCreatestatuspedido();
 
-        // Verificar se o código foi alterado e se já existe outro status com o mesmo código
-        if (StringUtils.hasText(command.getCodigo()) && !command.getCodigo().equals(entity.getCodigo())) {
-            if (repository.existsByCodigo(command.getCodigo())) {
-                throw new IllegalStateException("Já existe um status de pedido com o código " + command.getCodigo());
-            }
-            entity.setCodigo(command.getCodigo());
-        }
+        var domain = repository
+                .getById(Identificador.from(command.getStatusPedidoId()))
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Status pedido not found with id"+command.getStatusPedidoId()));
 
-        // Atualizar os campos se fornecidos
-        if (StringUtils.hasText(command.getNome())) {
-            entity.setNome(command.getNome());
-        }
+        domain.atualizarDetalhes(dto.getNome(), dto.getDescricao(),
+                        dto.getCor(), dto.getIcone(), dto.isFim(), domain.isVisivelPortal(),
+                dto.isAtivo(), dto.getOrdem() );
 
-        entity.setDescricao(command.getDescricao());
-
-        if (StringUtils.hasText(command.getCor())) {
-            entity.setCor(command.getCor());
-        }
-
-        if (StringUtils.hasText(command.getIcone())) {
-            entity.setIcone(command.getIcone());
-        }
-
-        if (command.getOrdem() != null) {
-            entity.setOrdem(command.getOrdem());
-        }
-
-        if (command.getVisivelPortal() != null) {
-            entity.setVisivelPortal(command.getVisivelPortal());
-        }
-
-        // Salvar as alterações
-        repository.save(entity);*/
-        return null;
+        var domainSaved = repository.save(domain);
+        return ResponseEntity.ok(statusPedidoMapper.toStatusPedidoResponseDTO(domainSaved));
     }
 
 }

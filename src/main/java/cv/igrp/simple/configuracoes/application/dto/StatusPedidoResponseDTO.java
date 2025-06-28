@@ -19,6 +19,9 @@ public class StatusPedidoResponseDTO {
   private Integer id;
   
   
+  private String statusPedidoId;
+  
+  
   private String codigo;
   
   
@@ -38,5 +41,11 @@ public class StatusPedidoResponseDTO {
   
   
   private boolean ativo;
+  
+  
+  private boolean visivelPortal;
+  
+  
+  private Integer ordem;
 
 }

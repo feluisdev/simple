@@ -16,18 +16,13 @@ public interface StatusPedidoEntityRepository extends
     JpaSpecificationExecutor<StatusPedidoEntity>
 {
 
-    /*
+    Optional<StatusPedidoEntity> findByStatusUuid(UUID statusUuid);
+
     boolean existsByCodigo(String codigo);
 
     Optional<StatusPedidoEntity> findByCodigo(String codigo);
 
+    List<StatusPedidoEntity> findByAtivoTrue();
 
-    List<StatusPedidoEntity> findByVisivelPortalTrue();
-
-
-    List<StatusPedidoEntity> findAllByOrderByOrdemAsc();
-
-
-    List<StatusPedidoEntity> findByVisivelPortalTrueOrderByOrdemAsc();*/
 }
 

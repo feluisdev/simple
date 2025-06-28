@@ -32,6 +32,8 @@ public interface StatusPedidoRepository {
      */
     Optional<StatusPedido> getByCodigo(String codigo);
 
+
+    boolean existByCodigo(String codigo);
     /**
      * Busca todos os StatusPedido cadastrados.
      *

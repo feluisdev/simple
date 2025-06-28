@@ -35,5 +35,11 @@ public class CreateStatusPedidoDTO {
   
   
   private boolean ativo;
+  
+  
+  private boolean visivelPortal;
+  
+  
+  private Integer ordem;
 
 }

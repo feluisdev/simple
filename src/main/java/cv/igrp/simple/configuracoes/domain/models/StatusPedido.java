@@ -7,30 +7,50 @@ import lombok.Getter;
 public class StatusPedido {
 
     private Integer id; // ID sequencial, geralmente gerenciado pelo banco de dados
-    private Identificador statusPedidoUuid;
+    private Identificador statusPedidoUuid; // Identificador UUID único para o status do pedido
+    private String nome;
     private String codigo;
     private String descricao;
+    private String cor;
+    private String icone;
+    private boolean fim;
     private boolean ativo;
+    private boolean visivelPortal;
+    private Integer ordem;
 
     // Construtor privado para controlar a criação de instâncias via métodos de factory.
-    // Agora recebe um Identificador.
-    private StatusPedido(Integer id, Identificador statusPedidoUuid, String codigo, String descricao, boolean ativo) {
+    private StatusPedido(Integer id, Identificador statusPedidoUuid, String nome, String codigo, String descricao,
+                         String cor, String icone,
+                         boolean fim, boolean ativo,
+                         boolean visivelPortal, Integer ordem) {
         if (statusPedidoUuid == null) {
-            throw new IllegalArgumentException("uuid não pode ser nulo.");
+            throw new IllegalArgumentException("O Identificador UUID (statusPedidoUuid) não pode ser nulo.");
         }
+        validarNome(nome);
         validarCodigo(codigo);
         validarDescricao(descricao);
+        // Cor e Icone podem ser nulos ou vazios, dependendo das regras de negócio. Por enquanto, não há validação estrita.
+
         this.id = id;
-        // O atributo 'codigo' é mantido como String por simplicidade inicial.
-        // Poderia ser refatorado para um Objeto de Valor (ex: CodigoStatusPedido)
-        // se regras de formato mais complexas ou comportamentos específicos fossem necessários.
-        // Por exemplo, para garantir que o código seja sempre maiúsculo ou siga um padrão específico.
+        this.statusPedidoUuid = statusPedidoUuid;
+        this.nome = nome;
         this.codigo = codigo;
         this.descricao = descricao;
+        this.cor = cor;
+        this.icone = icone;
+        this.fim = fim;
         this.ativo = ativo;
+        this.ordem = ordem;
+        this.visivelPortal = visivelPortal;
     }
 
     // Métodos de validação privados
+    private static void validarNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
+        }
+    }
+
     private static void validarCodigo(String codigo) {
         if (codigo == null || codigo.trim().isEmpty()) {
             throw new IllegalArgumentException("Código não pode ser nulo ou vazio.");
@@ -47,40 +67,77 @@ public class StatusPedido {
         }
     }
 
-
     /**
      * Cria uma nova instância de StatusPedido.
-     * O ID é gerado automaticamente e o status é definido como ativo por padrão.
+     * O id sequencial (Integer) é inicializado como null.
+     * Um novo statusPedidoUuid (Identificador) é gerado.
+     * O status é definido como ativo por padrão.
      *
-     * @param codigo O código do status do pedido (ex: "PENDENTE", "EM_PROCESSAMENTO").
+     * @param nome O nome do status do pedido.
+     * @param codigo O código do status do pedido.
      * @param descricao Uma descrição mais detalhada do status.
+     * @param cor A cor associada ao status (ex: hexadecimal).
+     * @param icone O ícone associado ao status.
+     * @param fim Indica se este é um status final de pedido.
      * @return Uma nova instância de StatusPedido.
      */
-    public static StatusPedido criarNovo(String codigo, String descricao) {
-        // As validações de 'codigo' e 'descricao' são tratadas no construtor privado.
-        Identificador novoId = Identificador.gerarNovo(); // Usa o VO para gerar novo ID
-        return new StatusPedido(null, novoId, codigo, descricao, true);
+    public static StatusPedido criarNovo(String nome, String codigo, String descricao,
+                                         String cor, String icone, boolean fim,
+                                         boolean visivelPortal, Integer ordem) {
+        Identificador novoUuid = Identificador.gerarNovo();
+        // O 'id' (Integer) é null aqui, pois seria atribuído pela camada de persistência.
+        // 'ativo' é true por padrão para novos status.
+        return new StatusPedido(null, novoUuid, nome, codigo, descricao, cor, icone, fim, true, visivelPortal, ordem);
     }
 
     /**
      * Reconstrói uma instância de StatusPedido a partir de dados existentes.
-     * Este método é útil ao recriar a entidade a partir de dados de persistência.
      *
-     * @param id O ID existente do status.
+     * @param id O ID sequencial existente do status.
+     * @param statusPedidoUuid O Identificador UUID existente do status.
+     * @param nome O nome existente do status.
      * @param codigo O código existente do status.
      * @param descricao A descrição existente do status.
+     * @param cor A cor existente do status.
+     * @param icone O ícone existente do status.
+     * @param fim O estado 'fim' existente do status.
      * @param ativo O estado de ativação existente.
      * @return Uma instância reconstruída de StatusPedido.
      */
-    // O método reconstruir agora espera um Identificador.
-    // Se estivermos reconstruindo a partir de uma String ou UUID puro vindo da persistência,
-    // a camada de infraestrutura (repositório) será responsável por converter para Identificador
-    // antes de chamar este método.
-    public static StatusPedido reconstruir(Integer id, Identificador statusPedidoUuid, String codigo, String descricao, boolean ativo) {
-        // As validações de 'codigo' e 'descricao' são tratadas no construtor privado,
-        // garantindo a consistência dos dados reconstruídos.
-        // A validação de 'id' (não nulo) também é feita no construtor.
-        return new StatusPedido(id, statusPedidoUuid, codigo, descricao, ativo);
+    public static StatusPedido reconstruir(Integer id, Identificador statusPedidoUuid,
+                                           String nome, String codigo,
+                                           String descricao, String cor, String icone,
+                                           boolean fim, boolean ativo, boolean visivelPortal, Integer ordem) {
+        return new StatusPedido(id, statusPedidoUuid, nome, codigo, descricao, cor, icone, fim, ativo, visivelPortal, ordem);
+    }
+
+
+    public void inativar() {
+        this.ativo = false;
+        this.visivelPortal = false;
+    }
+
+    public void ativar() {
+        this.ativo = true;
+        this.visivelPortal = false;
+    }
+
+
+    public void atualizarDetalhes(String nome, String descricao, String cor, String icone,
+                                  boolean fim, boolean visivelPortal, boolean ativo, Integer ordem) {
+        validarNome(nome); // Reutiliza a validação existente
+        validarDescricao(descricao); // Reutiliza a validação existente
+        // Cor e Icone podem ser nulos ou vazios, conforme definido anteriormente, sem validação estrita aqui.
+
+        this.nome = nome;
+        this.descricao = descricao;
+        this.cor = cor;
+        this.icone = icone;
+        this.fim = fim;
+        this.visivelPortal = visivelPortal;
+        this.ativo = ativo;
+        this.ordem = ordem;
+
     }
 
 

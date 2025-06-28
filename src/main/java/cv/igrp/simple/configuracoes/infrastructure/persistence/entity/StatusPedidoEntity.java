@@ -53,8 +53,16 @@ public class StatusPedidoEntity extends AuditEntity {
     private Integer ordem;
 
   
+    @Column(name="fim")
+    private boolean fim;
+
+  
     @Column(name="visivelportal")
     private boolean visivelPortal;
+
+  
+    @Column(name="ativo")
+    private boolean ativo;
 
   
 }

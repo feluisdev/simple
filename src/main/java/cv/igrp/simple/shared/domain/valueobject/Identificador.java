@@ -62,4 +62,8 @@ public class Identificador {
     public UUID getValor() {
         return valor;
     }
+
+    public String getStringValor() {
+        return valor.toString();
+    }
 }

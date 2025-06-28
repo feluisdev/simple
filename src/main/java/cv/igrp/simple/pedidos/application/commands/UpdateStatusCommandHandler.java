@@ -10,16 +10,16 @@ import org.slf4j.LoggerFactory;
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
 
 @Component
-public class UpdateStatusPedidoCommandHandler implements CommandHandler<UpdateStatusPedidoCommand, ResponseEntity<PedidoResponseDTO>> {
+public class UpdateStatusCommandHandler implements CommandHandler<UpdateStatusCommand, ResponseEntity<PedidoResponseDTO>> {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(UpdateStatusPedidoCommandHandler.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(UpdateStatusCommandHandler.class);
 
-   public UpdateStatusPedidoCommandHandler() {
+   public UpdateStatusCommandHandler() {
 
    }
 
    @IgrpCommandHandler
-   public ResponseEntity<PedidoResponseDTO> handle(UpdateStatusPedidoCommand command) {
+   public ResponseEntity<PedidoResponseDTO> handle(UpdateStatusCommand command) {
       // TODO: Implement the command handling logic here
       return null;
    }
