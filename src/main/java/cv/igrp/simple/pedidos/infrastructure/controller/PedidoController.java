@@ -21,7 +21,7 @@ import cv.igrp.simple.pedidos.application.queries.*;
 
 import cv.igrp.simple.pedidos.application.dto.PedidoRequestDTO;
 import java.util.Map;
-import java.util.List;
+import cv.igrp.simple.pedidos.application.dto.WrapperListaPedidoDTO;
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
 
 @IgrpController
@@ -90,14 +90,14 @@ public class PedidoController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = PedidoResponseDTO.class,
+                  implementation = WrapperListaPedidoDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<List<PedidoResponseDTO>> listPedido(
+  public ResponseEntity<WrapperListaPedidoDTO> listPedido(
     @RequestParam(value = "pedidoId", required = false) String pedidoId,
     @RequestParam(value = "tipoServicoId", required = false) String tipoServicoId,
     @RequestParam(value = "codigoAcompanhamento", required = false) String codigoAcompanhamento,
@@ -108,7 +108,7 @@ public class PedidoController {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "listPedido");
       final var query = new ListPedidoQuery(pedidoId, tipoServicoId, codigoAcompanhamento, utenteId, pagina, tamanho);
 
-      ResponseEntity<List<PedidoResponseDTO>> response = queryBus.handle(query);
+      ResponseEntity<WrapperListaPedidoDTO> response = queryBus.handle(query);
 
       LOGGER.debug("Operation finished");
 
