@@ -63,7 +63,7 @@ public class CreateTipoServicoCommandHandler implements CommandHandler<CreateTip
 
       var response = Map.of(
               "id", tipoServicoSaved.getId(),
-              "tipoServicoUuid", tipoServicoSaved.getTipoServicoUuid().getValue().toString());
+              "tipoServicoUuid", tipoServicoSaved.getTipoServicoUuid().getValor().toString());
 
       return ResponseEntity
               .status(HttpStatus.CREATED)

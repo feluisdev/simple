@@ -1,6 +1,7 @@
 package cv.igrp.simple.configuracoes.domain.models;
 
 import cv.igrp.simple.configuracoes.domain.valueobject.TipoServicoUuid;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 import org.springframework.util.Assert;
 
@@ -8,7 +9,7 @@ import org.springframework.util.Assert;
 public class TipoServico {
 
     private Integer id;
-    private TipoServicoUuid tipoServicoUuid;
+    private Identificador tipoServicoUuid;
     private String codigo;
     private String nome;
     private String descricao;
@@ -38,7 +39,7 @@ public class TipoServico {
                         boolean portal,
                         boolean estado,
                         CategoriaServico categoria,
-                        TipoServicoUuid tipoServicoUuid) {
+                        Identificador tipoServicoUuid) {
 
         validarCamposObrigatorios(codigo, nome, categoria);
 
@@ -83,7 +84,7 @@ public class TipoServico {
                 disponivelPortal,
                 true, // Novo tipo de serviço sempre ativo
                 categoria,
-                TipoServicoUuid.gerar()
+                Identificador.gerarNovo()
         );
     }
 
@@ -99,7 +100,7 @@ public class TipoServico {
                                           boolean portal,
                                           boolean estado,
                                           CategoriaServico categoria,
-                                          TipoServicoUuid tipoServicoUuid) {
+                                          Identificador tipoServicoUuid) {
 
         validarCamposObrigatorios(codigo, nome, categoria);
         Assert.notNull(id, "ID não pode ser nulo ao reconstruir TipoServico");

@@ -40,7 +40,7 @@ public class ListaCategoriaServicoQueryHandler implements QueryHandler<ListaCate
                .map(categoria -> {
                    var dto = new ListaCategoriaDTO();
                    dto.setId(categoria.getId());
-                   dto.setCategoriaId(categoria.getCategoriaUuid().getValue().toString());
+                   dto.setCategoriaId(categoria.getCategoriaUuid().getValor().toString());
                    dto.setNome(categoria.getNome());
                    dto.setCodigo(categoria.getCodigo());
                    dto.setEstado(categoria.isEstado()? Estado.ATIVO.getCode() : Estado.INATIVO.getCode()); // campo "estado" no domínio → "ativo" no DTO

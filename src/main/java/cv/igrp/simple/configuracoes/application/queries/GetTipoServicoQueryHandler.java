@@ -44,7 +44,7 @@ public class GetTipoServicoQueryHandler implements QueryHandler<GetTipoServicoQu
 
         var dto = new TiposServicosResponseDTO();
         dto.setId(tipoServicoSaved.getId());
-        dto.setCategoriaId(tipoServicoSaved.getCategoria().getCategoriaUuid().getValue().toString());
+        dto.setCategoriaId(tipoServicoSaved.getCategoria().getCategoriaUuid().getValor().toString());
         dto.setNome(tipoServicoSaved.getNome());
         dto.setCodigo(tipoServicoSaved.getCodigo());
         dto.setDescricao(tipoServicoSaved.getDescricao());

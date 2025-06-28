@@ -5,6 +5,7 @@ import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.configuracoes.domain.valueobject.TipoServicoUuid;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriaServicoEntity;
 import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.TipoServicoEntity;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,7 +27,7 @@ public class TipoServicoMapper {
         entity.setAprovacao(domain.isAprovacao());
         entity.setPortal(domain.isPortal());
         entity.setEstado(domain.isEstado());
-        entity.setTipoServicoUuid(domain.getTipoServicoUuid().getValue());
+        entity.setTipoServicoUuid(domain.getTipoServicoUuid().getValor());
 
         entity.setCategoriaId(categoriaEntity);
         return entity;
@@ -47,7 +48,7 @@ public class TipoServicoMapper {
         entity.setAprovacao(domain.isAprovacao());
         entity.setPortal(domain.isPortal());
         entity.setEstado(domain.isEstado());
-        entity.setTipoServicoUuid(domain.getTipoServicoUuid().getValue());
+        entity.setTipoServicoUuid(domain.getTipoServicoUuid().getValor());
 
         entity.setCategoriaId(null);
         return entity;
@@ -70,7 +71,7 @@ public class TipoServicoMapper {
                 entity.isPortal(),
                 entity.isEstado(),
                 null,
-                TipoServicoUuid.from(entity.getTipoServicoUuid())
+                Identificador.from(entity.getTipoServicoUuid())
         );
     }
 
@@ -91,7 +92,7 @@ public class TipoServicoMapper {
                 entity.isPortal(),
                 entity.isEstado(),
                 categoria,
-                TipoServicoUuid.from(entity.getTipoServicoUuid())
+                Identificador.from(entity.getTipoServicoUuid())
         );
     }
 

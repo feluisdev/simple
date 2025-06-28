@@ -51,7 +51,7 @@ public class CreateCategoriaCommandHandler implements CommandHandler<CreateCateg
 
       var response = Map.of(
               "id", categoriaSaved.getId(),
-              "categoriaUuid", categoriaSaved.getCategoriaUuid().getValue()
+              "categoriaUuid", categoriaSaved.getCategoriaUuid().getValor()
       );
 
       return ResponseEntity

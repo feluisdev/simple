@@ -45,7 +45,7 @@ public class ListaTipoServicoQueryHandler implements QueryHandler<ListaTipoServi
              .map(tipoServico -> {
                var dto = new ListaTipoServicoDTO();
                dto.setId(tipoServico.getId());
-               dto.setTipoServicoId(tipoServico.getTipoServicoUuid().getValue().toString());
+               dto.setTipoServicoId(tipoServico.getTipoServicoUuid().getValor().toString());
                dto.setNome(tipoServico.getNome());
                dto.setCodigo(tipoServico.getCodigo());
                dto.setCategoria(tipoServico.getCategoria().getNome());

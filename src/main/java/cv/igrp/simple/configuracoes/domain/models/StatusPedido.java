@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class StatusPedido {
 
-    private Integer id;
+    private Integer id; // ID sequencial, geralmente gerenciado pelo banco de dados
     private Identificador statusPedidoUuid;
     private String codigo;
     private String descricao;
