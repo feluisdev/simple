@@ -1,12 +1,9 @@
 package cv.igrp.simple.configuracoes.application.commands;
 
-import cv.igrp.simple.configuracoes.domain.repository.StatusPedidoRepository;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.framework.core.domain.CommandHandler;
+import cv.igrp.simple.configuracoes.domain.repository.StatusPedidoRepository;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

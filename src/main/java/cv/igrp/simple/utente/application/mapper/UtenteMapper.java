@@ -1,11 +1,10 @@
 package cv.igrp.simple.utente.application.mapper;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.constants.Estado;
-import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import cv.igrp.simple.utente.application.dto.CriarUtenteDTO;
 import cv.igrp.simple.utente.application.dto.UpdateUtenteDTO;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

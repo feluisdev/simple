@@ -3,7 +3,7 @@ package cv.igrp.simple.configuracoes.application.commands;
 import cv.igrp.simple.configuracoes.application.dto.CreateStatusPedidoDTO;
 import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
 import cv.igrp.simple.configuracoes.domain.repository.StatusPedidoRepository;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.framework.core.domain.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

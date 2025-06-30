@@ -19,7 +19,7 @@ public class PedidoRequestDTO {
   private String tipoServicoId;
   
   
-  private Integer cidadaoId;
+  private Integer utenteId;
   
   
   private String observacoes;

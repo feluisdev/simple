@@ -1,7 +1,7 @@
 package cv.igrp.simple.configuracoes.application.queries;
 
 import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.framework.core.domain.QueryHandler;
 import lombok.RequiredArgsConstructor;
 

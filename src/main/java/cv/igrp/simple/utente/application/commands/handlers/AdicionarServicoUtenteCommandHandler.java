@@ -4,12 +4,13 @@ import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
 import cv.igrp.simple.shared.domain.exceptions.IgrpProblem;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 import cv.igrp.simple.utente.application.constants.Estado;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
-import cv.igrp.simple.utente.domain.models.UtenteServicoEntity;
+
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteServicoEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteServicoEntityRepository;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;

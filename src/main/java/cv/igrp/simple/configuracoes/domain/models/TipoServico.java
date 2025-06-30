@@ -40,8 +40,6 @@ public class TipoServico {
                         CategoriaServico categoria,
                         Identificador tipoServicoUuid) {
 
-        validarCamposObrigatorios(codigo, nome, categoria);
-
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
@@ -101,9 +99,9 @@ public class TipoServico {
                                           CategoriaServico categoria,
                                           Identificador tipoServicoUuid) {
 
-        validarCamposObrigatorios(codigo, nome, categoria);
-        Assert.notNull(id, "ID não pode ser nulo ao reconstruir TipoServico");
-        Assert.notNull(tipoServicoUuid, "TipoServicoUuid não pode ser nulo ao reconstruir TipoServico");
+       // validarCamposObrigatorios(codigo, nome, categoria);
+       // Assert.notNull(id, "ID não pode ser nulo ao reconstruir TipoServico");
+       // Assert.notNull(tipoServicoUuid, "TipoServicoUuid não pode ser nulo ao reconstruir TipoServico");
 
         return new TipoServico(id, codigo, nome, descricao, prazoEstimado,
                 valorBase, vistoria, analiseTecnica, aprovacao, portal, estado, categoria, tipoServicoUuid);

@@ -1,7 +1,7 @@
 package cv.igrp.simple.utente.application.queries.filters;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 import cv.igrp.simple.utente.application.queries.queries.ListaServicosUtenteQuery;
-import cv.igrp.simple.utente.domain.models.UtenteServicoEntity;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;

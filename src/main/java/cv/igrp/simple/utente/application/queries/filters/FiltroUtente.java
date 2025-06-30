@@ -1,9 +1,9 @@
 package cv.igrp.simple.utente.application.queries.filters;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
 
 @Component
 public class FiltroUtente {

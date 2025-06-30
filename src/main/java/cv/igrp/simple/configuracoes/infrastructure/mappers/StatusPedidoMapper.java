@@ -2,7 +2,7 @@ package cv.igrp.simple.configuracoes.infrastructure.mappers;
 
 import cv.igrp.simple.configuracoes.application.dto.StatusPedidoResponseDTO;
 import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.stereotype.Component;
 

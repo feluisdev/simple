@@ -98,15 +98,18 @@ public class PedidoController {
   )
   
   public ResponseEntity<WrapperListaPedidoDTO> listPedido(
-    @RequestParam(value = "pedidoId", required = false) String pedidoId,
     @RequestParam(value = "tipoServicoId", required = false) String tipoServicoId,
     @RequestParam(value = "codigoAcompanhamento", required = false) String codigoAcompanhamento,
-    @RequestParam(value = "utenteId", required = false) String utenteId,
+    @RequestParam(value = "utenteId", required = false) Integer utenteId,
+    @RequestParam(value = "nomeUtente", required = false) String nomeUtente,
+    @RequestParam(value = "numeroUtente", required = false) String numeroUtente,
+    @RequestParam(value = "dataDe", required = false) String dataDe,
+    @RequestParam(value = "dataAte", required = false) String dataAte,
     @RequestParam(value = "pagina", defaultValue = "0") String pagina,
     @RequestParam(value = "tamanho", defaultValue = "20") String tamanho)
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "listPedido");
-      final var query = new ListPedidoQuery(pedidoId, tipoServicoId, codigoAcompanhamento, utenteId, pagina, tamanho);
+      final var query = new ListPedidoQuery(tipoServicoId, codigoAcompanhamento, utenteId, nomeUtente, numeroUtente, dataDe, dataAte, pagina, tamanho);
 
       ResponseEntity<WrapperListaPedidoDTO> response = queryBus.handle(query);
 
