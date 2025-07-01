@@ -91,7 +91,6 @@ public class UtenteEntity extends AuditEntity {
     private Estado estado;
 
   
-    @NotNull(message = "servicos is mandatory")
 
 
   @OneToMany(mappedBy = "utenteId", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })

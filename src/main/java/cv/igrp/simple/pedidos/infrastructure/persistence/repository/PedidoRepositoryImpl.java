@@ -35,12 +35,15 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
     @Override
     public Optional<Pedido> findById(Identificador pedidoUuid) {
-        return Optional.empty();
+        return pedidoEntityRepository.findByPedidoUuid(pedidoUuid.getValor())
+                .map(pedidoMapper::toDomain);
     }
 
     @Override
     public Optional<Pedido> findByCodigoAcompanhamento(CodigoAcompanhamento codigoAcompanhamento) {
-        return Optional.empty();
+        return pedidoEntityRepository
+                .findByCodigoAcompanhamento(codigoAcompanhamento.getValor())
+                .map(pedidoMapper::toDomain);
     }
 
     @Override
@@ -100,6 +103,8 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
     @Override
     public List<Pedido> findAllByUtenteId(Integer utenteID) {
-        return List.of();
+        var lista = pedidoEntityRepository.findAllByUtenteId_Id(utenteID);
+        return lista.stream()
+                .map(pedidoMapper::toDomain).collect(Collectors.toList());
     }
 }

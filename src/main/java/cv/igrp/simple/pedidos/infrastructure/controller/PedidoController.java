@@ -23,6 +23,7 @@ import cv.igrp.simple.pedidos.application.dto.PedidoRequestDTO;
 import java.util.Map;
 import cv.igrp.simple.pedidos.application.dto.WrapperListaPedidoDTO;
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
+import java.util.List;
 
 @IgrpController
 @RestController
@@ -280,13 +281,13 @@ public class PedidoController {
     }
   )
   
-  public ResponseEntity<PedidoResponseDTO> getPedidoByUtente(
+  public ResponseEntity<List<PedidoResponseDTO>> getPedidoByUtente(
     @PathVariable(value = "utenteId") String utenteId)
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PedidoController", "getPedidoByUtente");
       final var query = new GetPedidoByUtenteQuery(utenteId);
 
-      ResponseEntity<PedidoResponseDTO> response = queryBus.handle(query);
+      ResponseEntity<List<PedidoResponseDTO>> response = queryBus.handle(query);
 
       LOGGER.debug("Operation finished");
 

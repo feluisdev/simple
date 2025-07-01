@@ -4,6 +4,8 @@ import cv.igrp.simple.shared.infrastructure.persistence.entity.TipoServicoEntity
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +19,9 @@ public interface TipoServicoEntityRepository extends
     Optional<TipoServicoEntity> findByTipoServicoUuid(UUID tipoServicoUuid);
 
     Optional<TipoServicoEntity> findByCodigo(String codigo);
+
+    List<TipoServicoEntity> findByEstadoTrue();
+
     /*
     boolean existsByCodigo(String codigo);
 

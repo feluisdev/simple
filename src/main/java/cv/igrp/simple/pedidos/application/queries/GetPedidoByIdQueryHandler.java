@@ -1,4 +1,9 @@
 package cv.igrp.simple.pedidos.application.queries;
+import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
+import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
+import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
@@ -13,15 +18,22 @@ public class GetPedidoByIdQueryHandler implements QueryHandler<GetPedidoByIdQuer
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GetPedidoByIdQueryHandler.class);
 
+  private final PedidoRepository pedidoRepository;
+  private final PedidoMapper pedidoMapper;
 
-  public GetPedidoByIdQueryHandler() {
+  public GetPedidoByIdQueryHandler(PedidoRepository pedidoRepository, PedidoMapper pedidoMapper) {
 
+      this.pedidoRepository = pedidoRepository;
+      this.pedidoMapper = pedidoMapper;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<PedidoResponseDTO> handle(GetPedidoByIdQuery query) {
-    // TODO: Implement the query handling logic here
-    return null;
+     var identificador= Identificador.from(query.getPedidoId());
+     var pedido = pedidoRepository.findById(identificador)
+             .orElseThrow(() -> IgrpResponseStatusException.notFound("Pedido not found"));
+
+     return ResponseEntity.ok(pedidoMapper.toPedidoResponseDTO(pedido));
   }
 
 }

@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +27,8 @@ public interface CategoriaServicoEntityRepository extends
 
     @Query("SELECT c FROM CategoriaServicoEntity c LEFT JOIN FETCH c.tiposservicos WHERE c.categoriaUuid = :uuid")
     Optional<CategoriaServicoEntity> findWithTiposByCategoriaUuid(@Param("uuid") UUID uuid);
+
+    List<CategoriaServicoEntity> findByEstadoTrue();
 
     /*Optional<CategoriaServicoEntity> findByNome(String nome);
 

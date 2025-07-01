@@ -1,10 +1,13 @@
 package cv.igrp.simple.shared.infrastructure.persistence.repository;
 
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.utente.application.constants.Estado;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -21,4 +24,6 @@ public interface UtenteEntityRepository extends
      */
     @Query("SELECT MAX(u.id) FROM UtenteEntity u")
     Optional<Integer> findMaxId();
+
+    List<UtenteEntity> findByEstado(Estado estado);
 }

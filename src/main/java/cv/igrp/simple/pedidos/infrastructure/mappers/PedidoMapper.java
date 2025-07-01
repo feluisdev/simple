@@ -4,6 +4,7 @@ import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
 import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.StatusPedidoMapper;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.TipoServicoMapper;
+import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.StatusPedidoEntity;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.TipoServicoEntity;
 import cv.igrp.simple.pedidos.domain.models.Pedido;
@@ -62,5 +63,48 @@ public class PedidoMapper {
         entity.setUserCriacaoId(1); // todo resolve this later
         entity.setEtapaAtualId(1);// todo resolve this later
         return entity;
+    }
+
+    public PedidoResponseDTO toPedidoResponseDTO(Pedido pedido) {
+        if (pedido == null) {
+            return null;
+        }
+
+        PedidoResponseDTO dto = new PedidoResponseDTO();
+
+        dto.setId(pedido.getId());
+        dto.setPedidoId(pedido.getPedidoUuid() != null ? pedido.getPedidoUuid().getValor().toString() : null);
+        dto.setCodigoAcompanhamento(pedido.getCodigoAcompanhamento() != null ? pedido.getCodigoAcompanhamento().getValor() : null);
+
+        if (pedido.getTipoServico() != null) {
+            dto.setTipoServicoId(pedido.getTipoServico().getId());
+            dto.setTipoServicoNome(pedido.getTipoServico().getNome());
+        }
+
+        if (pedido.getUtente() != null) {
+            dto.setUtenteId(pedido.getUtente().getId() != null ? pedido.getUtente().getId().toString() : null);
+            dto.setUtenteNome(pedido.getUtente().getNome());
+        }
+
+        dto.setEtapaAtualId(pedido.getEtapaAtualId() != null ? pedido.getEtapaAtualId().toString() : null);
+        dto.setEtapaAtualNome(null); // TODO: Ajustar quando o domínio tiver essa informação
+
+        if (pedido.getStatus() != null) {
+            dto.setStatusId(pedido.getStatus().getId() != null ? pedido.getStatus().getId().toString() : null);
+            dto.setStatusNome(pedido.getStatus().getNome());
+            dto.setStatusCor(pedido.getStatus().getCor());
+        }
+
+        dto.setDataInicio(pedido.getDataSolicitacao());
+        dto.setDataPrevisao(pedido.getDataPrevisaoConclusao());
+        dto.setDataConclusao(null); // TODO: Ajustar quando o domínio tiver essa informação
+
+        dto.setObservacoes(pedido.getObservacao());
+        dto.setValorTotal(pedido.getValorTotal());
+        dto.setOrigem(pedido.getOrigem());
+        dto.setPrioridade(pedido.getPrioridade() != null ? pedido.getPrioridade().toString() : null);
+        dto.setDataCriacao(pedido.getDataSolicitacao());
+
+        return dto;
     }
 }

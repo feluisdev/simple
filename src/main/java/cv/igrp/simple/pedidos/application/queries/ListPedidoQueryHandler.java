@@ -8,6 +8,7 @@ import cv.igrp.simple.pedidos.application.dto.WrapperListaPedidoDTO;
 import cv.igrp.simple.pedidos.domain.models.PedidoFilter;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
+import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,12 @@ public class ListPedidoQueryHandler implements QueryHandler<ListPedidoQuery, Res
 
   private final PedidoRepository pedidoRepository;
 
-  public ListPedidoQueryHandler(PedidoRepository pedidoRepository) {
+  private final PedidoMapper pedidoMapper;
+
+  public ListPedidoQueryHandler(PedidoRepository pedidoRepository, PedidoMapper pedidoMapper) {
 
       this.pedidoRepository = pedidoRepository;
+      this.pedidoMapper = pedidoMapper;
   }
 
    @IgrpQueryHandler
@@ -50,43 +54,7 @@ public class ListPedidoQueryHandler implements QueryHandler<ListPedidoQuery, Res
      var pedidos = pedidoRepository.findAll(filter);
 
      var listaDTO = pedidos.stream()
-             .map(pedido -> {
-               var dto = new PedidoResponseDTO();
-
-               dto.setId(pedido.getId());
-               dto.setPedidoId(pedido.getPedidoUuid() != null ? pedido.getPedidoUuid().getValor().toString() : null);
-               dto.setCodigoAcompanhamento(pedido.getCodigoAcompanhamento() != null ? pedido.getCodigoAcompanhamento().getValor() : null);
-
-               if (pedido.getTipoServico() != null) {
-                 dto.setTipoServicoId(pedido.getTipoServico().getId());
-                 dto.setTipoServicoNome(pedido.getTipoServico().getNome());
-               }
-
-               if (pedido.getUtente() != null) {
-                 dto.setUtenteId(pedido.getUtente().getId() != null ? pedido.getUtente().getId().toString() : null);
-                 dto.setUtenteNome(pedido.getUtente().getNome());
-               }
-
-               dto.setEtapaAtualId(pedido.getEtapaAtualId() != null ? pedido.getEtapaAtualId().toString() : null);
-               dto.setEtapaAtualNome(null); // todo, não tem no domínio, ajustar depois
-
-               if (pedido.getStatus() != null) {
-                 dto.setStatusId(pedido.getStatus().getId() != null ? pedido.getStatus().getId().toString() : null);
-                 dto.setStatusNome(pedido.getStatus().getNome());
-                 dto.setStatusCor(pedido.getStatus().getCor());
-               }
-
-               dto.setDataInicio(pedido.getDataSolicitacao());
-               dto.setDataPrevisao(pedido.getDataPrevisaoConclusao());
-               dto.setDataConclusao(null); // todo, não tem no domínio, ajustar depois
-
-               dto.setObservacoes(pedido.getObservacao());
-               dto.setValorTotal(pedido.getValorTotal());
-               dto.setOrigem(pedido.getOrigem());
-               dto.setPrioridade(pedido.getPrioridade() != null ? pedido.getPrioridade().toString() : null);
-               dto.setDataCriacao(pedido.getDataSolicitacao());
-               return dto;
-             })
+             .map(pedidoMapper::toPedidoResponseDTO)
              .toList();
 
      var wrapper = new WrapperListaPedidoDTO();
