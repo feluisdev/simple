@@ -77,11 +77,7 @@ public class AdicionarServicoUtenteCommandHandler implements CommandHandler<Adic
       boolean jaAssociadoMesmoUtente = utente.getServicos().stream()
               .anyMatch(s -> s.getObjetoTipo().equals(objetoTipo) && s.getObjetoId().equals(objetoId));
       if (jaAssociadoMesmoUtente) {
-
-         throw new IgrpResponseStatusException(new IgrpProblem<>(
-                 HttpStatus.NOT_FOUND,
-                 "Serviço já associado a este utente",
-                 null));
+         throw IgrpResponseStatusException.notFound("Serviço já associado a este utente");
       }
    }
 

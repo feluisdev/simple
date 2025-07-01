@@ -55,10 +55,7 @@ public class ObterDetalhesServicoQueryHandler implements QueryHandler<ObterDetal
 
       if (optionalUtenteServico.isEmpty()) {
 
-         throw new IgrpResponseStatusException(new IgrpProblem<>(
-                 HttpStatus.NOT_FOUND,
-                 "Servico não encontrado com o ID: " + servicoId,
-                 null));
+         throw IgrpResponseStatusException.notFound("Servico não encontrado com o ID: " + servicoId);
       }
 
       UtenteServicoEntity utenteServico = optionalUtenteServico.get();;

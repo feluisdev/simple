@@ -30,9 +30,8 @@ public class UtenteService {
 
         Optional<UtenteEntity> utente = utenteRepository.findById(idUtente);
 
-        return utente.orElseThrow(() -> new IgrpResponseStatusException(new IgrpProblem<>(
-                HttpStatus.NOT_FOUND,
-                "Utente não encontrado com o ID: " + idUtente,
-                null)));
+        return utente.orElseThrow(() -> IgrpResponseStatusException.notFound(
+                "Utente não encontrado com o ID: " + idUtente
+        ));
     }
 }
