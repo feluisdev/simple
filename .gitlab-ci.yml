@@ -9,6 +9,9 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
   DOCKER_HOST: tcp://docker:2375
+  REGISTRY_URL: "registry-az.nosi.cv"
+  REGISTRY_PROJECT: "simplesv"
+  IMAGE_NAME: "simple-utente"
   GIT_STRATEGY: none
 
 stages:
@@ -24,7 +27,7 @@ build_docker_image_dev:
     - apk add --no-cache git
     - git clone https://$GIT_USERNAME:$GIT_PASSWORD@git-az.nosi.cv/simple-servico/backends/simple-backend.git .
     - docker login $REGISTRY_URL -u "$REGISTRY_USERNAME" -p "$REGISTRY_PASSWORD" 
-    - docker build -t $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:$CI_PIPELINE_ID .
-    - docker tag $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:$CI_PIPELINE_ID $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:latest
-    - docker push $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:$CI_PIPELINE_ID
-    - docker push $REGISTRY_URL/$REGISTRY_PROJECT/simple-utente:latest
+    - docker build -t $REGISTRY_URL/$REGISTRY_PROJECT/$IMAGE_NAME:$CI_PIPELINE_ID .
+    - docker tag $REGISTRY_URL/$REGISTRY_PROJECT/$IMAGE_NAME:$CI_PIPELINE_ID $REGISTRY_URL/$REGISTRY_PROJECT/$IMAGE_NAME:latest
+    - docker push $REGISTRY_URL/$REGISTRY_PROJECT/$IMAGE_NAME:$CI_PIPELINE_ID
+    - docker push $REGISTRY_URL/$REGISTRY_PROJECT/$IMAGE_NAME:latest
