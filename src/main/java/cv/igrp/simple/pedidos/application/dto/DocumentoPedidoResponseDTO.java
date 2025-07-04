@@ -16,10 +16,10 @@ public class DocumentoPedidoResponseDTO {
 
   
   
-  private Integer id;
+  private String documentoId;
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
   private String nome;

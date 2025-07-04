@@ -1,17 +1,15 @@
 package cv.igrp.simple.pedidos.infrastructure.persistence.repository;
 
 import cv.igrp.simple.pedidos.domain.models.Pedido;
-import cv.igrp.simple.pedidos.domain.models.PedidoFilter;
+import cv.igrp.simple.pedidos.domain.filter.PedidoFilter;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.PedidoEntity;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.PedidoEntityRepository;
-import jakarta.persistence.criteria.JoinType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 

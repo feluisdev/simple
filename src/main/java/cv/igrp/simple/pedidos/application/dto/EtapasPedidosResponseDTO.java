@@ -16,7 +16,7 @@ public class EtapasPedidosResponseDTO {
 
   
   
-  private Integer id;
+  private String etapaPedidoId;
   
   
   private String codigo;
@@ -31,7 +31,7 @@ public class EtapasPedidosResponseDTO {
   private Integer ordem;
   
   
-  private Integer tipoServicoId;
+  private String tipoServicoId;
   
   
   private String tipoServicoNome;

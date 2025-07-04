@@ -28,7 +28,7 @@ public class CreateEtapasPedidosDTO {
   private Integer ordem;
   
   
-  private Integer tipoServicoId;
+  private String tipoServicoId;
   
   
   private Integer tempoEstimado;

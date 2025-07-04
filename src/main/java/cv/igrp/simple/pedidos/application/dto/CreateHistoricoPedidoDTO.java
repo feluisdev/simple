@@ -16,13 +16,13 @@ public class CreateHistoricoPedidoDTO {
 
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
-  private Integer statusId;
+  private String statusId;
   
   
-  private Integer etapaId;
+  private String etapaId;
   
   
   private String observacao;

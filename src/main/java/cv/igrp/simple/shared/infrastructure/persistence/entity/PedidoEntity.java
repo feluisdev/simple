@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import org.hibernate.annotations.ColumnDefault;
 import java.math.BigDecimal;
 import java.util.List;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Audited
 @Getter
@@ -86,7 +88,8 @@ public class PedidoEntity extends AuditEntity {
   
 
 
-  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
 private List<AvaliacaoPedidoEntity> avaliacoes;
 
 

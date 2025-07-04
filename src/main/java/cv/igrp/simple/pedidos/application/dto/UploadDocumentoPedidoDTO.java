@@ -18,7 +18,7 @@ public class UploadDocumentoPedidoDTO {
 
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
   private String nome;

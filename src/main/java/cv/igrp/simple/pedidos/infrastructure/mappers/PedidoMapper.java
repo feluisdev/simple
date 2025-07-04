@@ -5,16 +5,15 @@ import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.StatusPedidoMapper;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.TipoServicoMapper;
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.StatusPedidoEntity;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.TipoServicoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.*;
 import cv.igrp.simple.pedidos.domain.models.Pedido;
 import cv.igrp.simple.pedidos.domain.models.Utente;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.PedidoEntity;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -23,6 +22,7 @@ public class PedidoMapper {
     private final UtenteMapper utenteMapper;
     private final StatusPedidoMapper statusPedidoMapper;
     private final TipoServicoMapper tipoServicoMapper;
+
 
     public Pedido toDomain(PedidoEntity entity) {
 
@@ -62,6 +62,28 @@ public class PedidoMapper {
         entity.setValorTotal(domain.getValorTotal());
         entity.setUserCriacaoId(1); // todo resolve this later
         entity.setEtapaAtualId(1);// todo resolve this later
+
+        if (domain.getAvaliacoes() != null) {
+            List<AvaliacaoPedidoEntity> avaliacaoEntities = domain.getAvaliacoes().stream()
+                    .map(av -> {
+                        AvaliacaoPedidoEntity avEntity = new AvaliacaoPedidoEntity();
+
+                        if(av.getIdDb() != null)
+                           avEntity.setId(av.getIdDb());
+
+                        avEntity.setAvaliacaoUuid(av.getAvaliacaoUuid().getValor());
+                        avEntity.setNota(av.getNota());
+                        avEntity.setComentario(av.getComentario());
+                        avEntity.setDataAvaliacao(av.getDataAvaliacao());
+                        avEntity.setUserId(av.getUserId());
+                        avEntity.setPedidoId(entity);
+
+                        return avEntity;
+                    }).toList();
+
+            entity.setAvaliacoes(avaliacaoEntities);
+        }
+
         return entity;
     }
 
@@ -77,7 +99,7 @@ public class PedidoMapper {
         dto.setCodigoAcompanhamento(pedido.getCodigoAcompanhamento() != null ? pedido.getCodigoAcompanhamento().getValor() : null);
 
         if (pedido.getTipoServico() != null) {
-            dto.setTipoServicoId(pedido.getTipoServico().getId());
+            dto.setTipoServicoId(pedido.getTipoServico().getTipoServicoUuid().getStringValor());
             dto.setTipoServicoNome(pedido.getTipoServico().getNome());
         }
 

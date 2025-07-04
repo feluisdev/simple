@@ -11,11 +11,9 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAvaliacaoPedidoQuery implements Query {
+public class GetListAvaliacoesPedidoQuery implements Query {
 
   @NotBlank(message = "The field <pedidoId> is required.")
   private String pedidoId;
-  @NotBlank(message = "The field <avaliacaoId> is required.")
-  private String avaliacaoId;
 
 }

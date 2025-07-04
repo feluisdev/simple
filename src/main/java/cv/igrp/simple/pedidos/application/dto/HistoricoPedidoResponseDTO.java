@@ -19,10 +19,10 @@ public class HistoricoPedidoResponseDTO {
   private Integer id;
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
-  private Integer statusId;
+  private String statusId;
   
   
   private String statusNome;
@@ -31,7 +31,7 @@ public class HistoricoPedidoResponseDTO {
   private String statusCor;
   
   
-  private Integer etapaId;
+  private String etapaId;
   
   
   private String etapaNome;

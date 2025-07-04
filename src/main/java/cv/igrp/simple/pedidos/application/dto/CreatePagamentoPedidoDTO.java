@@ -16,7 +16,7 @@ public class CreatePagamentoPedidoDTO {
 
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
   private BigDecimal valor;

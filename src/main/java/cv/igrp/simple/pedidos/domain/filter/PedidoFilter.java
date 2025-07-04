@@ -1,4 +1,4 @@
-package cv.igrp.simple.pedidos.domain.models;
+package cv.igrp.simple.pedidos.domain.filter;
 
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;

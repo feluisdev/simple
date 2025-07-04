@@ -16,10 +16,10 @@ public class AvaliacaoPedidoResponseDTO {
 
   
   
-  private Integer id;
+  private String avaliacaoPedidoId;
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
   private Integer nota;

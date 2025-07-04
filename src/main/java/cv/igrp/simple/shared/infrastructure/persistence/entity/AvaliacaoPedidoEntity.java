@@ -45,8 +45,7 @@ public class AvaliacaoPedidoEntity extends AuditEntity {
     private LocalDate dataAvaliacao;
 
   
-    @NotNull(message = "userId is mandatory")
-    @Column(name="user_id", nullable = false)
+    @Column(name="user_id")
     private Integer userId;
 
      @ManyToOne(fetch = FetchType.LAZY)

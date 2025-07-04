@@ -9,6 +9,9 @@ import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -27,6 +30,8 @@ public class Pedido {
     private String origem;
     private Integer prioridade;
     private BigDecimal valorTotal;
+
+    private List<Avaliacao> avaliacoes;
 
     private Pedido(Integer id,
                    Identificador pedidoUuid,
@@ -126,6 +131,21 @@ public class Pedido {
         }
 
         return data;
+    }
+
+    public void avaliarPedido(String comentario, Integer nota){
+
+        if (avaliacoes==null){
+            avaliacoes = new ArrayList<>();
+        }
+
+        var avaliacao = Avaliacao.criarNovo(comentario, nota, this);
+        this.avaliacoes.add(avaliacao);
+
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return Collections.unmodifiableList(avaliacoes);
     }
 
 

@@ -22,6 +22,7 @@ import cv.igrp.simple.pedidos.application.queries.*;
 import cv.igrp.simple.pedidos.application.dto.AvaliacaoPedidoResponseDTO;
 import cv.igrp.simple.pedidos.application.dto.CreateAvaliacaoPedidoDTO;
 import java.util.Map;
+import java.util.List;
 
 @IgrpController
 @RestController
@@ -44,7 +45,7 @@ public class AvaliacaoPedidoController {
   }
 
   @GetMapping(
-    value = "{pedidoId}/avaliacao"
+    value = "{pedidoId}/avaliacao/{avaliacaoId}"
   )
   @Operation(
     summary = "GET method to handle operations for getAvaliacaoPedido",
@@ -64,10 +65,10 @@ public class AvaliacaoPedidoController {
   )
   
   public ResponseEntity<AvaliacaoPedidoResponseDTO> getAvaliacaoPedido(
-    @PathVariable(value = "pedidoId") String pedidoId)
+    @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "avaliacaoId") String avaliacaoId)
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "AvaliacaoPedidoController", "getAvaliacaoPedido");
-      final var query = new GetAvaliacaoPedidoQuery(pedidoId);
+      final var query = new GetAvaliacaoPedidoQuery(pedidoId, avaliacaoId);
 
       ResponseEntity<AvaliacaoPedidoResponseDTO> response = queryBus.handle(query);
 
@@ -144,6 +145,41 @@ public class AvaliacaoPedidoController {
        LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "AvaliacaoPedidoController", "updateAvaliacao");
 
         return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "{pedidoId}/avaliacao"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getListAvaliacoesPedido",
+    description = "GET method to handle operations for getListAvaliacoesPedido",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = AvaliacaoPedidoResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<List<AvaliacaoPedidoResponseDTO>> getListAvaliacoesPedido(
+    @PathVariable(value = "pedidoId") String pedidoId)
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "AvaliacaoPedidoController", "getListAvaliacoesPedido");
+      final var query = new GetListAvaliacoesPedidoQuery(pedidoId);
+
+      ResponseEntity<List<AvaliacaoPedidoResponseDTO>> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
   }

@@ -7,21 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 
 @IgrpDTO
 public class CreateAvaliacaoPedidoDTO {
 
   
   
-  private Integer pedidoId;
+  private String pedidoId ;
   
   
-  private Integer nota;
+  private Integer nota ;
   
   
-  private String comentario;
+  private String comentario ;
 
 }

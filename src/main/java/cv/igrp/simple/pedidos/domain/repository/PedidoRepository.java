@@ -1,7 +1,7 @@
 package cv.igrp.simple.pedidos.domain.repository;
 
 import cv.igrp.simple.pedidos.domain.models.Pedido;
-import cv.igrp.simple.pedidos.domain.models.PedidoFilter;
+import cv.igrp.simple.pedidos.domain.filter.PedidoFilter;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 
@@ -22,4 +22,5 @@ public interface PedidoRepository {
     List<Pedido> findAll(PedidoFilter filter);
 
     List<Pedido> findAllByUtenteId(Integer utenteID);
+
 }

@@ -2,10 +2,8 @@ package cv.igrp.simple.pedidos.application.queries;
 
 import cv.igrp.framework.core.domain.QueryHandler;
 import cv.igrp.framework.stereotype.IgrpQueryHandler;
-import cv.igrp.simple.configuracoes.domain.models.TipoServicoFilter;
-import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
 import cv.igrp.simple.pedidos.application.dto.WrapperListaPedidoDTO;
-import cv.igrp.simple.pedidos.domain.models.PedidoFilter;
+import cv.igrp.simple.pedidos.domain.filter.PedidoFilter;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;

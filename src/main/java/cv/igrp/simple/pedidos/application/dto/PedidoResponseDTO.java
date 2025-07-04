@@ -26,7 +26,7 @@ public class PedidoResponseDTO {
   private String codigoAcompanhamento;
   
   
-  private Integer tipoServicoId;
+  private String tipoServicoId;
   
   
   private String tipoServicoNome;

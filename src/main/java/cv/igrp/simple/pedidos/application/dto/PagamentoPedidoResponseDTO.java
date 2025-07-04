@@ -17,10 +17,10 @@ public class PagamentoPedidoResponseDTO {
 
   
   
-  private Integer id;
+  private String pagamentoId;
   
   
-  private Integer pedidoId;
+  private String pedidoId;
   
   
   private BigDecimal valor;
