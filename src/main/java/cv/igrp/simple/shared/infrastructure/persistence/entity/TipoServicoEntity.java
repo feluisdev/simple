@@ -5,10 +5,13 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
+
 import java.util.UUID;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
+
 import java.util.List;
 
 @Audited
@@ -27,65 +30,69 @@ public class TipoServicoEntity extends AuditEntity {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-  
-    @Column(name="tipo_servico_uuid")
+
+    @Column(name = "tipo_servico_uuid")
     private UUID tipoServicoUuid;
 
-  
+
     @NotBlank(message = "codigo is mandatory")
-    @Column(name="codigo", unique = true, nullable = false)
+    @Column(name = "codigo", unique = true, nullable = false)
     private String codigo;
 
-  
+
     @NotBlank(message = "nome is mandatory")
-    @Column(name="nome", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-  
-    @Column(name="descricao")
+
+    @Column(name = "descricao")
     private String descricao;
 
-  
+
     @NotNull(message = "prazoEstimado is mandatory")
-    @Column(name="prazo_estimado", nullable = false)
+    @Column(name = "prazo_estimado", nullable = false)
     private Integer prazoEstimado;
 
-  
+
     @NotNull(message = "valorBase is mandatory")
-    @Column(name="valor_base", nullable = false)
+    @Column(name = "valor_base", nullable = false)
     private Double valorBase;
 
-  
+
     @ColumnDefault("'false'")
-    @Column(name="vistoria")
+    @Column(name = "vistoria")
     private boolean vistoria;
 
-  
+
     @ColumnDefault("'false'")
-    @Column(name="analise_tecnica")
+    @Column(name = "analise_tecnica")
     private boolean analiseTecnica;
 
-  
+
     @ColumnDefault("'false'")
-    @Column(name="aprovacao")
+    @Column(name = "aprovacao")
     private boolean aprovacao;
 
-  
+
     @ColumnDefault("'false'")
-    @Column(name="portal")
+    @Column(name = "portal")
     private boolean portal;
 
-  
-    @Column(name="estado")
+
+    @Column(name = "estado")
     private boolean estado;
 
-  
+
+    @OneToMany(mappedBy = "tipoServicoId", fetch = FetchType.LAZY)
+    private List<PedidoEntity> pedidos;
 
 
-  @OneToMany(mappedBy = "tipoServicoId", fetch = FetchType.LAZY)
-private List<PedidoEntity> pedidos;   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "categoria_id")
-   private CategoriaServicoEntity categoriaId;
+    @OneToMany(mappedBy = "tipoServicoId", fetch = FetchType.LAZY)
+    private List<EtapaPedidoEntity> etapas;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    private CategoriaServicoEntity categoriaId;
 
 
 }

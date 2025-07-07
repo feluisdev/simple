@@ -9,6 +9,7 @@ import java.util.UUID;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
+import java.util.List;
 
 @Audited
 @Getter
@@ -51,10 +52,6 @@ public class EtapaPedidoEntity extends AuditEntity {
     private Integer ordem;
 
   
-    @Column(name="tipo_servico_id")
-    private Integer tipoServicoId;
-
-  
     @Column(name="prazo_estimado")
     private Integer prazoEstimado;
 
@@ -71,4 +68,12 @@ public class EtapaPedidoEntity extends AuditEntity {
     private boolean ativo;
 
   
+
+
+  @OneToMany(mappedBy = "etapaId", fetch = FetchType.LAZY)
+private List<HistoricoPedidoEntity> historicos;   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "tipo_servico_id")
+   private TipoServicoEntity tipoServicoId;
+
+
 }

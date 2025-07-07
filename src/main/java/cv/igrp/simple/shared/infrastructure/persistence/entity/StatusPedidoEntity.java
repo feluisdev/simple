@@ -71,4 +71,8 @@ public class StatusPedidoEntity extends AuditEntity {
 
   @OneToMany(mappedBy = "statusId", fetch = FetchType.LAZY)
 private List<PedidoEntity> pedidos;
+
+
+  @OneToMany(mappedBy = "statusId", fetch = FetchType.LAZY)
+private List<HistoricoPedidoEntity> historicos;
 }

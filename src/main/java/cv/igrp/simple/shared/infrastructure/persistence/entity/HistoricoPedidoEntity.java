@@ -30,15 +30,6 @@ public class HistoricoPedidoEntity extends AuditEntity {
     private String historicoUuid;
 
   
-    @NotNull(message = "statusId is mandatory")
-    @Column(name="status_id", nullable = false)
-    private Integer statusId;
-
-  
-    @Column(name="etapa_id")
-    private Integer etapaId;
-
-  
     @NotNull(message = "userId is mandatory")
     @Column(name="user_id", nullable = false)
     private Integer userId;
@@ -55,6 +46,14 @@ public class HistoricoPedidoEntity extends AuditEntity {
      @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "pedido_id")
    private PedidoEntity pedidoId;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "status_id")
+   private StatusPedidoEntity statusId;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "etapa_id")
+   private EtapaPedidoEntity etapaId;
 
 
 }
