@@ -33,6 +33,8 @@ public class Pedido {
 
     private List<Avaliacao> avaliacoes;
     private List<HistoricoPedido> historicoPedido;
+    private List<Pagamento> pagamentos;
+    private List<Documento> documentos;
 
     private Pedido(Integer id,
                    Identificador pedidoUuid,
@@ -165,5 +167,34 @@ public class Pedido {
         this.historicoPedido.add(historico);
 
         this.status = statusPedido;
+    }
+
+    public void adicionarPagamento(LocalDate dataPagamento,
+                                   String metodoPagamento,
+                                   String referenciaPagamento,
+                                   String status,
+                                   String observacao,
+                                   BigDecimal valor) {
+
+        if (this.pagamentos == null) {
+            this.pagamentos = new ArrayList<>();
+        }
+
+        var pagamento = Pagamento.criarNovo(dataPagamento, metodoPagamento, referenciaPagamento, status, observacao, valor, this);
+        this.pagamentos.add(pagamento);
+    }
+
+    public void adicionarDocumento(String nome, String descricao, String tipoDocumento,
+                                   String caminhoArquivo,
+    Integer tamanhoArquivo) {
+
+        if (this.documentos == null) {
+            this.documentos = new ArrayList<>();
+        }
+
+        var documento = Documento.criarNovo(nome,descricao,tipoDocumento,
+                caminhoArquivo, tamanhoArquivo, LocalDate.now(), this);
+
+        this.documentos.add(documento);
     }
 }

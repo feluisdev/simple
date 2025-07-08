@@ -21,7 +21,10 @@ public class HistoricoPedidoMapper {
 
     public  HistoricoPedidoEntity toEntity(HistoricoPedido historico, PedidoEntity pedidoEntity) {
         HistoricoPedidoEntity entity = new HistoricoPedidoEntity();
-        entity.setId(historico.getIdDb());
+        if(historico.getIdDb()!=null){
+            entity.setId(historico.getIdDb());
+        }
+
         entity.setHistoricoUuid(historico.getHistoricoUuid().getValor());
         entity.setUserId(historico.getUserId());
         entity.setDataRegistro(historico.getDataRegistro());

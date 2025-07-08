@@ -1,6 +1,5 @@
 package cv.igrp.simple.pedidos.domain.repository;
 
-import cv.igrp.simple.pedidos.domain.models.Avaliacao;
 import cv.igrp.simple.pedidos.domain.models.HistoricoPedido;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 

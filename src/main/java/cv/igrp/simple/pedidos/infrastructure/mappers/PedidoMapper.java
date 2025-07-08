@@ -1,23 +1,16 @@
 package cv.igrp.simple.pedidos.infrastructure.mappers;
 
-import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.StatusPedidoMapper;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.TipoServicoMapper;
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
-import cv.igrp.simple.pedidos.domain.models.Avaliacao;
-import cv.igrp.simple.pedidos.domain.models.HistoricoPedido;
-import cv.igrp.simple.pedidos.domain.models.Pedido;
+import cv.igrp.simple.pedidos.domain.models.*;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.AvaliacaoPedidoEntity;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.HistoricoPedidoEntity;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.PedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -29,6 +22,8 @@ public class PedidoMapper {
     private final TipoServicoMapper tipoServicoMapper;
     private final AvaliacaoMapper avaliacaoMapper;
     private final HistoricoPedidoMapper historicoPedidoMapper;
+    private final PagamentoPedidoMapper pagamentoPedidoMapper;
+    private final DocumentoPedidoMapper documentoPedidoMapper;
 
 
     public Pedido toLightDomain(PedidoEntity entity) {
@@ -41,7 +36,7 @@ public class PedidoMapper {
                 statusPedidoMapper.toDomain(entity.getStatusId()),
                 tipoServicoMapper.toDomain(entity.getTipoServicoId()),
                 utenteMapper.toDomain(entity.getUtenteId() != null ? entity.getUtenteId() : null),
-                entity.getEtapaAtualId()!=null ? entity.getEtapaAtualId().getId() : null,
+                entity.getEtapaAtualId() != null ? entity.getEtapaAtualId().getId() : null,
                 entity.getDataInicio(),
                 entity.getDataPrevisao(),
                 entity.getOrigem(),
@@ -51,6 +46,7 @@ public class PedidoMapper {
                 null
         );
     }
+
     public Pedido toDomain(PedidoEntity entity) {
 
         var pedido = Pedido.reconstruir(
@@ -61,7 +57,7 @@ public class PedidoMapper {
                 statusPedidoMapper.toDomain(entity.getStatusId()),
                 tipoServicoMapper.toDomain(entity.getTipoServicoId()),
                 utenteMapper.toDomain(entity.getUtenteId() != null ? entity.getUtenteId() : null),
-                entity.getEtapaAtualId()!=null ? entity.getEtapaAtualId().getId() : null,
+                entity.getEtapaAtualId() != null ? entity.getEtapaAtualId().getId() : null,
                 entity.getDataInicio(),
                 entity.getDataPrevisao(),
                 entity.getOrigem(),
@@ -84,14 +80,28 @@ public class PedidoMapper {
             pedido.getHistoricoPedido().addAll(historicoPedidos);
         }
 
+        if (entity.getPagamentos() != null) {
+            List<Pagamento> pagamentos = entity.getPagamentos().stream()
+                    .map(pagamentoEntity -> pagamentoPedidoMapper.toDomainWithPedido(pagamentoEntity, pedido))
+                    .toList();
+            pedido.getPagamentos().addAll(pagamentos);
+        }
+
+        if (entity.getDocumentos() != null) {
+            List<Documento> documentos = entity.getDocumentos().stream()
+                    .map(documentoEntity -> documentoPedidoMapper.toDomainWithPedido(documentoEntity, pedido))
+                    .toList();
+            pedido.getDocumentos().addAll(documentos);
+        }
+
         return pedido;
     }
 
     public PedidoEntity toEntity(Pedido domain) {
         var entity = new PedidoEntity();
 
-        if(domain.getId() != null)
-         entity.setId(domain.getId());
+        if (domain.getId() != null)
+            entity.setId(domain.getId());
         entity.setPedidoUuid(domain.getPedidoUuid().getValor());
         entity.setCodigoAcompanhamento(domain.getCodigoAcompanhamento().getValor());
         entity.setObservacao(domain.getObservacao());
@@ -107,7 +117,7 @@ public class PedidoMapper {
         entity.setUserCriacaoId(1); // todo resolve this later
 
 
-        if (domain.getAvaliacoes() != null) {
+        /*if (domain.getAvaliacoes() != null) {
             List<AvaliacaoPedidoEntity> avaliacaoEntities = domain.getAvaliacoes().stream()
                     .map(av -> {
                         AvaliacaoPedidoEntity avEntity = new AvaliacaoPedidoEntity();
@@ -145,12 +155,42 @@ public class PedidoMapper {
                     }).toList();
 
             entity.setHistoricopedidos(historicoPedidoEntities);
+        }*/
+
+        if (domain.getAvaliacoes() != null) {
+            List<AvaliacaoPedidoEntity> avaliacaoEntities = domain.getAvaliacoes().stream()
+                    .map(avaliacao -> avaliacaoMapper.toEntity(avaliacao, entity))
+                    .toList();
+            entity.setAvaliacoes(avaliacaoEntities);
         }
+
+        if (domain.getHistoricoPedido() != null) {
+            List<HistoricoPedidoEntity> historicoPedidoEntities = domain.getHistoricoPedido().stream()
+                    .map(historico -> historicoPedidoMapper.toEntity(historico, entity))
+                    .toList();
+            entity.setHistoricopedidos(historicoPedidoEntities);
+        }
+
+
+        if (domain.getPagamentos() != null) {
+            List<PagamentoPedidoEntity> pagamentoEntities = domain.getPagamentos().stream()
+                    .map(pagamento -> pagamentoPedidoMapper.toEntity(pagamento, entity))
+                    .toList();
+            entity.setPagamentos(pagamentoEntities);
+        }
+
+        if (domain.getDocumentos() != null) {
+            List<DocumentoPedidoEntity> documentoEntities = domain.getDocumentos().stream()
+                    .map(documento -> documentoPedidoMapper.toEntity(documento, entity))
+                    .toList();
+            entity.setDocumentos(documentoEntities);
+        }
+
 
         return entity;
     }
 
-    public  PedidoResponseDTO toPedidoResponseDTO(Pedido pedido) {
+    public PedidoResponseDTO toPedidoResponseDTO(Pedido pedido) {
         if (pedido == null) {
             return null;
         }

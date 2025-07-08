@@ -29,8 +29,9 @@ public class AvaliacaoMapper {
 
     public  AvaliacaoPedidoEntity toEntity(Avaliacao avaliacao, PedidoEntity pedidoEntity) {
         AvaliacaoPedidoEntity entity = new AvaliacaoPedidoEntity();
-
-        entity.setId(avaliacao.getIdDb());
+         if (avaliacao.getIdDb()!=null) {
+             entity.setId(avaliacao.getIdDb());
+         }
         entity.setAvaliacaoUuid(avaliacao.getAvaliacaoUuid().getValor());
         entity.setNota(avaliacao.getNota());
         entity.setComentario(avaliacao.getComentario());

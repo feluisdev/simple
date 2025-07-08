@@ -9,6 +9,7 @@ import java.util.UUID;
 import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Audited
@@ -56,7 +57,7 @@ public class PagamentoPedidoEntity extends AuditEntity {
 
   
     @Column(name="valor")
-    private Double valor;
+    private BigDecimal valor;
 
      @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "pedido_id")
