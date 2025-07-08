@@ -5,6 +5,7 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import java.util.UUID;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,7 +28,7 @@ public class HistoricoPedidoEntity extends AuditEntity {
 
   
     @Column(name="historico_uuid")
-    private String historicoUuid;
+    private UUID historicoUuid;
 
   
     @NotNull(message = "userId is mandatory")

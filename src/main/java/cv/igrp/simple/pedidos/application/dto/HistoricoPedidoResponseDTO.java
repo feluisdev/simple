@@ -7,45 +7,47 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 
 @IgrpDTO
 public class HistoricoPedidoResponseDTO {
 
   
   
-  private Integer id;
+  private String historicoId ;
   
   
-  private String pedidoId;
+  private String pedidoId ;
   
   
-  private String statusId;
+  private String statusId ;
   
   
-  private String statusNome;
+  private String statusNome ;
   
   
-  private String statusCor;
+  private String statusCor ;
   
   
-  private String etapaId;
+  private String etapaId ;
   
   
-  private String etapaNome;
+  private String etapaNome ;
   
   
-  private Integer userId;
+  private Integer userId ;
   
   
-  private String userNome;
+  private String userNome ;
   
   
-  private LocalDate dataRegistro;
+  private LocalDate dataRegistro ;
   
   
-  private String observacao;
+  private String observacao ;
 
 }

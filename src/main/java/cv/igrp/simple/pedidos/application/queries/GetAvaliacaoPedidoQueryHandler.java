@@ -2,6 +2,7 @@ package cv.igrp.simple.pedidos.application.queries;
 
 import cv.igrp.simple.pedidos.domain.repository.AvaliacaoRepository;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
+import cv.igrp.simple.pedidos.infrastructure.mappers.AvaliacaoMapper;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
@@ -23,10 +24,13 @@ public class GetAvaliacaoPedidoQueryHandler implements QueryHandler<GetAvaliacao
     private final PedidoRepository pedidoRepository;
     private final AvaliacaoRepository avaliacaoRepository;
 
-    public GetAvaliacaoPedidoQueryHandler(PedidoRepository pedidoRepository, AvaliacaoRepository avaliacaoRepository) {
+    private final AvaliacaoMapper avaliacaoMapper;
+
+    public GetAvaliacaoPedidoQueryHandler(PedidoRepository pedidoRepository, AvaliacaoRepository avaliacaoRepository, AvaliacaoMapper avaliacaoMapper) {
 
         this.pedidoRepository = pedidoRepository;
         this.avaliacaoRepository = avaliacaoRepository;
+        this.avaliacaoMapper = avaliacaoMapper;
     }
 
     @IgrpQueryHandler
@@ -42,15 +46,7 @@ public class GetAvaliacaoPedidoQueryHandler implements QueryHandler<GetAvaliacao
         );
 
 
-        var responseDTO = new AvaliacaoPedidoResponseDTO(
-                avaliacao.getAvaliacaoUuid().getStringValor(),
-                avaliacao.getPedido().getPedidoUuid().getStringValor(),
-                avaliacao.getNota(),
-                avaliacao.getComentario(),
-                avaliacao.getDataAvaliacao(),
-                avaliacao.getUserId(),
-                "nome" // todo resolve this
-        );
+        var responseDTO = avaliacaoMapper.toResponseDTO(avaliacao);
 
 
         return ResponseEntity.ok(responseDTO);

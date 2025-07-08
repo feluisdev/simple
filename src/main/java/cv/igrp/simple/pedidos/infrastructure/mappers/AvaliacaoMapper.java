@@ -1,5 +1,6 @@
 package cv.igrp.simple.pedidos.infrastructure.mappers;
 
+import cv.igrp.simple.pedidos.application.dto.AvaliacaoPedidoResponseDTO;
 import cv.igrp.simple.pedidos.domain.models.Avaliacao;
 import cv.igrp.simple.pedidos.domain.models.Pedido;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
@@ -61,6 +62,22 @@ public class AvaliacaoMapper {
                 entity.getDataAvaliacao(),
                 entity.getUserId(),
                 pedido
+        );
+    }
+
+    public AvaliacaoPedidoResponseDTO toResponseDTO(Avaliacao avaliacao) {
+        if (avaliacao == null) {
+            return null;
+        }
+
+        return new AvaliacaoPedidoResponseDTO(
+                avaliacao.getAvaliacaoUuid().getStringValor(),
+                avaliacao.getPedido().getPedidoUuid().getStringValor(),
+                avaliacao.getNota(),
+                avaliacao.getComentario(),
+                avaliacao.getDataAvaliacao(),
+                avaliacao.getUserId(),
+                "nome" // TODO: resolver nome do usuário real, se disponível
         );
     }
 }

@@ -134,7 +134,7 @@ public class PedidoMapper {
                         var historicoPedidoEntity = new HistoricoPedidoEntity();
                         if(h.getIdDb() != null)
                             historicoPedidoEntity.setId(h.getIdDb());
-                        historicoPedidoEntity.setHistoricoUuid(h.getHistoricoUuid().getStringValor());
+                        historicoPedidoEntity.setHistoricoUuid(h.getHistoricoUuid().getValor());
                         historicoPedidoEntity.setUserId(h.getUserId());
                         historicoPedidoEntity.setDataRegistro(h.getDataRegistro());
                         historicoPedidoEntity.setObservacao(h.getObservacao());

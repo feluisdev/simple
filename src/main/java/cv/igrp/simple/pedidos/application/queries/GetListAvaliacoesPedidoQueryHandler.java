@@ -1,5 +1,6 @@
 package cv.igrp.simple.pedidos.application.queries;
 import cv.igrp.simple.pedidos.domain.repository.AvaliacaoRepository;
+import cv.igrp.simple.pedidos.infrastructure.mappers.AvaliacaoMapper;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,30 +19,23 @@ public class GetListAvaliacoesPedidoQueryHandler implements QueryHandler<GetList
 
   private final AvaliacaoRepository avaliacaoRepository;
 
+    private final AvaliacaoMapper avaliacaoMapper;
 
-  public GetListAvaliacoesPedidoQueryHandler(AvaliacaoRepository avaliacaoRepository) {
+  public GetListAvaliacoesPedidoQueryHandler(AvaliacaoRepository avaliacaoRepository, AvaliacaoMapper avaliacaoMapper) {
 
       this.avaliacaoRepository = avaliacaoRepository;
+      this.avaliacaoMapper = avaliacaoMapper;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<List<AvaliacaoPedidoResponseDTO>> handle(GetListAvaliacoesPedidoQuery query) {
-    // TODO: Implement the query handling logic here
 
-     var avaliacaoId = Identificador.from(query.getPedidoId());
+     var pedidoId = Identificador.from(query.getPedidoId());
 
-    var avaliacoes = avaliacaoRepository.findAvaliacoesByPedido(avaliacaoId);
+    var avaliacoes = avaliacaoRepository.findAvaliacoesByPedido(pedidoId);
 
      List<AvaliacaoPedidoResponseDTO> responseDTO = avaliacoes.stream()
-                .map(avaliacao -> new AvaliacaoPedidoResponseDTO(
-                        avaliacao.getAvaliacaoUuid().getStringValor(),
-                        avaliacao.getPedido().getPedidoUuid().getStringValor(),
-                        avaliacao.getNota(),
-                        avaliacao.getComentario(),
-                        avaliacao.getDataAvaliacao(),
-                        avaliacao.getUserId(),
-                        "nome" // todo resolve this
-                ))
+                .map(avaliacaoMapper::toResponseDTO)
                 .toList();
 
     return ResponseEntity.ok(responseDTO);

@@ -5,6 +5,7 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import java.util.UUID;
 import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
@@ -28,7 +29,7 @@ public class PagamentoPedidoEntity extends AuditEntity {
 
   
     @Column(name="pagamento_uuid")
-    private String pagamentoUuid;
+    private UUID pagamentoUuid;
 
   
     @NotNull(message = "dataPagamento is mandatory")
