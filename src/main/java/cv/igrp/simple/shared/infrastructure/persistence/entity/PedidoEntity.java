@@ -50,10 +50,6 @@ public class PedidoEntity extends AuditEntity {
     private Integer userResponsavelId;
 
   
-    @Column(name="etapa_atual_id")
-    private Integer etapaAtualId;
-
-  
     @NotNull(message = "dataInicio is mandatory")
     @Column(name="data_inicio", nullable = false)
     private LocalDate dataInicio;
@@ -93,15 +89,18 @@ public class PedidoEntity extends AuditEntity {
 private List<AvaliacaoPedidoEntity> avaliacoes;
 
 
-  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
 private List<HistoricoPedidoEntity> historicopedidos;
 
 
-  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
 private List<PagamentoPedidoEntity> pagamentos;
 
 
-  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
 private List<DocumentoPedidoEntity> documentos;   @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "tipo_servico_id")
    private TipoServicoEntity tipoServicoId;
@@ -113,6 +112,10 @@ private List<DocumentoPedidoEntity> documentos;   @ManyToOne(fetch = FetchType.L
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "utente_id")
    private UtenteEntity utenteId;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "etapa_atual_id")
+   private EtapaPedidoEntity etapaAtualId;
 
 
 }

@@ -71,7 +71,11 @@ public class EtapaPedidoEntity extends AuditEntity {
 
 
   @OneToMany(mappedBy = "etapaId", fetch = FetchType.LAZY)
-private List<HistoricoPedidoEntity> historicos;   @ManyToOne(fetch = FetchType.LAZY)
+private List<HistoricoPedidoEntity> historicos;
+
+
+  @OneToMany(mappedBy = "etapaAtualId", fetch = FetchType.LAZY)
+private List<PedidoEntity> pedidos;   @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "tipo_servico_id")
    private TipoServicoEntity tipoServicoId;
 

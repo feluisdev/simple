@@ -1,18 +1,16 @@
 package cv.igrp.simple.pedidos.infrastructure.mappers;
 
 import cv.igrp.simple.pedidos.domain.models.Avaliacao;
+import cv.igrp.simple.pedidos.domain.models.Pedido;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.AvaliacaoPedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.PedidoEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AvaliacaoMapper {
 
-    private final PedidoMapper pedidoMapper;
 
-    public AvaliacaoMapper(PedidoMapper pedidoMapper) {
-        this.pedidoMapper = pedidoMapper;
-    }
 
     public  AvaliacaoPedidoEntity toEntity(Avaliacao avaliacao) {
         AvaliacaoPedidoEntity entity = new AvaliacaoPedidoEntity();
@@ -23,7 +21,21 @@ public class AvaliacaoMapper {
         entity.setComentario(avaliacao.getComentario());
         entity.setDataAvaliacao(avaliacao.getDataAvaliacao());
         entity.setUserId(avaliacao.getUserId());
-        entity.setPedidoId(pedidoMapper.toEntity(avaliacao.getPedido()));
+        entity.setPedidoId(null);
+
+        return entity;
+    }
+
+    public  AvaliacaoPedidoEntity toEntity(Avaliacao avaliacao, PedidoEntity pedidoEntity) {
+        AvaliacaoPedidoEntity entity = new AvaliacaoPedidoEntity();
+
+        entity.setId(avaliacao.getIdDb());
+        entity.setAvaliacaoUuid(avaliacao.getAvaliacaoUuid().getValor());
+        entity.setNota(avaliacao.getNota());
+        entity.setComentario(avaliacao.getComentario());
+        entity.setDataAvaliacao(avaliacao.getDataAvaliacao());
+        entity.setUserId(avaliacao.getUserId());
+        entity.setPedidoId(pedidoEntity);
 
         return entity;
     }
@@ -36,7 +48,19 @@ public class AvaliacaoMapper {
                 entity.getComentario(),
                 entity.getDataAvaliacao(),
                 entity.getUserId(),
-                pedidoMapper.toDomain(entity.getPedidoId())
+                null
+        );
+    }
+
+    public  Avaliacao toDomainWithPedido(AvaliacaoPedidoEntity entity, Pedido pedido) {
+        return Avaliacao.reconstruir(
+                entity.getId(),
+                Identificador.from(entity.getAvaliacaoUuid()),
+                entity.getNota(),
+                entity.getComentario(),
+                entity.getDataAvaliacao(),
+                entity.getUserId(),
+                pedido
         );
     }
 }

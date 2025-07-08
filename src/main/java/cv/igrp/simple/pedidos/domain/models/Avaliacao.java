@@ -60,10 +60,6 @@ public class Avaliacao {
         return new Avaliacao(idDb, avaliacaoUuid, nota, comentario, dataAvaliacao, userId,pedido);
     }
 
-    public static Avaliacao reconstruir(Integer idDb, Identificador avaliacaoUuid, Integer nota,
-                                        String comentario, LocalDate dataAvaliacao, Integer userId, Integer idPedidoDb) {
 
-        return new Avaliacao(idDb, avaliacaoUuid, nota, comentario, dataAvaliacao, userId,idPedidoDb);
-    }
 
 }

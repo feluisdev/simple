@@ -3,6 +3,7 @@ package cv.igrp.simple.pedidos.infrastructure.persistence.repository;
 import cv.igrp.simple.pedidos.domain.models.Avaliacao;
 import cv.igrp.simple.pedidos.domain.repository.AvaliacaoRepository;
 import cv.igrp.simple.pedidos.infrastructure.mappers.AvaliacaoMapper;
+import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.AvaliacaoPedidoEntityRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class AvaliacaoPedidoRepositoryImpl implements AvaliacaoRepository {
 
     private final AvaliacaoPedidoEntityRepository avaliacaoPedidoEntityRepository;
     private final AvaliacaoMapper avaliacaoMapper;
+    private final PedidoMapper pedidoMapper;
 
     @Override
     public Optional<Avaliacao> findById(Identificador avaliacaoUuid) {
@@ -26,8 +28,12 @@ public class AvaliacaoPedidoRepositoryImpl implements AvaliacaoRepository {
 
         return avaliacaoPedidoEntityRepository
                 .findByAvaliacaoUuid(avaliacaoUuid.getValor())
-                .map(avaliacaoMapper::toDomain);
+                .map(entity -> {
+                    var pedido = pedidoMapper.toLightDomain(entity.getPedidoId());
+                    return avaliacaoMapper.toDomainWithPedido(entity, pedido);
+                });
     }
+
 
     @Override
     public Optional<Avaliacao> findByPedidoIdAndAvaliacaoID(Identificador pedidoUuid, Identificador avaliacaoUuid) {
@@ -37,7 +43,10 @@ public class AvaliacaoPedidoRepositoryImpl implements AvaliacaoRepository {
 
         return avaliacaoPedidoEntityRepository
                 .findByPedidoId_PedidoUuidAndAvaliacaoUuid(pedidoUuid.getValor(),avaliacaoUuid.getValor())
-                .map(avaliacaoMapper::toDomain);
+                .map(entity -> {
+                    var pedido = pedidoMapper.toLightDomain(entity.getPedidoId());
+                    return avaliacaoMapper.toDomainWithPedido(entity, pedido);
+                });
     }
 
     @Override
@@ -50,7 +59,10 @@ public class AvaliacaoPedidoRepositoryImpl implements AvaliacaoRepository {
         return avaliacaoPedidoEntityRepository
                 .findByPedidoId_PedidoUuid(pedidoId.getValor())
                 .stream()
-                .map(avaliacaoMapper::toDomain)
+                .map(entity -> {
+                    var pedido = pedidoMapper.toLightDomain(entity.getPedidoId());
+                    return avaliacaoMapper.toDomainWithPedido(entity, pedido);
+                })
                 .toList();
     }
 }

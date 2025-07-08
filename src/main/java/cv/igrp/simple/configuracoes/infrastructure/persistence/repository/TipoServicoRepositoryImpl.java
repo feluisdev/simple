@@ -33,7 +33,6 @@ public class TipoServicoRepositoryImpl implements TipoServicoRepository {
 
     @Override
     public TipoServico save(TipoServico tipoServico) {
-        // var tipoServicoEntity = tipoServicoMapper.toEntity(tipoServico);
 
         var categoriaEntity = categoriaMapper.toEntity(tipoServico.getCategoria());
 
@@ -42,8 +41,6 @@ public class TipoServicoRepositoryImpl implements TipoServicoRepository {
         var saved = jpaTipoServicoEntityRepository.save(tipoServicoEntity);
 
         return tipoServicoMapper.toDomainWithCategoria(saved, tipoServico.getCategoria());
-
-        //return tipoServicoMapper.toDomain(tipoServicoEntity);
     }
 
     @Override

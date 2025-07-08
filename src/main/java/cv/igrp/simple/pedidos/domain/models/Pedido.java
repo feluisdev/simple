@@ -18,20 +18,21 @@ import java.util.Objects;
 public class Pedido {
 
     private final Integer id;
-    private final Identificador pedidoUuid;
-    private final CodigoAcompanhamento codigoAcompanhamento;
-    private final String observacao;
-    private final StatusPedido status;
-    private final TipoServico tipoServico;
-    private final Utente utente;
-    private final Integer etapaAtualId;
-    private final LocalDate dataSolicitacao;
-    private final LocalDate dataPrevisaoConclusao;
+    private Identificador pedidoUuid;
+    private  CodigoAcompanhamento codigoAcompanhamento;
+    private  String observacao;
+    private  StatusPedido status;
+    private  TipoServico tipoServico;
+    private  Utente utente;
+    private  Integer etapaAtualId;
+    private  LocalDate dataSolicitacao;
+    private  LocalDate dataPrevisaoConclusao;
     private String origem;
     private Integer prioridade;
     private BigDecimal valorTotal;
 
     private List<Avaliacao> avaliacoes;
+    private List<HistoricoPedido> historicoPedido;
 
     private Pedido(Integer id,
                    Identificador pedidoUuid,
@@ -45,7 +46,9 @@ public class Pedido {
                    LocalDate dataPrevisaoConclusao,
                    String origem,
                    Integer prioridade,
-                   BigDecimal valorTotal) {
+                   BigDecimal valorTotal,
+                   List<Avaliacao> avaliacoes,
+                   List<HistoricoPedido> historicoPedido) {
 
         this.id = id;
         this.pedidoUuid = Objects.requireNonNull(pedidoUuid);
@@ -60,6 +63,8 @@ public class Pedido {
         this.origem = origem;
         this.prioridade = prioridade;
         this.valorTotal = valorTotal;
+        this.avaliacoes = avaliacoes!=null ? avaliacoes : new ArrayList<>();
+        this.historicoPedido = historicoPedido!=null ? historicoPedido : new ArrayList<>();
     }
 
     public static Pedido criarNovo(StatusPedido status,
@@ -88,7 +93,9 @@ public class Pedido {
                 previsao,
                  origem,
                  prioridade,
-                 valorTotal
+                 valorTotal,
+                null,
+                null
         );
     }
 
@@ -104,14 +111,17 @@ public class Pedido {
                                      LocalDate dataPrevisaoConclusao,
                                      String origem,
                                      Integer prioridade,
-                                     BigDecimal valorTotal) {
+                                     BigDecimal valorTotal,
+                                     List<Avaliacao> avaliacoes,
+                                     List<HistoricoPedido> historicoPedido
+                                     ) {
 
         return new Pedido(id, pedidoUuid, codigoAcompanhamento, observacao,
                 status, tipoServico, utente, etapaAtualId,
                 dataSolicitacao, dataPrevisaoConclusao,
                  origem,
                  prioridade,
-                 valorTotal);
+                 valorTotal,avaliacoes, historicoPedido);
     }
     private static LocalDate calcularDataPrevisao(LocalDate dataInicio, Integer prazoEstimado) {
         if (prazoEstimado == null || prazoEstimado <= 0) {
@@ -135,8 +145,8 @@ public class Pedido {
 
     public void avaliarPedido(String comentario, Integer nota){
 
-        if (avaliacoes==null){
-            avaliacoes = new ArrayList<>();
+        if (this.avaliacoes==null){
+            this.avaliacoes = new ArrayList<>();
         }
 
         var avaliacao = Avaliacao.criarNovo(comentario, nota, this);
@@ -144,9 +154,16 @@ public class Pedido {
 
     }
 
-    public List<Avaliacao> getAvaliacoes() {
-        return Collections.unmodifiableList(avaliacoes);
+
+    public void registarHistorico(String observacao, StatusPedido statusPedido) {
+
+        if (this.historicoPedido==null){
+            historicoPedido = new ArrayList<>();
+        }
+
+        var historico = HistoricoPedido.criarNovo(observacao, this, statusPedido);
+        this.historicoPedido.add(historico);
+
+        this.status = statusPedido;
     }
-
-
 }

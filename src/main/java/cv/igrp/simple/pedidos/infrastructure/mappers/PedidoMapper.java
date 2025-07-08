@@ -1,30 +1,37 @@
 package cv.igrp.simple.pedidos.infrastructure.mappers;
 
-import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
 import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.StatusPedidoMapper;
 import cv.igrp.simple.configuracoes.infrastructure.mappers.TipoServicoMapper;
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
-import cv.igrp.simple.shared.infrastructure.persistence.entity.*;
+import cv.igrp.simple.pedidos.domain.models.Avaliacao;
+import cv.igrp.simple.pedidos.domain.models.HistoricoPedido;
 import cv.igrp.simple.pedidos.domain.models.Pedido;
-import cv.igrp.simple.pedidos.domain.models.Utente;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.AvaliacaoPedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.HistoricoPedidoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.PedidoEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class PedidoMapper {
 
+
     private final UtenteMapper utenteMapper;
     private final StatusPedidoMapper statusPedidoMapper;
     private final TipoServicoMapper tipoServicoMapper;
+    private final AvaliacaoMapper avaliacaoMapper;
+    private final HistoricoPedidoMapper historicoPedidoMapper;
 
 
-    public Pedido toDomain(PedidoEntity entity) {
+    public Pedido toLightDomain(PedidoEntity entity) {
 
         return Pedido.reconstruir(
                 entity.getId(),
@@ -34,13 +41,50 @@ public class PedidoMapper {
                 statusPedidoMapper.toDomain(entity.getStatusId()),
                 tipoServicoMapper.toDomain(entity.getTipoServicoId()),
                 utenteMapper.toDomain(entity.getUtenteId() != null ? entity.getUtenteId() : null),
-                entity.getEtapaAtualId(),
+                entity.getEtapaAtualId()!=null ? entity.getEtapaAtualId().getId() : null,
                 entity.getDataInicio(),
                 entity.getDataPrevisao(),
                 entity.getOrigem(),
                 entity.getPrioridade(),
-                entity.getValorTotal()
+                entity.getValorTotal(),
+                null,
+                null
         );
+    }
+    public Pedido toDomain(PedidoEntity entity) {
+
+        var pedido = Pedido.reconstruir(
+                entity.getId(),
+                Identificador.from(entity.getPedidoUuid()),
+                CodigoAcompanhamento.of(entity.getCodigoAcompanhamento()),
+                entity.getObservacao(),
+                statusPedidoMapper.toDomain(entity.getStatusId()),
+                tipoServicoMapper.toDomain(entity.getTipoServicoId()),
+                utenteMapper.toDomain(entity.getUtenteId() != null ? entity.getUtenteId() : null),
+                entity.getEtapaAtualId()!=null ? entity.getEtapaAtualId().getId() : null,
+                entity.getDataInicio(),
+                entity.getDataPrevisao(),
+                entity.getOrigem(),
+                entity.getPrioridade(),
+                entity.getValorTotal(),
+                null,
+                null
+        );
+
+        if (entity.getAvaliacoes() != null) {
+            List<Avaliacao> avaliacoes = entity.getAvaliacoes().stream()
+                    .map(avaliacaoEntity -> avaliacaoMapper.toDomainWithPedido(avaliacaoEntity, pedido))
+                    .toList();
+            pedido.getAvaliacoes().addAll(avaliacoes);
+        }
+        if (entity.getHistoricopedidos() != null) {
+            List<HistoricoPedido> historicoPedidos = entity.getHistoricopedidos().stream()
+                    .map(historicoPedidoEntity -> historicoPedidoMapper.toDomainWithPedido(historicoPedidoEntity, pedido))
+                    .toList();
+            pedido.getHistoricoPedido().addAll(historicoPedidos);
+        }
+
+        return pedido;
     }
 
     public PedidoEntity toEntity(Pedido domain) {
@@ -54,14 +98,14 @@ public class PedidoMapper {
         entity.setStatusId(statusPedidoMapper.toEntity(domain.getStatus()));
         entity.setTipoServicoId(tipoServicoMapper.toEntity(domain.getTipoServico()));
         entity.setUtenteId(utenteMapper.toEntity(domain.getUtente()));
-        entity.setEtapaAtualId(domain.getEtapaAtualId());
+        entity.setEtapaAtualId(null); // todo resolve this later
         entity.setDataInicio(domain.getDataSolicitacao());
         entity.setDataPrevisao(domain.getDataPrevisaoConclusao());
         entity.setOrigem(domain.getOrigem());
         entity.setPrioridade(domain.getPrioridade());
         entity.setValorTotal(domain.getValorTotal());
         entity.setUserCriacaoId(1); // todo resolve this later
-        entity.setEtapaAtualId(1);// todo resolve this later
+
 
         if (domain.getAvaliacoes() != null) {
             List<AvaliacaoPedidoEntity> avaliacaoEntities = domain.getAvaliacoes().stream()
@@ -84,10 +128,29 @@ public class PedidoMapper {
             entity.setAvaliacoes(avaliacaoEntities);
         }
 
+        if (domain.getHistoricoPedido() != null) {
+            List<HistoricoPedidoEntity> historicoPedidoEntities = domain.getHistoricoPedido().stream()
+                    .map(h -> {
+                        var historicoPedidoEntity = new HistoricoPedidoEntity();
+                        if(h.getIdDb() != null)
+                            historicoPedidoEntity.setId(h.getIdDb());
+                        historicoPedidoEntity.setHistoricoUuid(h.getHistoricoUuid().getStringValor());
+                        historicoPedidoEntity.setUserId(h.getUserId());
+                        historicoPedidoEntity.setDataRegistro(h.getDataRegistro());
+                        historicoPedidoEntity.setObservacao(h.getObservacao());
+                        historicoPedidoEntity.setStatusId(statusPedidoMapper.toEntity(h.getStatus()));
+                        historicoPedidoEntity.setPedidoId(entity);
+
+                        return historicoPedidoEntity;
+                    }).toList();
+
+            entity.setHistoricopedidos(historicoPedidoEntities);
+        }
+
         return entity;
     }
 
-    public PedidoResponseDTO toPedidoResponseDTO(Pedido pedido) {
+    public  PedidoResponseDTO toPedidoResponseDTO(Pedido pedido) {
         if (pedido == null) {
             return null;
         }

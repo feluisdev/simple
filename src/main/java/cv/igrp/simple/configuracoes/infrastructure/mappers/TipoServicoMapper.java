@@ -2,7 +2,6 @@ package cv.igrp.simple.configuracoes.infrastructure.mappers;
 
 import cv.igrp.simple.configuracoes.domain.models.CategoriaServico;
 import cv.igrp.simple.configuracoes.domain.models.TipoServico;
-
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.CategoriaServicoEntity;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.TipoServicoEntity;

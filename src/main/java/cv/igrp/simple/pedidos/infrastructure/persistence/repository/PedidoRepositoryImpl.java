@@ -37,6 +37,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
                 .map(pedidoMapper::toDomain);
     }
 
+
     @Override
     public Optional<Pedido> findByCodigoAcompanhamento(CodigoAcompanhamento codigoAcompanhamento) {
         return pedidoEntityRepository
