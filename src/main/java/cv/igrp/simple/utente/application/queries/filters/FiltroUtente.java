@@ -13,12 +13,12 @@ public class FiltroUtente {
 
         if (query.getTipo() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("tipo"), query.getTipo()));
+                    criteriaBuilder.equal(root.get("tipoUtente"), query.getTipo()));
         }
 
         if (query.getNumeroUtente() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("nrUtente"), query.getNumeroUtente()));
+                    criteriaBuilder.equal(root.get("numero"), query.getNumeroUtente()));
         }
 
         if (query.getNome() != null) {
