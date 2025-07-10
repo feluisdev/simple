@@ -66,4 +66,18 @@ public class Identificador {
     public String getStringValor() {
         return valor.toString();
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Identificador that)) return false;
+        return valor.equals(that.valor);
+    }
+
+    @Override
+    public int hashCode() {
+        return valor.hashCode();
+    }
+
 }
