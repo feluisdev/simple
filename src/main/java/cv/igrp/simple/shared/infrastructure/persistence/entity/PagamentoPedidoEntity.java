@@ -9,8 +9,8 @@ import java.util.UUID;
 import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
+import cv.igrp.simple.shared.application.constants.StatusPagamento;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Audited
 @Getter
@@ -47,9 +47,10 @@ public class PagamentoPedidoEntity extends AuditEntity {
     private String referenciaPagamento;
 
   
-    @NotBlank(message = "status is mandatory")
-    @Column(name="status", nullable = false, length=20)
-    private String status;
+    @NotNull(message = "status is mandatory")
+    @Enumerated(EnumType.STRING)
+    @Column(name="status", nullable = false)
+    private StatusPagamento status;
 
   
     @Column(name="observacao")
@@ -59,9 +60,11 @@ public class PagamentoPedidoEntity extends AuditEntity {
     @Column(name="valor")
     private BigDecimal valor;
 
-     @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "pedido_id")
-   private PedidoEntity pedidoId;
+  
 
 
+  
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pedido_id", unique = true, referencedColumnName = "id")
+    private PedidoEntity pedidoId;
 }

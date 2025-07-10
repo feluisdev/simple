@@ -1,4 +1,8 @@
 package cv.igrp.simple.pedidos.application.queries;
+import cv.igrp.simple.pedidos.domain.repository.PagamentoPedidoRepository;
+import cv.igrp.simple.pedidos.infrastructure.mappers.PagamentoPedidoMapper;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
@@ -13,15 +17,25 @@ public class GetPagamentoPedidoByIdQueryHandler implements QueryHandler<GetPagam
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GetPagamentoPedidoByIdQueryHandler.class);
 
+  private final PagamentoPedidoRepository pagamentoRepository;
+  private final PagamentoPedidoMapper pagamentoMapper;
 
-  public GetPagamentoPedidoByIdQueryHandler() {
+  public GetPagamentoPedidoByIdQueryHandler(PagamentoPedidoRepository pagamentoRepository, PagamentoPedidoMapper pagamentoMapper) {
 
+      this.pagamentoRepository = pagamentoRepository;
+      this.pagamentoMapper = pagamentoMapper;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<PagamentoPedidoResponseDTO> handle(GetPagamentoPedidoByIdQuery query) {
-    // TODO: Implement the query handling logic here
-    return null;
+     var pedidoId = Identificador.from(query.getPedidoId());
+     var pagamentoId = Identificador.from(query.getPagamentoId());
+
+     var pagamento = pagamentoRepository.findByPedidoIdAndPagamentoId(pedidoId, pagamentoId)
+             .orElseThrow(() -> IgrpResponseStatusException.notFound("Pagamento não encontrado para o pedido informado."));
+
+
+     return ResponseEntity.ok(pagamentoMapper.toResponseDTO(pagamento));
   }
 
 }

@@ -51,7 +51,7 @@ public class PagamentoPedidoMapper {
                 pagamento.getDataPagamento(),
                 pagamento.getMetodoPagamento(),
                 pagamento.getReferenciaPagamento(),
-                pagamento.getStatus(),
+                pagamento.getStatus().getDescription(),
                 pagamento.getObservacao()
         );
     }

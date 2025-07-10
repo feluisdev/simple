@@ -43,6 +43,7 @@ public class PedidoMapper {
                 entity.getPrioridade(),
                 entity.getValorTotal(),
                 null,
+                null,
                 null
         );
     }
@@ -64,6 +65,7 @@ public class PedidoMapper {
                 entity.getPrioridade(),
                 entity.getValorTotal(),
                 null,
+                null,
                 null
         );
 
@@ -80,11 +82,10 @@ public class PedidoMapper {
             pedido.getHistoricoPedido().addAll(historicoPedidos);
         }
 
-        if (entity.getPagamentos() != null) {
-            List<Pagamento> pagamentos = entity.getPagamentos().stream()
-                    .map(pagamentoEntity -> pagamentoPedidoMapper.toDomainWithPedido(pagamentoEntity, pedido))
-                    .toList();
-            pedido.getPagamentos().addAll(pagamentos);
+
+        if (entity.getPagamento() != null) {
+           var  pagamento = pagamentoPedidoMapper.toDomainWithPedido(entity.getPagamento(), pedido);
+           pedido.adicionarPagamento(pagamento);
         }
 
         if (entity.getDocumentos() != null) {
@@ -116,47 +117,6 @@ public class PedidoMapper {
         entity.setValorTotal(domain.getValorTotal());
         entity.setUserCriacaoId(1); // todo resolve this later
 
-
-        /*if (domain.getAvaliacoes() != null) {
-            List<AvaliacaoPedidoEntity> avaliacaoEntities = domain.getAvaliacoes().stream()
-                    .map(av -> {
-                        AvaliacaoPedidoEntity avEntity = new AvaliacaoPedidoEntity();
-
-                        if(av.getIdDb() != null)
-                           avEntity.setId(av.getIdDb());
-
-                        avEntity.setAvaliacaoUuid(av.getAvaliacaoUuid().getValor());
-                        avEntity.setNota(av.getNota());
-                        avEntity.setComentario(av.getComentario());
-                        avEntity.setDataAvaliacao(av.getDataAvaliacao());
-                        avEntity.setUserId(av.getUserId());
-                        avEntity.setPedidoId(entity);
-
-                        return avEntity;
-                    }).toList();
-
-            entity.setAvaliacoes(avaliacaoEntities);
-        }
-
-        if (domain.getHistoricoPedido() != null) {
-            List<HistoricoPedidoEntity> historicoPedidoEntities = domain.getHistoricoPedido().stream()
-                    .map(h -> {
-                        var historicoPedidoEntity = new HistoricoPedidoEntity();
-                        if(h.getIdDb() != null)
-                            historicoPedidoEntity.setId(h.getIdDb());
-                        historicoPedidoEntity.setHistoricoUuid(h.getHistoricoUuid().getValor());
-                        historicoPedidoEntity.setUserId(h.getUserId());
-                        historicoPedidoEntity.setDataRegistro(h.getDataRegistro());
-                        historicoPedidoEntity.setObservacao(h.getObservacao());
-                        historicoPedidoEntity.setStatusId(statusPedidoMapper.toEntity(h.getStatus()));
-                        historicoPedidoEntity.setPedidoId(entity);
-
-                        return historicoPedidoEntity;
-                    }).toList();
-
-            entity.setHistoricopedidos(historicoPedidoEntities);
-        }*/
-
         if (domain.getAvaliacoes() != null) {
             List<AvaliacaoPedidoEntity> avaliacaoEntities = domain.getAvaliacoes().stream()
                     .map(avaliacao -> avaliacaoMapper.toEntity(avaliacao, entity))
@@ -172,11 +132,10 @@ public class PedidoMapper {
         }
 
 
-        if (domain.getPagamentos() != null) {
-            List<PagamentoPedidoEntity> pagamentoEntities = domain.getPagamentos().stream()
-                    .map(pagamento -> pagamentoPedidoMapper.toEntity(pagamento, entity))
-                    .toList();
-            entity.setPagamentos(pagamentoEntities);
+        if (domain.getPagamento() != null) {
+            Pagamento pagamento = domain.getPagamento();
+            PagamentoPedidoEntity pagamentoEntity = pagamentoPedidoMapper.toEntity(pagamento, entity);
+            entity.setPagamento(pagamentoEntity);
         }
 
         if (domain.getDocumentos() != null) {

@@ -21,6 +21,17 @@ public class AvaliacaoPedidoRepositoryImpl implements AvaliacaoRepository {
     private final PedidoMapper pedidoMapper;
 
     @Override
+    public Avaliacao save(Avaliacao avaliacao) {
+       var pedidoEntity = pedidoMapper.toEntity(avaliacao.getPedido());
+        var avaliacaoEntity = avaliacaoMapper.toEntity(avaliacao, pedidoEntity);
+        var savedEntity = avaliacaoPedidoEntityRepository.save(avaliacaoEntity);
+
+        // Map the saved entity back to domain model
+        var pedido = pedidoMapper.toLightDomain(savedEntity.getPedidoId());
+        return avaliacaoMapper.toDomainWithPedido(savedEntity, pedido);
+    }
+
+    @Override
     public Optional<Avaliacao> findById(Identificador avaliacaoUuid) {
         if (avaliacaoUuid == null || avaliacaoUuid.getValor() == null) {
             return Optional.empty();

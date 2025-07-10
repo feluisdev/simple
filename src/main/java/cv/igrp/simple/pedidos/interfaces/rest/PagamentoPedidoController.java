@@ -1,4 +1,4 @@
-package cv.igrp.simple.pedidos.infrastructure.controller;
+package cv.igrp.simple.pedidos.interfaces.rest;
 
 import cv.igrp.framework.stereotype.IgrpController;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +19,9 @@ import cv.igrp.simple.pedidos.application.commands.*;
 import cv.igrp.simple.pedidos.application.queries.*;
 
 
-import java.util.List;
-import cv.igrp.simple.pedidos.application.dto.PagamentoPedidoResponseDTO;
 import cv.igrp.simple.pedidos.application.dto.CreatePagamentoPedidoDTO;
 import java.util.Map;
+import cv.igrp.simple.pedidos.application.dto.PagamentoPedidoResponseDTO;
 
 @IgrpController
 @RestController
@@ -42,41 +41,6 @@ public class PagamentoPedidoController {
   ) {
     this.commandBus = commandBus;
     this.queryBus = queryBus;
-  }
-
-  @GetMapping(
-    value = "{pedidoId}/pagamentos"
-  )
-  @Operation(
-    summary = "GET method to handle operations for listPagamentosPedido",
-    description = "GET method to handle operations for listPagamentosPedido",
-    responses = {
-      @ApiResponse(
-          responseCode = "200",
-          description = "",
-          content = @Content(
-              mediaType = "application/json",
-              schema = @Schema(
-                  implementation = PagamentoPedidoResponseDTO.class,
-                  type = "object")
-          )
-      )
-    }
-  )
-  
-  public ResponseEntity<List<PagamentoPedidoResponseDTO>> listPagamentosPedido(
-    @PathVariable(value = "pedidoId") String pedidoId)
-  {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PagamentoPedidoController", "listPagamentosPedido");
-      final var query = new ListPagamentosPedidoQuery(pedidoId);
-
-      ResponseEntity<List<PagamentoPedidoResponseDTO>> response = queryBus.handle(query);
-
-      LOGGER.debug("Operation finished");
-
-      return ResponseEntity.status(response.getStatusCode())
-              .headers(response.getHeaders())
-              .body(response.getBody());
   }
 
   @PostMapping(
@@ -102,12 +66,14 @@ public class PagamentoPedidoController {
   public ResponseEntity<Map<String, ?>> registarPagamentoPedido(@Valid @RequestBody CreatePagamentoPedidoDTO registarPagamentoPedidoRequest
     , @PathVariable(value = "pedidoId") String pedidoId)
   {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PagamentoPedidoController", "registarPagamentoPedido");
+
+      LOGGER.debug("Operation started");
+
       final var command = new RegistarPagamentoPedidoCommand(registarPagamentoPedidoRequest, pedidoId);
 
        ResponseEntity<Map<String, ?>> response = commandBus.send(command);
 
-       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PagamentoPedidoController", "registarPagamentoPedido");
+       LOGGER.debug("Operation finished");
 
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
@@ -137,7 +103,9 @@ public class PagamentoPedidoController {
   public ResponseEntity<PagamentoPedidoResponseDTO> getPagamentoPedidoById(
     @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
   {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PagamentoPedidoController", "getPagamentoPedidoById");
+
+      LOGGER.debug("Operation started");
+
       final var query = new GetPagamentoPedidoByIdQuery(pedidoId, pagamentoId);
 
       ResponseEntity<PagamentoPedidoResponseDTO> response = queryBus.handle(query);
@@ -172,12 +140,14 @@ public class PagamentoPedidoController {
   public ResponseEntity<Map<String, ?>> inativarPagamentoPedido(
     @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
   {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PagamentoPedidoController", "inativarPagamentoPedido");
+
+      LOGGER.debug("Operation started");
+
       final var command = new InativarPagamentoPedidoCommand(pedidoId, pagamentoId);
 
        ResponseEntity<Map<String, ?>> response = commandBus.send(command);
 
-       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PagamentoPedidoController", "inativarPagamentoPedido");
+       LOGGER.debug("Operation finished");
 
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
@@ -204,15 +174,17 @@ public class PagamentoPedidoController {
     }
   )
   
-  public ResponseEntity<PagamentoPedidoResponseDTO> updatePagamentoPedido(
-    @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
+  public ResponseEntity<PagamentoPedidoResponseDTO> updatePagamentoPedido(@Valid @RequestBody CreatePagamentoPedidoDTO updatePagamentoPedidoRequest
+    , @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
   {
-      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "PagamentoPedidoController", "updatePagamentoPedido");
-      final var command = new UpdatePagamentoPedidoCommand(pedidoId, pagamentoId);
+
+      LOGGER.debug("Operation started");
+
+      final var command = new UpdatePagamentoPedidoCommand(updatePagamentoPedidoRequest, pedidoId, pagamentoId);
 
        ResponseEntity<PagamentoPedidoResponseDTO> response = commandBus.send(command);
 
-       LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "PagamentoPedidoController", "updatePagamentoPedido");
+       LOGGER.debug("Operation finished");
 
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())

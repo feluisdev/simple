@@ -1,5 +1,6 @@
 package cv.igrp.simple.pedidos.domain.models;
 
+import cv.igrp.simple.shared.application.constants.StatusPagamento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 
@@ -12,13 +13,13 @@ public class Pagamento {
 
 
     private  Integer idDb;
-    private final Identificador pagamentoUuid;
-    private final LocalDate dataPagamento;
-    private final String metodoPagamento;
-    private final String referenciaPagamento;
-    private final String status;
-    private final String observacao;
-    private final BigDecimal valor;
+    private  Identificador pagamentoUuid;
+    private  LocalDate dataPagamento;
+    private  String metodoPagamento;
+    private  String referenciaPagamento;
+    private  StatusPagamento status;
+    private  String observacao;
+    private  BigDecimal valor;
     private final Pedido pedido;
 
     private Pagamento(Integer idDb,
@@ -26,7 +27,7 @@ public class Pagamento {
                       LocalDate dataPagamento,
                       String metodoPagamento,
                       String referenciaPagamento,
-                      String status,
+                      StatusPagamento status,
                       String observacao,
                       BigDecimal valor,
                       Pedido pedido) {
@@ -42,10 +43,9 @@ public class Pagamento {
         this.pedido = Objects.requireNonNull(pedido);
     }
 
-    public static Pagamento criarNovo(LocalDate dataPagamento,
+    public static Pagamento criarNovo(
                                       String metodoPagamento,
                                       String referenciaPagamento,
-                                      String status,
                                       String observacao,
                                       BigDecimal valor,
                                       Pedido pedido) {
@@ -53,10 +53,10 @@ public class Pagamento {
         return new Pagamento(
                 null,
                 Identificador.gerarNovo(),
-                dataPagamento,
+                LocalDate.now(),
                 metodoPagamento,
                 referenciaPagamento,
-                status,
+                StatusPagamento.PAGO,
                 observacao,
                 valor,
                 pedido
@@ -68,7 +68,7 @@ public class Pagamento {
                                         LocalDate dataPagamento,
                                         String metodoPagamento,
                                         String referenciaPagamento,
-                                        String status,
+                                        StatusPagamento status,
                                         String observacao,
                                         BigDecimal valor,
                                         Pedido pedido) {
@@ -84,5 +84,20 @@ public class Pagamento {
                 valor,
                 pedido
         );
+    }
+
+    public void atualizar(String metodoPagamento,
+                          String referenciaPagamento,
+                          String observacao,
+                          BigDecimal valor) {
+
+        if (this.status == StatusPagamento.PAGO) {
+            //todo resolve later
+        }
+
+        this.metodoPagamento = Objects.requireNonNull(metodoPagamento);
+        this.referenciaPagamento = referenciaPagamento;
+        this.observacao = observacao;
+        this.valor = valor;
     }
 }

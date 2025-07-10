@@ -1,0 +1,31 @@
+{
+  "type": "enum",
+  "module": "shared",
+  "name": "StatusPagamento",
+  "values": [
+    {
+      "name": "PAGO",
+      "attributes": [
+        "PAGO",
+        "PAGO"
+      ]
+    },
+    {
+      "name": "NAO_PAGO",
+      "attributes": [
+        "NAO_PAGO",
+        "NAO_PAGO"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "type": "string",
+      "name": "Code"
+    },
+    {
+      "type": "string",
+      "name": "Description"
+    }
+  ]
+}

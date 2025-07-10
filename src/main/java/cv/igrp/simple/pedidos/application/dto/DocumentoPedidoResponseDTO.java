@@ -7,42 +7,41 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 
 @IgrpDTO
 public class DocumentoPedidoResponseDTO {
 
   
   
-  private String documentoId;
+  private String documentoId ;
   
   
-  private String pedidoId;
+  private String pedidoId ;
   
   
-  private String nome;
+  private String nome ;
   
   
-  private String descricao;
+  private String descricao ;
   
   
-  private String tipoDocumento;
+  private String tipoDocumento ;
   
   
-  private String caminhoArquivo;
+  private String caminhoArquivo ;
   
   
-  private Integer tamanhoArquivo;
+  private LocalDate dataUpload ;
   
   
-  private LocalDate dataUpload;
+  private Integer userId ;
   
   
-  private Integer userId;
-  
-  
-  private String userNome;
+  private String userNome ;
 
 }

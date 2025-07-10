@@ -94,9 +94,7 @@ private List<AvaliacaoPedidoEntity> avaliacoes;
 private List<HistoricoPedidoEntity> historicopedidos;
 
 
-  @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-private List<PagamentoPedidoEntity> pagamentos;
+  
 
 
   @OneToMany(mappedBy = "pedidoId", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
@@ -116,6 +114,9 @@ private List<DocumentoPedidoEntity> documentos;   @ManyToOne(fetch = FetchType.L
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "etapa_atual_id")
    private EtapaPedidoEntity etapaAtualId;
+
+   @OneToOne(mappedBy = "pedidoId", fetch = FetchType.LAZY)
+   private PagamentoPedidoEntity pagamento;
 
 
 }

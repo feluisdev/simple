@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface AvaliacaoRepository {
 
+    Avaliacao save(Avaliacao avaliacao);
+
     Optional<Avaliacao> findById(Identificador avaliacaoUuid);
 
     Optional<Avaliacao> findByPedidoIdAndAvaliacaoID(Identificador pedidoId ,Identificador avaliacaoUuid);

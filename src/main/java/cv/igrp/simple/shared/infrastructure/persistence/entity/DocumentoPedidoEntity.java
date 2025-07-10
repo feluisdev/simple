@@ -51,18 +51,9 @@ public class DocumentoPedidoEntity extends AuditEntity {
     private String caminhoArquivo;
 
   
-    @Column(name="tamanho_arquivo")
-    private Integer tamanhoArquivo;
-
-  
     @NotNull(message = "dataUpload is mandatory")
     @Column(name="data_upload", nullable = false)
     private LocalDate dataUpload;
-
-  
-    @NotNull(message = "userId is mandatory")
-    @Column(name="user_id", nullable = false)
-    private Integer userId;
 
      @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "pedido_id")

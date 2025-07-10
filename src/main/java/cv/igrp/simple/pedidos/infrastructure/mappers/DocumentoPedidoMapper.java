@@ -23,9 +23,7 @@ public class DocumentoPedidoMapper {
         entity.setDescricao(documento.getDescricao());
         entity.setTipoDocumento(documento.getTipoDocumento());
         entity.setCaminhoArquivo(documento.getCaminhoArquivo());
-        entity.setTamanhoArquivo(documento.getTamanhoArquivo());
         entity.setDataUpload(documento.getDataUpload());
-        entity.setUserId(documento.getUserId());
         entity.setPedidoId(pedidoEntity);
         return entity;
     }
@@ -38,9 +36,7 @@ public class DocumentoPedidoMapper {
                 entity.getDescricao(),
                 entity.getTipoDocumento(),
                 entity.getCaminhoArquivo(),
-                entity.getTamanhoArquivo(),
                 entity.getDataUpload(),
-                entity.getUserId(),
                 pedido
         );
     }
@@ -57,10 +53,9 @@ public class DocumentoPedidoMapper {
                 documento.getDescricao(),
                 documento.getTipoDocumento(),
                 documento.getCaminhoArquivo(),
-                documento.getTamanhoArquivo(),
                 documento.getDataUpload(),
-                documento.getUserId(),
-                null // userNome não disponível, deixar null
+                null, // userId não disponível, deixar null
+                null// userNome não disponível, deixar null
         );
     }
 

@@ -7,6 +7,7 @@ import cv.igrp.simple.configuracoes.domain.repository.TipoServicoRepository;
 import cv.igrp.simple.pedidos.domain.models.Pedido;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
 import cv.igrp.simple.pedidos.domain.repository.UtenteRepository;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -42,21 +43,21 @@ public class CreatePedidoCommandHandler implements CommandHandler<CreatePedidoCo
         var tipoServico = tipoServicoRepository.findByUuId(UUID.fromString(tipoServicoUuid))
                 .orElseThrow(() -> {
                     LOGGER.warn("Tipo de Serviço com ID {} não encontrado.", tipoServicoUuid);
-                    return new IllegalArgumentException("Tipo de Serviço não encontrado com o ID: " + tipoServicoUuid);
+                    return IgrpResponseStatusException.notFound("Tipo de Serviço não encontrado com o ID: " + tipoServicoUuid);
                 });
 
         var codigoInicial = "NOVO";
         var statusPedido = statusPedidoRepository.getByCodigo(codigoInicial)
                 .orElseThrow(() -> {
                     LOGGER.warn("Status de Pedido com codigo {} não encontrado.", codigoInicial);
-                    return new IllegalArgumentException("Status de Pedido com codigo: " + codigoInicial);
+                    return IgrpResponseStatusException.notFound("Status de Pedido com codigo: " + codigoInicial);
                 });
 
         var utenteId = dto.getUtenteId();
         var utente = utenteRepository.findById(utenteId)
                 .orElseThrow(() -> {
                     LOGGER.warn("utente com id {} não encontrado.", utenteId);
-                    return new IllegalArgumentException("utente com id: " + utenteId);
+                    return IgrpResponseStatusException.notFound("utente com id: " + utenteId);
                 });
 
         var pedido = Pedido

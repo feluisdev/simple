@@ -3,6 +3,7 @@ package cv.igrp.simple.pedidos.domain.models;
 import cv.igrp.simple.configuracoes.domain.models.StatusPedido;
 import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 
@@ -33,7 +34,7 @@ public class Pedido {
 
     private List<Avaliacao> avaliacoes;
     private List<HistoricoPedido> historicoPedido;
-    private List<Pagamento> pagamentos;
+    private Pagamento pagamento;
     private List<Documento> documentos;
 
     private Pedido(Integer id,
@@ -50,7 +51,8 @@ public class Pedido {
                    Integer prioridade,
                    BigDecimal valorTotal,
                    List<Avaliacao> avaliacoes,
-                   List<HistoricoPedido> historicoPedido) {
+                   List<HistoricoPedido> historicoPedido,
+                   Pagamento pagamento) {
 
         this.id = id;
         this.pedidoUuid = Objects.requireNonNull(pedidoUuid);
@@ -67,6 +69,7 @@ public class Pedido {
         this.valorTotal = valorTotal;
         this.avaliacoes = avaliacoes!=null ? avaliacoes : new ArrayList<>();
         this.historicoPedido = historicoPedido!=null ? historicoPedido : new ArrayList<>();
+        this.pagamento = pagamento;
     }
 
     public static Pedido criarNovo(StatusPedido status,
@@ -97,6 +100,7 @@ public class Pedido {
                  prioridade,
                  valorTotal,
                 null,
+                null,
                 null
         );
     }
@@ -115,7 +119,8 @@ public class Pedido {
                                      Integer prioridade,
                                      BigDecimal valorTotal,
                                      List<Avaliacao> avaliacoes,
-                                     List<HistoricoPedido> historicoPedido
+                                     List<HistoricoPedido> historicoPedido,
+                                     Pagamento pagamento
                                      ) {
 
         return new Pedido(id, pedidoUuid, codigoAcompanhamento, observacao,
@@ -123,7 +128,7 @@ public class Pedido {
                 dataSolicitacao, dataPrevisaoConclusao,
                  origem,
                  prioridade,
-                 valorTotal,avaliacoes, historicoPedido);
+                 valorTotal,avaliacoes, historicoPedido, pagamento);
     }
     private static LocalDate calcularDataPrevisao(LocalDate dataInicio, Integer prazoEstimado) {
         if (prazoEstimado == null || prazoEstimado <= 0) {
@@ -156,7 +161,6 @@ public class Pedido {
 
     }
 
-
     public void registarHistorico(String observacao, StatusPedido statusPedido) {
 
         if (this.historicoPedido==null){
@@ -169,32 +173,58 @@ public class Pedido {
         this.status = statusPedido;
     }
 
-    public void adicionarPagamento(LocalDate dataPagamento,
-                                   String metodoPagamento,
+    public void registrarPagamento(String metodoPagamento,
                                    String referenciaPagamento,
-                                   String status,
                                    String observacao,
                                    BigDecimal valor) {
 
-        if (this.pagamentos == null) {
-            this.pagamentos = new ArrayList<>();
-        }
-
-        var pagamento = Pagamento.criarNovo(dataPagamento, metodoPagamento, referenciaPagamento, status, observacao, valor, this);
-        this.pagamentos.add(pagamento);
+    if (this.pagamento != null) {
+        throw IgrpResponseStatusException.badRequest("Pagamento já registrado para este pedido.");
     }
 
+        this.pagamento = Pagamento.criarNovo(
+                metodoPagamento,
+                referenciaPagamento,
+                observacao,
+                valor,
+                this
+        );
+    }
+
+
     public void adicionarDocumento(String nome, String descricao, String tipoDocumento,
-                                   String caminhoArquivo,
-    Integer tamanhoArquivo) {
+                                   String caminhoArquivo) {
 
         if (this.documentos == null) {
             this.documentos = new ArrayList<>();
         }
 
         var documento = Documento.criarNovo(nome,descricao,tipoDocumento,
-                caminhoArquivo, tamanhoArquivo, LocalDate.now(), this);
+                caminhoArquivo, LocalDate.now(), this);
 
         this.documentos.add(documento);
+    }
+
+    // para reconstruir o pagamento de um pedido existente
+    public void adicionarPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public void atualizar(TipoServico tipoServico, Utente utente, String observacoes,
+                          BigDecimal valorTotal, String origem,
+                          Integer prioridade) {
+
+
+        if(this.status.getCodigo()!= "NOVO") {
+            //todo: criar exceção específica para atualização de pedidos
+            //throw IgrpResponseStatusException.badRequest("Não é possível atualizar um pedido que não está no estado 'Novo'");
+        }
+
+        this.tipoServico = Objects.requireNonNull(tipoServico, "Tipo de Serviço não pode ser nulo.");
+        this.utente = Objects.requireNonNull(utente, "Utente não pode ser nulo.");
+        this.observacao = observacoes;
+        this.valorTotal = valorTotal != null ? valorTotal : BigDecimal.ZERO;
+        this.origem = origem != null ? origem : "Desconhecida";
+        this.prioridade = prioridade != null ? prioridade : 0;
     }
 }

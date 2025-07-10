@@ -21,6 +21,15 @@ public class DocumentoPedidoRepositoryImpl implements DocumentoPedidoRepository 
     private final PedidoMapper pedidoMapper;
 
     @Override
+    public Documento save(Documento documento) {
+        var pedidoEntity = pedidoMapper.toEntity(documento.getPedido());
+        var docEntity = documentoPedidoMapper.toEntity(documento,pedidoEntity);
+
+        var saved = documentoPedidoEntityRepository.save(docEntity);
+        return documentoPedidoMapper.toDomainWithPedido(saved, pedidoMapper.toLightDomain(saved.getPedidoId()));
+    }
+
+    @Override
     public Optional<Documento> findById(Identificador documentoUuid) {
         if (documentoUuid == null || documentoUuid.getValor() == null) {
             return Optional.empty();

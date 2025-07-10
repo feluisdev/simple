@@ -16,9 +16,7 @@ public class Documento {
     private String descricao;
     private String tipoDocumento;
     private String caminhoArquivo;
-    private Integer tamanhoArquivo;
     private LocalDate dataUpload;
-    private Integer userId;
     private Pedido pedido;
 
     private Documento(Integer idDb,
@@ -27,9 +25,7 @@ public class Documento {
                       String descricao,
                       String tipoDocumento,
                       String caminhoArquivo,
-                      Integer tamanhoArquivo,
                       LocalDate dataUpload,
-                      Integer userId,
                       Pedido pedido) {
 
         this.idDb = idDb;
@@ -38,9 +34,7 @@ public class Documento {
         this.descricao = descricao;
         this.tipoDocumento = Objects.requireNonNull(tipoDocumento);
         this.caminhoArquivo = Objects.requireNonNull(caminhoArquivo);
-        this.tamanhoArquivo = tamanhoArquivo;
         this.dataUpload = Objects.requireNonNull(dataUpload);
-        this.userId = Objects.requireNonNullElse(userId, 1); // TODO: resolver userId
         this.pedido = Objects.requireNonNull(pedido);
     }
 
@@ -48,7 +42,6 @@ public class Documento {
                                       String descricao,
                                       String tipoDocumento,
                                       String caminhoArquivo,
-                                      Integer tamanhoArquivo,
                                       LocalDate dataUpload,
                                       Pedido pedido) {
 
@@ -59,9 +52,7 @@ public class Documento {
                 descricao,
                 tipoDocumento,
                 caminhoArquivo,
-                tamanhoArquivo,
                 dataUpload,
-                1, // TODO: resolver userId corretamente depois
                 pedido
         );
     }
@@ -72,9 +63,7 @@ public class Documento {
                                         String descricao,
                                         String tipoDocumento,
                                         String caminhoArquivo,
-                                        Integer tamanhoArquivo,
                                         LocalDate dataUpload,
-                                        Integer userId,
                                         Pedido pedido) {
 
         return new Documento(
@@ -84,10 +73,17 @@ public class Documento {
                 descricao,
                 tipoDocumento,
                 caminhoArquivo,
-                tamanhoArquivo,
                 dataUpload,
-                userId,
                 pedido
         );
     }
+
+
+    public void atualizar(String nome, String descricao, String tipoDocumento, String caminhoArquivo) {
+        this.nome = Objects.requireNonNull(nome);
+        this.descricao = descricao;
+        this.tipoDocumento = Objects.requireNonNull(tipoDocumento);
+        this.caminhoArquivo = Objects.requireNonNull(caminhoArquivo);
+    }
+
 }

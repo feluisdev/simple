@@ -47,14 +47,4 @@ public class PagamentoPedidoRepositoryImpl implements PagamentoPedidoRepository 
                 });
     }
 
-    @Override
-    public List<Pagamento> findPagamentosByPedido(Identificador pedidoId) {
-        return pagamentoPedidoJpaRepository.findByPedidoId_PedidoUuid(pedidoId.getValor())
-                .stream()
-                .map(entity -> {
-                    var pedido = pedidoMapper.toLightDomain(entity.getPedidoId());
-                    return pagamentoPedidoMapper.toDomainWithPedido(entity, pedido);
-                })
-                .toList();
-    }
 }

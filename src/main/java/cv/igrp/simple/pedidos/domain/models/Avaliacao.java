@@ -61,5 +61,16 @@ public class Avaliacao {
     }
 
 
+    public void atualizar(String novoComentario, Integer novaNota) {
+        if (novoComentario != null) {
+            this.comentario = novoComentario;
+        }
+        if (novaNota != null) {
+            this.nota = novaNota;
+        }
+        this.dataAvaliacao = LocalDate.now();
+    }
+
+
 
 }
