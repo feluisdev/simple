@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface PagamentoPedidoRepository {
 
+    Pagamento save(Pagamento pagamento);
+
     Optional<Pagamento> findById(Identificador pagamentoUuid);
 
     Optional<Pagamento> findByPedidoIdAndPagamentoId(Identificador pedidoId ,Identificador pagamentoUuid);

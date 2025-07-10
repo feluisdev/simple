@@ -22,6 +22,18 @@ public class PagamentoPedidoRepositoryImpl implements PagamentoPedidoRepository 
 
 
     @Override
+    public Pagamento save(Pagamento pagamento) {
+        var pedidoEntity = pedidoMapper.toEntity(pagamento.getPedido());
+        var pagEntity = pagamentoPedidoMapper.toEntity(pagamento,pedidoEntity);
+
+
+        var saved = pagamentoPedidoJpaRepository.save(pagEntity);
+
+        return pagamentoPedidoMapper.toDomainWithPedido(saved, pedidoMapper.toLightDomain(saved.getPedidoId()));
+
+    }
+
+    @Override
     public Optional<Pagamento> findById(Identificador pagamentoUuid) {
         if (pagamentoUuid == null || pagamentoUuid.getValor() == null) {
             return Optional.empty();

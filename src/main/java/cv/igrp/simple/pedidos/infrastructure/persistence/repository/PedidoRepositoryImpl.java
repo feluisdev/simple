@@ -2,11 +2,14 @@ package cv.igrp.simple.pedidos.infrastructure.persistence.repository;
 
 import cv.igrp.simple.pedidos.domain.models.Pedido;
 import cv.igrp.simple.pedidos.domain.filter.PedidoFilter;
+import cv.igrp.simple.pedidos.domain.repository.PagamentoPedidoRepository;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
+import cv.igrp.simple.pedidos.infrastructure.mappers.PagamentoPedidoMapper;
 import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.PedidoEntity;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.PagamentoPedidoEntityRepository;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.PedidoEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -23,13 +26,23 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
     private final PedidoEntityRepository pedidoEntityRepository;
     private final PedidoMapper pedidoMapper;
+    private final PagamentoPedidoEntityRepository pagamentoPedidoRepository;
+    private final PagamentoPedidoMapper pagamentoPedidoMapper;
 
     @Override
     public Pedido save(Pedido pedido) {
-        var entityPedido = pedidoMapper.toEntity(pedido);
+        var savedPedido = pedidoEntityRepository.save(pedidoMapper.toEntity(pedido));
 
-        return pedidoMapper.toDomain(pedidoEntityRepository.save(entityPedido));
+        if (pedido.getPagamento() != null) {
+            var pagamento = pedido.getPagamento();
+            var pagamentoEntity = pagamentoPedidoMapper.toEntity(pagamento, savedPedido);
+            pagamentoPedidoRepository.save(pagamentoEntity);
+
+        }
+
+        return pedidoMapper.toDomain(savedPedido);
     }
+
 
     @Override
     public Optional<Pedido> findById(Identificador pedidoUuid) {

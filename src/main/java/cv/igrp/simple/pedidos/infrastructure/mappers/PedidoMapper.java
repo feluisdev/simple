@@ -134,11 +134,11 @@ public class PedidoMapper {
         }
 
 
-        if (domain.getPagamento() != null) {
+       /* if (domain.getPagamento() != null) {
             Pagamento pagamento = domain.getPagamento();
             PagamentoPedidoEntity pagamentoEntity = pagamentoPedidoMapper.toEntity(pagamento, entity);
             entity.setPagamento(pagamentoEntity);
-        }
+        }*/
 
         if (domain.getDocumentos() != null) {
             List<DocumentoPedidoEntity> documentoEntities = domain.getDocumentos().stream()
