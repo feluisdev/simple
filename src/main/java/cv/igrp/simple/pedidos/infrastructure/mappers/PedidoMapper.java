@@ -44,6 +44,7 @@ public class PedidoMapper {
                 entity.getValorTotal(),
                 null,
                 null,
+                null,
                 null
         );
     }
@@ -64,6 +65,7 @@ public class PedidoMapper {
                 entity.getOrigem(),
                 entity.getPrioridade(),
                 entity.getValorTotal(),
+                null,
                 null,
                 null,
                 null

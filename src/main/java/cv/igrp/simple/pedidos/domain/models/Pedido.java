@@ -52,6 +52,7 @@ public class Pedido {
                    BigDecimal valorTotal,
                    List<Avaliacao> avaliacoes,
                    List<HistoricoPedido> historicoPedido,
+                   List<Documento> documentos,
                    Pagamento pagamento) {
 
         this.id = id;
@@ -69,6 +70,7 @@ public class Pedido {
         this.valorTotal = valorTotal;
         this.avaliacoes = avaliacoes!=null ? avaliacoes : new ArrayList<>();
         this.historicoPedido = historicoPedido!=null ? historicoPedido : new ArrayList<>();
+        this.documentos = documentos!=null ? documentos : new ArrayList<>();
         this.pagamento = pagamento;
     }
 
@@ -101,6 +103,7 @@ public class Pedido {
                  valorTotal,
                 null,
                 null,
+                null,
                 null
         );
     }
@@ -120,7 +123,8 @@ public class Pedido {
                                      BigDecimal valorTotal,
                                      List<Avaliacao> avaliacoes,
                                      List<HistoricoPedido> historicoPedido,
-                                     Pagamento pagamento
+                                     Pagamento pagamento,
+                                     List<Documento> documentos
                                      ) {
 
         return new Pedido(id, pedidoUuid, codigoAcompanhamento, observacao,
@@ -128,7 +132,7 @@ public class Pedido {
                 dataSolicitacao, dataPrevisaoConclusao,
                  origem,
                  prioridade,
-                 valorTotal,avaliacoes, historicoPedido, pagamento);
+                 valorTotal,avaliacoes, historicoPedido, documentos,pagamento);
     }
     private static LocalDate calcularDataPrevisao(LocalDate dataInicio, Integer prazoEstimado) {
         if (prazoEstimado == null || prazoEstimado <= 0) {
