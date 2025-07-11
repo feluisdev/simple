@@ -114,11 +114,11 @@
 		</dependency>
     
     <!-- IGRP dependencies -->
-    <dependency>
-        <groupId>cv.igrp.framework</groupId>
-        <artifactId>core</artifactId>
-        <version>0.0.1-alpha</version>
-    </dependency>
+		<dependency>
+			<groupId>cv.igrp.framework</groupId>
+			<artifactId>core</artifactId>
+			<version>0.0.3-alpha</version>
+		</dependency>
     
     <dependency>
       <groupId>cv.igrp.framework</groupId>
@@ -143,18 +143,8 @@
 		  <groupId>io.opentelemetry</groupId>
 		  <artifactId>opentelemetry-exporter-zipkin</artifactId>
 		</dependency>
-		<!--<dependency>
-            <groupId>cv.igrp.platform</groupId>
-            <artifactId>filemanager</artifactId>
-            <version>0.0.2-alpha</version>
-        </dependency>
 
-        <dependency>
-            <groupId>cv.igrp.framework.filemanager</groupId>
-            <artifactId>minio</artifactId>
-            <version>0.0.2-alpha</version>
-        </dependency>-->
-		<!---<dependency>
+		<dependency>
 			<groupId>cv.igrp.platform</groupId>
 			<artifactId>file-manager-core</artifactId>
 			<version>0.0.1-alpha</version>
@@ -164,7 +154,7 @@
 			<groupId>cv.igrp.platform</groupId>
 			<artifactId>file-manager-minio</artifactId>
 			<version>0.0.1-alpha</version>
-		</dependency> -->
+		</dependency>
   
   </dependencies>
 	<build>

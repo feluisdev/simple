@@ -1,0 +1,6 @@
+.gitkeep# .gitkeep - Keep empty directory for version control
+
+This file is used to ensure that the empty directory is tracked by Git. 
+It does not contain any important data or files, but it is required for maintaining the directory structure.
+
+You can safely ignore this file.
