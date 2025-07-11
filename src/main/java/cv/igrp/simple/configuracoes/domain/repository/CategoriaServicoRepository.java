@@ -1,0 +1,27 @@
+package cv.igrp.simple.configuracoes.domain.repository;
+
+import cv.igrp.simple.configuracoes.domain.models.CategoriaFilter;
+import cv.igrp.simple.configuracoes.domain.models.CategoriaServico;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public interface CategoriaServicoRepository {
+
+    CategoriaServico save(CategoriaServico categoriaServico);
+
+    Optional<CategoriaServico> findById(Integer categoriaId);
+
+    Optional<CategoriaServico> findByUuId(UUID categoriaId);
+
+    Optional<CategoriaServico> findWithTiposByCategoriaUuid(UUID categoriaId);
+
+    List<CategoriaServico> getAll(CategoriaFilter filter);
+
+    Optional<CategoriaServico> findByCodigo(String codigo);
+
+    List<CategoriaServico> getByAtivo(boolean ativo);
+
+
+}

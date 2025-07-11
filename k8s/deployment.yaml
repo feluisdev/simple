@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: simple-utente
-          image: registry-az.nosi.cv/simplesv/simple-utente:latest
+          image: registry.nosi.cv/igrp-simple-servico/simple-utente:latest
           ports:
             - containerPort: 8080
           resources:
