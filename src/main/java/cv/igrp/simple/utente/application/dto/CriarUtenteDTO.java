@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.utente.application.dto.validator.ICriarUtenteDTOValidator;
+import cv.igrp.simple.utente.application.constants.GeneroTipo;
+import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
 import java.time.LocalDate;
 @Data
@@ -27,9 +29,12 @@ public class CriarUtenteDTO {
   @NotBlank(message = "The field <nif> is required.")
   
   private String nif;
-  @NotBlank(message = "The field <bi> is required.")
+  @NotNull(message = "The field <tipoIdentificacao> is required.")
   
-  private String bi;
+  private TipoIdentificacao tipoIdentificacao;
+  @NotBlank(message = "The field <identificacao> is required.")
+  
+  private String identificacao;
   
   
   private String nomeMae;
@@ -42,14 +47,26 @@ public class CriarUtenteDTO {
   @NotBlank(message = "The field <telefone> is required.")
   
   private String telefone;
+  @NotBlank(message = "The field <endereco> is required.")
   
-  
-  private String morada;
+  private String endereco;
   @Email(message = "Invalid email format for field <email>.")
   
   private String email;
   
   
-  private String cxPostal;
+  private String caixaPostal;
+  
+  
+  private String telemovel;
+  
+  
+  private String departamentoResponsavel;
+  
+  
+  private GeneroTipo genero;
+  
+  
+  private String nacionalidade;
 
 }

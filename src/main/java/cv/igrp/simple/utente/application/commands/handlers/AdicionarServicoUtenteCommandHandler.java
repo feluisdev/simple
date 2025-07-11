@@ -4,12 +4,14 @@ import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
 import cv.igrp.simple.shared.domain.exceptions.IgrpProblem;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 import cv.igrp.simple.utente.application.constants.Estado;
-import cv.igrp.simple.utente.domain.models.Utente;
-import cv.igrp.simple.utente.domain.models.UtenteServico;
+
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteRepository;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteServicoRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteServicoEntityRepository;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +27,11 @@ import java.time.LocalDate;
 public class AdicionarServicoUtenteCommandHandler implements CommandHandler<AdicionarServicoUtenteCommand, ResponseEntity<ServicoAssociadoResponseDTO>> {
 
    private final UtenteService utenteService;
-   private final UtenteRepository utenteRepository;
+   private final UtenteEntityRepository utenteRepository;
 
-   private final UtenteServicoRepository utenteServicoRepository;
+   private final UtenteServicoEntityRepository utenteServicoRepository;
 
-   public AdicionarServicoUtenteCommandHandler(UtenteService utenteService, UtenteRepository utenteRepository, UtenteServicoRepository utenteServicoRepository) {
+   public AdicionarServicoUtenteCommandHandler(UtenteService utenteService, UtenteEntityRepository utenteRepository, UtenteServicoEntityRepository utenteServicoRepository) {
 
        this.utenteService = utenteService;
        this.utenteRepository = utenteRepository;
@@ -41,14 +43,14 @@ public class AdicionarServicoUtenteCommandHandler implements CommandHandler<Adic
    public ResponseEntity<ServicoAssociadoResponseDTO> handle(AdicionarServicoUtenteCommand command) {
       // TODO: Implement the command handling logic here
      int idUtente = command.getUtenteId();
-      Utente utente = utenteService.obterUtentePorId(idUtente);
+      UtenteEntity utente = utenteService.obterUtentePorId(idUtente);
 
       Integer idServico = command.getServicoId();
       String tipoServico = command.getAdicionarservico().getTipoServico();
 
       validarAssociacaoServico(utente, tipoServico, idServico);
 
-      var novoUtenteServico = new UtenteServico();
+      var novoUtenteServico = new UtenteServicoEntity();
       novoUtenteServico.setObjetoTipo(tipoServico);
       novoUtenteServico.setDescricao("Descrição do serviço");
       novoUtenteServico.setReferencia("Referência do serviço");
@@ -70,16 +72,12 @@ public class AdicionarServicoUtenteCommandHandler implements CommandHandler<Adic
 
    }
 
-   private void validarAssociacaoServico(Utente utente, String objetoTipo, Integer objetoId) {
+   private void validarAssociacaoServico(UtenteEntity utente, String objetoTipo, Integer objetoId) {
       // Regra 1: mesmo utente não pode ter o mesmo serviço 2 vezes
       boolean jaAssociadoMesmoUtente = utente.getServicos().stream()
               .anyMatch(s -> s.getObjetoTipo().equals(objetoTipo) && s.getObjetoId().equals(objetoId));
       if (jaAssociadoMesmoUtente) {
-
-         throw new IgrpResponseStatusException(new IgrpProblem<>(
-                 HttpStatus.NOT_FOUND,
-                 "Serviço já associado a este utente",
-                 null));
+         throw IgrpResponseStatusException.notFound("Serviço já associado a este utente");
       }
    }
 
