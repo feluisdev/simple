@@ -45,6 +45,8 @@ public class GetTipoServicoQueryHandler implements QueryHandler<GetTipoServicoQu
         var dto = new TiposServicosResponseDTO();
         dto.setId(tipoServicoSaved.getId());
         dto.setCategoriaId(tipoServicoSaved.getCategoria().getCategoriaUuid().getValor().toString());
+        // novo campo UUID público
+        dto.setTipoServicoId(tipoServicoSaved.getTipoServicoUuid().getValor().toString());
         dto.setNome(tipoServicoSaved.getNome());
         dto.setCodigo(tipoServicoSaved.getCodigo());
         dto.setDescricao(tipoServicoSaved.getDescricao());
@@ -55,7 +57,7 @@ public class GetTipoServicoQueryHandler implements QueryHandler<GetTipoServicoQu
         dto.setRequerAprovacao(tipoServicoSaved.isAprovacao());
         dto.setRequerVistoria(tipoServicoSaved.isVistoria());
         dto.setAtivo(tipoServicoSaved.isEstado());
-// todo tipoServicoUuid não está no DTO. Adicionar se necessário.
+
         return dto;
 
     }
