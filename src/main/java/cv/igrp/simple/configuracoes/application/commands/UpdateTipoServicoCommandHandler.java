@@ -73,6 +73,7 @@ public class UpdateTipoServicoCommandHandler implements CommandHandler<UpdateTip
 
       var dto = new TiposServicosResponseDTO();
       dto.setId(tipoServicoSaved.getId());
+      dto.setTipoServicoId(tipoServicoSaved.getTipoServicoUuid().getValor().toString());
       dto.setCategoriaId(tipoServicoSaved.getCategoria().getCategoriaUuid().getValor().toString());
       dto.setNome(tipoServicoSaved.getNome());
       dto.setCodigo(tipoServicoSaved.getCodigo());
