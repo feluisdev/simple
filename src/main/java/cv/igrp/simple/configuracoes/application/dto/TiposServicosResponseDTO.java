@@ -18,6 +18,9 @@ public class TiposServicosResponseDTO {
   
   private Integer id;
   
+  // UUID público do tipo de serviço
+  private String tipoServicoId;
+  
   
   private String categoriaId;
   
