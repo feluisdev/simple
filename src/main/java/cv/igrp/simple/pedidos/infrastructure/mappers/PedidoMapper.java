@@ -67,7 +67,7 @@ public class PedidoMapper {
                 entity.getValorTotal(),
                 null,
                 null,
-                null,
+                entity.getPagamento()!=null ? pagamentoPedidoMapper.toDomain(entity.getPagamento()): null,
                 null
         );
 

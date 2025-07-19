@@ -46,7 +46,7 @@
     },
     {
       "actionName": "getPagamentoPedidoById",
-      "path": "{pedidoId}/pagamentos/{pagamentoId}",
+      "path": "{pedidoId}/pagamentos",
       "method": "GET",
       "responses": {
         "200": {
@@ -69,17 +69,12 @@
           "name": "pedidoId",
           "type": "string",
           "isRequired": true
-        },
-        {
-          "name": "pagamentoId",
-          "type": "string",
-          "isRequired": true
         }
       ]
     },
     {
       "actionName": "inativarPagamentoPedido",
-      "path": "{pedidoId}/pagamentos/{pagamentoId}",
+      "path": "{pedidoId}/pagamentos/cancelar",
       "method": "DELETE",
       "responses": {
         "200": {
@@ -100,31 +95,13 @@
           "name": "pedidoId",
           "type": "string",
           "isRequired": true
-        },
-        {
-          "name": "pagamentoId",
-          "type": "string",
-          "isRequired": true
         }
       ]
     },
     {
       "actionName": "updatePagamentoPedido",
-      "path": "{pedidoId}/pagamentos/{pagamentoId}",
-      "method": "PUT",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "CreatePagamentoPedido",
-              "collectionType": "none",
-              "name": "data",
-              "objectType": "dto",
-              "module": "pedidos"
-            }
-          }
-        }
-      },
+      "path": "{pedidoId}/pagamentos/pagar",
+      "method": "PATCH",
       "responses": {
         "200": {
           "name": "OK",
@@ -144,11 +121,6 @@
       "pathVariables": [
         {
           "name": "pedidoId",
-          "type": "string",
-          "isRequired": true
-        },
-        {
-          "name": "pagamentoId",
           "type": "string",
           "isRequired": true
         }

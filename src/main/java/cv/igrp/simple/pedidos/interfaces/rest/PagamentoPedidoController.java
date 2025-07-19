@@ -1,3 +1,6 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 package cv.igrp.simple.pedidos.interfaces.rest;
 
 import cv.igrp.framework.stereotype.IgrpController;
@@ -81,7 +84,7 @@ public class PagamentoPedidoController {
   }
 
   @GetMapping(
-    value = "{pedidoId}/pagamentos/{pagamentoId}"
+    value = "{pedidoId}/pagamentos"
   )
   @Operation(
     summary = "GET method to handle operations for getPagamentoPedidoById",
@@ -101,12 +104,12 @@ public class PagamentoPedidoController {
   )
   
   public ResponseEntity<PagamentoPedidoResponseDTO> getPagamentoPedidoById(
-    @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
+    @PathVariable(value = "pedidoId") String pedidoId)
   {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetPagamentoPedidoByIdQuery(pedidoId, pagamentoId);
+      final var query = new GetPagamentoPedidoByIdQuery(pedidoId);
 
       ResponseEntity<PagamentoPedidoResponseDTO> response = queryBus.handle(query);
 
@@ -118,7 +121,7 @@ public class PagamentoPedidoController {
   }
 
   @DeleteMapping(
-    value = "{pedidoId}/pagamentos/{pagamentoId}"
+    value = "{pedidoId}/pagamentos/cancelar"
   )
   @Operation(
     summary = "DELETE method to handle operations for inativarPagamentoPedido",
@@ -138,12 +141,12 @@ public class PagamentoPedidoController {
   )
   
   public ResponseEntity<Map<String, ?>> inativarPagamentoPedido(
-    @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
+    @PathVariable(value = "pedidoId") String pedidoId)
   {
 
       LOGGER.debug("Operation started");
 
-      final var command = new InativarPagamentoPedidoCommand(pedidoId, pagamentoId);
+      final var command = new InativarPagamentoPedidoCommand(pedidoId);
 
        ResponseEntity<Map<String, ?>> response = commandBus.send(command);
 
@@ -154,12 +157,12 @@ public class PagamentoPedidoController {
               .body(response.getBody());
   }
 
-  @PutMapping(
-    value = "{pedidoId}/pagamentos/{pagamentoId}"
+  @PatchMapping(
+    value = "{pedidoId}/pagamentos/pagar"
   )
   @Operation(
-    summary = "PUT method to handle operations for updatePagamentoPedido",
-    description = "PUT method to handle operations for updatePagamentoPedido",
+    summary = "PATCH method to handle operations for updatePagamentoPedido",
+    description = "PATCH method to handle operations for updatePagamentoPedido",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -174,13 +177,13 @@ public class PagamentoPedidoController {
     }
   )
   
-  public ResponseEntity<PagamentoPedidoResponseDTO> updatePagamentoPedido(@Valid @RequestBody CreatePagamentoPedidoDTO updatePagamentoPedidoRequest
-    , @PathVariable(value = "pedidoId") String pedidoId,@PathVariable(value = "pagamentoId") String pagamentoId)
+  public ResponseEntity<PagamentoPedidoResponseDTO> updatePagamentoPedido(
+    @PathVariable(value = "pedidoId") String pedidoId)
   {
 
       LOGGER.debug("Operation started");
 
-      final var command = new UpdatePagamentoPedidoCommand(updatePagamentoPedidoRequest, pedidoId, pagamentoId);
+      final var command = new UpdatePagamentoPedidoCommand(pedidoId);
 
        ResponseEntity<PagamentoPedidoResponseDTO> response = commandBus.send(command);
 
