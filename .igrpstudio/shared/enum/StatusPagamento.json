@@ -4,17 +4,52 @@
   "name": "StatusPagamento",
   "values": [
     {
-      "name": "PAGO",
+      "name": "REGISTADO",
       "attributes": [
-        "PAGO",
-        "PAGO"
+        "REGISTADO",
+        "Pagamento registrado, mas ainda não processado"
       ]
     },
     {
-      "name": "NAO_PAGO",
+      "name": "PAGO",
       "attributes": [
-        "NAO_PAGO",
-        "NAO_PAGO"
+        "PAGO",
+        "Pagamento recebido com sucesso"
+      ]
+    },
+    {
+      "name": "EM_PROCESSAMENTO",
+      "attributes": [
+        "EM_PROCESSAMENTO",
+        "Em fase de verificação ou confirmação com intermediário financeiro."
+      ]
+    },
+    {
+      "name": "PENDENTE",
+      "attributes": [
+        "PENDENTE",
+        "Aguardando efetivação"
+      ]
+    },
+    {
+      "name": "CANCELADO",
+      "attributes": [
+        "CANCELADO",
+        "Pagamento foi cancelado antes de ser efetivado."
+      ]
+    },
+    {
+      "name": "ESTORNADO",
+      "attributes": [
+        "ESTORNADO",
+        "Valor já pago foi devolvido ao pagador"
+      ]
+    },
+    {
+      "name": "EXPIRADO",
+      "attributes": [
+        "EXPIRADO",
+        "Perdeu validade"
       ]
     }
   ],

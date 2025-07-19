@@ -1,3 +1,6 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 package cv.igrp.simple.shared.application.constants;
 
 import cv.igrp.framework.core.domain.IgrpEnum;
@@ -10,8 +13,13 @@ import java.util.stream.Collectors;
 
 public enum StatusPagamento implements IgrpEnum<String> {
 
-  PAGO("PAGO", "PAGO"),
-    NAO_PAGO("NAO_PAGO", "NAO_PAGO")
+  REGISTADO("REGISTADO", "Pagamento registrado, mas ainda não processado"),
+    PAGO("PAGO", "Pagamento recebido com sucesso"),
+    EM_PROCESSAMENTO("EM_PROCESSAMENTO", "Em fase de verificação ou confirmação com intermediário financeiro."),
+    PENDENTE("PENDENTE", "Aguardando efetivação"),
+    CANCELADO("CANCELADO", "Pagamento foi cancelado antes de ser efetivado."),
+    ESTORNADO("ESTORNADO", "Valor já pago foi devolvido ao pagador"),
+    EXPIRADO("EXPIRADO", "Perdeu validade")
   ;
 
   private final String code;
