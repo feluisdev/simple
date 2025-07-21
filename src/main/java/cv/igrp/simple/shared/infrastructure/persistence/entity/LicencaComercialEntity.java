@@ -7,6 +7,7 @@ import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 import cv.igrp.simple.shared.application.constants.Estado;
 import java.util.List;
 
-
+@Audited
 @Getter
 @Setter
 @ToString
