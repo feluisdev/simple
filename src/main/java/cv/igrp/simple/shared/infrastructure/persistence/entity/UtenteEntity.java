@@ -1,3 +1,6 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 package cv.igrp.simple.shared.infrastructure.persistence.entity;
 
 import cv.igrp.simple.shared.config.AuditEntity;
@@ -119,5 +122,8 @@ private List<UtenteServicoEntity> servicos;
 
 
   @OneToMany(mappedBy = "utenteId", fetch = FetchType.LAZY)
-private List<PedidoEntity> pedidos;
+private List<PedidoEntity> pedidos;   @OneToMany(mappedBy = "utenteId")
+private List<LicencaComercialEntity> licencas;
+
+
 }
