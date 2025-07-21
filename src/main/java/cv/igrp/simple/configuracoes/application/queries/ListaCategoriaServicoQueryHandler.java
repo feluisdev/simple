@@ -40,6 +40,7 @@ public class ListaCategoriaServicoQueryHandler implements QueryHandler<ListaCate
                .map(categoria -> {
                    var dto = new ListaCategoriaDTO();
                    dto.setId(categoria.getId());
+                   dto.setDescricao(categoria.getDescricao());
                    dto.setCategoriaId(categoria.getCategoriaUuid().getValor().toString());
                    dto.setNome(categoria.getNome());
                    dto.setCodigo(categoria.getCodigo());
