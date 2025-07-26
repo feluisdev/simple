@@ -6,10 +6,11 @@ import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
 import cv.igrp.simple.utente.application.mapper.ServicoMapper;
 import cv.igrp.simple.utente.application.queries.filters.FiltroUtenteServico;
 import cv.igrp.simple.utente.application.queries.queries.ListaServicosUtenteQuery;
-import cv.igrp.simple.utente.domain.models.Utente;
-import cv.igrp.simple.utente.domain.models.UtenteServico;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
+
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteServicoRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteServicoEntityRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +21,14 @@ public class ListaServicosUtenteQueryHandler implements QueryHandler<ListaServic
 
    private  final UtenteService utenteService;
 
-   private final UtenteServicoRepository utenteServicoRepository;
+   private final UtenteServicoEntityRepository utenteServicoRepository;
 
    private final ServicoMapper servicoMapper;
 
    private final FiltroUtenteServico filtroUtenteServico;
 
-   public ListaServicosUtenteQueryHandler(UtenteService utenteService, UtenteServicoRepository utenteServicoRepository, ServicoMapper servicoMapper, FiltroUtenteServico filtroUtenteServico) {
+   public ListaServicosUtenteQueryHandler(UtenteService utenteService, UtenteServicoEntityRepository utenteServicoRepository, ServicoMapper servicoMapper, FiltroUtenteServico filtroUtenteServico) {
+
 
 
        this.utenteService = utenteService;
@@ -40,11 +42,11 @@ public class ListaServicosUtenteQueryHandler implements QueryHandler<ListaServic
       // TODO: Implement the query handling logic here
       Integer utenteId = Integer.parseInt(query.getUtenteId());
 
-      Utente utente = utenteService.obterUtentePorId(utenteId);
+      UtenteEntity utente = utenteService.obterUtentePorId(utenteId);
 
-      Specification<UtenteServico> spec = filtroUtenteServico.aplicarFiltros(query);
+      Specification<UtenteServicoEntity> spec = filtroUtenteServico.aplicarFiltros(query);
 
-      Page<UtenteServico> pageServicos = utenteServicoRepository.findAll(spec, query.getPageable());
+      Page<UtenteServicoEntity> pageServicos = utenteServicoRepository.findAll(spec, query.getPageable());
 
 
       Page<ServicoResponseDTO> response = pageServicos.map(s ->

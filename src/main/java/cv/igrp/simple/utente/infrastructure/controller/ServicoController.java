@@ -1,30 +1,31 @@
 package cv.igrp.simple.utente.infrastructure.controller;
 
+import cv.igrp.framework.core.domain.CommandBus;
+import cv.igrp.framework.core.domain.QueryBus;
 import cv.igrp.framework.stereotype.IgrpController;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import cv.igrp.simple.shared.application.dto.ComboIntegerDTO;
+import cv.igrp.simple.utente.application.commands.commands.AdicionarServicoUtenteCommand;
+import cv.igrp.simple.utente.application.dto.AdicionarServicoDTO;
+import cv.igrp.simple.utente.application.dto.ServicoAssociadoResponseDTO;
+import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
+import cv.igrp.simple.utente.application.queries.GetUtentesAtivosQuery;
+import cv.igrp.simple.utente.application.queries.queries.ListaServicosUtenteQuery;
+import cv.igrp.simple.utente.application.queries.queries.ObterDetalhesServicoQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import cv.igrp.framework.core.domain.CommandBus;
-import cv.igrp.framework.core.domain.QueryBus;
-import cv.igrp.simple.utente.application.commands.commands.*;
-import cv.igrp.simple.utente.application.queries.queries.*;
-
-
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
-import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
-import cv.igrp.simple.utente.application.dto.AdicionarServicoDTO;
-import cv.igrp.simple.utente.application.dto.ServicoAssociadoResponseDTO;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @IgrpController
 @RestController
@@ -32,7 +33,7 @@ import cv.igrp.simple.utente.application.dto.ServicoAssociadoResponseDTO;
 @Tag(name = "Servico", description = "serviços de um utente")
 public class ServicoController {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(ServicoController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ServicoController.class);
 
   
   private final CommandBus commandBus;
@@ -74,8 +75,11 @@ public class ServicoController {
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "listaServicosUtente");
       final var query = new ListaServicosUtenteQuery(Tipo, Estado, dataInicio, dataFIm, utenteId,pageable);
+
       ResponseEntity<Page<ServicoResponseDTO>> response = queryBus.handle(query);
-      LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "ServicoController", "listaServicosUtente");
+
+      LOGGER.debug("Operation finished");
+
       return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
@@ -106,8 +110,11 @@ public class ServicoController {
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "adicionarServicoUtente");
       final var command = new AdicionarServicoUtenteCommand(adicionarServicoUtenteRequest, utenteId, servicoId);
+
        ResponseEntity<ServicoAssociadoResponseDTO> response = commandBus.send(command);
+
        LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "ServicoController", "adicionarServicoUtente");
+
         return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());
@@ -138,8 +145,46 @@ public class ServicoController {
   {
       LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "obterDetalhesServico");
       final var query = new ObterDetalhesServicoQuery(utenteId, servicoId);
+
       ResponseEntity<ServicoResponseDTO> response = queryBus.handle(query);
-      LOGGER.debug("Operation finished - Endpoint: {}, Action: {}", "ServicoController", "obterDetalhesServico");
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "ativos"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getUtentesAtivos",
+    description = "GET method to handle operations for getUtentesAtivos",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = ComboIntegerDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<List<ComboIntegerDTO>> getUtentesAtivos(
+    )
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "ServicoController", "getUtentesAtivos");
+      final var query = new GetUtentesAtivosQuery();
+
+      ResponseEntity<List<ComboIntegerDTO>> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
       return ResponseEntity.status(response.getStatusCode())
               .headers(response.getHeaders())
               .body(response.getBody());

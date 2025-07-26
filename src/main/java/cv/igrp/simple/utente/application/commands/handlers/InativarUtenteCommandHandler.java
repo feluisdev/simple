@@ -2,10 +2,11 @@ package cv.igrp.simple.utente.application.commands.handlers;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.constants.Estado;
-import cv.igrp.simple.utente.domain.models.Utente;
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import cv.igrp.simple.utente.application.commands.commands.InativarUtenteCommand;
@@ -18,9 +19,9 @@ public class InativarUtenteCommandHandler implements CommandHandler<InativarUten
 
    private final UtenteService utenteService;
 
-   private final UtenteRepository utenteRepository;
+   private final UtenteEntityRepository utenteRepository;
 
-   public InativarUtenteCommandHandler(UtenteService utenteService, UtenteRepository utenteRepository) {
+   public InativarUtenteCommandHandler(UtenteService utenteService, UtenteEntityRepository utenteRepository) {
 
        this.utenteService = utenteService;
        this.utenteRepository = utenteRepository;
@@ -28,9 +29,8 @@ public class InativarUtenteCommandHandler implements CommandHandler<InativarUten
 
    @IgrpCommandHandler
    public ResponseEntity<String> handle(InativarUtenteCommand command) {
-      // TODO: Implement the command handling logic here
       Integer idUtente = command.getId();
-      Utente utente = utenteService.obterUtentePorId(idUtente);
+      UtenteEntity utente = utenteService.obterUtentePorId(idUtente);
       utente.setEstado(Estado.INATIVO);
       utenteRepository.save(utente);
       return ResponseEntity.ok("Utente inativado com sucesso");

@@ -1,14 +1,16 @@
 package cv.igrp.simple.utente.application.mapper;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
-import cv.igrp.simple.utente.domain.models.UtenteServico;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class ServicoMapper {
 
 
-    public ServicoResponseDTO mapToDTO(UtenteServico servico) {
+    public ServicoResponseDTO mapToDTO(UtenteServicoEntity servico) {
+
         ServicoResponseDTO dto = new ServicoResponseDTO();
         dto.setId(servico.getId());
         dto.setTipo(servico.getObjetoTipo());

@@ -1,24 +1,24 @@
 package cv.igrp.simple.utente.application.queries.filters;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import cv.igrp.simple.utente.domain.models.Utente;
 
 @Component
 public class FiltroUtente {
 
-    public Specification<Utente> aplicarFiltros(ListaDeUtentesQuery query) {
-        Specification<Utente> spec = Specification.where(null);
+    public Specification<UtenteEntity> aplicarFiltros(ListaDeUtentesQuery query) {
+        Specification<UtenteEntity> spec = Specification.where(null);
 
         if (query.getTipo() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("tipo"), query.getTipo()));
+                    criteriaBuilder.equal(root.get("tipoUtente"), query.getTipo()));
         }
 
         if (query.getNumeroUtente() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("nrUtente"), query.getNumeroUtente()));
+                    criteriaBuilder.equal(root.get("numero"), query.getNumeroUtente()));
         }
 
         if (query.getNome() != null) {
