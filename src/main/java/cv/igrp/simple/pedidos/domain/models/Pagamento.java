@@ -40,7 +40,7 @@ public class Pagamento {
         this.status = Objects.requireNonNull(status);
         this.observacao = observacao;
         this.valor = valor;
-        this.pedido = Objects.requireNonNull(pedido);
+        this.pedido = pedido;
     }
 
     public static Pagamento criarNovo(
@@ -56,7 +56,7 @@ public class Pagamento {
                 LocalDate.now(),
                 metodoPagamento,
                 referenciaPagamento,
-                StatusPagamento.PAGO,
+                StatusPagamento.REGISTADO,
                 observacao,
                 valor,
                 pedido
@@ -99,5 +99,24 @@ public class Pagamento {
         this.referenciaPagamento = referenciaPagamento;
         this.observacao = observacao;
         this.valor = valor;
+    }
+
+    public void confirmar() {
+
+        this.status = StatusPagamento.PAGO;
+    }
+    public void cancelar() {
+
+        this.status = StatusPagamento.CANCELADO;
+    }
+
+    public void estornar() {
+
+        this.status = StatusPagamento.ESTORNADO;
+    }
+
+
+    public boolean isCancelado() {
+        return this.status == StatusPagamento.CANCELADO;
     }
 }

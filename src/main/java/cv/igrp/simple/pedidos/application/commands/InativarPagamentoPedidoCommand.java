@@ -14,7 +14,5 @@ public class InativarPagamentoPedidoCommand implements Command {
 
   @NotBlank(message = "The field <pedidoId> is required.")
   private String pedidoId;
-  @NotBlank(message = "The field <pagamentoId> is required.")
-  private String pagamentoId;
 
 }

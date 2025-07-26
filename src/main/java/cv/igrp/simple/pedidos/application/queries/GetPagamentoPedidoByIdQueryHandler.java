@@ -1,5 +1,6 @@
 package cv.igrp.simple.pedidos.application.queries;
 import cv.igrp.simple.pedidos.domain.repository.PagamentoPedidoRepository;
+import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
 import cv.igrp.simple.pedidos.infrastructure.mappers.PagamentoPedidoMapper;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
@@ -17,25 +18,30 @@ public class GetPagamentoPedidoByIdQueryHandler implements QueryHandler<GetPagam
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GetPagamentoPedidoByIdQueryHandler.class);
 
-  private final PagamentoPedidoRepository pagamentoRepository;
   private final PagamentoPedidoMapper pagamentoMapper;
 
-  public GetPagamentoPedidoByIdQueryHandler(PagamentoPedidoRepository pagamentoRepository, PagamentoPedidoMapper pagamentoMapper) {
+  private final PedidoRepository pedidoRepository;
 
-      this.pagamentoRepository = pagamentoRepository;
+  public GetPagamentoPedidoByIdQueryHandler(PagamentoPedidoMapper pagamentoMapper, PedidoRepository pedidoRepository) {
+
       this.pagamentoMapper = pagamentoMapper;
+      this.pedidoRepository = pedidoRepository;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<PagamentoPedidoResponseDTO> handle(GetPagamentoPedidoByIdQuery query) {
      var pedidoId = Identificador.from(query.getPedidoId());
-     var pagamentoId = Identificador.from(query.getPagamentoId());
 
-     var pagamento = pagamentoRepository.findByPedidoIdAndPagamentoId(pedidoId, pagamentoId)
-             .orElseThrow(() -> IgrpResponseStatusException.notFound("Pagamento não encontrado para o pedido informado."));
+       var pedido = pedidoRepository.findById(pedidoId)
+               .orElseThrow(() ->  IgrpResponseStatusException.notFound("Pedido não encontrado: " + pedidoId));
 
+      // System.out.println("pedido: "+pedido);
 
-     return ResponseEntity.ok(pagamentoMapper.toResponseDTO(pagamento));
+       if(pedido.getPagamento()==null){
+          throw  IgrpResponseStatusException.notFound("Nao Foi registado nenhum pagamento para esse pedido");
+       }
+       //System.out.println("pagamento: "+pedido.getPagamento());
+     return ResponseEntity.ok(pagamentoMapper.toResponseDTO(pedido.getPagamento()));
   }
 
 }
