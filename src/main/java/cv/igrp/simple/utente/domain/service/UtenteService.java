@@ -2,8 +2,8 @@ package cv.igrp.simple.utente.domain.service;
 
 import cv.igrp.simple.shared.domain.exceptions.IgrpProblem;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +30,8 @@ public class UtenteService {
 
         Optional<UtenteEntity> utente = utenteRepository.findById(idUtente);
 
-        return utente.orElseThrow(() -> new IgrpResponseStatusException(new IgrpProblem<>(
-                HttpStatus.NOT_FOUND,
-                "Utente não encontrado com o ID: " + idUtente,
-                null)));
+        return utente.orElseThrow(() -> IgrpResponseStatusException.notFound(
+                "Utente não encontrado com o ID: " + idUtente
+        ));
     }
 }

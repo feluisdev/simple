@@ -23,6 +23,8 @@ import cv.igrp.simple.configuracoes.application.dto.CriarTiposServicosDTO;
 import java.util.Map;
 import cv.igrp.simple.configuracoes.application.dto.TiposServicosResponseDTO;
 import cv.igrp.simple.configuracoes.application.dto.WrapperListaTipoServicoDTO;
+import java.util.List;
+import cv.igrp.simple.shared.application.dto.ComboStringDTO;
 
 @IgrpController
 @RestController
@@ -213,6 +215,41 @@ public class TipoServicoController {
       final var query = new ListaTipoServicoQuery(nome, codigo, categoriaId, pagina, tamanho);
 
       ResponseEntity<WrapperListaTipoServicoDTO> response = queryBus.handle(query);
+
+      LOGGER.debug("Operation finished");
+
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "ativos"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getTipoServicosAtivos",
+    description = "GET method to handle operations for getTipoServicosAtivos",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = ComboStringDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<List<ComboStringDTO>> getTipoServicosAtivos(
+    )
+  {
+      LOGGER.debug("Operation started - Endpoint: {}, Action: {}", "TipoServicoController", "getTipoServicosAtivos");
+      final var query = new GetTipoServicosAtivosQuery();
+
+      ResponseEntity<List<ComboStringDTO>> response = queryBus.handle(query);
 
       LOGGER.debug("Operation finished");
 

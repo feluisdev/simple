@@ -1,1 +1,46 @@
-{"type":"dto","module":"pedidos","name":"CreateAvaliacaoPedidoDTO","attributes":[{"name":"pedidoId","type":"integer","nullable":false,"validation":{"notNull":true,"message":"O ID do pedido é obrigatório"}},{"name":"nota","type":"integer","nullable":false,"validation":{"notNull":true,"min":{"value":1,"message":"A nota deve ser no mínimo 1"},"max":{"value":5,"message":"A nota deve ser no máximo 5"},"message":"A nota é obrigatória"}},{"name":"comentario","type":"string","nullable":true,"validation":{"size":{"max":500,"message":"O comentário deve ter no máximo 500 caracteres"}}}]}
+{
+  "type": "dto",
+  "module": "pedidos",
+  "name": "CreateAvaliacaoPedido",
+  "template": "classic",
+  "enableCustonValidation": false,
+  "attributes": [
+    {
+      "name": "pedidoId",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "nota",
+      "objectType": "java",
+      "type": "integer",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "comentario",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    }
+  ],
+  "id": "mtcq1v2edz"
+}

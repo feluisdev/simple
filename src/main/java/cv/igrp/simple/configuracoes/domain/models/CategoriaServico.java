@@ -1,6 +1,6 @@
 package cv.igrp.simple.configuracoes.domain.models;
 
-import cv.igrp.simple.configuracoes.domain.valueobject.CategoriaUuid;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 import org.springframework.util.Assert;
 
@@ -19,7 +19,7 @@ public class CategoriaServico {
     private Integer ordem;
     private boolean estado;
 
-    private CategoriaUuid categoriaUuid;
+    private Identificador categoriaUuid;
 
     private List<TipoServico> tiposServico;
 
@@ -29,7 +29,7 @@ public class CategoriaServico {
 
     private CategoriaServico(Integer id, String nome, String descricao, String icone,
                              String cor, Integer ordem,
-                             boolean estado, CategoriaUuid categoriaUuid,
+                             boolean estado, Identificador categoriaUuid,
                              List<TipoServico> tiposServico, String codigo) {
 
         validarCamposObrigatorios(nome, codigo);
@@ -61,7 +61,7 @@ public class CategoriaServico {
                 cor,
                 ordem,
                 true, // Nova categoria sempre ativa
-                CategoriaUuid.gerar(),
+                Identificador.gerarNovo(),
                 new ArrayList<>(), // Inicializa a lista de tipos de serviço vazia
                 codigo
         );
@@ -75,7 +75,7 @@ public class CategoriaServico {
                                                String cor,
                                                Integer ordem,
                                                boolean estado,
-                                               CategoriaUuid categoriaUuid,
+                                               Identificador categoriaUuid,
                                                List<TipoServico> tiposServico,
                                                String codigo) {
 

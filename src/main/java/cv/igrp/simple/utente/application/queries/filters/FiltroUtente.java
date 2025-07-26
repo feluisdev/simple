@@ -1,9 +1,9 @@
 package cv.igrp.simple.utente.application.queries.filters;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
 
 @Component
 public class FiltroUtente {
@@ -13,12 +13,12 @@ public class FiltroUtente {
 
         if (query.getTipo() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("tipo"), query.getTipo()));
+                    criteriaBuilder.equal(root.get("tipoUtente"), query.getTipo()));
         }
 
         if (query.getNumeroUtente() != null) {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("nrUtente"), query.getNumeroUtente()));
+                    criteriaBuilder.equal(root.get("numero"), query.getNumeroUtente()));
         }
 
         if (query.getNome() != null) {

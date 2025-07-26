@@ -1,1 +1,70 @@
-{"type":"dto","module":"pedidos","name":"UploadDocumentoPedidoDTO","attributes":[{"name":"pedidoId","type":"integer","nullable":false,"validation":{"notNull":true,"message":"O ID do pedido é obrigatório"}},{"name":"nome","type":"string","nullable":false,"validation":{"notBlank":true,"size":{"min":3,"max":100,"message":"O nome deve ter entre 3 e 100 caracteres"},"message":"O nome é obrigatório"}},{"name":"descricao","type":"string","nullable":true},{"name":"tipoDocumento","type":"string","nullable":false,"validation":{"notBlank":true,"size":{"min":2,"max":50,"message":"O tipo de documento deve ter entre 2 e 50 caracteres"},"message":"O tipo de documento é obrigatório"}},{"name":"arquivo","type":"multipartFile","nullable":false,"validation":{"notNull":true,"message":"O arquivo é obrigatório"}}]}
+{
+  "type": "dto",
+  "module": "pedidos",
+  "name": "UploadDocumentoPedido",
+  "template": "classic",
+  "enableCustonValidation": false,
+  "attributes": [
+    {
+      "name": "pedidoId",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "nome",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "descricao",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "tipoDocumento",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "url",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    }
+  ],
+  "id": "svi6fpo5ts"
+}

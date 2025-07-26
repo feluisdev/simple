@@ -45,7 +45,7 @@ public class InativarTipoServicoCommandHandler implements CommandHandler<Inativa
 
       var response = Map.of(
               "id", tipoServico.getId(),
-              "tipoServicoUuid", tipoServico.getTipoServicoUuid().getValue().toString(),
+              "tipoServicoUuid", tipoServico.getTipoServicoUuid().getValor().toString(),
               "message", "Tipo de Serviço inativado com sucesso."
       );
 

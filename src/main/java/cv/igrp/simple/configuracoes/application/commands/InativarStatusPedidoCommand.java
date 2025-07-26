@@ -1,18 +1,18 @@
 package cv.igrp.simple.configuracoes.application.commands;
 
 import cv.igrp.framework.core.domain.Command;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class InativarStatusPedidoCommand implements Command {
 
-    @NotNull(message = "O ID é obrigatório")
-    private Integer id;
+  @NotBlank(message = "The field <statusPedidoId> is required.")
+  private String statusPedidoId;
+
 }

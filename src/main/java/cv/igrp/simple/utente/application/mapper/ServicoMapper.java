@@ -1,7 +1,7 @@
 package cv.igrp.simple.utente.application.mapper;
 
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
-import cv.igrp.simple.utente.domain.models.UtenteServicoEntity;
 
 import org.springframework.stereotype.Component;
 

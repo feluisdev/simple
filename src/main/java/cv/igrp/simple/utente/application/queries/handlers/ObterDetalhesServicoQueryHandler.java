@@ -4,14 +4,14 @@ import cv.igrp.framework.core.domain.QueryHandler;
 import cv.igrp.framework.stereotype.IgrpQueryHandler;
 import cv.igrp.simple.shared.domain.exceptions.IgrpProblem;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteServicoEntityRepository;
 import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
 import cv.igrp.simple.utente.application.mapper.ServicoMapper;
 import cv.igrp.simple.utente.application.queries.queries.ObterDetalhesServicoQuery;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
-import cv.igrp.simple.utente.domain.models.UtenteServicoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteServicoEntityRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,10 +55,7 @@ public class ObterDetalhesServicoQueryHandler implements QueryHandler<ObterDetal
 
       if (optionalUtenteServico.isEmpty()) {
 
-         throw new IgrpResponseStatusException(new IgrpProblem<>(
-                 HttpStatus.NOT_FOUND,
-                 "Servico não encontrado com o ID: " + servicoId,
-                 null));
+         throw IgrpResponseStatusException.notFound("Servico não encontrado com o ID: " + servicoId);
       }
 
       UtenteServicoEntity utenteServico = optionalUtenteServico.get();;

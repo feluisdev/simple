@@ -1,32 +1,40 @@
 package cv.igrp.simple.configuracoes.application.commands;
 
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.StatusPedidoEntity;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.StatusPedidoRepository;
 import cv.igrp.framework.core.domain.CommandHandler;
+import cv.igrp.simple.configuracoes.domain.repository.StatusPedidoRepository;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
-public class InativarStatusPedidoCommandHandler implements CommandHandler<InativarStatusPedidoCommand, Void> {
+public class InativarStatusPedidoCommandHandler implements CommandHandler<InativarStatusPedidoCommand, ResponseEntity<Map<String, ?>>> {
 
     private final StatusPedidoRepository repository;
 
     @Override
     @Transactional
-    public Void handle(InativarStatusPedidoCommand command) {
-        // Buscar a entidade existente
-        StatusPedidoEntity entity = repository.findById(command.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Status de pedido não encontrado"));
+    public ResponseEntity<Map<String, ?>> handle(InativarStatusPedidoCommand command) {
 
-        // Inativar o status definindo visivelPortal como false
-        entity.setVisivelPortal(false);
+        var domain = repository
+                .getById(Identificador.from(command.getStatusPedidoId()))
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Status pedido not found with id"+command.getStatusPedidoId()));
 
-        // Salvar as alterações
-        repository.save(entity);
-        return null;
+        domain.inativar();
+
+        repository.save(domain);
+
+        var response = Map.of(
+                "id", domain.getId(),
+                "statusPedidoUuid", domain.getStatusPedidoUuid().getStringValor(),
+                "message", "Status Pedido inativado com sucesso."
+        );
+
+        return ResponseEntity.ok(response);
     }
 }

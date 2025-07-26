@@ -30,4 +30,6 @@ public class ListaCategoriaDTO {
   
   private String estado;
 
+  private String descricao;
+
 }

@@ -6,8 +6,8 @@ import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.application.mapper.UtenteMapper;
 import cv.igrp.simple.utente.application.queries.filters.FiltroUtente;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;

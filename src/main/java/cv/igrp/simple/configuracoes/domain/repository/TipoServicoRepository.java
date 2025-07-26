@@ -18,4 +18,6 @@ public interface TipoServicoRepository {
     Optional<TipoServico> findByCodigo(String codigo);
 
     List<TipoServico> getAll(TipoServicoFilter filter);
+
+    List<TipoServico> getByAtivo(boolean ativo);
 }

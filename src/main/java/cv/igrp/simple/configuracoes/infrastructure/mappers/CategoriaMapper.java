@@ -2,8 +2,8 @@ package cv.igrp.simple.configuracoes.infrastructure.mappers;
 
 import cv.igrp.simple.configuracoes.domain.models.CategoriaServico;
 import cv.igrp.simple.configuracoes.domain.models.TipoServico;
-import cv.igrp.simple.configuracoes.domain.valueobject.CategoriaUuid;
-import cv.igrp.simple.configuracoes.infrastructure.persistence.entity.CategoriaServicoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.CategoriaServicoEntity;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class CategoriaMapper {
         entity.setOrdem(domain.getOrdem());
         entity.setEstado(domain.isEstado());
         entity.setCodigo(domain.getCodigo());
-        entity.setCategoriaUuid(domain.getCategoriaUuid().getValue());
+        entity.setCategoriaUuid(domain.getCategoriaUuid().getValor());
 
         if (domain.getTiposServico() != null) {
             var tiposEntities = domain.getTiposServico().stream()
@@ -54,7 +54,7 @@ public class CategoriaMapper {
                 entity.getCor(),
                 entity.getOrdem(),
                 entity.isEstado(),
-                CategoriaUuid.from(entity.getCategoriaUuid()),
+                Identificador.from(entity.getCategoriaUuid()),
                 null, // vamos adicionar os tipos depois
                 entity.getCodigo()
         );

@@ -2,10 +2,10 @@ package cv.igrp.simple.utente.application.commands.handlers;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.constants.Estado;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

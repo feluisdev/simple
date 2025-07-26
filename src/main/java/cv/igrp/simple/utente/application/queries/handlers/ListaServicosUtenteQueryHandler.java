@@ -6,11 +6,11 @@ import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
 import cv.igrp.simple.utente.application.mapper.ServicoMapper;
 import cv.igrp.simple.utente.application.queries.filters.FiltroUtenteServico;
 import cv.igrp.simple.utente.application.queries.queries.ListaServicosUtenteQuery;
-import cv.igrp.simple.utente.domain.models.UtenteEntity;
-import cv.igrp.simple.utente.domain.models.UtenteServicoEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 
 import cv.igrp.simple.utente.domain.service.UtenteService;
-import cv.igrp.simple.utente.infrastructure.persistence.UtenteServicoEntityRepository;
+import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteServicoEntityRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
