@@ -19,11 +19,12 @@ public class UtenteService {
     }
 
     public String geraNumeroUtente(){
-
-        //todo, handle logic to generate numero utente
-        Integer ultimoId = utenteRepository.findMaxId().orElse(0);
-        Integer novoId = ultimoId + 1;
-        return "N" + novoId;
+        // Generate unique user number based on UUID
+        String uuid = UUID.randomUUID().toString();
+        // Take first 8 characters of UUID and convert to uppercase
+        String uniqueId = uuid.substring(0, 8).toUpperCase();
+        // Add prefix 'N' to the unique ID
+        return "N" + uniqueId;
     }
 
     public UtenteEntity obterUtentePorId(int idUtente) {

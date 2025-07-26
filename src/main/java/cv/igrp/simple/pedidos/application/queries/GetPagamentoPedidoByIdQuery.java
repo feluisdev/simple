@@ -15,7 +15,5 @@ public class GetPagamentoPedidoByIdQuery implements Query {
 
   @NotBlank(message = "The field <pedidoId> is required.")
   private String pedidoId;
-  @NotBlank(message = "The field <pagamentoId> is required.")
-  private String pagamentoId;
 
 }

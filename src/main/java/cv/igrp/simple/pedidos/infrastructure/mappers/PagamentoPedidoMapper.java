@@ -55,4 +55,18 @@ public class PagamentoPedidoMapper {
                 pagamento.getObservacao()
         );
     }
+
+    public Pagamento toDomain(PagamentoPedidoEntity entity) {
+        return Pagamento.reconstruir(
+                entity.getId(),
+                Identificador.from(entity.getPagamentoUuid()),
+                entity.getDataPagamento(),
+                entity.getMetodoPagamento(),
+                entity.getReferenciaPagamento(),
+                entity.getStatus(),
+                entity.getObservacao(),
+                entity.getValor(),
+                null
+        );
+    }
 }

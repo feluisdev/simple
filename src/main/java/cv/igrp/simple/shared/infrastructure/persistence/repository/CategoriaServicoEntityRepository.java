@@ -15,7 +15,6 @@ import java.util.UUID;
 
 
 @Repository
-@RepositoryRestResource(path = "categoriaServicoEntity")
 public interface CategoriaServicoEntityRepository extends
     JpaRepository<CategoriaServicoEntity, Integer>,
     JpaSpecificationExecutor<CategoriaServicoEntity>

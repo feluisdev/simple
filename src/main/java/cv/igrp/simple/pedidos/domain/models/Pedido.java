@@ -20,14 +20,14 @@ public class Pedido {
 
     private final Integer id;
     private Identificador pedidoUuid;
-    private  CodigoAcompanhamento codigoAcompanhamento;
-    private  String observacao;
-    private  StatusPedido status;
-    private  TipoServico tipoServico;
-    private  Utente utente;
-    private  Integer etapaAtualId;
-    private  LocalDate dataSolicitacao;
-    private  LocalDate dataPrevisaoConclusao;
+    private CodigoAcompanhamento codigoAcompanhamento;
+    private String observacao;
+    private StatusPedido status;
+    private TipoServico tipoServico;
+    private Utente utente;
+    private Integer etapaAtualId;
+    private LocalDate dataSolicitacao;
+    private LocalDate dataPrevisaoConclusao;
     private String origem;
     private Integer prioridade;
     private BigDecimal valorTotal;
@@ -68,9 +68,9 @@ public class Pedido {
         this.origem = origem;
         this.prioridade = prioridade;
         this.valorTotal = valorTotal;
-        this.avaliacoes = avaliacoes!=null ? avaliacoes : new ArrayList<>();
-        this.historicoPedido = historicoPedido!=null ? historicoPedido : new ArrayList<>();
-        this.documentos = documentos!=null ? documentos : new ArrayList<>();
+        this.avaliacoes = avaliacoes != null ? avaliacoes : new ArrayList<>();
+        this.historicoPedido = historicoPedido != null ? historicoPedido : new ArrayList<>();
+        this.documentos = documentos != null ? documentos : new ArrayList<>();
         this.pagamento = pagamento;
     }
 
@@ -82,7 +82,7 @@ public class Pedido {
                                    String origem,
                                    Integer prioridade,
                                    BigDecimal valorTotal
-                                   ) {
+    ) {
 
         LocalDate hoje = LocalDate.now();
         LocalDate previsao = calcularDataPrevisao(hoje, tipoServico.getPrazoEstimado());
@@ -98,9 +98,9 @@ public class Pedido {
                 etapaAtualId,
                 hoje,
                 previsao,
-                 origem,
-                 prioridade,
-                 valorTotal,
+                origem,
+                prioridade,
+                valorTotal,
                 null,
                 null,
                 null,
@@ -125,15 +125,16 @@ public class Pedido {
                                      List<HistoricoPedido> historicoPedido,
                                      Pagamento pagamento,
                                      List<Documento> documentos
-                                     ) {
+    ) {
 
         return new Pedido(id, pedidoUuid, codigoAcompanhamento, observacao,
                 status, tipoServico, utente, etapaAtualId,
                 dataSolicitacao, dataPrevisaoConclusao,
-                 origem,
-                 prioridade,
-                 valorTotal,avaliacoes, historicoPedido, documentos,pagamento);
+                origem,
+                prioridade,
+                valorTotal, avaliacoes, historicoPedido, documentos, pagamento);
     }
+
     private static LocalDate calcularDataPrevisao(LocalDate dataInicio, Integer prazoEstimado) {
         if (prazoEstimado == null || prazoEstimado <= 0) {
             return dataInicio;
@@ -154,9 +155,9 @@ public class Pedido {
         return data;
     }
 
-    public void avaliarPedido(String comentario, Integer nota){
+    public void avaliarPedido(String comentario, Integer nota) {
 
-        if (this.avaliacoes==null){
+        if (this.avaliacoes == null) {
             this.avaliacoes = new ArrayList<>();
         }
 
@@ -167,7 +168,7 @@ public class Pedido {
 
     public void registarHistorico(String observacao, StatusPedido statusPedido) {
 
-        if (this.historicoPedido==null){
+        if (this.historicoPedido == null) {
             historicoPedido = new ArrayList<>();
         }
 
@@ -182,9 +183,9 @@ public class Pedido {
                                    String observacao,
                                    BigDecimal valor) {
 
-    if (this.pagamento != null) {
-        throw IgrpResponseStatusException.badRequest("Pagamento já registrado para este pedido.");
-    }
+        if (this.pagamento != null) {
+            throw IgrpResponseStatusException.badRequest("Pagamento já registrado para este pedido.");
+        }
 
         this.pagamento = Pagamento.criarNovo(
                 metodoPagamento,
@@ -195,6 +196,27 @@ public class Pedido {
         );
     }
 
+    public void confirmarPagamento(StatusPedido statusPago) {
+        if (this.pagamento == null) {
+            throw IgrpResponseStatusException.badRequest("Nenhum pagamento registrado para este pedido.");
+        }
+
+        if (this.pagamento.isCancelado()) {
+
+            throw IgrpResponseStatusException.badRequest("Pagamento se encontra cancelado.");
+        }
+
+        this.pagamento.confirmar();
+
+        var historico = HistoricoPedido.criarNovo(observacao, this, statusPago);
+        this.historicoPedido.add(historico);
+        this.status = statusPago;
+    }
+
+    public void cancelarPagamento() {
+
+        this.pagamento.cancelar();
+    }
 
     public void adicionarDocumento(String nome, String descricao, String tipoDocumento,
                                    String caminhoArquivo) {
@@ -203,7 +225,7 @@ public class Pedido {
             this.documentos = new ArrayList<>();
         }
 
-        var documento = Documento.criarNovo(nome,descricao,tipoDocumento,
+        var documento = Documento.criarNovo(nome, descricao, tipoDocumento,
                 caminhoArquivo, LocalDate.now(), this);
 
         this.documentos.add(documento);
@@ -219,7 +241,7 @@ public class Pedido {
                           Integer prioridade) {
 
 
-        if(this.status.getCodigo()!= "NOVO") {
+        if (this.status.getCodigo() != "NOVO") {
             //todo: criar exceção específica para atualização de pedidos
             //throw IgrpResponseStatusException.badRequest("Não é possível atualizar um pedido que não está no estado 'Novo'");
         }
@@ -231,4 +253,6 @@ public class Pedido {
         this.origem = origem != null ? origem : "Desconhecida";
         this.prioridade = prioridade != null ? prioridade : 0;
     }
+
+
 }

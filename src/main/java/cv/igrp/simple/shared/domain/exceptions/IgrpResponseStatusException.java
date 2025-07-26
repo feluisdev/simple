@@ -34,18 +34,16 @@ public class IgrpResponseStatusException extends ErrorResponseException {
         return new IgrpResponseStatusException(status, problemDetail, null);
     }
 
-    public static <T> IgrpResponseStatusException notFound(String title, T details) {
-        return of(HttpStatus.NOT_FOUND, title, details);
-    }
-
-    public static IgrpResponseStatusException badRequest(String title) {
-        return of(HttpStatus.BAD_REQUEST, title);
-    }
 
     public static IgrpResponseStatusException notFound(String title) {
-        return notFound(title, null);
+        var problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problemDetail.setTitle(title);
+        return new IgrpResponseStatusException(HttpStatus.NOT_FOUND, problemDetail, null);
     }
-
-
+    public static IgrpResponseStatusException badRequest(String title) {
+        var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        problemDetail.setTitle(title);
+        return new IgrpResponseStatusException(HttpStatus.BAD_REQUEST, problemDetail, null);
+    }
 
 }
