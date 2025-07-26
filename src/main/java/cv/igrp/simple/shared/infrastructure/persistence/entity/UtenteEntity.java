@@ -11,7 +11,6 @@ import org.hibernate.envers.Audited;
 import cv.igrp.simple.utente.application.constants.TipoUtente;
 import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import java.time.LocalDate;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import cv.igrp.simple.utente.application.constants.Estado;
 import java.util.List;
@@ -64,18 +63,15 @@ public class UtenteEntity extends AuditEntity {
     private String email;
 
   
-    @NotNull(message = "dataNascimento is mandatory")
-    @Column(name="data_nascimento", nullable = false)
+    @Column(name="data_nascimento")
     private LocalDate dataNascimento;
 
   
-    @NotBlank(message = "nomeMae is mandatory")
-    @Column(name="nome_mae", nullable = false)
+    @Column(name="nome_mae")
     private String nomeMae;
 
   
-    @NotBlank(message = "nomePai is mandatory")
-    @Column(name="nome_pai", nullable = false)
+    @Column(name="nome_pai")
     private String nomePai;
 
   
