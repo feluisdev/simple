@@ -1,1 +1,45 @@
-{"type":"enum","module":"utente","name":"TipoIdentificacao","values":[{"name":"BI","attributes":["BI","Bilhete de Indentidade"]},{"name":"CNI","attributes":["CNI","Cartão Nacional de Identificação"]},{"name":"PEC","attributes":["PEC","Passaporte"]},{"name":"NIPC","attributes":["NIPC","Numero de Identificação de Pessoa Coletiva"]}],"attributes":[{"type":"string","name":"Code"},{"type":"string","name":"Description"}]}
+{
+  "type": "enum",
+  "module": "utente",
+  "name": "TipoIdentificacao",
+  "values": [
+    {
+      "name": "BI",
+      "attributes": [
+        "BI",
+        "Bilhete de Indentidade"
+      ]
+    },
+    {
+      "name": "CNI",
+      "attributes": [
+        "CNI",
+        "Cartão Nacional de Identificação"
+      ]
+    },
+    {
+      "name": "PEC",
+      "attributes": [
+        "PEC",
+        "Passaporte"
+      ]
+    },
+    {
+      "name": "NIPC",
+      "attributes": [
+        "NIPC",
+        "Numero de Identificação de Pessoa Coletiva"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "type": "string",
+      "name": "Code"
+    },
+    {
+      "type": "string",
+      "name": "Description"
+    }
+  ]
+}

@@ -1,20 +1,20 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 package cv.igrp.simple.utente.application.constants;
 
-import java.util.*;
+import cv.igrp.framework.core.domain.IgrpEnum;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import lombok.Getter;
+public enum GeneroTipo implements IgrpEnum<String> {
 
-@Getter
-public enum GeneroTipo {
-
-  MASCULINO(
-    "MASCULINO", "Masculino"
-  ),
-    FEMININO(
-    "FEMININO", "Feminino"
-  )
+  MASCULINO("MASCULINO", "Masculino"),
+    FEMININO("FEMININO", "Feminino")
   ;
 
   private final String code;
@@ -23,6 +23,16 @@ public enum GeneroTipo {
   GeneroTipo(String code, String description) {
     this.code = code;
     this.description = description;
+  }
+
+  @Override
+  public String getCode() {
+    return code;
+  }
+
+  @Override
+  public String getDescription() {
+    return description;
   }
 
   /**

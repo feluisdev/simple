@@ -1,26 +1,22 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 package cv.igrp.simple.utente.application.constants;
 
-import java.util.*;
+import cv.igrp.framework.core.domain.IgrpEnum;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import lombok.Getter;
+public enum TipoIdentificacao implements IgrpEnum<String> {
 
-@Getter
-public enum TipoIdentificacao {
-
-  BI(
-    "BI", "Bilhete de Indentidade"
-  ),
-    CNI(
-    "CNI", "Cartão Nacional de Identificação"
-  ),
-    PEC(
-    "PEC", "Passaporte"
-  ),
-    NIPC(
-    "NIPC", "Numero de Identificação de Pessoa Coletiva"
-  )
+  BI("BI", "Bilhete de Indentidade"),
+    CNI("CNI", "Cartão Nacional de Identificação"),
+    PEC("PEC", "Passaporte"),
+    NIPC("NIPC", "Numero de Identificação de Pessoa Coletiva")
   ;
 
   private final String code;
@@ -29,6 +25,16 @@ public enum TipoIdentificacao {
   TipoIdentificacao(String code, String description) {
     this.code = code;
     this.description = description;
+  }
+
+  @Override
+  public String getCode() {
+    return code;
+  }
+
+  @Override
+  public String getDescription() {
+    return description;
   }
 
   /**
