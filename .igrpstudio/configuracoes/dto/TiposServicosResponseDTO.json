@@ -1,41 +1,63 @@
 {
   "type": "dto",
-  "module": "utente",
-  "name": "CriarUtente",
+  "module": "configuracoes",
+  "name": "TiposServicosResponse",
   "template": "classic",
-  "enableCustonValidation": true,
+  "enableCustonValidation": false,
   "attributes": [
     {
-      "name": "tipoUtente",
-      "objectType": "enum",
-      "type": "TipoUtente",
-      "required": true,
+      "name": "id",
+      "objectType": "java",
+      "type": "integer",
+      "required": false,
       "before": false,
       "after": false,
       "positive": false,
       "isEmail": false,
       "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
+      "primaryKey": false
+    },
+    {
+      "name": "categoriaId",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "tipoServicoId",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "codigo",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
     },
     {
       "name": "nome",
       "objectType": "java",
       "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "minLength": 3,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "nif",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
+      "required": false,
       "before": false,
       "after": false,
       "positive": false,
@@ -44,32 +66,7 @@
       "primaryKey": false
     },
     {
-      "name": "tipoIdentificacao",
-      "objectType": "enum",
-      "type": "TipoIdentificacao",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
-    },
-    {
-      "name": "identificacao",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "nomeMae",
+      "name": "descricao",
       "objectType": "java",
       "type": "string",
       "required": false,
@@ -81,9 +78,9 @@
       "primaryKey": false
     },
     {
-      "name": "nomePai",
+      "name": "prazoEstimado",
       "objectType": "java",
-      "type": "string",
+      "type": "integer",
       "required": false,
       "before": false,
       "after": false,
@@ -93,9 +90,9 @@
       "primaryKey": false
     },
     {
-      "name": "dataNascimento",
+      "name": "valorBase",
       "objectType": "java",
-      "type": "date",
+      "type": "double",
       "required": false,
       "before": false,
       "after": false,
@@ -105,45 +102,9 @@
       "primaryKey": false
     },
     {
-      "name": "telefone",
+      "name": "requerVistoria",
       "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "endereco",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "email",
-      "objectType": "java",
-      "type": "string",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": true,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "caixaPostal",
-      "objectType": "java",
-      "type": "string",
+      "type": "boolean",
       "required": false,
       "before": false,
       "after": false,
@@ -153,9 +114,9 @@
       "primaryKey": false
     },
     {
-      "name": "telemovel",
+      "name": "requerAnaliseTec",
       "objectType": "java",
-      "type": "string",
+      "type": "boolean",
       "required": false,
       "before": false,
       "after": false,
@@ -165,9 +126,9 @@
       "primaryKey": false
     },
     {
-      "name": "departamentoResponsavel",
+      "name": "requerAprovacao",
       "objectType": "java",
-      "type": "string",
+      "type": "boolean",
       "required": false,
       "before": false,
       "after": false,
@@ -177,22 +138,21 @@
       "primaryKey": false
     },
     {
-      "name": "genero",
-      "objectType": "enum",
-      "type": "GeneroTipo",
+      "name": "disponivelPortal",
+      "objectType": "java",
+      "type": "boolean",
       "required": false,
       "before": false,
       "after": false,
       "positive": false,
       "isEmail": false,
       "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
+      "primaryKey": false
     },
     {
-      "name": "nacionalidade",
+      "name": "ativo",
       "objectType": "java",
-      "type": "string",
+      "type": "boolean",
       "required": false,
       "before": false,
       "after": false,
@@ -202,5 +162,5 @@
       "primaryKey": false
     }
   ],
-  "id": "l3zm1myrme"
+  "id": "4ryaxc4wzw"
 }

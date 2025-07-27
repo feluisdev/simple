@@ -1,75 +1,12 @@
 {
   "type": "dto",
-  "module": "utente",
-  "name": "CriarUtente",
+  "module": "pedidos",
+  "name": "HistoricoPedidoResponse",
   "template": "classic",
-  "enableCustonValidation": true,
+  "enableCustonValidation": false,
   "attributes": [
     {
-      "name": "tipoUtente",
-      "objectType": "enum",
-      "type": "TipoUtente",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
-    },
-    {
-      "name": "nome",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "minLength": 3,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "nif",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "tipoIdentificacao",
-      "objectType": "enum",
-      "type": "TipoIdentificacao",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
-    },
-    {
-      "name": "identificacao",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "nomeMae",
+      "name": "historicoId",
       "objectType": "java",
       "type": "string",
       "required": false,
@@ -81,7 +18,7 @@
       "primaryKey": false
     },
     {
-      "name": "nomePai",
+      "name": "pedidoId",
       "objectType": "java",
       "type": "string",
       "required": false,
@@ -93,7 +30,91 @@
       "primaryKey": false
     },
     {
-      "name": "dataNascimento",
+      "name": "statusId",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "statusNome",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "statusCor",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "etapaId",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "etapaNome",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "userId",
+      "objectType": "java",
+      "type": "integer",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "userNome",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "dataRegistro",
       "objectType": "java",
       "type": "date",
       "required": false,
@@ -105,92 +126,7 @@
       "primaryKey": false
     },
     {
-      "name": "telefone",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "endereco",
-      "objectType": "java",
-      "type": "string",
-      "required": true,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "email",
-      "objectType": "java",
-      "type": "string",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": true,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "caixaPostal",
-      "objectType": "java",
-      "type": "string",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "telemovel",
-      "objectType": "java",
-      "type": "string",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "departamentoResponsavel",
-      "objectType": "java",
-      "type": "string",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "genero",
-      "objectType": "enum",
-      "type": "GeneroTipo",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
-    },
-    {
-      "name": "nacionalidade",
+      "name": "observacao",
       "objectType": "java",
       "type": "string",
       "required": false,
@@ -202,5 +138,5 @@
       "primaryKey": false
     }
   ],
-  "id": "l3zm1myrme"
+  "id": "2o9b5eocfe"
 }

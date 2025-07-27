@@ -1,0 +1,24 @@
+{
+  "type": "enum",
+  "module": "shared",
+  "name": "DocumentoFolder",
+  "values": [
+    {
+      "name": "Utente",
+      "attributes": [
+        "Utente documents",
+        "Utente documents"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "type": "string",
+      "name": "Code"
+    },
+    {
+      "type": "string",
+      "name": "Description"
+    }
+  ]
+}

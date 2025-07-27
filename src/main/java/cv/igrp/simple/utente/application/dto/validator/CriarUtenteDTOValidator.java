@@ -15,20 +15,19 @@ public class CriarUtenteDTOValidator implements ConstraintValidator<ICriarUtente
 
     @Override
     public boolean isValid(CriarUtenteDTO dto, ConstraintValidatorContext context) {
-
         boolean isValid = true;
-        context.disableDefaultConstraintViolation(); // Desativa a violação padrão
+        context.disableDefaultConstraintViolation(); // Disable default violation
 
         String nif = dto.getNif().trim();
 
-        // Verifica se o NIF tem 9 dígitos
+        // NIF length and digit check
         if (nif.length() != 9 || !nif.matches("\\d{9}")) {
             context.buildConstraintViolationWithTemplate("O NIF deve conter 9 dígitos.")
                     .addPropertyNode("nif")
                     .addConstraintViolation();
             isValid = false;
         } else {
-            // Valida o primeiro dígito conforme o tipo de utente
+            // Validate first digit based on tipoUtente
             if (dto.getTipoUtente() == TipoUtente.CIDADAO && nif.charAt(0) != '1') {
                 context.buildConstraintViolationWithTemplate("O NIF de um cidadão deve começar com 1.")
                         .addPropertyNode("nif")
@@ -42,7 +41,16 @@ public class CriarUtenteDTOValidator implements ConstraintValidator<ICriarUtente
             }
         }
 
+        // Validate genero only if tipoUtente is CIDADAO (or other that require it)
+        if (dto.getTipoUtente() == TipoUtente.CIDADAO && dto.getGenero() == null) {
+            context.buildConstraintViolationWithTemplate("O campo <genero> é obrigatório para cidadãos.")
+                    .addPropertyNode("genero")
+                    .addConstraintViolation();
+            isValid = false;
+        }
+
         return isValid;
     }
+
 
 }
