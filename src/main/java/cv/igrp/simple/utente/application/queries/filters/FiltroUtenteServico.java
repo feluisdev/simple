@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class FiltroUtenteServico {
 
     public Specification<UtenteServicoEntity> aplicarFiltros(ListaServicosUtenteQuery query) {
-        Specification<UtenteServicoEntity> spec = Specification.where(null);
+        Specification<UtenteServicoEntity> spec = (root, query1, cb) -> cb.conjunction(); // inicializa com "true"
         Integer utenteId = Integer.parseInt(query.getUtenteId());
 
         spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
@@ -22,11 +22,6 @@ public class FiltroUtenteServico {
             spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
                     criteriaBuilder.equal(root.get("objetoTipo"), query.getTipo()));
         }
-
-      /*  if (query.getEstado() != null) {
-            spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("estado"), query.getEstado())); // Supondo que "estado" existe
-        }*/
 
         if (query.getDataInicio() != null) {
             LocalDate dataInicio = parseDate(query.getDataInicio());
@@ -43,7 +38,6 @@ public class FiltroUtenteServico {
         return spec;
     }
 
-    // Método auxiliar para converter a string de data para LocalDate
     private LocalDate parseDate(String date) {
         if (date == null || date.isEmpty()) return null;
         return LocalDate.parse(date);

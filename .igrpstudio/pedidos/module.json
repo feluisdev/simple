@@ -1,0 +1,1 @@
+{"type":"module","name":"pedidos","description":"Módulo para gerenciamento de pedidos, incluindo histórico, documentos, etapas, pagamentos e avaliações","version":"1.0.0","dependencies":["utente","configuracoes"],"config":{"enableAudit":true,"enableRevision":false}}
