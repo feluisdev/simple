@@ -3,8 +3,10 @@ package cv.igrp.simple.shared.domain.exceptions;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -103,6 +105,56 @@ public class GlobalExceptionHandler {
         problem.setDetail(ex.getMessage());
 
         return problem;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+
+        var rootCause = getRootCause(ex);
+
+        var problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+
+        if (rootCause instanceof PSQLException psqlEx) {
+
+            var sqlState = psqlEx.getSQLState();
+
+            if ("23503".equals(sqlState)) {
+
+                var detail = extractForeignKeyField(psqlEx);
+
+                problem.setTitle("Foreign Key Constraint Violation");
+                problem.setDetail(detail != null
+                        ? "Foreign key constraint violated on field: '" + detail + "'."
+                        : "A foreign key constraint was violated.");
+                return problem;
+            }
+        }
+
+        problem.setTitle("Data Integrity Violation");
+        problem.setDetail(ex.getMostSpecificCause().getMessage());
+
+        return problem;
+    }
+
+    private String extractForeignKeyField(org.postgresql.util.PSQLException ex) {
+
+        var message = ex.getServerErrorMessage() != null
+                ? ex.getServerErrorMessage().getDetail()
+                : ex.getMessage();
+
+        if (message != null) {
+            int keyStart = message.indexOf("Key (");
+            int keyEnd = message.indexOf(")=");
+            if (keyStart != -1 && keyEnd != -1 && keyEnd > keyStart + 5) {
+                return message.substring(keyStart + 5, keyEnd);
+            }
+        }
+        return null;
+    }
+
+    private Throwable getRootCause(Throwable throwable) {
+        var cause = throwable.getCause();
+        return (cause == null || cause == throwable) ? throwable : getRootCause(cause);
     }
 
 }
