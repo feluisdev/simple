@@ -66,6 +66,7 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ProblemDetail handleConstraintViolationException(ConstraintViolationException ex) {
 
