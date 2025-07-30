@@ -35,7 +35,7 @@ public class UtenteMapper {
         // Verificar se dataNascimento é null antes de chamar toString()
         LocalDate dataNascimento = utente.getDataNascimento();
         dto.setDataNascimento(dataNascimento != null ? dataNascimento.toString() : null);
-        dto.setEstado(utente.getEstado());
+        dto.setEstado(utente.getEstado().getDescription());
         dto.setEndereco(utente.getEndereco());
         dto.setTelefone(utente.getTelefone());
         dto.setEmail(utente.getEmail());
