@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ListaServicosUtenteQueryHandler implements QueryHandler<ListaServicosUtenteQuery, ResponseEntity<Page<ServicoResponseDTO>>>{
@@ -37,7 +38,9 @@ public class ListaServicosUtenteQueryHandler implements QueryHandler<ListaServic
        this.filtroUtenteServico = filtroUtenteServico;
    }
 
+
    @IgrpQueryHandler
+   @Transactional(readOnly = true)
    public ResponseEntity<Page<ServicoResponseDTO>> handle(ListaServicosUtenteQuery query) {
       // TODO: Implement the query handling logic here
       Integer utenteId = Integer.parseInt(query.getUtenteId());
