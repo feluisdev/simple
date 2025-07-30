@@ -53,6 +53,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 
+        LOGGER.error("Method argument not valid exception: {}", ex.getMessage(), ex);
+
         var errors = ex.getBindingResult().getFieldErrors()
                 .stream()
                 .collect(Collectors.toMap(
@@ -69,6 +71,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ProblemDetail handleConstraintViolationException(ConstraintViolationException ex) {
+        LOGGER.error("Constraint violation exception: {}", ex.getMessage(), ex);
 
         var errors = ex.getConstraintViolations()
                 .stream()
@@ -112,6 +115,8 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleDataIntegrityViolation(DataIntegrityViolationException ex) {
 
         var rootCause = getRootCause(ex);
+
+        LOGGER.error("DataIntegrityViolationException root cause: {}", rootCause.getMessage(), ex);
 
         var problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
 
