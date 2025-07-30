@@ -46,7 +46,7 @@ public class UtenteResponseDTO {
   private String dataNascimento;
   
   
-  private Estado estado;
+  private String estado;
   
   
   private String telefone;
