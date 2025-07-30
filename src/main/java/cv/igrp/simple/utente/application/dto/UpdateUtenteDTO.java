@@ -34,10 +34,6 @@ public class UpdateUtenteDTO {
   
   private TipoIdentificacao tipoIdentificacao;
 
-  @NotNull(message = "The field <estado> is required.")
-  
-  private Estado estado;
-
   @NotBlank(message = "The field <identificacao> is required.")
   
   private String identificacao;

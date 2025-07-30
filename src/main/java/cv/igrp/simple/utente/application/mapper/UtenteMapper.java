@@ -79,7 +79,6 @@ public class UtenteMapper {
         utente.setTelefone(dto.getTelefone());
         utente.setEmail(dto.getEmail());
         utente.setEndereco(dto.getEndereco());
-        utente.setEstado(dto.getEstado());
         utente.setDataNascimento(dto.getDataNascimento());
         utente.setIdentificacao(dto.getIdentificacao());
         utente.setTipoIdentificacao(dto.getTipoIdentificacao());

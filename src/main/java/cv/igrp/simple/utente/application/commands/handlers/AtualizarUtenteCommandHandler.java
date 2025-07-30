@@ -32,18 +32,19 @@ public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUt
 
    @IgrpCommandHandler
    public ResponseEntity<UtenteResponseDTO> handle(AtualizarUtenteCommand command) {
+
       // Obter o ID do utente a ser atualizado
       Integer idUtente = command.getId();
       // Buscar o utente existente pelo ID
       UtenteEntity utente = utenteService.obterUtentePorId(idUtente);
       var dto = command.getUpdateutente();
 
+
       // Atualizar os campos do utente existente com os dados do DTO
       if (dto.getNome() != null) utente.setNome(dto.getNome());
       if (dto.getTelefone() != null) utente.setTelefone(dto.getTelefone());
       if (dto.getEmail() != null) utente.setEmail(dto.getEmail());
       if (dto.getEndereco() != null) utente.setEndereco(dto.getEndereco());
-      if (dto.getEstado() != null) utente.setEstado(dto.getEstado());
       if (dto.getDataNascimento() != null) utente.setDataNascimento(dto.getDataNascimento());
       if (dto.getIdentificacao() != null) utente.setIdentificacao(dto.getIdentificacao());
       if (dto.getTipoIdentificacao() != null) utente.setTipoIdentificacao(dto.getTipoIdentificacao());
