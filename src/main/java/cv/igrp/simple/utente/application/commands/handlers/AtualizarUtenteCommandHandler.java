@@ -8,14 +8,17 @@ import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import cv.igrp.simple.utente.application.mapper.UtenteMapper;
 import cv.igrp.simple.utente.domain.service.UtenteService;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUtenteCommand, ResponseEntity<UtenteResponseDTO>> {
 
-   private final UtenteEntityRepository utenteRepository;
+   private static final Logger LOGGER = LoggerFactory.getLogger(AtualizarUtenteCommandHandler.class);
 
+   private final UtenteEntityRepository utenteRepository;
 
    private final UtenteMapper utenteMapper;
 
@@ -32,6 +35,8 @@ public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUt
 
    @IgrpCommandHandler
    public ResponseEntity<UtenteResponseDTO> handle(AtualizarUtenteCommand command) {
+
+      LOGGER.info("Iniciando atualização do utente com ID {}", command.getId());
 
       // Obter o ID do utente a ser atualizado
       Integer idUtente = command.getId();
@@ -61,6 +66,8 @@ public class AtualizarUtenteCommandHandler implements CommandHandler<AtualizarUt
       // Salvar a entidade atualizada
       var utenteUpdated = utenteRepository.save(utente);
       UtenteResponseDTO responseDTO = utenteMapper.toUtenteResponseDTO(utenteUpdated);
+
+      LOGGER.info("Utente com ID {} atualizado com sucesso", command.getId());
 
       return ResponseEntity.ok(responseDTO);
    }
