@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public enum GeneroTipo implements IgrpEnum<String> {
 
-  MASCULINO("MASCULINO", "Masculino"),
-    FEMININO("FEMININO", "Feminino")
+  M("M", "Masculino"),
+    F("F", "Feminino")
   ;
 
   private final String code;

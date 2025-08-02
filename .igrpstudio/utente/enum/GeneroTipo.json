@@ -4,16 +4,16 @@
   "name": "GeneroTipo",
   "values": [
     {
-      "name": "MASCULINO",
+      "name": "M",
       "attributes": [
-        "MASCULINO",
+        "M",
         "Masculino"
       ]
     },
     {
-      "name": "FEMININO",
+      "name": "F",
       "attributes": [
-        "FEMININO",
+        "F",
         "Feminino"
       ]
     }
