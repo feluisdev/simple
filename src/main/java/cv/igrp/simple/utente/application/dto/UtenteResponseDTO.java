@@ -1,3 +1,6 @@
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 package cv.igrp.simple.utente.application.dto;
 
 import cv.igrp.framework.stereotype.IgrpDTO;
@@ -6,79 +9,90 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import cv.igrp.simple.utente.application.constants.Estado;
-import cv.igrp.simple.utente.application.constants.GeneroTipo;
-import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
-import cv.igrp.simple.utente.application.constants.TipoUtente;
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
+
 @IgrpDTO
-public class UtenteResponseDTO {
+public class UtenteResponseDTO  {
 
   
   
-  private Integer id;
-  @NotBlank(message = "The field <nome> is required.")
+  private Integer id ;
+  @NotBlank(message = "The field <nome> is required")
   
-  private String nome;
-  
-  
-  private TipoUtente tipoUtente;
+  private String nome ;
   
   
-  private String numero;
+  private String tipoUtente ;
   
   
-  private String nif;
+  private String tipoUtenteDesc ;
   
   
-  private String identificacao;
+  private String numero ;
   
   
-  private String nomeMae;
+  private String nif ;
   
   
-  private String nomePai;
+  private String identificacao ;
   
   
-  private String dataNascimento;
+  private String nomeMae ;
   
   
-  private String estado;
+  private String nomePai ;
   
   
-  private String telefone;
+  private LocalDate dataNascimento ;
   
   
-  private String email;
+  private String estado ;
   
   
-  private String endereco;
+  private String telefone ;
   
   
-  private String createdAt;
+  private String email ;
   
   
-  private String updatedAt;
+  private String morada ;
   
   
-  private String caixaPostal;
+  private String createdAt ;
   
   
-  private String departamentoResponsavel;
+  private String updatedAt ;
   
   
-  private TipoIdentificacao tipoIdentificacao;
+  private String caixaPostal ;
   
   
-  private GeneroTipo genero;
+  private String departamentoResponsavel ;
   
   
-  private String nacionalidade;
+  private String tipoIdentificacao ;
   
   
-  private String telemovel;
+  private String tipoIdentificacaoDesc ;
+  
+  
+  private String genero ;
+  
+  
+  private String generoDesc ;
+  
+  
+  private String nacionalidade ;
+  
+  
+  private String telemovel ;
+  
+  
+  private String endereco ;
 
 }
