@@ -31,16 +31,27 @@
     },
     {
       "name": "tipoUtente",
-      "objectType": "enum",
-      "type": "TipoUtente",
+      "objectType": "java",
+      "type": "string",
       "required": false,
       "before": false,
       "after": false,
       "positive": false,
       "isEmail": false,
       "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
+      "primaryKey": false
+    },
+    {
+      "name": "tipoUtenteDesc",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
     },
     {
       "name": "numero",
@@ -105,7 +116,7 @@
     {
       "name": "dataNascimento",
       "objectType": "java",
-      "type": "string",
+      "type": "date",
       "required": false,
       "before": false,
       "after": false,
@@ -213,29 +224,51 @@
     },
     {
       "name": "tipoIdentificacao",
-      "objectType": "enum",
-      "type": "TipoIdentificacao",
+      "objectType": "java",
+      "type": "string",
       "required": false,
       "before": false,
       "after": false,
       "positive": false,
       "isEmail": false,
       "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
+      "primaryKey": false
+    },
+    {
+      "name": "tipoIdentificacaoDesc",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
     },
     {
       "name": "genero",
-      "objectType": "enum",
-      "type": "GeneroTipo",
+      "objectType": "java",
+      "type": "string",
       "required": false,
       "before": false,
       "after": false,
       "positive": false,
       "isEmail": false,
       "isUrl": false,
-      "primaryKey": false,
-      "module": "utente"
+      "primaryKey": false
+    },
+    {
+      "name": "generoDesc",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
     },
     {
       "name": "nacionalidade",
@@ -251,6 +284,18 @@
     },
     {
       "name": "telemovel",
+      "objectType": "java",
+      "type": "string",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "endereco",
       "objectType": "java",
       "type": "string",
       "required": false,
