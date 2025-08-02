@@ -24,25 +24,28 @@ public class UtenteMapper {
 
         UtenteResponseDTO dto = new UtenteResponseDTO();
         dto.setId(utente.getId());
-        dto.setTipoUtente(utente.getTipoUtente());
+        dto.setTipoUtente(utente.getTipoUtente().getCode());
+        dto.setTipoUtenteDesc(utente.getTipoUtente().getDescription());
         dto.setNome(utente.getNome());
         dto.setNumero(utente.getNumero());
         dto.setNif(utente.getNif());
-        dto.setTipoIdentificacao(utente.getTipoIdentificacao());
+        dto.setTipoIdentificacao(utente.getTipoIdentificacao().getCode());
+        dto.setTipoIdentificacaoDesc(utente.getTipoIdentificacao().getDescription());
         dto.setIdentificacao(utente.getIdentificacao());
-        dto.setNomeMae(utente.getNomeMae());
-        dto.setNomePai(utente.getNomePai()); // Esse campo parece não estar presente na entidade — confirme se existe
+        dto.setNomeMae(utente.getNomeMae()!=null ? utente.getNomeMae() : "");
+        dto.setNomePai(utente.getNomePai()!=null ? utente.getNomePai() : ""); // Esse campo parece não estar presente na entidade — confirme se existe
         // Verificar se dataNascimento é null antes de chamar toString()
         LocalDate dataNascimento = utente.getDataNascimento();
-        dto.setDataNascimento(dataNascimento != null ? dataNascimento.toString() : null);
+        dto.setDataNascimento(dataNascimento);
         dto.setEstado(utente.getEstado().getCode());
         dto.setEndereco(utente.getEndereco());
         dto.setTelefone(utente.getTelefone());
         dto.setEmail(utente.getEmail());
-        dto.setCaixaPostal(utente.getCaixaPostal());
-        dto.setDepartamentoResponsavel(utente.getDepartamentoResponsavel());
+        dto.setCaixaPostal(utente.getCaixaPostal()!=null ? utente.getCaixaPostal() : "");
+        dto.setDepartamentoResponsavel(utente.getDepartamentoResponsavel()!=null ? utente.getDepartamentoResponsavel() : "");
         dto.setTelemovel(utente.getTelemovel());
-        dto.setGenero(utente.getGenero());
+        dto.setGenero(utente.getGenero()!=null ? utente.getGenero().getCode() : "");
+        dto.setGeneroDesc(utente.getGenero()!=null ? utente.getGenero().getDescription() : "");
         dto.setNacionalidade(utente.getNacionalidade());
 
         return dto;
