@@ -31,7 +31,7 @@ public class CreateTipoAtividadeCommandHandler implements CommandHandler<CreateT
       var dto = command.getTipoatividaderequest();
 
       // Criar o domínio usando os dados do DTO
-      var novaTipoAtividade = TipoAtividade.criarNovo(dto.getCodigo(), dto.getDescricao());
+      var novaTipoAtividade = TipoAtividade.criarNovo(dto.getNome(), dto.getCodigo(), dto.getDescricao());
 
       var saved = tipoAtividadeRepository.save(novaTipoAtividade);
 
