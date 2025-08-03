@@ -62,7 +62,7 @@ public class LicencaComercialRepositoryImpl implements LicencaComercialRepositor
 
             if (filter.getAlvara() != null && !filter.getAlvara().isBlank()) {
                 predicates = cb.and(predicates,
-                        cb.equal(cb.lower(root.get("alvara")), filter.getAlvara().trim().toLowerCase()));
+                        cb.equal(root.get("alvara"), filter.getAlvara()));
             }
 
             if (filter.getIdEstabalecimento() != null) {

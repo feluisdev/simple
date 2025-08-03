@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class GetEstabelecimentosQuery implements Query {
 
+  @NotBlank(message = "The field <nome> is required")
+  private String nome;
   @NotBlank(message = "The field <gerente> is required")
   private String gerente;
   @NotBlank(message = "The field <estado> is required")

@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.licenciamento.application.dto.TipoAtividadeResponseDTO;
 import cv.igrp.simple.shared.application.dto.PageDTO;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 @Data
 @NoArgsConstructor
@@ -22,6 +24,6 @@ public class WrapperListaTipoAtividadeDTO extends PageDTO {
 
   
   @Valid
-  private TipoAtividadeResponseDTO content ;
+  private List<TipoAtividadeResponseDTO> content = new ArrayList<>();
 
 }

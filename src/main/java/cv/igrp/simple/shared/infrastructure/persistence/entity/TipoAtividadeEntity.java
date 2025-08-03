@@ -32,6 +32,10 @@ public class TipoAtividadeEntity extends AuditEntity {
     private UUID externalId;
 
   
+    @Column(name="nome")
+    private String nome;
+
+  
     @Column(name="codigo")
     private String codigo;
 

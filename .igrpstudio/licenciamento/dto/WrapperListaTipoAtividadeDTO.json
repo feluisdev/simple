@@ -20,7 +20,8 @@
       "isEmail": false,
       "isUrl": false,
       "primaryKey": false,
-      "module": "licenciamento"
+      "module": "licenciamento",
+      "collectionType": "list"
     }
   ],
   "id": "cmlohp62jm"

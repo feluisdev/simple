@@ -8,6 +8,7 @@ import lombok.Getter;
 @Builder
 public class EstabelecimentoFilter {
 
+    private String nome;
     private String gerente;
     private Estado estado;
     private Integer pageNumber;

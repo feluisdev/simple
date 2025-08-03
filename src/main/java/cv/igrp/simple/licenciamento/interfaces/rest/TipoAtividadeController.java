@@ -141,7 +141,7 @@ public class TipoAtividadeController {
   
   public ResponseEntity<WrapperListaTipoAtividadeDTO> getTiposAtividade(
     @RequestParam(value = "codigo", required = false) String codigo,
-    @RequestParam(value = "descricao", required = false) String descricao,
+    @RequestParam(value = "nome", required = false) String nome,
     @RequestParam(value = "estado", required = false) String estado,
     @RequestParam(value = "pagina") String pagina,
     @RequestParam(value = "tamanho") String tamanho)
@@ -149,7 +149,7 @@ public class TipoAtividadeController {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetTiposAtividadeQuery(codigo, descricao, estado, pagina, tamanho);
+      final var query = new GetTiposAtividadeQuery(codigo, nome, estado, pagina, tamanho);
 
       ResponseEntity<WrapperListaTipoAtividadeDTO> response = queryBus.handle(query);
 
@@ -254,7 +254,7 @@ public class TipoAtividadeController {
     }
   )
   
-  public ResponseEntity<String> desativarTipoAtividade(
+  public ResponseEntity<Map<String, ?>> desativarTipoAtividade(
     @PathVariable(value = "idTipoAtividade") String idTipoAtividade)
   {
 
@@ -262,7 +262,7 @@ public class TipoAtividadeController {
 
       final var command = new DesativarTipoAtividadeCommand(idTipoAtividade);
 
-       ResponseEntity<String> response = commandBus.send(command);
+       ResponseEntity<Map<String, ?>> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 

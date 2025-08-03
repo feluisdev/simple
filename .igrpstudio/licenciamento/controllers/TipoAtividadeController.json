@@ -93,7 +93,7 @@
         },
         {
           "type": "string",
-          "name": "descricao",
+          "name": "nome",
           "isRequired": false
         },
         {
@@ -192,7 +192,7 @@
               "schema": {
                 "type": "string",
                 "name": "data",
-                "collectionType": "none"
+                "collectionType": "map"
               }
             }
           }

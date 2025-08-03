@@ -15,8 +15,8 @@ public class GetTiposAtividadeQuery implements Query {
 
   @NotBlank(message = "The field <codigo> is required")
   private String codigo;
-  @NotBlank(message = "The field <descricao> is required")
-  private String descricao;
+  @NotBlank(message = "The field <nome> is required")
+  private String nome;
   @NotBlank(message = "The field <estado> is required")
   private String estado;
   @NotBlank(message = "The field <pagina> is required")

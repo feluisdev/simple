@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public class TipoAtividadeFilter {
 
+    private String nome;
     private String codigo;
-    private String descricao;
     private Estado estado;
     private Integer pageNumber;
     private Integer pageSize;

@@ -2,6 +2,9 @@ package cv.igrp.simple.licenciamento.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
+import cv.igrp.simple.licenciamento.domain.repository.EstabelecimentoRepository;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -14,14 +17,25 @@ public class AtivarEstabelecimentoCommandHandler implements CommandHandler<Ativa
 
    private static final Logger LOGGER = LoggerFactory.getLogger(AtivarEstabelecimentoCommandHandler.class);
 
-   public AtivarEstabelecimentoCommandHandler() {
+   private final EstabelecimentoRepository repository;
 
+   public AtivarEstabelecimentoCommandHandler(EstabelecimentoRepository repository) {
+
+       this.repository = repository;
    }
 
    @IgrpCommandHandler
    public ResponseEntity<Map<String, ?>> handle(AtivarEstabelecimentoCommand command) {
-      // TODO: Implement the command handling logic here
-      return null;
+      var id = Identificador.from(command.getIdEstabelecimento());
+
+      var estabelecimento = repository.findById(id)
+              .orElseThrow(() -> IgrpResponseStatusException.notFound("Estabelecimento não encontrado"));
+
+      estabelecimento.ativar(); // Atualiza estado no domínio
+
+      repository.save(estabelecimento); // Persiste
+
+      return ResponseEntity.ok(Map.of("message", "Estabelecimento ativado com sucesso"));
    }
 
 }

@@ -15,6 +15,7 @@ public class TipoAtividadeMapper {
         return TipoAtividade.reconstruir(
                 entity.getId(), // <-- agora passando o ID inteiro
                 Identificador.from(entity.getExternalId()),
+                entity.getNome(),
                 entity.getCodigo(),
                 entity.getDescricao(),
                 entity.getEstado()
@@ -26,6 +27,7 @@ public class TipoAtividadeMapper {
 
         var entity = new TipoAtividadeEntity();
         entity.setExternalId(tipoAtividade.getIdTipoAtividade().getValor());
+        entity.setNome(tipoAtividade.getNome());
         entity.setCodigo(tipoAtividade.getCodigo());
         entity.setDescricao(tipoAtividade.getDescricao());
         entity.setEstado(tipoAtividade.getEstado());
@@ -46,6 +48,7 @@ public class TipoAtividadeMapper {
 
         dto.setTipoAtividadeId(tipoAtividade.getIdTipoAtividade().getStringValor());
 
+        dto.setNome(tipoAtividade.getNome());
         dto.setCodigo(tipoAtividade.getCodigo());
         dto.setDescricao(tipoAtividade.getDescricao());
 

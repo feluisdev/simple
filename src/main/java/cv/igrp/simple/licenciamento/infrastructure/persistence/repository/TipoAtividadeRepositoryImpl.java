@@ -63,12 +63,12 @@ public class TipoAtividadeRepositoryImpl implements TipoAtividadeRepository {
 
             if (filter.getCodigo() != null && !filter.getCodigo().isBlank()) {
                 predicates = cb.and(predicates,
-                        cb.like(cb.lower(root.get("codigo")), "%" + filter.getCodigo().trim().toLowerCase() + "%"));
+                        cb.equal(root.get("codigo"), filter.getCodigo()));
             }
 
-            if (filter.getDescricao() != null && !filter.getDescricao().isBlank()) {
+            if (filter.getNome() != null && !filter.getNome().isBlank()) {
                 predicates = cb.and(predicates,
-                        cb.like(cb.lower(root.get("descricao")), "%" + filter.getDescricao().trim().toLowerCase() + "%"));
+                        cb.like(cb.lower(root.get("nome")), "%" + filter.getNome().trim().toLowerCase() + "%"));
             }
 
             if (filter.getEstado() != null) {

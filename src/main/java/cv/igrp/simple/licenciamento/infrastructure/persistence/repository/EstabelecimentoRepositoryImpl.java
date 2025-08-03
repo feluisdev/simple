@@ -59,6 +59,12 @@ public class EstabelecimentoRepositoryImpl implements EstabelecimentoRepository 
         Specification<EstabelecimentoEntity> spec = (root, query, cb) -> {
             var predicates = cb.conjunction();
 
+
+            if (filter.getNome() != null && !filter.getNome().isBlank()) {
+                predicates = cb.and(predicates,
+                        cb.equal(cb.lower(root.get("nome")), filter.getNome().trim().toLowerCase()));
+            }
+
             if (filter.getGerente() != null && !filter.getGerente().isBlank()) {
                 predicates = cb.and(predicates,
                         cb.equal(cb.lower(root.get("gerente")), filter.getGerente().trim().toLowerCase()));

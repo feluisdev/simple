@@ -1,5 +1,9 @@
 package cv.igrp.simple.licenciamento.application.queries;
 
+import cv.igrp.simple.licenciamento.domain.repository.TipoAtividadeRepository;
+import cv.igrp.simple.licenciamento.infrastructure.mappers.TipoAtividadeMapper;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
@@ -16,14 +20,25 @@ public class GetTipoAtividadeByIdQueryHandler implements QueryHandler<GetTipoAti
   private static final Logger LOGGER = LoggerFactory.getLogger(GetTipoAtividadeByIdQueryHandler.class);
 
 
-  public GetTipoAtividadeByIdQueryHandler() {
+  private final TipoAtividadeRepository repository;
+  private final TipoAtividadeMapper mapper;
 
+
+  public GetTipoAtividadeByIdQueryHandler(TipoAtividadeRepository repository, TipoAtividadeMapper mapper) {
+
+      this.repository = repository;
+      this.mapper = mapper;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<TipoAtividadeResponseDTO> handle(GetTipoAtividadeByIdQuery query) {
-    // TODO: Implement the query handling logic here
-    return null;
+     var id = Identificador.from(query.getIdTipoAtividade());
+
+     var tipoAtividade = repository.findById(id)
+             .orElseThrow(() -> IgrpResponseStatusException.notFound("Tipo de atividade não encontrado"));
+
+     var dto = mapper.toDTO(tipoAtividade);
+     return ResponseEntity.ok(dto);
   }
 
 }

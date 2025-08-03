@@ -2,6 +2,9 @@ package cv.igrp.simple.licenciamento.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
+import cv.igrp.simple.licenciamento.domain.repository.ClasseRepository;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -14,14 +17,25 @@ public class DesativarClasseCommandHandler implements CommandHandler<DesativarCl
 
    private static final Logger LOGGER = LoggerFactory.getLogger(DesativarClasseCommandHandler.class);
 
-   public DesativarClasseCommandHandler() {
+   private final ClasseRepository repository;
 
+   public DesativarClasseCommandHandler(ClasseRepository repository) {
+
+       this.repository = repository;
    }
 
    @IgrpCommandHandler
    public ResponseEntity<Map<String, ?>> handle(DesativarClasseCommand command) {
-      // TODO: Implement the command handling logic here
-      return null;
+      var id = Identificador.from(command.getIdClasse());
+
+      var classe = repository.findById(id)
+              .orElseThrow(() -> IgrpResponseStatusException.notFound("Classe não encontrada"));
+
+      classe.desativar(); // Atualiza estado para ATIVO no domínio
+
+      repository.save(classe); // Persiste alteração
+
+      return ResponseEntity.ok(Map.of("message", "Classe desativada com sucesso"));
    }
 
 }

@@ -24,6 +24,9 @@ public class TipoAtividadeResponseDTO  {
   private String tipoAtividadeId ;
   
   
+  private String nome ;
+  
+  
   private String codigo ;
   
   

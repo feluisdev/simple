@@ -1,5 +1,9 @@
 package cv.igrp.simple.licenciamento.application.queries;
 
+import cv.igrp.simple.licenciamento.domain.repository.ClasseRepository;
+import cv.igrp.simple.licenciamento.infrastructure.mappers.ClasseMapper;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
@@ -15,15 +19,25 @@ public class GetClasseByIdQueryHandler implements QueryHandler<GetClasseByIdQuer
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GetClasseByIdQueryHandler.class);
 
+  private final ClasseRepository classeRepository;
+  private final ClasseMapper classeMapper;
 
-  public GetClasseByIdQueryHandler() {
+  public GetClasseByIdQueryHandler(ClasseRepository classeRepository, ClasseMapper classeMapper) {
 
+      this.classeRepository = classeRepository;
+      this.classeMapper = classeMapper;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<ClasseResponseDTO> handle(GetClasseByIdQuery query) {
-    // TODO: Implement the query handling logic here
-    return null;
+     var id = Identificador.from(query.getIdClasse());
+
+     var classe = classeRepository.findById(id)
+             .orElseThrow(() -> IgrpResponseStatusException.notFound("Classe não encontrada: " + query.getIdClasse()));
+
+     var dto = classeMapper.toDTO(classe);
+
+     return ResponseEntity.ok(dto);
   }
 
 }

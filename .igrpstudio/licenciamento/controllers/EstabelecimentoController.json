@@ -55,6 +55,11 @@
       "requestParams": [
         {
           "type": "string",
+          "name": "nome",
+          "isRequired": false
+        },
+        {
+          "type": "string",
           "name": "gerente",
           "isRequired": false
         },
