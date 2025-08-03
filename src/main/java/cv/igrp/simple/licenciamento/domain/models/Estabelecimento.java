@@ -4,11 +4,16 @@ import cv.igrp.simple.shared.application.constants.Estado;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 @Getter
 public class Estabelecimento {
 
-    private final Integer id;               // novo campo id da base, pode ser null se ainda não persistido
+    private final Integer id;
     private final Identificador idEstabelecimento;
+
     private String gerente;
     private String descricao;
     private boolean flagVistoria;
@@ -18,6 +23,9 @@ public class Estabelecimento {
     private String email;
     private String nif;
     private Estado estado;
+
+    private TipoAtividade tipoAtividade;
+    private Set<Classe> classes;
 
     private Estabelecimento(
             Integer id,
@@ -30,7 +38,9 @@ public class Estabelecimento {
             String telefone,
             String email,
             String nif,
-            Estado estado
+            Estado estado,
+            TipoAtividade tipoAtividade,
+            Set<Classe> classes
     ) {
         this.id = id;
         this.idEstabelecimento = idEstabelecimento;
@@ -43,6 +53,8 @@ public class Estabelecimento {
         this.email = email;
         this.nif = nif;
         this.estado = estado;
+        this.tipoAtividade = tipoAtividade;
+        this.classes = classes != null ? new HashSet<>(classes) : new HashSet<>();
     }
 
     public static Estabelecimento criarNovo(
@@ -53,7 +65,8 @@ public class Estabelecimento {
             String endereco,
             String telefone,
             String email,
-            String nif
+            String nif,
+            TipoAtividade tipoAtividade
     ) {
         return new Estabelecimento(
                 null,
@@ -66,7 +79,9 @@ public class Estabelecimento {
                 telefone,
                 email,
                 nif,
-                Estado.ATIVO
+                Estado.ATIVO,
+                tipoAtividade,
+                new HashSet<>()
         );
     }
 
@@ -81,7 +96,9 @@ public class Estabelecimento {
             String telefone,
             String email,
             String nif,
-            Estado estado
+            Estado estado,
+            TipoAtividade tipoAtividade,
+            Set<Classe> classes
     ) {
         return new Estabelecimento(
                 id,
@@ -94,7 +111,9 @@ public class Estabelecimento {
                 telefone,
                 email,
                 nif,
-                estado
+                estado,
+                tipoAtividade,
+                classes
         );
     }
 
@@ -106,7 +125,8 @@ public class Estabelecimento {
             String endereco,
             String telefone,
             String email,
-            String nif
+            String nif,
+            TipoAtividade tipoAtividade
     ) {
         this.gerente = gerente;
         this.descricao = descricao;
@@ -116,6 +136,20 @@ public class Estabelecimento {
         this.telefone = telefone;
         this.email = email;
         this.nif = nif;
+        this.tipoAtividade = tipoAtividade;
+    }
+
+
+    // Método para adicionar classe
+    public void adicionarClasse(Classe classe) {
+        Objects.requireNonNull(classe, "Classe não pode ser nula");
+        this.classes.add(classe);
+    }
+
+    // Método para remover classe
+    public void removerClasse(Classe classe) {
+        Objects.requireNonNull(classe, "Classe não pode ser nula");
+        this.classes.remove(classe);
     }
 
     public void ativar() {

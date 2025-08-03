@@ -1,19 +1,42 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
+import cv.igrp.simple.licenciamento.domain.models.Classe;
 import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
+import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
+import cv.igrp.simple.shared.infrastructure.persistence.entity.ClasseEntity;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.EstabelecimentoEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class EstabelecimentoMapper {
 
+    private final TipoAtividadeMapper tipoAtividadeMapper;
+    private final ClasseMapper classeMapper;
+
+    public EstabelecimentoMapper(TipoAtividadeMapper tipoAtividadeMapper, ClasseMapper classeMapper) {
+        this.tipoAtividadeMapper = tipoAtividadeMapper;
+        this.classeMapper = classeMapper;
+    }
     public Estabelecimento toDomain(EstabelecimentoEntity entity) {
         if (entity == null) return null;
 
+        TipoAtividade tipoAtividadeDomain = tipoAtividadeMapper.toDomain(entity.getIdTipoAtividade());
+
+        Set<Classe> classesDomain = Collections.emptySet();
+        if (entity.getClasses() != null) {
+            classesDomain = entity.getClasses().stream()
+                    .map(classeMapper::toDomain)
+                    .collect(Collectors.toSet());
+        }
+
         return Estabelecimento.reconstruir(
-                entity.getId(), // id Integer
-                Identificador.from(entity.getExternalId()), // idEstabelecimento Identificador
+                entity.getId(),
+                Identificador.from(entity.getExternalId()),
                 entity.getGerente(),
                 entity.getDescricao(),
                 entity.isFlagVistoria(),
@@ -22,7 +45,9 @@ public class EstabelecimentoMapper {
                 entity.getTelefone(),
                 entity.getEmail(),
                 entity.getNif(),
-                entity.getEstado()
+                entity.getEstado(),
+                tipoAtividadeDomain,
+                classesDomain
         );
     }
 
@@ -45,6 +70,19 @@ public class EstabelecimentoMapper {
         entity.setEmail(estabelecimento.getEmail());
         entity.setNif(estabelecimento.getNif());
         entity.setEstado(estabelecimento.getEstado());
+
+        // Mapear TipoAtividade para entidade
+        entity.setIdTipoAtividade(tipoAtividadeMapper.toEntity(estabelecimento.getTipoAtividade()));
+
+        // Mapear classes para entidade (Set<ClasseEntity>)
+        if (estabelecimento.getClasses() != null) {
+            Set<ClasseEntity> classesEntity = estabelecimento.getClasses().stream()
+                    .map(classeMapper::toEntity)
+                    .collect(Collectors.toSet());
+            entity.setClasses(classesEntity);
+        } else {
+            entity.setClasses(Collections.emptySet());
+        }
 
         return entity;
     }
