@@ -24,6 +24,7 @@ public class Classe {
     }
 
     public static Classe criarNovo(String classe, String descricao) {
+        Objects.requireNonNull(classe, "Classe não pode ser nula");
         return new Classe(null, Identificador.gerarNovo(), classe, descricao, Estado.ATIVO);
     }
 

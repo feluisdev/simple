@@ -62,6 +62,7 @@ public class LicencaComercial {
             LocalTime horarioInicioFuncionamento,
             LocalTime horarioFimFuncionamento,
             String designacao,
+            EstadoLicenca estadoLicenca,
             Utente utente,
             Estabelecimento estabelecimento
     ) {
@@ -75,7 +76,7 @@ public class LicencaComercial {
                 horarioInicioFuncionamento,
                 horarioFimFuncionamento,
                 designacao,
-                EstadoLicenca.A,
+                estadoLicenca,
                 utente,
                 estabelecimento
         );
@@ -119,6 +120,7 @@ public class LicencaComercial {
             LocalTime horarioInicioFuncionamento,
             LocalTime horarioFimFuncionamento,
             String designacao,
+            EstadoLicenca estado,
             Utente utente,
             Estabelecimento estabelecimento
     ) {
