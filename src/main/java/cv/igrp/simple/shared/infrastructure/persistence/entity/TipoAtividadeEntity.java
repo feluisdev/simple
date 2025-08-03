@@ -8,6 +8,7 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import java.util.UUID;
 import cv.igrp.simple.shared.application.constants.Estado;
 import java.util.List;
 
@@ -25,6 +26,10 @@ public class TipoAtividadeEntity extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
+
+  
+    @Column(name="externalid")
+    private UUID externalId;
 
   
     @Column(name="codigo")

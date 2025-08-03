@@ -31,9 +31,9 @@ public class LicencaComercialEntity extends AuditEntity {
     private Integer id;
 
   
-    @NotNull(message = "externalID is mandatory")
+    @NotNull(message = "externalId is mandatory")
     @Column(name="externalid", nullable = false)
-    private UUID externalID;
+    private UUID externalId;
 
   
     @Column(name="alvara", unique = true)
