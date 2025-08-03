@@ -1,5 +1,6 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
+import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseDTO;
 import cv.igrp.simple.licenciamento.domain.models.Classe;
 import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
 import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
@@ -37,6 +38,7 @@ public class EstabelecimentoMapper {
         return Estabelecimento.reconstruir(
                 entity.getId(),
                 Identificador.from(entity.getExternalId()),
+                entity.getNome(),
                 entity.getGerente(),
                 entity.getDescricao(),
                 entity.isFlagVistoria(),
@@ -61,6 +63,7 @@ public class EstabelecimentoMapper {
         }
 
         entity.setExternalId(estabelecimento.getIdEstabelecimento().getValor());
+        entity.setNome(estabelecimento.getNome());
         entity.setGerente(estabelecimento.getGerente());
         entity.setDescricao(estabelecimento.getDescricao());
         entity.setFlagVistoria(estabelecimento.isFlagVistoria());
@@ -85,5 +88,44 @@ public class EstabelecimentoMapper {
         }
 
         return entity;
+    }
+
+
+    public EstabelecimentoResponseDTO toDTO(Estabelecimento estabelecimento) {
+        if (estabelecimento == null) return null;
+
+        EstabelecimentoResponseDTO dto = new EstabelecimentoResponseDTO();
+
+        // Aqui 'nome' não está no domínio, então pode ficar vazio ou mapear outro campo
+        dto.setNome(estabelecimento.getNome() != null ? estabelecimento.getNome() : "");
+        dto.setGerente(estabelecimento.getGerente());
+        dto.setDescricao(estabelecimento.getDescricao());
+        dto.setEndereco(estabelecimento.getEndereco());
+        dto.setTelefone(estabelecimento.getTelefone());
+        dto.setEmail(estabelecimento.getEmail());
+        dto.setNif(estabelecimento.getNif());
+        dto.setFlagVistoria(estabelecimento.isFlagVistoria());
+        dto.setLicRetalho(estabelecimento.isLicRetalho());
+
+        // TipoAtividadeId como string, se tipoAtividade não for nulo
+        dto.setTipoAtividadeId(
+                estabelecimento.getTipoAtividade() != null
+                        ? estabelecimento.getTipoAtividade().getIdTipoAtividade().getStringValor()
+                        : null
+        );
+
+        // Lista de IDs das classes
+        if (estabelecimento.getClasses() != null) {
+            dto.setClassesId(
+                    estabelecimento.getClasses().stream()
+                            .map(c -> c.getIdClasse().getStringValor())
+                            .collect(Collectors.toList())
+            );
+        }
+
+        dto.setEstado(estabelecimento.getEstado() != null ? estabelecimento.getEstado().name() : "");
+        dto.setEstadoDesc(estabelecimento.getEstado() != null ? estabelecimento.getEstado().getDescription() : "");
+
+        return dto;
     }
 }

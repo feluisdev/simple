@@ -14,6 +14,7 @@ public class Estabelecimento {
     private final Integer id;
     private final Identificador idEstabelecimento;
 
+    private String nome;
     private String gerente;
     private String descricao;
     private boolean flagVistoria;
@@ -30,6 +31,7 @@ public class Estabelecimento {
     private Estabelecimento(
             Integer id,
             Identificador idEstabelecimento,
+            String nome,
             String gerente,
             String descricao,
             boolean flagVistoria,
@@ -44,6 +46,7 @@ public class Estabelecimento {
     ) {
         this.id = id;
         this.idEstabelecimento = idEstabelecimento;
+        this.nome = nome;
         this.gerente = gerente;
         this.descricao = descricao;
         this.flagVistoria = flagVistoria;
@@ -58,6 +61,7 @@ public class Estabelecimento {
     }
 
     public static Estabelecimento criarNovo(
+            String nome,
             String gerente,
             String descricao,
             boolean flagVistoria,
@@ -71,6 +75,7 @@ public class Estabelecimento {
         return new Estabelecimento(
                 null,
                 Identificador.gerarNovo(),
+                nome,
                 gerente,
                 descricao,
                 flagVistoria,
@@ -88,6 +93,7 @@ public class Estabelecimento {
     public static Estabelecimento reconstruir(
             Integer id,
             Identificador idEstabelecimento,
+            String nome,
             String gerente,
             String descricao,
             boolean flagVistoria,
@@ -103,6 +109,7 @@ public class Estabelecimento {
         return new Estabelecimento(
                 id,
                 idEstabelecimento,
+                nome,
                 gerente,
                 descricao,
                 flagVistoria,
@@ -118,6 +125,7 @@ public class Estabelecimento {
     }
 
     public void atualizar(
+            String nome,
             String gerente,
             String descricao,
             boolean flagVistoria,
@@ -126,8 +134,10 @@ public class Estabelecimento {
             String telefone,
             String email,
             String nif,
-            TipoAtividade tipoAtividade
+            TipoAtividade tipoAtividade,
+            Set<Classe> novasClasses
     ) {
+        this.nome = nome;
         this.gerente = gerente;
         this.descricao = descricao;
         this.flagVistoria = flagVistoria;
@@ -137,7 +147,32 @@ public class Estabelecimento {
         this.email = email;
         this.nif = nif;
         this.tipoAtividade = tipoAtividade;
+
+        atualizarClasses(novasClasses);
     }
+
+    public void atualizarClasses(Set<Classe> novasClasses) {
+        if (novasClasses == null) {
+            this.classes.clear();
+            return;
+        }
+
+        // Remover as classes que não existem mais no conjunto novo, comparando pelo identificador
+        this.classes.removeIf(cAtual ->
+                novasClasses.stream()
+                        .noneMatch(cNova -> cNova.getIdClasse().equals(cAtual.getIdClasse()))
+        );
+
+        // Adicionar as novas classes que ainda não existem, comparando pelo identificador
+        for (Classe cNova : novasClasses) {
+            boolean existe = this.classes.stream()
+                    .anyMatch(cAtual -> cAtual.getIdClasse().equals(cNova.getIdClasse()));
+            if (!existe) {
+                this.classes.add(cNova);
+            }
+        }
+    }
+
 
 
     // Método para adicionar classe

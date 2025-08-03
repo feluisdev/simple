@@ -35,6 +35,10 @@ public class EstabelecimentoEntity extends AuditEntity {
     private UUID externalId;
 
   
+    @Column(name="nome")
+    private String nome;
+
+  
     @Column(name="gerente")
     private String gerente;
 

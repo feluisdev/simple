@@ -1,5 +1,6 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
+import cv.igrp.simple.licenciamento.application.dto.ClasseResponseDTO;
 import cv.igrp.simple.licenciamento.domain.models.Classe;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.ClasseEntity;
@@ -36,5 +37,20 @@ public class ClasseMapper {
         entity.setEstado(classe.getEstado());
 
         return entity;
+    }
+
+    public ClasseResponseDTO toDTO(Classe classe) {
+        if (classe == null) {
+            return null;
+        }
+
+        var dto = new ClasseResponseDTO();
+        dto.setClasseId(classe.getIdClasse().getStringValor());
+        dto.setCodigo(classe.getClasse());
+        dto.setDescricao(classe.getDescricao());
+        dto.setEstado(classe.getEstado() != null ? classe.getEstado().name() : "");
+        dto.setEstadoDesc(classe.getEstado() != null ? classe.getEstado().getDescription() : "");
+
+        return dto;
     }
 }
