@@ -15,4 +15,6 @@ public interface EstabelecimentoEntityRepository extends
     RevisionRepository<EstabelecimentoEntity, Integer, Integer>
 {
 
+    Optional<EstabelecimentoEntity> findByExternalId(UUID externalId);
+
 }

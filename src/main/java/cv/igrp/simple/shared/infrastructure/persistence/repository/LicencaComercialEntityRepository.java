@@ -18,4 +18,5 @@ public interface LicencaComercialEntityRepository extends
     JpaSpecificationExecutor<LicencaComercialEntity>
 {
 
+    Optional<LicencaComercialEntity> findByExternalId(UUID externalId);
 }

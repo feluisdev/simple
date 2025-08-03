@@ -25,6 +25,7 @@ public class TipoAtividadeRepositoryImpl implements TipoAtividadeRepository {
     private final TipoAtividadeEntityRepository tipoAtividadeEntityRepository;
     private final TipoAtividadeMapper tipoAtividadeMapper;
 
+    @Transactional
     @Override
     public TipoAtividade save(TipoAtividade tipoAtividade) {
         var entity = tipoAtividadeMapper.toEntity(tipoAtividade);

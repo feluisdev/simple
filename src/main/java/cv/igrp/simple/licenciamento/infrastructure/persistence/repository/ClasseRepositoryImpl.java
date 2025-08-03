@@ -24,6 +24,7 @@ public class ClasseRepositoryImpl implements ClasseRepository {
     private final ClasseEntityRepository classeEntityRepository;
     private final ClasseMapper classeMapper;
 
+    @Transactional
     @Override
     public Classe save(Classe classe) {
         var entity = classeMapper.toEntity(classe);
