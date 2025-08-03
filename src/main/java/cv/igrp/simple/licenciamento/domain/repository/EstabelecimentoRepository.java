@@ -1,4 +1,4 @@
 package cv.igrp.simple.licenciamento.domain.repository;
 
-public interface TipoAtividadaRepository {
+public interface EstabelecimentoRepository {
 }
