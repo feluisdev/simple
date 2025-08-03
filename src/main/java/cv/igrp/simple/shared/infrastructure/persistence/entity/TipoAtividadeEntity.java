@@ -8,9 +8,8 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
-import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
-import java.util.Set;
+import java.util.List;
 
 @Audited
 @Getter
@@ -19,8 +18,8 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cml_classe")
-public class ClasseEntity extends AuditEntity {
+@Table(name = "cml_atividade")
+public class TipoAtividadeEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +27,20 @@ public class ClasseEntity extends AuditEntity {
     private Integer id;
 
   
-    @NotNull(message = "externalId is mandatory")
-    @Column(name="externalid", nullable = false)
+    @Column(name="externalid")
     private UUID externalId;
 
   
-    @Column(name="classe")
-    private String classe;
+    @Column(name="codigo")
+    private String codigo;
 
   
     @Column(name="descricao")
     private String descricao;
 
-     @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
-private Set<TipoEstabelecimentoEntity> tipoestabelecimentos;
+  
 
 
+  @OneToMany(mappedBy = "idTpAtividade", fetch = FetchType.LAZY)
+private List<TipoEstabelecimentoEntity> tipoatividades;
 }

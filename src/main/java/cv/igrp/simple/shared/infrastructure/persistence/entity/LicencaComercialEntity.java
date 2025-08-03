@@ -11,14 +11,12 @@ import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import java.time.LocalDate;
-import java.math.BigDecimal;
 import cv.igrp.simple.shared.application.constants.Estado;
 import java.util.List;
 
 @Audited
 @Getter
 @Setter
-@ToString
 @IgrpEntity
 @Entity
 @NoArgsConstructor
@@ -37,77 +35,24 @@ public class LicencaComercialEntity extends AuditEntity {
     private UUID externalID;
 
   
-    @Column(name="numero")
-    private String numero;
-
-  
     @Column(name="nome")
     private String nome;
-
-  
-    @Column(name="cartao")
-    private String cartao;
-
-  
-    @Column(name="especialidade")
-    private String especialidade;
-
-  
-    @Column(name="data_licenca")
-    private LocalDate dataLicenca;
 
   
     @Column(name="alvara")
     private String alvara;
 
   
-    @Column(name="pagamento")
-    private BigDecimal pagamento;
+    @Column(name="data_inicio_licenca")
+    private LocalDate dataInicioLicenca;
 
   
-    @Column(name="localidade")
-    private String localidade;
+    @Column(name="data_fim_licenca")
+    private String dataFimLicenca;
 
   
-    @Enumerated(EnumType.STRING)
-    @Column(name="estado")
-    private Estado estado;
-
-  
-    @Column(name="abrangencia")
-    private String abrangencia;
-
-  
-    @Column(name="dt_fim_lic")
-    private String dtFimLic;
-
-  
-    @Column(name="tp_hor_func")
-    private Integer tpHorFunc;
-
-  
-    @Column(name="dt_renovacao")
-    private LocalDate dtRenovacao;
-
-  
-    @Column(name="data_lic_horario")
-    private LocalDate dataLicHorario;
-
-  
-    @Column(name="dt_fim_horario")
-    private LocalDate dtFimHorario;
-
-  
-    @Column(name="designacao")
-    private String designacao;
-
-  
-    @Column(name="selo")
-    private BigDecimal selo;
-
-  
-    @Column(name="taxa")
-    private BigDecimal taxa;
+    @Column(name="data_renovacao_licenca")
+    private LocalDate dataRenovacaoLicenca;
 
   
     @Column(name="morada")
@@ -124,6 +69,15 @@ public class LicencaComercialEntity extends AuditEntity {
   
     @Column(name="nif")
     private String nif;
+
+  
+    @Column(name="designacao")
+    private String designacao;
+
+  
+    @Enumerated(EnumType.STRING)
+    @Column(name="estado")
+    private Estado estado;
 
   
 

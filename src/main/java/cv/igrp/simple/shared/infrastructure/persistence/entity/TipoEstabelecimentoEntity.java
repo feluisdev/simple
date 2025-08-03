@@ -8,15 +8,14 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
-import jakarta.validation.constraints.NotBlank;
-import java.math.BigDecimal;
+import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
 import java.util.List;
 import java.util.Set;
 
 @Audited
 @Getter
 @Setter
-@ToString
 @IgrpEntity
 @Entity
 @NoArgsConstructor
@@ -30,9 +29,9 @@ public class TipoEstabelecimentoEntity extends AuditEntity {
     private Integer id;
 
   
-    @NotBlank(message = "externalId is mandatory")
+    @NotNull(message = "externalId is mandatory")
     @Column(name="externalid", nullable = false)
-    private String externalId;
+    private UUID externalId;
 
   
     @Column(name="codigo")
@@ -43,58 +42,18 @@ public class TipoEstabelecimentoEntity extends AuditEntity {
     private String descricao;
 
   
-    @Column(name="tipo_atividade")
-    private String tipoAtividade;
-
-  
-    @Column(name="taxa_recolha_lixo")
-    private BigDecimal taxaRecolhaLixo;
-
-  
-    @Column(name="tarifa_minima")
-    private BigDecimal tarifaMinima;
-
-  
-    @Column(name="frequencia")
-    private Integer frequencia;
-
-  
-    @Column(name="num_contentores")
-    private Integer numContentores;
-
-  
     @Column(name="flag_vistoria")
     private Integer flagVistoria;
-
-  
-    @Column(name="categoria")
-    private String categoria;
 
   
     @Column(name="licretalho")
     private boolean licRetalho;
 
   
-    @Column(name="horario_encerramento")
-    private String horarioEncerramento;
-
-  
-    @Column(name="horario_funcionamento")
-    private String horarioFuncionamento;
-
-  
 
 
   @OneToMany(mappedBy = "tpEstabelecimentoId", fetch = FetchType.LAZY)
 private List<LicencaComercialEntity> licencascomercias;
-    @Column(name="taxa_fixa")
-    private BigDecimal taxaFixa;
-
-  
-    @Column(name="taxa_quarto")
-    private BigDecimal taxaQuarto;
-
-  
 
 
   
@@ -104,5 +63,9 @@ private List<LicencaComercialEntity> licencascomercias;
             joinColumns = @JoinColumn(name = "tipoestabelecimento_id"),
             inverseJoinColumns = @JoinColumn(name = "classe_id")
     )
-private Set<ClasseEntity> classes;
+private Set<ClasseEntity> classes;   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_tp_atividade")
+   private TipoAtividadeEntity idTpAtividade;
+
+
 }
