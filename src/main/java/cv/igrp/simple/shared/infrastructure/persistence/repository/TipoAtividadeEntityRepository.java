@@ -15,4 +15,7 @@ public interface TipoAtividadeEntityRepository extends
     RevisionRepository<TipoAtividadeEntity, Integer, Integer>
 {
 
+    Optional<TipoAtividadeEntity> findByExternalId(UUID externalId);
+
+
 }
