@@ -1,12 +1,46 @@
 {
   "type": "controller",
-  "name": "Classe",
+  "name": "TipoAtividade",
   "module": "licenciamento",
-  "description": "gestao de classes",
-  "basePath": "api/v1/classes",
+  "description": "gestao tipo Atividade",
+  "basePath": "api/v1/tipos-atividade",
   "actions": [
     {
-      "actionName": "getClasses",
+      "actionName": "createTipoAtividade",
+      "method": "POST",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "TipoAtividadeRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "TipoAtividadeResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "actionName": "getTipoAtividadeById",
+      "path": "{idTipoAtividade}",
       "method": "GET",
       "responses": {
         "200": {
@@ -14,7 +48,34 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "WrapperListaClasse",
+                "type": "TipoAtividadeResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idTipoAtividade",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getTiposAtividade",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListaTipoAtividade",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -27,7 +88,7 @@
       "requestParams": [
         {
           "type": "string",
-          "name": "classe",
+          "name": "codigo",
           "isRequired": false
         },
         {
@@ -38,54 +99,24 @@
         {
           "type": "string",
           "name": "pagina",
-          "value": "0",
           "isRequired": true
         },
         {
           "type": "string",
           "name": "tamanho",
-          "value": "20",
           "isRequired": true
         }
       ]
     },
     {
-      "actionName": "getClasseById",
-      "path": "{idClasse}",
-      "method": "GET",
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "ClasseResponse",
-                "objectType": "dto",
-                "name": "data",
-                "collectionType": "none",
-                "module": "licenciamento"
-              }
-            }
-          }
-        }
-      },
-      "pathVariables": [
-        {
-          "name": "idClasse",
-          "type": "string",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "actionName": "updateClasse",
-      "path": "{classeId}",
+      "actionName": "updateTipoAtividade",
+      "path": "{idTipoAtividade}",
       "method": "PUT",
       "requestBody": {
         "content": {
           "application/json": {
             "schema": {
-              "type": "ClasseRequest",
+              "type": "TipoAtividadeRequest",
               "collectionType": "none",
               "name": "data",
               "objectType": "dto",
@@ -100,7 +131,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "ClasseResponse",
+                "type": "TipoAtividadeResponse",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -112,48 +143,15 @@
       },
       "pathVariables": [
         {
-          "name": "classeId",
+          "name": "idTipoAtividade",
           "type": "string",
           "isRequired": true
         }
       ]
     },
     {
-      "actionName": "createClasse",
-      "method": "POST",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "ClasseRequest",
-              "collectionType": "none",
-              "name": "data",
-              "objectType": "dto",
-              "module": "licenciamento"
-            }
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "ClasseResponse",
-                "objectType": "dto",
-                "name": "data",
-                "collectionType": "none",
-                "module": "licenciamento"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "actionName": "ativarClasse",
-      "path": "{idClasse}/ativar",
+      "actionName": "ativarTipoAtividade",
+      "path": "{idTipoAtividade}/ativar",
       "method": "PATCH",
       "responses": {
         "200": {
@@ -171,15 +169,15 @@
       },
       "pathVariables": [
         {
-          "name": "idClasse",
+          "name": "idTipoAtividade",
           "type": "string",
           "isRequired": true
         }
       ]
     },
     {
-      "actionName": "desativarClasse",
-      "path": "{idClasse}/desativar",
+      "actionName": "desativarTipoAtividade",
+      "path": "{idTipoAtividade}/desativar",
       "method": "PATCH",
       "responses": {
         "200": {
@@ -189,7 +187,7 @@
               "schema": {
                 "type": "string",
                 "name": "data",
-                "collectionType": "map"
+                "collectionType": "none"
               }
             }
           }
@@ -197,12 +195,12 @@
       },
       "pathVariables": [
         {
-          "name": "idClasse",
+          "name": "idTipoAtividade",
           "type": "string",
           "isRequired": true
         }
       ]
     }
   ],
-  "id": "h60rz0zsri-CONTROLLER"
+  "id": "nyyw8ki5z3-CONTROLLER"
 }

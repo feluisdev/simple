@@ -22,36 +22,36 @@ import cv.igrp.simple.licenciamento.application.commands.*;
 import cv.igrp.simple.licenciamento.application.queries.*;
 
 
-import cv.igrp.simple.licenciamento.application.dto.WrapperListaClasseDTO;
-import cv.igrp.simple.licenciamento.application.dto.ClasseResponseDTO;
-import cv.igrp.simple.licenciamento.application.dto.ClasseRequestDTO;
+import cv.igrp.simple.licenciamento.application.dto.TipoAtividadeRequestDTO;
+import cv.igrp.simple.licenciamento.application.dto.TipoAtividadeResponseDTO;
+import cv.igrp.simple.licenciamento.application.dto.WrapperListaTipoAtividadeDTO;
 import java.util.Map;
 
 @IgrpController
 @RestController
-@RequestMapping(path = "api/v1/classes")
-@Tag(name = "Classe", description = "gestao de classes")
-public class ClasseController {
+@RequestMapping(path = "api/v1/tipos-atividade")
+@Tag(name = "TipoAtividade", description = "gestao tipo Atividade")
+public class TipoAtividadeController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ClasseController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TipoAtividadeController.class);
 
   
   private final CommandBus commandBus;
   private final QueryBus queryBus;
 
   
-  public ClasseController(
+  public TipoAtividadeController(
     CommandBus commandBus, QueryBus queryBus
   ) {
     this.commandBus = commandBus;
     this.queryBus = queryBus;
   }
 
-  @GetMapping(
+  @PostMapping(
   )
   @Operation(
-    summary = "GET method to handle operations for getClasses",
-    description = "GET method to handle operations for getClasses",
+    summary = "POST method to handle operations for createTipoAtividade",
+    description = "POST method to handle operations for createTipoAtividade",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -59,25 +59,59 @@ public class ClasseController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = WrapperListaClasseDTO.class,
+                  implementation = TipoAtividadeResponseDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<WrapperListaClasseDTO> getClasses(
-    @RequestParam(value = "classe", required = false) String classe,
-    @RequestParam(value = "descricao", required = false) String descricao,
-    @RequestParam(value = "pagina", defaultValue = "0") String pagina,
-    @RequestParam(value = "tamanho", defaultValue = "20") String tamanho)
+  public ResponseEntity<TipoAtividadeResponseDTO> createTipoAtividade(@Valid @RequestBody TipoAtividadeRequestDTO createTipoAtividadeRequest
+    )
   {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetClassesQuery(classe, descricao, pagina, tamanho);
+      final var command = new CreateTipoAtividadeCommand(createTipoAtividadeRequest);
 
-      ResponseEntity<WrapperListaClasseDTO> response = queryBus.handle(query);
+       ResponseEntity<TipoAtividadeResponseDTO> response = commandBus.send(command);
+
+       LOGGER.debug("Operation finished");
+
+        return ResponseEntity.status(response.getStatusCode())
+              .headers(response.getHeaders())
+              .body(response.getBody());
+  }
+
+  @GetMapping(
+    value = "{idTipoAtividade}"
+  )
+  @Operation(
+    summary = "GET method to handle operations for getTipoAtividadeById",
+    description = "GET method to handle operations for getTipoAtividadeById",
+    responses = {
+      @ApiResponse(
+          responseCode = "200",
+          description = "",
+          content = @Content(
+              mediaType = "application/json",
+              schema = @Schema(
+                  implementation = TipoAtividadeResponseDTO.class,
+                  type = "object")
+          )
+      )
+    }
+  )
+  
+  public ResponseEntity<TipoAtividadeResponseDTO> getTipoAtividadeById(
+    @PathVariable(value = "idTipoAtividade") String idTipoAtividade)
+  {
+
+      LOGGER.debug("Operation started");
+
+      final var query = new GetTipoAtividadeByIdQuery(idTipoAtividade);
+
+      ResponseEntity<TipoAtividadeResponseDTO> response = queryBus.handle(query);
 
       LOGGER.debug("Operation finished");
 
@@ -87,11 +121,10 @@ public class ClasseController {
   }
 
   @GetMapping(
-    value = "{idClasse}"
   )
   @Operation(
-    summary = "GET method to handle operations for getClasseById",
-    description = "GET method to handle operations for getClasseById",
+    summary = "GET method to handle operations for getTiposAtividade",
+    description = "GET method to handle operations for getTiposAtividade",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -99,22 +132,25 @@ public class ClasseController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = ClasseResponseDTO.class,
+                  implementation = WrapperListaTipoAtividadeDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<ClasseResponseDTO> getClasseById(
-    @PathVariable(value = "idClasse") String idClasse)
+  public ResponseEntity<WrapperListaTipoAtividadeDTO> getTiposAtividade(
+    @RequestParam(value = "codigo", required = false) String codigo,
+    @RequestParam(value = "descricao", required = false) String descricao,
+    @RequestParam(value = "pagina") String pagina,
+    @RequestParam(value = "tamanho") String tamanho)
   {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetClasseByIdQuery(idClasse);
+      final var query = new GetTiposAtividadeQuery(codigo, descricao, pagina, tamanho);
 
-      ResponseEntity<ClasseResponseDTO> response = queryBus.handle(query);
+      ResponseEntity<WrapperListaTipoAtividadeDTO> response = queryBus.handle(query);
 
       LOGGER.debug("Operation finished");
 
@@ -124,11 +160,11 @@ public class ClasseController {
   }
 
   @PutMapping(
-    value = "{classeId}"
+    value = "{idTipoAtividade}"
   )
   @Operation(
-    summary = "PUT method to handle operations for updateClasse",
-    description = "PUT method to handle operations for updateClasse",
+    summary = "PUT method to handle operations for updateTipoAtividade",
+    description = "PUT method to handle operations for updateTipoAtividade",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -136,58 +172,22 @@ public class ClasseController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = ClasseResponseDTO.class,
+                  implementation = TipoAtividadeResponseDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<ClasseResponseDTO> updateClasse(@Valid @RequestBody ClasseRequestDTO updateClasseRequest
-    , @PathVariable(value = "classeId") String classeId)
+  public ResponseEntity<TipoAtividadeResponseDTO> updateTipoAtividade(@Valid @RequestBody TipoAtividadeRequestDTO updateTipoAtividadeRequest
+    , @PathVariable(value = "idTipoAtividade") String idTipoAtividade)
   {
 
       LOGGER.debug("Operation started");
 
-      final var command = new UpdateClasseCommand(updateClasseRequest, classeId);
+      final var command = new UpdateTipoAtividadeCommand(updateTipoAtividadeRequest, idTipoAtividade);
 
-       ResponseEntity<ClasseResponseDTO> response = commandBus.send(command);
-
-       LOGGER.debug("Operation finished");
-
-        return ResponseEntity.status(response.getStatusCode())
-              .headers(response.getHeaders())
-              .body(response.getBody());
-  }
-
-  @PostMapping(
-  )
-  @Operation(
-    summary = "POST method to handle operations for createClasse",
-    description = "POST method to handle operations for createClasse",
-    responses = {
-      @ApiResponse(
-          responseCode = "200",
-          description = "",
-          content = @Content(
-              mediaType = "application/json",
-              schema = @Schema(
-                  implementation = ClasseResponseDTO.class,
-                  type = "object")
-          )
-      )
-    }
-  )
-  
-  public ResponseEntity<ClasseResponseDTO> createClasse(@Valid @RequestBody ClasseRequestDTO createClasseRequest
-    )
-  {
-
-      LOGGER.debug("Operation started");
-
-      final var command = new CreateClasseCommand(createClasseRequest);
-
-       ResponseEntity<ClasseResponseDTO> response = commandBus.send(command);
+       ResponseEntity<TipoAtividadeResponseDTO> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 
@@ -197,11 +197,11 @@ public class ClasseController {
   }
 
   @PatchMapping(
-    value = "{idClasse}/ativar"
+    value = "{idTipoAtividade}/ativar"
   )
   @Operation(
-    summary = "PATCH method to handle operations for ativarClasse",
-    description = "PATCH method to handle operations for ativarClasse",
+    summary = "PATCH method to handle operations for ativarTipoAtividade",
+    description = "PATCH method to handle operations for ativarTipoAtividade",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -216,13 +216,13 @@ public class ClasseController {
     }
   )
   
-  public ResponseEntity<Map<String, ?>> ativarClasse(
-    @PathVariable(value = "idClasse") String idClasse)
+  public ResponseEntity<Map<String, ?>> ativarTipoAtividade(
+    @PathVariable(value = "idTipoAtividade") String idTipoAtividade)
   {
 
       LOGGER.debug("Operation started");
 
-      final var command = new AtivarClasseCommand(idClasse);
+      final var command = new AtivarTipoAtividadeCommand(idTipoAtividade);
 
        ResponseEntity<Map<String, ?>> response = commandBus.send(command);
 
@@ -234,11 +234,11 @@ public class ClasseController {
   }
 
   @PatchMapping(
-    value = "{idClasse}/desativar"
+    value = "{idTipoAtividade}/desativar"
   )
   @Operation(
-    summary = "PATCH method to handle operations for desativarClasse",
-    description = "PATCH method to handle operations for desativarClasse",
+    summary = "PATCH method to handle operations for desativarTipoAtividade",
+    description = "PATCH method to handle operations for desativarTipoAtividade",
     responses = {
       @ApiResponse(
           responseCode = "200",
@@ -253,15 +253,15 @@ public class ClasseController {
     }
   )
   
-  public ResponseEntity<Map<String, ?>> desativarClasse(
-    @PathVariable(value = "idClasse") String idClasse)
+  public ResponseEntity<String> desativarTipoAtividade(
+    @PathVariable(value = "idTipoAtividade") String idTipoAtividade)
   {
 
       LOGGER.debug("Operation started");
 
-      final var command = new DesativarClasseCommand(idClasse);
+      final var command = new DesativarTipoAtividadeCommand(idTipoAtividade);
 
-       ResponseEntity<Map<String, ?>> response = commandBus.send(command);
+       ResponseEntity<String> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 

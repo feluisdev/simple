@@ -1,12 +1,13 @@
 {
   "type": "controller",
-  "name": "Classe",
+  "name": "Estabelecimento",
   "module": "licenciamento",
-  "description": "gestao de classes",
-  "basePath": "api/v1/classes",
+  "description": "gestao estabelecimento",
+  "basePath": "api/v1/estabelecimentos",
   "actions": [
     {
-      "actionName": "getClasses",
+      "actionName": "getEstabelecimentoById",
+      "path": "{idEstabelecimento}",
       "method": "GET",
       "responses": {
         "200": {
@@ -14,7 +15,34 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "WrapperListaClasse",
+                "type": "EstabelecimentoResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idEstabelecimento",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getEstabelecimentos",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListaEstabelecimento",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -27,12 +55,7 @@
       "requestParams": [
         {
           "type": "string",
-          "name": "classe",
-          "isRequired": false
-        },
-        {
-          "type": "string",
-          "name": "descricao",
+          "name": "gerente",
           "isRequired": false
         },
         {
@@ -50,82 +73,13 @@
       ]
     },
     {
-      "actionName": "getClasseById",
-      "path": "{idClasse}",
-      "method": "GET",
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "ClasseResponse",
-                "objectType": "dto",
-                "name": "data",
-                "collectionType": "none",
-                "module": "licenciamento"
-              }
-            }
-          }
-        }
-      },
-      "pathVariables": [
-        {
-          "name": "idClasse",
-          "type": "string",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "actionName": "updateClasse",
-      "path": "{classeId}",
-      "method": "PUT",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "ClasseRequest",
-              "collectionType": "none",
-              "name": "data",
-              "objectType": "dto",
-              "module": "licenciamento"
-            }
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "ClasseResponse",
-                "objectType": "dto",
-                "name": "data",
-                "collectionType": "none",
-                "module": "licenciamento"
-              }
-            }
-          }
-        }
-      },
-      "pathVariables": [
-        {
-          "name": "classeId",
-          "type": "string",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "actionName": "createClasse",
+      "actionName": "createEstabelecimento",
       "method": "POST",
       "requestBody": {
         "content": {
           "application/json": {
             "schema": {
-              "type": "ClasseRequest",
+              "type": "EstabelecimentoRequest",
               "collectionType": "none",
               "name": "data",
               "objectType": "dto",
@@ -140,7 +94,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "ClasseResponse",
+                "type": "EstabelecimentoResponse",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -152,18 +106,33 @@
       }
     },
     {
-      "actionName": "ativarClasse",
-      "path": "{idClasse}/ativar",
-      "method": "PATCH",
+      "actionName": "updateEstabelecimento",
+      "path": "{idEstabelecimento}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "EstabelecimentoRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
       "responses": {
         "200": {
           "name": "OK",
           "content": {
             "application/json": {
               "schema": {
-                "type": "string",
+                "type": "EstabelecimentoResponse",
+                "objectType": "dto",
                 "name": "data",
-                "collectionType": "map"
+                "collectionType": "none",
+                "module": "licenciamento"
               }
             }
           }
@@ -171,15 +140,15 @@
       },
       "pathVariables": [
         {
-          "name": "idClasse",
+          "name": "idEstabelecimento",
           "type": "string",
           "isRequired": true
         }
       ]
     },
     {
-      "actionName": "desativarClasse",
-      "path": "{idClasse}/desativar",
+      "actionName": "ativarEstabelecimento",
+      "path": "{idEstabelecimento}/ativar",
       "method": "PATCH",
       "responses": {
         "200": {
@@ -197,12 +166,38 @@
       },
       "pathVariables": [
         {
-          "name": "idClasse",
+          "name": "idEstabelecimento",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "desativarEstabelecimento",
+      "path": "{idEstabelecimento}/desativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idEstabelecimento",
           "type": "string",
           "isRequired": true
         }
       ]
     }
   ],
-  "id": "h60rz0zsri-CONTROLLER"
+  "id": "n27afcfvxr-CONTROLLER"
 }

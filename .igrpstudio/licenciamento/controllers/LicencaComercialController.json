@@ -1,12 +1,13 @@
 {
   "type": "controller",
-  "name": "Classe",
+  "name": "LicencaComercial",
   "module": "licenciamento",
-  "description": "gestao de classes",
-  "basePath": "api/v1/classes",
+  "description": "gestao de licencas comerciais",
+  "basePath": "api/v1/licencas",
   "actions": [
     {
-      "actionName": "getClasses",
+      "actionName": "getLicencaComercialByID",
+      "path": "{idLicenca}",
       "method": "GET",
       "responses": {
         "200": {
@@ -14,7 +15,34 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "WrapperListaClasse",
+                "type": "LicencaResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idLicenca",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getLicencasComerciais",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListaLicencaComercial",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -27,12 +55,17 @@
       "requestParams": [
         {
           "type": "string",
-          "name": "classe",
+          "name": "alvara",
           "isRequired": false
         },
         {
           "type": "string",
-          "name": "descricao",
+          "name": "EstadoLicenca",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "idEstabelecimento",
           "isRequired": false
         },
         {
@@ -50,82 +83,13 @@
       ]
     },
     {
-      "actionName": "getClasseById",
-      "path": "{idClasse}",
-      "method": "GET",
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "ClasseResponse",
-                "objectType": "dto",
-                "name": "data",
-                "collectionType": "none",
-                "module": "licenciamento"
-              }
-            }
-          }
-        }
-      },
-      "pathVariables": [
-        {
-          "name": "idClasse",
-          "type": "string",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "actionName": "updateClasse",
-      "path": "{classeId}",
-      "method": "PUT",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "ClasseRequest",
-              "collectionType": "none",
-              "name": "data",
-              "objectType": "dto",
-              "module": "licenciamento"
-            }
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "ClasseResponse",
-                "objectType": "dto",
-                "name": "data",
-                "collectionType": "none",
-                "module": "licenciamento"
-              }
-            }
-          }
-        }
-      },
-      "pathVariables": [
-        {
-          "name": "classeId",
-          "type": "string",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "actionName": "createClasse",
+      "actionName": "createLicencaComercial",
       "method": "POST",
       "requestBody": {
         "content": {
           "application/json": {
             "schema": {
-              "type": "ClasseRequest",
+              "type": "LicencaRequest",
               "collectionType": "none",
               "name": "data",
               "objectType": "dto",
@@ -140,7 +104,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "ClasseResponse",
+                "type": "LicencaResponse",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -152,18 +116,33 @@
       }
     },
     {
-      "actionName": "ativarClasse",
-      "path": "{idClasse}/ativar",
-      "method": "PATCH",
+      "actionName": "updateLicencaComercial",
+      "path": "{idLicenca}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "LicencaRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
       "responses": {
         "200": {
           "name": "OK",
           "content": {
             "application/json": {
               "schema": {
-                "type": "string",
+                "type": "LicencaResponse",
+                "objectType": "dto",
                 "name": "data",
-                "collectionType": "map"
+                "collectionType": "none",
+                "module": "licenciamento"
               }
             }
           }
@@ -171,38 +150,12 @@
       },
       "pathVariables": [
         {
-          "name": "idClasse",
-          "type": "string",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "actionName": "desativarClasse",
-      "path": "{idClasse}/desativar",
-      "method": "PATCH",
-      "responses": {
-        "200": {
-          "name": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string",
-                "name": "data",
-                "collectionType": "map"
-              }
-            }
-          }
-        }
-      },
-      "pathVariables": [
-        {
-          "name": "idClasse",
+          "name": "idLicenca",
           "type": "string",
           "isRequired": true
         }
       ]
     }
   ],
-  "id": "h60rz0zsri-CONTROLLER"
+  "id": "hfpv16702o-CONTROLLER"
 }

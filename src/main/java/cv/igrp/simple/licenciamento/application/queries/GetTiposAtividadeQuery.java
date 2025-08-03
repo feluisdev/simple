@@ -11,10 +11,10 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetClassesQuery implements Query {
+public class GetTiposAtividadeQuery implements Query {
 
-  @NotBlank(message = "The field <classe> is required")
-  private String classe;
+  @NotBlank(message = "The field <codigo> is required")
+  private String codigo;
   @NotBlank(message = "The field <descricao> is required")
   private String descricao;
   @NotBlank(message = "The field <pagina> is required")
