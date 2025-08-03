@@ -24,16 +24,10 @@ public class TipoAtividadeResponseDTO  {
   private String tipoAtividadeId ;
   
   
-  private String nome ;
-  
-  
   private String codigo ;
   
   
   private String descricao ;
-  
-  
-  private String categoria ;
   
   
   private String estado ;

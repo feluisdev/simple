@@ -1,5 +1,6 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
+import cv.igrp.simple.licenciamento.application.dto.TipoAtividadeResponseDTO;
 import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.TipoAtividadeEntity;
@@ -34,5 +35,28 @@ public class TipoAtividadeMapper {
         }
 
         return entity;
+    }
+
+    public TipoAtividadeResponseDTO toDTO(TipoAtividade tipoAtividade) {
+        if (tipoAtividade == null) {
+            return null;
+        }
+
+        var dto = new TipoAtividadeResponseDTO();
+
+        dto.setTipoAtividadeId(tipoAtividade.getIdTipoAtividade().getStringValor());
+
+        dto.setCodigo(tipoAtividade.getCodigo());
+        dto.setDescricao(tipoAtividade.getDescricao());
+
+        dto.setEstado(tipoAtividade.getEstado() != null
+                ? tipoAtividade.getEstado().name()
+                : "");
+
+        dto.setEstadoDesc(tipoAtividade.getEstado() != null
+                ? tipoAtividade.getEstado().getDescription()
+                : "");
+
+        return dto;
     }
 }

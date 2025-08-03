@@ -28,8 +28,5 @@ public class TipoAtividadeRequestDTO  {
   
   
   private String descricao ;
-  
-  
-  private String categoria ;
 
 }
