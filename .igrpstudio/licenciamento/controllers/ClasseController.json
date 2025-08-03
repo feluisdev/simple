@@ -1,0 +1,208 @@
+{
+  "type": "controller",
+  "name": "Classe",
+  "module": "licenciamento",
+  "description": "gestao de classes",
+  "basePath": "api/v1/classes",
+  "actions": [
+    {
+      "actionName": "getClasses",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListaClasse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "requestParams": [
+        {
+          "type": "string",
+          "name": "codigo",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "descricao",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "pagina",
+          "value": "0",
+          "isRequired": true
+        },
+        {
+          "type": "string",
+          "name": "tamanho",
+          "value": "20",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getClasseById",
+      "path": "{idClasse}",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "ClasseResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idClasse",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "updateClasse",
+      "path": "{classeId}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "ClasseRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "ClasseResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "classeId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "createClasse",
+      "method": "POST",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "ClasseRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "ClasseResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "actionName": "ativarClasse",
+      "path": "{idClasse}/ativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idClasse",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "desativarClasse",
+      "path": "{idClasse}/desativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idClasse",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    }
+  ],
+  "id": "h60rz0zsri-CONTROLLER"
+}
