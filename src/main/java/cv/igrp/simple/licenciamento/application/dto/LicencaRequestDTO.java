@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import cv.igrp.simple.shared.application.constants.EstadoLicenca;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
@@ -34,7 +35,10 @@ public class LicencaRequestDTO  {
   private LocalDate dataRenovacaoLicenca ;
   
   
-  private String horarioFuncionamento ;
+  private LocalTime horarioInicioFuncionamento ;
+  
+  
+  private LocalTime horarioFimFuncionamento ;
   
   
   private String designacao ;

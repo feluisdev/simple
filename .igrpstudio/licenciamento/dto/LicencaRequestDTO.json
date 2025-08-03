@@ -54,9 +54,21 @@
       "primaryKey": false
     },
     {
-      "name": "horarioFuncionamento",
+      "name": "horarioInicioFuncionamento",
       "objectType": "java",
-      "type": "string",
+      "type": "time",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false
+    },
+    {
+      "name": "horarioFimFuncionamento",
+      "objectType": "java",
+      "type": "time",
       "required": false,
       "before": false,
       "after": false,

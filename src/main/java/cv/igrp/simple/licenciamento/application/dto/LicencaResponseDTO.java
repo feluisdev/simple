@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
@@ -36,10 +37,13 @@ public class LicencaResponseDTO  {
   private LocalDate dataRenovacaoLicenca ;
   
   
-  private String horarioFuncionamento ;
-  
-  
   private String designacao ;
+  
+  
+  private LocalTime horarioInicioFuncionamento ;
+  
+  
+  private LocalTime horarioFimFuncionamento ;
   
   
   private String estadoLicenca ;

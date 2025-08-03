@@ -9,12 +9,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.UUID;
 import java.time.LocalDate;
-
+import java.time.LocalTime;
 import cv.igrp.simple.shared.application.constants.EstadoLicenca;
-
 import java.util.List;
 
 @Audited
@@ -32,48 +30,52 @@ public class LicencaComercialEntity extends AuditEntity {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-
+  
     @NotNull(message = "externalID is mandatory")
-    @Column(name = "externalid", nullable = false)
+    @Column(name="externalid", nullable = false)
     private UUID externalID;
 
-
-    @Column(name = "alvara", unique = true)
+  
+    @Column(name="alvara", unique = true)
     private String alvara;
 
-
-    @Column(name = "data_inicio_licenca")
+  
+    @Column(name="data_inicio_licenca")
     private LocalDate dataInicioLicenca;
 
-
-    @Column(name = "data_fim_licenca")
+  
+    @Column(name="data_fim_licenca")
     private LocalDate dataFimLicenca;
 
-
-    @Column(name = "data_renovacao_licenca")
+  
+    @Column(name="data_renovacao_licenca")
     private LocalDate dataRenovacaoLicenca;
 
+  
+    @Column(name="horariofimfuncionamento")
+    private LocalTime horarioFimFuncionamento;
 
-    @Column(name = "horariofuncionamento")
-    private String horarioFuncionamento;
+  
+    @Column(name="horarioiniciofuncionamento")
+    private LocalTime horarioInicioFuncionamento;
 
-
-    @Column(name = "designacao")
+  
+    @Column(name="designacao")
     private String designacao;
 
-
+  
     @Enumerated(EnumType.STRING)
-    @Column(name = "estado")
+    @Column(name="estado")
     private EstadoLicenca estado;
 
+  
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+  @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utente_id", referencedColumnName = "id")
-    private UtenteEntity utenteId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estabelecimento")
-    private EstabelecimentoEntity idEstabelecimento;
+    private UtenteEntity utenteId;   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_estabelecimento")
+   private EstabelecimentoEntity idEstabelecimento;
 
 
 }
