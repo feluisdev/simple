@@ -7,28 +7,22 @@ import cv.igrp.simple.shared.config.AuditEntity;
 import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.envers.Audited;
-import java.util.UUID;
 import java.util.List;
 
-@Audited
+
 @Getter
 @Setter
 @IgrpEntity
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cml_atividade")
+@Table(name = "cml_tipo_atividade")
 public class TipoAtividadeEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
-
-  
-    @Column(name="externalid")
-    private UUID externalId;
 
   
     @Column(name="codigo")
@@ -41,6 +35,6 @@ public class TipoAtividadeEntity extends AuditEntity {
   
 
 
-  @OneToMany(mappedBy = "idTpAtividade", fetch = FetchType.LAZY)
-private List<TipoEstabelecimentoEntity> tipoatividades;
+  @OneToMany(mappedBy = "idTipoAtividade", fetch = FetchType.LAZY)
+private List<EstabelecimentoEntity> estabelecimentos;
 }

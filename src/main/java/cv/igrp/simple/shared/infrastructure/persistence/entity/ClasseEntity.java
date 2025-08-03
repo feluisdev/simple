@@ -33,7 +33,7 @@ public class ClasseEntity extends AuditEntity {
     private UUID externalId;
 
   
-    @Column(name="classe")
+    @Column(name="classe", unique = true)
     private String classe;
 
   
@@ -41,7 +41,7 @@ public class ClasseEntity extends AuditEntity {
     private String descricao;
 
      @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
-private Set<TipoEstabelecimentoEntity> tipoestabelecimentos;
+private Set<EstabelecimentoEntity> estabelecimentos;
 
 
 }

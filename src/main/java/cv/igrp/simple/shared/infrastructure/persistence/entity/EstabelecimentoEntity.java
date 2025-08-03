@@ -10,8 +10,9 @@ import lombok.*;
 import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
-import java.util.List;
+import cv.igrp.simple.shared.application.constants.Estado;
 import java.util.Set;
+import java.util.List;
 
 @Audited
 @Getter
@@ -21,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cml_tipo_estabelecimento")
-public class TipoEstabelecimentoEntity extends AuditEntity {
+public class EstabelecimentoEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +35,8 @@ public class TipoEstabelecimentoEntity extends AuditEntity {
     private UUID externalId;
 
   
-    @Column(name="codigo")
-    private String codigo;
+    @Column(name="gerente")
+    private String gerente;
 
   
     @Column(name="descricao")
@@ -43,29 +44,50 @@ public class TipoEstabelecimentoEntity extends AuditEntity {
 
   
     @Column(name="flag_vistoria")
-    private Integer flagVistoria;
+    private boolean flagVistoria;
 
   
     @Column(name="licretalho")
     private boolean licRetalho;
 
   
+    @Column(name="endereco")
+    private String endereco;
 
+  
+    @Column(name="telefone")
+    private String telefone;
 
-  @OneToMany(mappedBy = "tpEstabelecimentoId", fetch = FetchType.LAZY)
-private List<LicencaComercialEntity> licencascomercias;
+  
+    @Column(name="email")
+    private String email;
+
+  
+    @Column(name="nif")
+    private String nif;
+
+  
+    @Enumerated(EnumType.STRING)
+    @Column(name="estado")
+    private Estado estado;
+
+  
 
 
   
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "CML_TP_ESTAB_CLASSE",
-            joinColumns = @JoinColumn(name = "tipoestabelecimento_id"),
+            joinColumns = @JoinColumn(name = "estabelecimento_id"),
             inverseJoinColumns = @JoinColumn(name = "classe_id")
     )
-private Set<ClasseEntity> classes;   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "id_tp_atividade")
-   private TipoAtividadeEntity idTpAtividade;
+private Set<ClasseEntity> classes;
+
+
+  @OneToMany(mappedBy = "idEstabelecimento", fetch = FetchType.LAZY)
+private List<LicencaComercialEntity> licencas;   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_tipo_atividade")
+   private TipoAtividadeEntity idTipoAtividade;
 
 
 }
