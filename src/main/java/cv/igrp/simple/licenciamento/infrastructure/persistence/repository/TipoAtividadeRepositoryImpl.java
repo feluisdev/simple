@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class TipoAtividadeRepositoryImpl implements TipoAtividadeRepository {
         return tipoAtividadeMapper.toDomain(saved);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<TipoAtividade> findById(Identificador idTipoAtividade) {
         return tipoAtividadeEntityRepository
@@ -38,6 +40,7 @@ public class TipoAtividadeRepositoryImpl implements TipoAtividadeRepository {
                 .map(tipoAtividadeMapper::toDomain);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<TipoAtividade> findAll() {
         List<TipoAtividadeEntity> entities = tipoAtividadeEntityRepository.findAll();
@@ -46,6 +49,7 @@ public class TipoAtividadeRepositoryImpl implements TipoAtividadeRepository {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<TipoAtividade> findAll(TipoAtividadeFilter filter) {
         var pageable = PageRequest.of(
