@@ -10,6 +10,7 @@ import lombok.*;
 import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
+import cv.igrp.simple.shared.application.constants.Estado;
 import java.util.Set;
 
 @Audited
@@ -39,6 +40,11 @@ public class ClasseEntity extends AuditEntity {
   
     @Column(name="descricao")
     private String descricao;
+
+  
+    @Enumerated(EnumType.STRING)
+    @Column(name="estado")
+    private Estado estado;
 
      @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
 private Set<EstabelecimentoEntity> estabelecimentos;
