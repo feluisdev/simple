@@ -142,13 +142,14 @@ public class TipoAtividadeController {
   public ResponseEntity<WrapperListaTipoAtividadeDTO> getTiposAtividade(
     @RequestParam(value = "codigo", required = false) String codigo,
     @RequestParam(value = "descricao", required = false) String descricao,
+    @RequestParam(value = "estado", required = false) String estado,
     @RequestParam(value = "pagina") String pagina,
     @RequestParam(value = "tamanho") String tamanho)
   {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetTiposAtividadeQuery(codigo, descricao, pagina, tamanho);
+      final var query = new GetTiposAtividadeQuery(codigo, descricao, estado, pagina, tamanho);
 
       ResponseEntity<WrapperListaTipoAtividadeDTO> response = queryBus.handle(query);
 

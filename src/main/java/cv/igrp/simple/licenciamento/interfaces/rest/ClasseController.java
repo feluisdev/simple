@@ -69,13 +69,14 @@ public class ClasseController {
   public ResponseEntity<WrapperListaClasseDTO> getClasses(
     @RequestParam(value = "classe", required = false) String classe,
     @RequestParam(value = "descricao", required = false) String descricao,
+    @RequestParam(value = "estado", required = false) String estado,
     @RequestParam(value = "pagina", defaultValue = "0") String pagina,
     @RequestParam(value = "tamanho", defaultValue = "20") String tamanho)
   {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetClassesQuery(classe, descricao, pagina, tamanho);
+      final var query = new GetClassesQuery(classe, descricao, estado, pagina, tamanho);
 
       ResponseEntity<WrapperListaClasseDTO> response = queryBus.handle(query);
 

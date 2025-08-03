@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class Estabelecimento {
 
+    private final Integer id;               // novo campo id da base, pode ser null se ainda não persistido
     private final Identificador idEstabelecimento;
     private String gerente;
     private String descricao;
@@ -19,6 +20,7 @@ public class Estabelecimento {
     private Estado estado;
 
     private Estabelecimento(
+            Integer id,
             Identificador idEstabelecimento,
             String gerente,
             String descricao,
@@ -30,6 +32,7 @@ public class Estabelecimento {
             String nif,
             Estado estado
     ) {
+        this.id = id;
         this.idEstabelecimento = idEstabelecimento;
         this.gerente = gerente;
         this.descricao = descricao;
@@ -53,6 +56,7 @@ public class Estabelecimento {
             String nif
     ) {
         return new Estabelecimento(
+                null,
                 Identificador.gerarNovo(),
                 gerente,
                 descricao,
@@ -67,6 +71,7 @@ public class Estabelecimento {
     }
 
     public static Estabelecimento reconstruir(
+            Integer id,
             Identificador idEstabelecimento,
             String gerente,
             String descricao,
@@ -79,6 +84,7 @@ public class Estabelecimento {
             Estado estado
     ) {
         return new Estabelecimento(
+                id,
                 idEstabelecimento,
                 gerente,
                 descricao,

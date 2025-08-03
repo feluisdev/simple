@@ -1,5 +1,6 @@
 package cv.igrp.simple.licenciamento.domain.models;
 
+import cv.igrp.simple.pedidos.domain.models.Utente;
 import cv.igrp.simple.shared.application.constants.EstadoLicenca;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import java.util.Objects;
 @Getter
 public class LicencaComercial {
 
+    private final Integer id;               // novo campo id da base (pode ser null se não persistido)
     private final Identificador idLicenca;
     private String alvara;
     private LocalDate dataInicioLicenca;
@@ -21,10 +23,11 @@ public class LicencaComercial {
     private String designacao;
     private EstadoLicenca estado;
 
-    private Identificador utenteId;
+    private Utente utente;
     private Estabelecimento estabelecimento;
 
     private LicencaComercial(
+            Integer id,
             Identificador idLicenca,
             String alvara,
             LocalDate dataInicioLicenca,
@@ -34,9 +37,10 @@ public class LicencaComercial {
             LocalTime horarioFimFuncionamento,
             String designacao,
             EstadoLicenca estado,
-            Identificador utenteId,
+            Utente utente,
             Estabelecimento estabelecimento
     ) {
+        this.id = id;
         this.idLicenca = idLicenca;
         this.alvara = alvara;
         this.dataInicioLicenca = dataInicioLicenca;
@@ -46,7 +50,7 @@ public class LicencaComercial {
         this.horarioFimFuncionamento = horarioFimFuncionamento;
         this.designacao = designacao;
         this.estado = estado;
-        this.utenteId = utenteId;
+        this.utente = utente;
         this.estabelecimento = estabelecimento;
     }
 
@@ -58,10 +62,11 @@ public class LicencaComercial {
             LocalTime horarioInicioFuncionamento,
             LocalTime horarioFimFuncionamento,
             String designacao,
-            Identificador utenteId,
+            Utente utente,
             Estabelecimento estabelecimento
     ) {
         return new LicencaComercial(
+                null,
                 Identificador.gerarNovo(),
                 alvara,
                 dataInicioLicenca,
@@ -71,12 +76,13 @@ public class LicencaComercial {
                 horarioFimFuncionamento,
                 designacao,
                 EstadoLicenca.A,
-                utenteId,
+                utente,
                 estabelecimento
         );
     }
 
     public static LicencaComercial reconstruir(
+            Integer id,
             Identificador idLicenca,
             String alvara,
             LocalDate dataInicioLicenca,
@@ -86,10 +92,11 @@ public class LicencaComercial {
             LocalTime horarioFimFuncionamento,
             String designacao,
             EstadoLicenca estado,
-            Identificador utenteId,
+            Utente utente,
             Estabelecimento estabelecimento
     ) {
         return new LicencaComercial(
+                id,
                 idLicenca,
                 alvara,
                 dataInicioLicenca,
@@ -99,7 +106,7 @@ public class LicencaComercial {
                 horarioFimFuncionamento,
                 designacao,
                 estado,
-                utenteId,
+                utente,
                 estabelecimento
         );
     }
@@ -112,11 +119,11 @@ public class LicencaComercial {
             LocalTime horarioInicioFuncionamento,
             LocalTime horarioFimFuncionamento,
             String designacao,
-            Identificador utenteId,
+            Utente utente,
             Estabelecimento estabelecimento
     ) {
         Objects.requireNonNull(alvara, "Alvará não pode ser nulo");
-        Objects.requireNonNull(utenteId, "UtenteId não pode ser nulo");
+        Objects.requireNonNull(utente, "UtenteId não pode ser nulo");
         Objects.requireNonNull(estabelecimento, "Estabelecimento não pode ser nulo");
 
         this.alvara = alvara;
@@ -126,7 +133,7 @@ public class LicencaComercial {
         this.horarioInicioFuncionamento = horarioInicioFuncionamento;
         this.horarioFimFuncionamento = horarioFimFuncionamento;
         this.designacao = designacao;
-        this.utenteId = utenteId;
+        this.utente = utente;
         this.estabelecimento = estabelecimento;
     }
 

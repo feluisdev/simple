@@ -1,5 +1,6 @@
 package cv.igrp.simple.licenciamento.application.queries;
 
+import cv.igrp.simple.licenciamento.application.dto.WrapperListaEstabelecimentoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseDTO;
 
 @Component
-public class GetEstabelecimentosQueryHandler implements QueryHandler<GetEstabelecimentosQuery, ResponseEntity<EstabelecimentoResponseDTO>>{
+public class GetEstabelecimentosQueryHandler implements QueryHandler<GetEstabelecimentosQuery, ResponseEntity<WrapperListaEstabelecimentoDTO>>{
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GetEstabelecimentosQueryHandler.class);
 
@@ -21,7 +22,7 @@ public class GetEstabelecimentosQueryHandler implements QueryHandler<GetEstabele
   }
 
    @IgrpQueryHandler
-  public ResponseEntity<EstabelecimentoResponseDTO> handle(GetEstabelecimentosQuery query) {
+  public ResponseEntity<WrapperListaEstabelecimentoDTO> handle(GetEstabelecimentosQuery query) {
     // TODO: Implement the query handling logic here
     return null;
   }

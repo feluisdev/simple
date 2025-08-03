@@ -105,13 +105,14 @@ public class EstabelecimentoController {
   
   public ResponseEntity<WrapperListaEstabelecimentoDTO> getEstabelecimentos(
     @RequestParam(value = "gerente", required = false) String gerente,
+    @RequestParam(value = "estado", required = false) String estado,
     @RequestParam(value = "pagina", defaultValue = "0") String pagina,
     @RequestParam(value = "tamanho", defaultValue = "20") String tamanho)
   {
 
       LOGGER.debug("Operation started");
 
-      final var query = new GetEstabelecimentosQuery(gerente, pagina, tamanho);
+      final var query = new GetEstabelecimentosQuery(gerente, estado, pagina, tamanho);
 
       ResponseEntity<WrapperListaEstabelecimentoDTO> response = queryBus.handle(query);
 
