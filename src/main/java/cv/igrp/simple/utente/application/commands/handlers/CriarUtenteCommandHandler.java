@@ -2,11 +2,10 @@ package cv.igrp.simple.utente.application.commands.handlers;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
-import cv.igrp.simple.pedidos.application.commands.RegistarPagamentoPedidoCommandHandler;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.commands.commands.CriarUtenteCommand;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
-import cv.igrp.simple.utente.application.mapper.UtenteMapper;
+import cv.igrp.simple.utente.infrastructure.mappers.UtenteMapper;
 import cv.igrp.simple.utente.domain.service.UtenteService;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
 

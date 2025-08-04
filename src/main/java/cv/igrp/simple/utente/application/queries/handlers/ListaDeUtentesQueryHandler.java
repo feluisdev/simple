@@ -3,7 +3,7 @@ package cv.igrp.simple.utente.application.queries.handlers;
 import cv.igrp.framework.core.domain.QueryHandler;
 import cv.igrp.framework.stereotype.IgrpQueryHandler;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
-import cv.igrp.simple.utente.application.mapper.UtenteMapper;
+import cv.igrp.simple.utente.infrastructure.mappers.UtenteMapper;
 import cv.igrp.simple.utente.application.queries.filters.FiltroUtente;
 import cv.igrp.simple.utente.application.queries.queries.ListaDeUtentesQuery;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;

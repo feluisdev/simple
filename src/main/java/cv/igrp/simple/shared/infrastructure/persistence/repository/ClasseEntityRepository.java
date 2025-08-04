@@ -7,13 +7,16 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 
 @Repository
-@Tag(name = "Classes", description = "API para gestão de classes")
-@RepositoryRestResource(path = "classes")
 public interface ClasseEntityRepository extends
     JpaRepository<ClasseEntity, Integer>,
     JpaSpecificationExecutor<ClasseEntity>
 {
+
+    Optional<ClasseEntity> findByExternalId(UUID externalId);
 
 }

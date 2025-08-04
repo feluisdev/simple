@@ -11,14 +11,13 @@ import org.hibernate.envers.Audited;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import java.time.LocalDate;
-import java.math.BigDecimal;
-import cv.igrp.simple.shared.application.constants.Estado;
+import java.time.LocalTime;
+import cv.igrp.simple.shared.application.constants.EstadoLicenca;
 import java.util.List;
 
 @Audited
 @Getter
 @Setter
-@ToString
 @IgrpEntity
 @Entity
 @NoArgsConstructor
@@ -32,98 +31,42 @@ public class LicencaComercialEntity extends AuditEntity {
     private Integer id;
 
   
-    @NotNull(message = "externalID is mandatory")
+    @NotNull(message = "externalId is mandatory")
     @Column(name="externalid", nullable = false)
-    private UUID externalID;
+    private UUID externalId;
 
   
-    @Column(name="numero")
-    private String numero;
-
-  
-    @Column(name="nome")
-    private String nome;
-
-  
-    @Column(name="cartao")
-    private String cartao;
-
-  
-    @Column(name="especialidade")
-    private String especialidade;
-
-  
-    @Column(name="data_licenca")
-    private LocalDate dataLicenca;
-
-  
-    @Column(name="alvara")
+    @Column(name="alvara", unique = true)
     private String alvara;
 
   
-    @Column(name="pagamento")
-    private BigDecimal pagamento;
+    @Column(name="data_inicio_licenca")
+    private LocalDate dataInicioLicenca;
 
   
-    @Column(name="localidade")
-    private String localidade;
+    @Column(name="data_fim_licenca")
+    private LocalDate dataFimLicenca;
 
   
-    @Enumerated(EnumType.STRING)
-    @Column(name="estado")
-    private Estado estado;
+    @Column(name="data_renovacao_licenca")
+    private LocalDate dataRenovacaoLicenca;
 
   
-    @Column(name="abrangencia")
-    private String abrangencia;
+    @Column(name="horariofimfuncionamento")
+    private LocalTime horarioFimFuncionamento;
 
   
-    @Column(name="dt_fim_lic")
-    private String dtFimLic;
-
-  
-    @Column(name="tp_hor_func")
-    private Integer tpHorFunc;
-
-  
-    @Column(name="dt_renovacao")
-    private LocalDate dtRenovacao;
-
-  
-    @Column(name="data_lic_horario")
-    private LocalDate dataLicHorario;
-
-  
-    @Column(name="dt_fim_horario")
-    private LocalDate dtFimHorario;
+    @Column(name="horarioiniciofuncionamento")
+    private LocalTime horarioInicioFuncionamento;
 
   
     @Column(name="designacao")
     private String designacao;
 
   
-    @Column(name="selo")
-    private BigDecimal selo;
-
-  
-    @Column(name="taxa")
-    private BigDecimal taxa;
-
-  
-    @Column(name="morada")
-    private String morada;
-
-  
-    @Column(name="telefone")
-    private String telefone;
-
-  
-    @Column(name="email")
-    private String email;
-
-  
-    @Column(name="nif")
-    private String nif;
+    @Enumerated(EnumType.STRING)
+    @Column(name="estado")
+    private EstadoLicenca estado;
 
   
 
@@ -131,8 +74,8 @@ public class LicencaComercialEntity extends AuditEntity {
   @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utente_id", referencedColumnName = "id")
     private UtenteEntity utenteId;   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "tp_estabelecimento_id")
-   private TipoEstabelecimentoEntity tpEstabelecimentoId;
+   @JoinColumn(name = "id_estabelecimento")
+   private EstabelecimentoEntity idEstabelecimento;
 
 
 }

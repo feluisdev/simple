@@ -2,6 +2,8 @@ package cv.igrp.simple.shared.interfaces.rest;
 
 import cv.igrp.framework.core.data.EnumItem;
 import cv.igrp.framework.core.utils.object.EnumUtils;
+import cv.igrp.simple.shared.application.constants.Estado;
+import cv.igrp.simple.shared.application.constants.EstadoLicenca;
 import cv.igrp.simple.utente.application.constants.GeneroTipo;
 import cv.igrp.simple.utente.application.constants.TipoIdentificacao;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +28,17 @@ public class ParametrizacaoController {
     @GetMapping("/sexo")
     public ResponseEntity<List<EnumItem<String>>> getSexo() {
         return ResponseEntity.ok(EnumUtils.mapEnumToItems(GeneroTipo.class));
+    }
+
+    @GetMapping("/estado")
+    public ResponseEntity<List<EnumItem<String>>> getEstado() {
+        return ResponseEntity.ok(EnumUtils.mapEnumToItems(Estado.class));
+    }
+
+
+    @GetMapping("/estado-licenca-comercial")
+    public ResponseEntity<List<EnumItem<String>>> getEstadoLicencaComercial() {
+        return ResponseEntity.ok(EnumUtils.mapEnumToItems(EstadoLicenca.class));
     }
 
 

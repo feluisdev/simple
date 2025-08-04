@@ -19,7 +19,6 @@ import cv.igrp.simple.utente.application.constants.GeneroTipo;
 @Audited
 @Getter
 @Setter
-@ToString
 @IgrpEntity
 @Entity
 @NoArgsConstructor

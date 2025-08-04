@@ -1,0 +1,213 @@
+{
+  "type": "controller",
+  "name": "Estabelecimento",
+  "module": "licenciamento",
+  "description": "gestao estabelecimento",
+  "basePath": "api/v1/estabelecimentos",
+  "actions": [
+    {
+      "actionName": "getEstabelecimentoById",
+      "path": "{idEstabelecimento}",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "EstabelecimentoResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idEstabelecimento",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getEstabelecimentos",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListaEstabelecimento",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "requestParams": [
+        {
+          "type": "string",
+          "name": "nome",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "gerente",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "estado",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "pagina",
+          "value": "0",
+          "isRequired": true
+        },
+        {
+          "type": "string",
+          "name": "tamanho",
+          "value": "20",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "createEstabelecimento",
+      "method": "POST",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "EstabelecimentoRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "EstabelecimentoResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "actionName": "updateEstabelecimento",
+      "path": "{idEstabelecimento}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "EstabelecimentoRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "EstabelecimentoResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idEstabelecimento",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "ativarEstabelecimento",
+      "path": "{idEstabelecimento}/ativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idEstabelecimento",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "desativarEstabelecimento",
+      "path": "{idEstabelecimento}/desativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idEstabelecimento",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    }
+  ],
+  "id": "n27afcfvxr-CONTROLLER"
+}

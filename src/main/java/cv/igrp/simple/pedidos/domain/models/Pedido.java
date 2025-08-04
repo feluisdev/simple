@@ -5,13 +5,13 @@ import cv.igrp.simple.configuracoes.domain.models.TipoServico;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
+import cv.igrp.simple.utente.domain.models.Utente;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
