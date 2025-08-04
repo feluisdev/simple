@@ -3,7 +3,9 @@
 
 package cv.igrp.simple.licenciamento.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import cv.igrp.framework.stereotype.IgrpDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -33,11 +35,11 @@ public class LicencaRequestDTO  {
   
   
   private LocalDate dataRenovacaoLicenca ;
-  
-  
+
+  @Schema(type = "string", format = "time", example = "08:30:00")
   private LocalTime horarioInicioFuncionamento ;
-  
-  
+
+  @Schema(type = "string", format = "time", example = "08:30:00")
   private LocalTime horarioFimFuncionamento ;
   
   
