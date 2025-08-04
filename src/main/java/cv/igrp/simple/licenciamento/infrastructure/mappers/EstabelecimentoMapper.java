@@ -96,6 +96,7 @@ public class EstabelecimentoMapper {
 
         EstabelecimentoResponseDTO dto = new EstabelecimentoResponseDTO();
 
+        dto.setEstabelecimentoId(estabelecimento.getIdEstabelecimento().getStringValor());
         dto.setNome(estabelecimento.getNome() != null ? estabelecimento.getNome() : "");
         dto.setGerente(estabelecimento.getGerente());
         dto.setDescricao(estabelecimento.getDescricao());

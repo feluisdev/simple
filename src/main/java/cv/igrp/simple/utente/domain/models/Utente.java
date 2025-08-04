@@ -1,4 +1,4 @@
-package cv.igrp.simple.pedidos.domain.models;
+package cv.igrp.simple.utente.domain.models;
 
 import lombok.Getter;
 

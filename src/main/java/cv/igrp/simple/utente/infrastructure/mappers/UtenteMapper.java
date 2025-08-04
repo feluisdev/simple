@@ -1,9 +1,9 @@
-package cv.igrp.simple.utente.application.mapper;
+package cv.igrp.simple.utente.infrastructure.mappers;
 
+import cv.igrp.simple.utente.domain.models.Utente;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.constants.Estado;
 import cv.igrp.simple.utente.application.dto.CriarUtenteDTO;
-import cv.igrp.simple.utente.application.dto.UpdateUtenteDTO;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
 import org.springframework.stereotype.Component;
 
@@ -75,27 +75,25 @@ public class UtenteMapper {
         return utente;
     }
 
+    public Utente toDomain(UtenteEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        return Utente.reconstruir(entity.getId(), entity.getNome(), entity.getNumero());
+    }
 
-    public UtenteEntity toUpdateUtente(UpdateUtenteDTO dto) {
-        UtenteEntity utente = new UtenteEntity();
-        utente.setNome(dto.getNome());
-        utente.setTelefone(dto.getTelefone());
-        utente.setEmail(dto.getEmail());
-        utente.setEndereco(dto.getEndereco());
-        utente.setDataNascimento(dto.getDataNascimento());
-        utente.setIdentificacao(dto.getIdentificacao());
-        utente.setTipoIdentificacao(dto.getTipoIdentificacao());
-        utente.setCaixaPostal(dto.getCaixaPostal());
-        utente.setDepartamentoResponsavel(dto.getDepartamentoResponsavel());
-        utente.setTipoUtente(dto.getTipoUtente());
-        utente.setNomeMae(dto.getNomeMae());
-        utente.setNomePai(dto.getNomePai());
-        utente.setNif(dto.getNif());
-        utente.setTelemovel(dto.getTelemovel());
-        utente.setGenero(dto.getGenero());
-        utente.setNacionalidade(dto.getNacionalidade());
+    public UtenteEntity toEntity(Utente domain) {
 
-        return utente;
-     }
+        var entity = new UtenteEntity();
+        if (domain.getId()!=null)
+            entity.setId(domain.getId());
+
+        entity.setNome(domain.getNome());
+        entity.setNumero(domain.getNumero());
+        return entity;
+    }
+
+
+
 
 }

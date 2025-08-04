@@ -24,6 +24,9 @@ public class EstabelecimentoResponseDTO  {
 
   
   
+  private String estabelecimentoId ;
+  
+  
   private String nome ;
   
   

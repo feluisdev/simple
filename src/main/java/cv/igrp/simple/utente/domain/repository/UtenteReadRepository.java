@@ -1,4 +1,4 @@
-package cv.igrp.simple.pedidos.domain.repository;
+package cv.igrp.simple.utente.domain.repository;
 
 import cv.igrp.simple.configuracoes.domain.models.Combo;
 

@@ -2,18 +2,16 @@ package cv.igrp.simple.utente.application.queries.handlers;
 
 import cv.igrp.framework.core.domain.QueryHandler;
 import cv.igrp.framework.stereotype.IgrpQueryHandler;
-import cv.igrp.simple.shared.domain.exceptions.IgrpProblem;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteServicoEntityRepository;
 import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;
-import cv.igrp.simple.utente.application.mapper.ServicoMapper;
+import cv.igrp.simple.utente.infrastructure.mappers.ServicoMapper;
 import cv.igrp.simple.utente.application.queries.queries.ObterDetalhesServicoQuery;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 
 import cv.igrp.simple.utente.domain.service.UtenteService;
 import jakarta.persistence.EntityManager;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package cv.igrp.simple.licenciamento.domain.models;
 
-import cv.igrp.simple.pedidos.domain.models.Utente;
+import cv.igrp.simple.utente.domain.models.Utente;
 import cv.igrp.simple.shared.application.constants.EstadoLicenca;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;

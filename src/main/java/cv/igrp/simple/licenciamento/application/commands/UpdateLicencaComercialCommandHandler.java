@@ -9,6 +9,8 @@ import cv.igrp.simple.licenciamento.domain.repository.LicencaComercialRepository
 import cv.igrp.simple.licenciamento.infrastructure.mappers.LicencaComercialMapper;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
+import cv.igrp.simple.utente.domain.models.Utente;
+import cv.igrp.simple.utente.domain.repository.UtenteRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -24,12 +26,14 @@ public class UpdateLicencaComercialCommandHandler implements CommandHandler<Upda
    private final LicencaComercialRepository licencaRepository;
    private final EstabelecimentoRepository estabelecimentoRepository;
    private final LicencaComercialMapper licencaMapper;
+   private final UtenteRepository utenteRepository;
 
-   public UpdateLicencaComercialCommandHandler(LicencaComercialRepository licencaRepository, EstabelecimentoRepository estabelecimentoRepository, LicencaComercialMapper licencaMapper) {
+   public UpdateLicencaComercialCommandHandler(LicencaComercialRepository licencaRepository, EstabelecimentoRepository estabelecimentoRepository, LicencaComercialMapper licencaMapper, UtenteRepository utenteRepository) {
 
        this.licencaRepository = licencaRepository;
        this.estabelecimentoRepository = estabelecimentoRepository;
        this.licencaMapper = licencaMapper;
+       this.utenteRepository = utenteRepository;
    }
 
    @IgrpCommandHandler
@@ -45,6 +49,15 @@ public class UpdateLicencaComercialCommandHandler implements CommandHandler<Upda
       Estabelecimento estabelecimento = estabelecimentoRepository.findById(Identificador.from(dto.getIdEstabelecimento()))
               .orElseThrow(() -> IgrpResponseStatusException.badRequest("Estabelecimento não encontrado: " + dto.getIdEstabelecimento()));
 
+      Utente utente = null;
+
+      if (dto.getIdUtente() != null && !dto.getIdUtente().isBlank()) {
+         var idUtente = Integer.parseInt(dto.getIdUtente());
+         utente = utenteRepository
+                 .findById(idUtente)
+                 .orElseThrow(() -> IgrpResponseStatusException.badRequest("Utente não encontrado: " + dto.getIdUtente()));
+      }
+
       // Atualizar a licença no domínio
       licenca.atualizar(
               dto.getAlvara(),
@@ -55,7 +68,7 @@ public class UpdateLicencaComercialCommandHandler implements CommandHandler<Upda
               dto.getHorarioFimFuncionamento(),
               dto.getDesignacao(),
               dto.getEstadoLicenca(),
-              null,
+              utente,
               estabelecimento
       );
 

@@ -1,4 +1,4 @@
-package cv.igrp.simple.utente.application.mapper;
+package cv.igrp.simple.utente.infrastructure.mappers;
 
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteServicoEntity;
 import cv.igrp.simple.utente.application.dto.ServicoResponseDTO;

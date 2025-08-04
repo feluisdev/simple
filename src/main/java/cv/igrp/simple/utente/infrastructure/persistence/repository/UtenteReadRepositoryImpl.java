@@ -1,7 +1,7 @@
-package cv.igrp.simple.pedidos.infrastructure.persistence.repository;
+package cv.igrp.simple.utente.infrastructure.persistence.repository;
 
 import cv.igrp.simple.configuracoes.domain.models.Combo;
-import cv.igrp.simple.pedidos.domain.repository.UtenteReadRepository;
+import cv.igrp.simple.utente.domain.repository.UtenteReadRepository;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
 import cv.igrp.simple.utente.application.constants.Estado;
 import org.springframework.stereotype.Repository;

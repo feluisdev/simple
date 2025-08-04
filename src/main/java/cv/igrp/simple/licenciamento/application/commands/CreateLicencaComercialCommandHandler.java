@@ -6,8 +6,8 @@ import cv.igrp.simple.licenciamento.domain.models.LicencaComercial;
 import cv.igrp.simple.licenciamento.domain.repository.EstabelecimentoRepository;
 import cv.igrp.simple.licenciamento.domain.repository.LicencaComercialRepository;
 import cv.igrp.simple.licenciamento.infrastructure.mappers.LicencaComercialMapper;
-import cv.igrp.simple.pedidos.domain.models.Utente;
-import cv.igrp.simple.pedidos.domain.repository.UtenteRepository;
+import cv.igrp.simple.utente.domain.models.Utente;
+import cv.igrp.simple.utente.domain.repository.UtenteRepository;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +44,14 @@ public class CreateLicencaComercialCommandHandler implements CommandHandler<Crea
               .findById(Identificador.from(dto.getIdEstabelecimento()))
               .orElseThrow(() -> IgrpResponseStatusException.badRequest("Estabelecimento não encontrado: " + dto.getIdEstabelecimento()));
 
-      /*Utente utente = null;
+      Utente utente = null;
+
       if (dto.getIdUtente() != null && !dto.getIdUtente().isBlank()) {
+         var idUtente = Integer.parseInt(dto.getIdUtente());
          utente = utenteRepository
-                 .findById(Identificador.from(dto.getIdUtente()))
+                 .findById(idUtente)
                  .orElseThrow(() -> IgrpResponseStatusException.badRequest("Utente não encontrado: " + dto.getIdUtente()));
-      }*/
+      }
 
 
       // Criar licença comercial no domínio
@@ -62,7 +64,7 @@ public class CreateLicencaComercialCommandHandler implements CommandHandler<Crea
               dto.getHorarioFimFuncionamento(),
               dto.getDesignacao(),
               dto.getEstadoLicenca(),
-              null,
+              utente,
               estabelecimento
       );
 

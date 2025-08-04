@@ -5,7 +5,7 @@ import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
 import cv.igrp.simple.licenciamento.domain.models.LicencaComercial;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.LicencaComercialEntity;
-import cv.igrp.simple.utente.application.mapper.UtenteMapper;
+import cv.igrp.simple.utente.infrastructure.mappers.UtenteMapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -35,7 +35,7 @@ public class LicencaComercialMapper {
                 entity.getHorarioFimFuncionamento(),
                 entity.getDesignacao(),
                 entity.getEstado(),
-                null,
+                entity.getUtenteId() != null ? utenteMapper.toDomain(entity.getUtenteId()) : null,
                 estabelecimentoDomain
         );
     }
@@ -58,7 +58,7 @@ public class LicencaComercialMapper {
         entity.setHorarioFimFuncionamento(licenca.getHorarioFimFuncionamento());
         entity.setDesignacao(licenca.getDesignacao());
         entity.setEstado(licenca.getEstado());
-        entity.setUtenteId(null);
+        entity.setUtenteId(licenca.getUtente()!=null ? utenteMapper.toEntity(licenca.getUtente()) : null);
 
         entity.setIdEstabelecimento(estabelecimentoMapper.toEntity(licenca.getEstabelecimento()));
 
@@ -84,7 +84,10 @@ public class LicencaComercialMapper {
 
         dto.setEstabelecimento(licenca.getEstabelecimento() != null ?
                 estabelecimentoMapper.toDTO(licenca.getEstabelecimento()) : null);
-        //dto.setIdUtente(licenca.getUtente() != null ? licenca.getUtente().getIdUtente().getStringValor() : null);
+        dto.setIdUtente(licenca.getUtente() != null && licenca.getUtente().getId()!=null ? licenca.getUtente().getId().toString(): "");
+        dto.setNomeUtente(licenca.getUtente() != null ? licenca.getUtente().getNome() : "");
+        dto.setNumeroUtente(licenca.getUtente() != null ? licenca.getUtente().getNumero() : "");
+
 
         return dto;
     }

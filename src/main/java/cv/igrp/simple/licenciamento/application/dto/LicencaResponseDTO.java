@@ -57,5 +57,11 @@ public class LicencaResponseDTO  {
   
   
   private String idUtente ;
+  
+  
+  private String nomeUtente ;
+  
+  
+  private String numeroUtente ;
 
 }

@@ -1,6 +1,6 @@
-package cv.igrp.simple.pedidos.domain.repository;
+package cv.igrp.simple.utente.domain.repository;
 
-import cv.igrp.simple.pedidos.domain.models.Utente;
+import cv.igrp.simple.utente.domain.models.Utente;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 
 import java.util.Optional;
