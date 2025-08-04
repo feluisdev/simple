@@ -12,8 +12,6 @@ import java.util.UUID;
 
 
 @Repository
-@Tag(name = "Classes", description = "API para gestão de classes")
-@RepositoryRestResource(path = "classes")
 public interface ClasseEntityRepository extends
     JpaRepository<ClasseEntity, Integer>,
     JpaSpecificationExecutor<ClasseEntity>

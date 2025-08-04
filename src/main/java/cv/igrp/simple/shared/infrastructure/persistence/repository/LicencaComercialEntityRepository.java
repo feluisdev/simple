@@ -11,8 +11,6 @@ import java.util.UUID;
 
 
 @Repository
-@Tag(name = "Licenca Comercial", description = "API para gestão de Licenca Comercial")
-@RepositoryRestResource(path = "licencas-comerciais")
 public interface LicencaComercialEntityRepository extends
     JpaRepository<LicencaComercialEntity, Integer>,
     JpaSpecificationExecutor<LicencaComercialEntity>
