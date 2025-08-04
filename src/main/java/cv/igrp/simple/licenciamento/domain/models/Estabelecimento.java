@@ -72,6 +72,10 @@ public class Estabelecimento {
             String nif,
             TipoAtividade tipoAtividade
     ) {
+
+        Objects.requireNonNull(nome, "Nome não pode ser nulo");
+        Objects.requireNonNull(gerente, "Gerente não pode ser nulo");
+
         return new Estabelecimento(
                 null,
                 Identificador.gerarNovo(),

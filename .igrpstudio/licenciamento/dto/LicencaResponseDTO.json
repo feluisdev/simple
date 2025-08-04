@@ -126,16 +126,17 @@
       "primaryKey": false
     },
     {
-      "name": "idEstabelecimento",
-      "objectType": "java",
-      "type": "string",
+      "name": "estabelecimento",
+      "objectType": "dto",
+      "type": "EstabelecimentoResponse",
       "required": false,
       "before": false,
       "after": false,
       "positive": false,
       "isEmail": false,
       "isUrl": false,
-      "primaryKey": false
+      "primaryKey": false,
+      "module": "licenciamento"
     },
     {
       "name": "idUtente",

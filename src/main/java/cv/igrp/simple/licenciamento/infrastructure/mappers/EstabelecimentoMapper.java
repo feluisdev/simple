@@ -96,7 +96,6 @@ public class EstabelecimentoMapper {
 
         EstabelecimentoResponseDTO dto = new EstabelecimentoResponseDTO();
 
-        // Aqui 'nome' não está no domínio, então pode ficar vazio ou mapear outro campo
         dto.setNome(estabelecimento.getNome() != null ? estabelecimento.getNome() : "");
         dto.setGerente(estabelecimento.getGerente());
         dto.setDescricao(estabelecimento.getDescricao());
@@ -107,18 +106,15 @@ public class EstabelecimentoMapper {
         dto.setFlagVistoria(estabelecimento.isFlagVistoria());
         dto.setLicRetalho(estabelecimento.isLicRetalho());
 
-        // TipoAtividadeId como string, se tipoAtividade não for nulo
-        dto.setTipoAtividadeId(
+        dto.setTipoAtividade(
                 estabelecimento.getTipoAtividade() != null
-                        ? estabelecimento.getTipoAtividade().getIdTipoAtividade().getStringValor()
-                        : null
-        );
+                        ? tipoAtividadeMapper.toDTO(estabelecimento.getTipoAtividade()) : null);
 
         // Lista de IDs das classes
         if (estabelecimento.getClasses() != null) {
-            dto.setClassesId(
+            dto.setClasses(
                     estabelecimento.getClasses().stream()
-                            .map(c -> c.getIdClasse().getStringValor())
+                            .map(classeMapper::toDTO)
                             .collect(Collectors.toList())
             );
         }

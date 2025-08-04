@@ -114,21 +114,9 @@
       "primaryKey": false
     },
     {
-      "name": "tipoAtividadeId",
-      "objectType": "java",
-      "type": "string",
-      "required": false,
-      "before": false,
-      "after": false,
-      "positive": false,
-      "isEmail": false,
-      "isUrl": false,
-      "primaryKey": false
-    },
-    {
-      "name": "classesId",
-      "objectType": "java",
-      "type": "string",
+      "name": "tipoAtividade",
+      "objectType": "dto",
+      "type": "TipoAtividadeResponse",
       "required": false,
       "before": false,
       "after": false,
@@ -136,7 +124,21 @@
       "isEmail": false,
       "isUrl": false,
       "primaryKey": false,
-      "collectionType": "list"
+      "module": "licenciamento"
+    },
+    {
+      "name": "classes",
+      "objectType": "dto",
+      "type": "ClasseResponse",
+      "required": false,
+      "before": false,
+      "after": false,
+      "positive": false,
+      "isEmail": false,
+      "isUrl": false,
+      "primaryKey": false,
+      "collectionType": "list",
+      "module": "licenciamento"
     },
     {
       "name": "estado",

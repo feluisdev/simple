@@ -9,6 +9,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseDTO;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -51,8 +52,8 @@ public class LicencaResponseDTO  {
   
   private String estadoLicencaDesc ;
   
-  
-  private String idEstabelecimento ;
+  @Valid
+  private EstabelecimentoResponseDTO estabelecimento ;
   
   
   private String idUtente ;

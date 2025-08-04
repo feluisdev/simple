@@ -9,6 +9,8 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import cv.igrp.simple.licenciamento.application.dto.ClasseResponseDTO;
+import cv.igrp.simple.licenciamento.application.dto.TipoAtividadeResponseDTO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,11 +50,11 @@ public class EstabelecimentoResponseDTO  {
   
   private boolean licRetalho ;
   
+  @Valid
+  private TipoAtividadeResponseDTO tipoAtividade ;
   
-  private String tipoAtividadeId ;
-  
-  
-  private List<String> classesId = new ArrayList<>();
+  @Valid
+  private List<ClasseResponseDTO> classes = new ArrayList<>();
   
   
   private String estado ;

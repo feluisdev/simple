@@ -2,6 +2,7 @@ package cv.igrp.simple.licenciamento.domain.models;
 
 import cv.igrp.simple.pedidos.domain.models.Utente;
 import cv.igrp.simple.shared.application.constants.EstadoLicenca;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import lombok.Getter;
 
@@ -66,6 +67,28 @@ public class LicencaComercial {
             Utente utente,
             Estabelecimento estabelecimento
     ) {
+
+        Objects.requireNonNull(alvara, "Alvará não pode ser nulo");
+        Objects.requireNonNull(dataInicioLicenca, "Data de início da licença é obrigatória");
+        Objects.requireNonNull(dataFimLicenca, "Data de fim da licença é obrigatória");
+        Objects.requireNonNull(horarioInicioFuncionamento, "Horário de início do funcionamento é obrigatório");
+        Objects.requireNonNull(horarioFimFuncionamento, "Horário de fim do funcionamento é obrigatório");
+        Objects.requireNonNull(estabelecimento, "Estabelecimento não pode ser nulo");
+
+
+        if (dataFimLicenca.isBefore(dataInicioLicenca)) {
+            throw IgrpResponseStatusException.badRequest("Data de fim da licença não pode ser anterior à data de início");
+        }
+
+        if (dataRenovacaoLicenca.isBefore(dataInicioLicenca)) {
+            throw IgrpResponseStatusException.badRequest("Data de renovação não pode ser anterior à data de início da licença");
+        }
+
+        if (!horarioFimFuncionamento.isAfter(horarioInicioFuncionamento)) {
+            throw IgrpResponseStatusException.badRequest("Horário de fim do funcionamento deve ser posterior ao horário de início");
+        }
+
+
         return new LicencaComercial(
                 null,
                 Identificador.gerarNovo(),
@@ -125,8 +148,24 @@ public class LicencaComercial {
             Estabelecimento estabelecimento
     ) {
         Objects.requireNonNull(alvara, "Alvará não pode ser nulo");
-        Objects.requireNonNull(utente, "UtenteId não pode ser nulo");
+        Objects.requireNonNull(dataInicioLicenca, "Data de início da licença é obrigatória");
+        Objects.requireNonNull(dataFimLicenca, "Data de fim da licença é obrigatória");
+        Objects.requireNonNull(horarioInicioFuncionamento, "Horário de início do funcionamento é obrigatório");
+        Objects.requireNonNull(horarioFimFuncionamento, "Horário de fim do funcionamento é obrigatório");
         Objects.requireNonNull(estabelecimento, "Estabelecimento não pode ser nulo");
+
+
+        if (dataFimLicenca.isBefore(dataInicioLicenca)) {
+            throw IgrpResponseStatusException.badRequest("Data de fim da licença não pode ser anterior à data de início");
+        }
+
+        if (dataRenovacaoLicenca.isBefore(dataInicioLicenca)) {
+            throw IgrpResponseStatusException.badRequest("Data de renovação não pode ser anterior à data de início da licença");
+        }
+
+        if (!horarioFimFuncionamento.isAfter(horarioInicioFuncionamento)) {
+            throw IgrpResponseStatusException.badRequest("Horário de fim do funcionamento deve ser posterior ao horário de início");
+        }
 
         this.alvara = alvara;
         this.dataInicioLicenca = dataInicioLicenca;
@@ -137,6 +176,7 @@ public class LicencaComercial {
         this.designacao = designacao;
         this.utente = utente;
         this.estabelecimento = estabelecimento;
+        this.estado = estado;
     }
 
     public void ativar() {

@@ -82,7 +82,8 @@ public class LicencaComercialMapper {
         dto.setEstadoLicenca(licenca.getEstado() != null ? licenca.getEstado().name() : null);
         dto.setEstadoLicencaDesc(licenca.getEstado() != null ? licenca.getEstado().getDescription() : null);
 
-        dto.setIdEstabelecimento(licenca.getEstabelecimento() != null ? licenca.getEstabelecimento().getIdEstabelecimento().getStringValor() : null);
+        dto.setEstabelecimento(licenca.getEstabelecimento() != null ?
+                estabelecimentoMapper.toDTO(licenca.getEstabelecimento()) : null);
         //dto.setIdUtente(licenca.getUtente() != null ? licenca.getUtente().getIdUtente().getStringValor() : null);
 
         return dto;
