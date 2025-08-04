@@ -1,0 +1,161 @@
+{
+  "type": "controller",
+  "name": "LicencaComercial",
+  "module": "licenciamento",
+  "description": "gestao de licencas comerciais",
+  "basePath": "api/v1/licencas",
+  "actions": [
+    {
+      "actionName": "getLicencaComercialByID",
+      "path": "{idLicenca}",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "LicencaResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idLicenca",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getLicencasComerciais",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListaLicencaComercial",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "requestParams": [
+        {
+          "type": "string",
+          "name": "alvara",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "EstadoLicenca",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "idEstabelecimento",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "pagina",
+          "value": "0",
+          "isRequired": true
+        },
+        {
+          "type": "string",
+          "name": "tamanho",
+          "value": "20",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "createLicencaComercial",
+      "method": "POST",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "LicencaRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "LicencaResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "actionName": "updateLicencaComercial",
+      "path": "{idLicenca}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "LicencaRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "LicencaResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "idLicenca",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    }
+  ],
+  "id": "hfpv16702o-CONTROLLER"
+}

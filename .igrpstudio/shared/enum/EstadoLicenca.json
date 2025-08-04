@@ -1,0 +1,52 @@
+{
+  "type": "enum",
+  "module": "shared",
+  "name": "EstadoLicenca",
+  "values": [
+    {
+      "name": "A",
+      "attributes": [
+        "A",
+        "Ativa"
+      ]
+    },
+    {
+      "name": "E",
+      "attributes": [
+        "E",
+        "Experida"
+      ]
+    },
+    {
+      "name": "S",
+      "attributes": [
+        "S",
+        "Suspensa"
+      ]
+    },
+    {
+      "name": "C",
+      "attributes": [
+        "C",
+        "Cancelada"
+      ]
+    },
+    {
+      "name": "P",
+      "attributes": [
+        "P",
+        "Pendente"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "type": "string",
+      "name": "Code"
+    },
+    {
+      "type": "string",
+      "name": "Description"
+    }
+  ]
+}

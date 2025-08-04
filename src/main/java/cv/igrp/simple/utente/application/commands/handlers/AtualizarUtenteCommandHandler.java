@@ -6,7 +6,7 @@ import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.UtenteEntity;
 import cv.igrp.simple.utente.application.commands.commands.AtualizarUtenteCommand;
 import cv.igrp.simple.utente.application.dto.UtenteResponseDTO;
-import cv.igrp.simple.utente.application.mapper.UtenteMapper;
+import cv.igrp.simple.utente.infrastructure.mappers.UtenteMapper;
 import cv.igrp.simple.utente.domain.service.UtenteService;
 import cv.igrp.simple.shared.infrastructure.persistence.repository.UtenteEntityRepository;
 import org.slf4j.Logger;

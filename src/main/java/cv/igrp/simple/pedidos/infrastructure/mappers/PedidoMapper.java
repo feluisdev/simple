@@ -7,6 +7,7 @@ import cv.igrp.simple.pedidos.domain.models.*;
 import cv.igrp.simple.pedidos.domain.valueobject.CodigoAcompanhamento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.*;
+import cv.igrp.simple.utente.infrastructure.mappers.UtenteMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

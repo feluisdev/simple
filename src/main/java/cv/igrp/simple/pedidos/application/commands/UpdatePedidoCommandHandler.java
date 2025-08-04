@@ -2,10 +2,9 @@ package cv.igrp.simple.pedidos.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
-import cv.igrp.simple.configuracoes.domain.repository.StatusPedidoRepository;
 import cv.igrp.simple.configuracoes.domain.repository.TipoServicoRepository;
 import cv.igrp.simple.pedidos.domain.repository.PedidoRepository;
-import cv.igrp.simple.pedidos.domain.repository.UtenteRepository;
+import cv.igrp.simple.utente.domain.repository.UtenteRepository;
 import cv.igrp.simple.pedidos.infrastructure.mappers.PedidoMapper;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
@@ -15,8 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cv.igrp.simple.pedidos.application.dto.PedidoResponseDTO;
-
-import java.util.UUID;
 
 @Component
 public class UpdatePedidoCommandHandler implements CommandHandler<UpdatePedidoCommand, ResponseEntity<PedidoResponseDTO>> {
