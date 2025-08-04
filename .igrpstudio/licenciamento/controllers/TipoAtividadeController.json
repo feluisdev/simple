@@ -104,12 +104,14 @@
         {
           "type": "string",
           "name": "pagina",
-          "isRequired": true
+          "isRequired": true,
+          "value": "0"
         },
         {
           "type": "string",
           "name": "tamanho",
-          "isRequired": true
+          "isRequired": true,
+          "value": "20"
         }
       ]
     },

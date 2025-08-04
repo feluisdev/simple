@@ -143,8 +143,8 @@ public class TipoAtividadeController {
     @RequestParam(value = "codigo", required = false) String codigo,
     @RequestParam(value = "nome", required = false) String nome,
     @RequestParam(value = "estado", required = false) String estado,
-    @RequestParam(value = "pagina") String pagina,
-    @RequestParam(value = "tamanho") String tamanho)
+    @RequestParam(value = "pagina", defaultValue = "0") String pagina,
+    @RequestParam(value = "tamanho", defaultValue = "20") String tamanho)
   {
 
       LOGGER.debug("Operation started");
