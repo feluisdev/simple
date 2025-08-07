@@ -9,7 +9,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import cv.igrp.simple.licenciamento.application.dto.LicencaResponseDTO;
+import cv.igrp.simple.licenciamento.application.dto.LicencaResponseLigthDTO;
 import cv.igrp.simple.shared.application.dto.PageDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,6 @@ public class WrapperListaLicencaComercialDTO extends PageDTO {
 
   
   @Valid
-  private List<LicencaResponseDTO> content = new ArrayList<>();
+  private List<LicencaResponseLigthDTO> content = new ArrayList<>();
 
 }

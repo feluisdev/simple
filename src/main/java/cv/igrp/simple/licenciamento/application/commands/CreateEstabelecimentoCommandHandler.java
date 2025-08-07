@@ -2,6 +2,7 @@ package cv.igrp.simple.licenciamento.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
+import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseLigthDTO;
 import cv.igrp.simple.licenciamento.domain.models.Classe;
 import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
 import cv.igrp.simple.licenciamento.domain.repository.ClasseRepository;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class CreateEstabelecimentoCommandHandler implements CommandHandler<CreateEstabelecimentoCommand, ResponseEntity<EstabelecimentoResponseDTO>> {
+public class CreateEstabelecimentoCommandHandler implements CommandHandler<CreateEstabelecimentoCommand, ResponseEntity<EstabelecimentoResponseLigthDTO>> {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(CreateEstabelecimentoCommandHandler.class);
 
@@ -40,7 +41,7 @@ public class CreateEstabelecimentoCommandHandler implements CommandHandler<Creat
    }
 
    @IgrpCommandHandler
-   public ResponseEntity<EstabelecimentoResponseDTO> handle(CreateEstabelecimentoCommand command) {
+   public ResponseEntity<EstabelecimentoResponseLigthDTO> handle(CreateEstabelecimentoCommand command) {
       var dto = command.getEstabelecimentorequest();
 
       var tipoAtividade = tipoAtividadeRepository
@@ -80,7 +81,7 @@ public class CreateEstabelecimentoCommandHandler implements CommandHandler<Creat
       var saved = estabelecimentoRepository.save(estabelecimento);
 
       // Mapear para DTO e retornar
-      return ResponseEntity.ok(estabelecimentoMapper.toDTO(saved));
+      return ResponseEntity.ok(estabelecimentoMapper.toLigthDTO(saved));
    }
 
 }

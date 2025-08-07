@@ -46,7 +46,7 @@ public class GetEstabelecimentosQueryHandler implements QueryHandler<GetEstabele
         List<Estabelecimento> estabelecimentos = estabelecimentoRepository.findAll(filter);
 
         var contentDTO = estabelecimentos.stream()
-                .map(estabelecimentoMapper::toDTO)
+                .map(estabelecimentoMapper::toLigthDTO)
                 .toList();
 
         var response = new WrapperListaEstabelecimentoDTO();

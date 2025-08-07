@@ -47,7 +47,7 @@ public class GetLicencasComerciaisQueryHandler implements QueryHandler<GetLicenc
      List<LicencaComercial> licencas = repository.findAll(filter);
 
      var content = licencas.stream()
-             .map(mapper::toDTO)
+             .map(mapper::toLightDTO)
              .toList();
 
      var response = new WrapperListaLicencaComercialDTO();

@@ -12,7 +12,7 @@
     {
       "name": "content",
       "objectType": "dto",
-      "type": "EstabelecimentoResponse",
+      "type": "EstabelecimentoResponseLigth",
       "required": false,
       "before": false,
       "after": false,
