@@ -1,6 +1,7 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
 import cv.igrp.simple.licenciamento.application.dto.LicencaResponseDTO;
+import cv.igrp.simple.licenciamento.application.dto.LicencaResponseLigthDTO;
 import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
 import cv.igrp.simple.licenciamento.domain.models.LicencaComercial;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
@@ -89,6 +90,31 @@ public class LicencaComercialMapper {
         dto.setNumeroUtente(licenca.getUtente() != null ? licenca.getUtente().getNumero() : "");
 
 
+        return dto;
+    }
+
+
+    public LicencaResponseLigthDTO toLightDTO(LicencaComercial licenca) {
+        if (licenca == null) return null;
+
+        var dto = new LicencaResponseLigthDTO();
+
+        dto.setIdLicenca(licenca.getIdLicenca().getStringValor());
+        dto.setAlvara(licenca.getAlvara());
+        dto.setDataInicioLicenca(licenca.getDataInicioLicenca());
+        dto.setDataFimLicenca(licenca.getDataFimLicenca());
+        dto.setDataRenovacaoLicenca(licenca.getDataRenovacaoLicenca());
+        dto.setDesignacao(licenca.getDesignacao());
+        dto.setHorarioInicioFuncionamento(licenca.getHorarioInicioFuncionamento());
+        dto.setHorarioFimFuncionamento(licenca.getHorarioFimFuncionamento());
+
+        dto.setEstadoLicenca(licenca.getEstado() != null ? licenca.getEstado().name() : null);
+        dto.setEstadoLicencaDesc(licenca.getEstado() != null ? licenca.getEstado().getDescription() : null);
+
+        dto.setEstabelecimentoId(licenca.getEstabelecimento() != null ? licenca.getEstabelecimento().getIdEstabelecimento().getStringValor(): null);
+        dto.setIdUtente(licenca.getUtente() != null && licenca.getUtente().getId()!=null ? licenca.getUtente().getId().toString(): "");
+        dto.setNomeUtente(licenca.getUtente() != null ? licenca.getUtente().getNome() : "");
+        dto.setNumeroUtente(licenca.getUtente() != null ? licenca.getUtente().getNumero() : "");
         return dto;
     }
 

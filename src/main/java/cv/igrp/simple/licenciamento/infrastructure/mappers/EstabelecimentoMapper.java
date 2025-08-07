@@ -1,6 +1,7 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
 import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseDTO;
+import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseLigthDTO;
 import cv.igrp.simple.licenciamento.domain.models.Classe;
 import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
 import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
@@ -116,6 +117,40 @@ public class EstabelecimentoMapper {
             dto.setClasses(
                     estabelecimento.getClasses().stream()
                             .map(classeMapper::toDTO)
+                            .collect(Collectors.toList())
+            );
+        }
+
+        dto.setEstado(estabelecimento.getEstado() != null ? estabelecimento.getEstado().name() : "");
+        dto.setEstadoDesc(estabelecimento.getEstado() != null ? estabelecimento.getEstado().getDescription() : "");
+
+        return dto;
+    }
+
+
+    public EstabelecimentoResponseLigthDTO toLigthDTO(Estabelecimento estabelecimento) {
+        if (estabelecimento == null) return null;
+
+        var dto = new EstabelecimentoResponseLigthDTO();
+
+        dto.setEstabelecimentoId(estabelecimento.getIdEstabelecimento().getStringValor());
+        dto.setNome(estabelecimento.getNome() != null ? estabelecimento.getNome() : "");
+        dto.setGerente(estabelecimento.getGerente());
+        dto.setDescricao(estabelecimento.getDescricao());
+        dto.setEndereco(estabelecimento.getEndereco());
+        dto.setTelefone(estabelecimento.getTelefone());
+        dto.setEmail(estabelecimento.getEmail());
+        dto.setNif(estabelecimento.getNif());
+        dto.setFlagVistoria(estabelecimento.isFlagVistoria());
+        dto.setLicRetalho(estabelecimento.isLicRetalho());
+
+        dto.setTipoAtividadeId(estabelecimento.getTipoAtividade()!=null ? estabelecimento.getTipoAtividade().getIdTipoAtividade().getStringValor() : null);
+
+        // Lista de IDs das classes
+        if (estabelecimento.getClasses() != null) {
+            dto.setClasses(
+                    estabelecimento.getClasses().stream()
+                            .map(classe -> classe.getIdClasse().getStringValor())
                             .collect(Collectors.toList())
             );
         }
