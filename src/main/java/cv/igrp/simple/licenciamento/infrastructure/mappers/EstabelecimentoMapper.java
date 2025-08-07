@@ -145,6 +145,7 @@ public class EstabelecimentoMapper {
         dto.setLicRetalho(estabelecimento.isLicRetalho());
 
         dto.setTipoAtividadeId(estabelecimento.getTipoAtividade()!=null ? estabelecimento.getTipoAtividade().getIdTipoAtividade().getStringValor() : null);
+        dto.setTipoAtividadeNome(estabelecimento.getTipoAtividade()!=null ? estabelecimento.getTipoAtividade().getNome() : null);
 
         // Lista de IDs das classes
         if (estabelecimento.getClasses() != null) {

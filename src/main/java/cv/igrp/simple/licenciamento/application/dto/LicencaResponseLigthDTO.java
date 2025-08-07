@@ -55,6 +55,12 @@ public class LicencaResponseLigthDTO  {
   private String estabelecimentoId ;
   
   
+  private String estabelecimentoNome ;
+  
+  
+  private String estabelecimentoGerente ;
+  
+  
   private String idUtente ;
   
   

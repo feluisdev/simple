@@ -25,6 +25,7 @@ import cv.igrp.simple.licenciamento.application.queries.*;
 import cv.igrp.simple.licenciamento.application.dto.LicencaResponseDTO;
 import cv.igrp.simple.licenciamento.application.dto.WrapperListaLicencaComercialDTO;
 import cv.igrp.simple.licenciamento.application.dto.LicencaRequestDTO;
+import cv.igrp.simple.licenciamento.application.dto.LicencaResponseLigthDTO;
 
 @IgrpController
 @RestController
@@ -135,14 +136,14 @@ public class LicencaComercialController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = LicencaResponseDTO.class,
+                  implementation = LicencaResponseLigthDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<LicencaResponseDTO> createLicencaComercial(@Valid @RequestBody LicencaRequestDTO createLicencaComercialRequest
+  public ResponseEntity<LicencaResponseLigthDTO> createLicencaComercial(@Valid @RequestBody LicencaRequestDTO createLicencaComercialRequest
     )
   {
 
@@ -150,7 +151,7 @@ public class LicencaComercialController {
 
       final var command = new CreateLicencaComercialCommand(createLicencaComercialRequest);
 
-       ResponseEntity<LicencaResponseDTO> response = commandBus.send(command);
+       ResponseEntity<LicencaResponseLigthDTO> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 
@@ -172,14 +173,14 @@ public class LicencaComercialController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = LicencaResponseDTO.class,
+                  implementation = LicencaResponseLigthDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<LicencaResponseDTO> updateLicencaComercial(@Valid @RequestBody LicencaRequestDTO updateLicencaComercialRequest
+  public ResponseEntity<LicencaResponseLigthDTO> updateLicencaComercial(@Valid @RequestBody LicencaRequestDTO updateLicencaComercialRequest
     , @PathVariable(value = "idLicenca") String idLicenca)
   {
 
@@ -187,7 +188,7 @@ public class LicencaComercialController {
 
       final var command = new UpdateLicencaComercialCommand(updateLicencaComercialRequest, idLicenca);
 
-       ResponseEntity<LicencaResponseDTO> response = commandBus.send(command);
+       ResponseEntity<LicencaResponseLigthDTO> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 

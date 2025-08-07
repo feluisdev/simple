@@ -55,6 +55,9 @@ public class EstabelecimentoResponseLigthDTO  {
   private String tipoAtividadeId ;
   
   
+  private String tipoAtividadeNome ;
+  
+  
   private List<String> classes = new ArrayList<>();
   
   

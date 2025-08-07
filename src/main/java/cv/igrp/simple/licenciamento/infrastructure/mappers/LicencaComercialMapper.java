@@ -112,6 +112,8 @@ public class LicencaComercialMapper {
         dto.setEstadoLicencaDesc(licenca.getEstado() != null ? licenca.getEstado().getDescription() : null);
 
         dto.setEstabelecimentoId(licenca.getEstabelecimento() != null ? licenca.getEstabelecimento().getIdEstabelecimento().getStringValor(): null);
+        dto.setEstabelecimentoNome(licenca.getEstabelecimento() != null ? licenca.getEstabelecimento().getNome() : null);
+        dto.setEstabelecimentoGerente(licenca.getEstabelecimento() != null ? licenca.getEstabelecimento().getGerente() : null);
         dto.setIdUtente(licenca.getUtente() != null && licenca.getUtente().getId()!=null ? licenca.getUtente().getId().toString(): "");
         dto.setNomeUtente(licenca.getUtente() != null ? licenca.getUtente().getNome() : "");
         dto.setNumeroUtente(licenca.getUtente() != null ? licenca.getUtente().getNumero() : "");

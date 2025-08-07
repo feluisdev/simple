@@ -25,6 +25,7 @@ import cv.igrp.simple.licenciamento.application.queries.*;
 import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseDTO;
 import cv.igrp.simple.licenciamento.application.dto.WrapperListaEstabelecimentoDTO;
 import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoRequestDTO;
+import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseLigthDTO;
 import java.util.Map;
 
 @IgrpController
@@ -136,14 +137,14 @@ public class EstabelecimentoController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = EstabelecimentoResponseDTO.class,
+                  implementation = EstabelecimentoResponseLigthDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<EstabelecimentoResponseDTO> createEstabelecimento(@Valid @RequestBody EstabelecimentoRequestDTO createEstabelecimentoRequest
+  public ResponseEntity<EstabelecimentoResponseLigthDTO> createEstabelecimento(@Valid @RequestBody EstabelecimentoRequestDTO createEstabelecimentoRequest
     )
   {
 
@@ -151,7 +152,7 @@ public class EstabelecimentoController {
 
       final var command = new CreateEstabelecimentoCommand(createEstabelecimentoRequest);
 
-       ResponseEntity<EstabelecimentoResponseDTO> response = commandBus.send(command);
+       ResponseEntity<EstabelecimentoResponseLigthDTO> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 
@@ -173,14 +174,14 @@ public class EstabelecimentoController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = EstabelecimentoResponseDTO.class,
+                  implementation = EstabelecimentoResponseLigthDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<EstabelecimentoResponseDTO> updateEstabelecimento(@Valid @RequestBody EstabelecimentoRequestDTO updateEstabelecimentoRequest
+  public ResponseEntity<EstabelecimentoResponseLigthDTO> updateEstabelecimento(@Valid @RequestBody EstabelecimentoRequestDTO updateEstabelecimentoRequest
     , @PathVariable(value = "idEstabelecimento") String idEstabelecimento)
   {
 
@@ -188,7 +189,7 @@ public class EstabelecimentoController {
 
       final var command = new UpdateEstabelecimentoCommand(updateEstabelecimentoRequest, idEstabelecimento);
 
-       ResponseEntity<EstabelecimentoResponseDTO> response = commandBus.send(command);
+       ResponseEntity<EstabelecimentoResponseLigthDTO> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 
