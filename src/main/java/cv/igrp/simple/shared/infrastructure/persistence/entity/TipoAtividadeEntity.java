@@ -36,7 +36,7 @@ public class TipoAtividadeEntity extends AuditEntity {
     private String nome;
 
   
-    @Column(name="codigo")
+    @Column(name="codigo", unique = true)
     private String codigo;
 
   
