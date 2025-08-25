@@ -73,8 +73,8 @@ public class LicenseTypeController {
     @RequestParam(value = "renewable", required = false) boolean renewable,
     @RequestParam(value = "name", required = false) String name,
     @RequestParam(value = "code", required = false) String code,
-    @RequestParam(value = "pageNumber") String pageNumber,
-    @RequestParam(value = "pageSize") String pageSize)
+    @RequestParam(value = "pageNumber", defaultValue = "0") String pageNumber,
+    @RequestParam(value = "pageSize", defaultValue = "20") String pageSize)
   {
 
       LOGGER.debug("Operation started");

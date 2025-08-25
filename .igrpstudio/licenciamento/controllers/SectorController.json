@@ -48,12 +48,14 @@
         {
           "type": "string",
           "name": "pageNumber",
-          "isRequired": true
+          "isRequired": true,
+          "value": "0"
         },
         {
           "type": "string",
           "name": "pageSize",
-          "isRequired": true
+          "isRequired": true,
+          "value": "20"
         }
       ]
     },
@@ -212,5 +214,5 @@
       ]
     }
   ],
-  "id": "6t70cqkq49"
+  "id": "6t70cqkq49-getSectores"
 }
