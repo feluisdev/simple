@@ -14,7 +14,7 @@ public class Category {
     private String description;
     private String code;
     private boolean active;
-    private String level;
+    private Integer level;
     private Integer sortOrder;
     private Metadata metadata;
     private String path;
@@ -26,7 +26,7 @@ public class Category {
                      String description,
                      String code,
                      boolean active,
-                     String level,
+                     Integer level,
                      Integer sortOrder,
                      Metadata metadata,
                      String path,
@@ -49,7 +49,7 @@ public class Category {
     public static Category criarNovo(String name,
                                      String description,
                                      String code,
-                                     String level,
+                                     Integer level,
                                      Integer sortOrder,
                                      Metadata metadata,
                                      String path,
@@ -75,7 +75,7 @@ public class Category {
                                        String description,
                                        String code,
                                        boolean active,
-                                       String level,
+                                       Integer level,
                                        Integer sortOrder,
                                        Metadata metadata,
                                        String path,
@@ -87,7 +87,7 @@ public class Category {
     public void atualizar(String name,
                           String description,
                           String code,
-                          String level,
+                          Integer level,
                           Integer sortOrder,
                           Metadata metadata,
                           String path,

@@ -8,11 +8,8 @@ import cv.igrp.framework.stereotype.IgrpEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.Audited;
-
 import java.util.UUID;
-
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.List;
 
 @Audited
@@ -29,55 +26,55 @@ public class CategoryEntity extends AuditEntity {
     @Column(name = "id", unique = true, nullable = false)
     private UUID id;
 
-
+  
     @NotBlank(message = "name is mandatory")
-    @Column(name = "name", nullable = false)
+    @Column(name="name", nullable = false)
     private String name;
 
-
-    @Column(name = "description")
+  
+    @Column(name="description")
     private String description;
 
-
-    @Column(name = "code", unique = true)
+  
+    @Column(name="code", unique = true)
     private String code;
 
-
-    @Column(name = "active")
+  
+    @Column(name="active")
     private boolean active;
 
+  
+    @Column(name="level")
+    private Integer level;
 
-    @Column(name = "level")
-    private String level;
-
-
-    @Column(name = "sort_order")
+  
+    @Column(name="sort_order")
     private Integer sortOrder;
 
-
+  
     @Lob
-    @Column(name = "metadata", columnDefinition = "TEXT")
+    @Column(name="metadata", columnDefinition="TEXT")
     private String metadata;
 
-
-    @Column(name = "path")
+  
+    @Column(name="path")
     private String path;
 
-
-    @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
-    private List<CategoryEntity> childrens;
+  
 
 
-    @OneToMany(mappedBy = "categoryId", fetch = FetchType.LAZY)
-    private List<LicenseTypeEntity> licencetypes;
+  @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
+private List<CategoryEntity> childrens;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private CategoryEntity parentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sector_id")
-    private SectorEntity sectorId;
+  @OneToMany(mappedBy = "categoryId", fetch = FetchType.LAZY)
+private List<LicenseTypeEntity> licencetypes;   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "parent_id")
+   private CategoryEntity parentId;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "sector_id")
+   private SectorEntity sectorId;
 
 
 }
