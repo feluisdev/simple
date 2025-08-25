@@ -16,6 +16,7 @@ public class LicenseType {
     private String code;
     private String licensingModelKey;
     private Integer validityPeriod;
+    private String validityUnitKey;
     private boolean renewable;
     private boolean autoRenewal;
     private boolean requiresInspection;
@@ -35,6 +36,7 @@ public class LicenseType {
                         String code,
                         String licensingModelKey,
                         Integer validityPeriod,
+                        String validityUnitKey,
                         boolean renewable,
                         boolean autoRenewal,
                         boolean requiresInspection,
@@ -73,6 +75,7 @@ public class LicenseType {
                                         String code,
                                         String licensingModelKey,
                                         Integer validityPeriod,
+                                        String validityUnitKey,
                                         boolean renewable,
                                         boolean autoRenewal,
                                         boolean requiresInspection,
@@ -92,6 +95,7 @@ public class LicenseType {
                 code,
                 licensingModelKey,
                 validityPeriod,
+                validityUnitKey,
                 renewable,
                 autoRenewal,
                 requiresInspection,
@@ -113,6 +117,7 @@ public class LicenseType {
                                           String code,
                                           String licensingModelKey,
                                           Integer validityPeriod,
+                                          String validityUnitKey,
                                           boolean renewable,
                                           boolean autoRenewal,
                                           boolean requiresInspection,
@@ -133,6 +138,7 @@ public class LicenseType {
                 code,
                 licensingModelKey,
                 validityPeriod,
+                validityUnitKey,
                 renewable,
                 autoRenewal,
                 requiresInspection,
@@ -153,6 +159,7 @@ public class LicenseType {
                           String code,
                           String licensingModelKey,
                           Integer validityPeriod,
+                          String validityUnitKey,
                           boolean renewable,
                           boolean autoRenewal,
                           boolean requiresInspection,

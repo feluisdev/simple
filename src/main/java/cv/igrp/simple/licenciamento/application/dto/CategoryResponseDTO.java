@@ -29,13 +29,16 @@ public class CategoryResponseDTO  {
   private String code ;
   
   
+  private String name ;
+  
+  
   private String sectorId ;
   
   
   private String sectorName ;
   
   
-  private String level ;
+  private Integer level ;
   
   
   private String path ;

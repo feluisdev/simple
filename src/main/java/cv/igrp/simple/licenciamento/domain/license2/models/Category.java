@@ -4,6 +4,8 @@ import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.domain.valueobject.Metadata;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -18,8 +20,10 @@ public class Category {
     private Integer sortOrder;
     private Metadata metadata;
     private String path;
-    private Identificador parentId;  // Apenas referência, sem carregar objeto
-    private Identificador sectorId;  // Apenas referência
+
+    private Identificador parentId;       // apenas referência
+    private Sector sector;                // referência completa
+    private List<Category> children;  // filhos completos
 
     private Category(Identificador id,
                      String name,
@@ -31,19 +35,22 @@ public class Category {
                      Metadata metadata,
                      String path,
                      Identificador parentId,
-                     Identificador sectorId) {
+                     Sector sector,
+                     List<Category> children) {
 
-        this.id = Objects.requireNonNull(id, "Identificador não pode ser nulo");
-        this.name = Objects.requireNonNull(name, "Nome não pode ser nulo");
+        this.id = Objects.requireNonNull(id);
+        this.name = Objects.requireNonNull(name);
         this.description = description;
-        this.code = Objects.requireNonNull(code, "Código não pode ser nulo");
+        this.code = Objects.requireNonNull(code);
         this.active = active;
         this.level = level;
         this.sortOrder = sortOrder;
         this.metadata = metadata;
         this.path = path;
         this.parentId = parentId;
-        this.sectorId = sectorId;
+        this.sector = sector;
+        this.children = children != null ? children : new ArrayList<>();
+
     }
 
     public static Category criarNovo(String name,
@@ -54,55 +61,62 @@ public class Category {
                                      Metadata metadata,
                                      String path,
                                      Identificador parentId,
-                                     Identificador sectorId) {
+                                     Sector sector) {
         return new Category(
                 Identificador.gerarNovo(),
                 name,
                 description,
                 code,
-                true, // ativo por padrão
+                true,
                 level,
                 sortOrder,
                 metadata,
                 path,
                 parentId,
-                sectorId
+                sector,
+                new ArrayList<>()
         );
     }
 
-    public static Category reconstruir(Identificador id,
-                                       String name,
-                                       String description,
-                                       String code,
-                                       boolean active,
-                                       Integer level,
-                                       Integer sortOrder,
-                                       Metadata metadata,
-                                       String path,
-                                       Identificador parentId,
-                                       Identificador sectorId) {
-        return new Category(id, name, description, code, active, level, sortOrder, metadata, path, parentId, sectorId);
+    public static Category reconstruir(
+            Identificador id,
+            String name,
+            String description,
+            String code,
+            boolean active,
+            Integer level,
+            Integer sortOrder,
+            Metadata metadata,
+            String path,
+            Identificador parentId,
+            Sector sector,
+            List<Category> children) {
+
+        return new Category(
+                id,
+                name,
+                description,
+                code,
+                active,
+                level,
+                sortOrder,
+                metadata,
+                path,
+                parentId,
+                sector,
+                children != null ? children : new ArrayList<>()
+        );
     }
 
-    public void atualizar(String name,
-                          String description,
-                          String code,
-                          Integer level,
-                          Integer sortOrder,
-                          Metadata metadata,
-                          String path,
-                          Identificador parentId,
-                          Identificador sectorId) {
 
-        this.name = Objects.requireNonNull(name, "Nome não pode ser nulo");
-        this.description = description;
-        this.code = Objects.requireNonNull(code, "Código não pode ser nulo");
-        this.level = level;
-        this.sortOrder = sortOrder;
-        this.metadata = metadata;
-        this.path = path;
-        this.parentId = parentId;
-        this.sectorId = sectorId;
+    public void addChild(Category child) {
+        if (!children.contains(child)) {
+            children.add(child);
+        }
+    }
+
+    public void removeChild(Category child) {
+        children.remove(child);
     }
 
     public void ativar() {
@@ -114,6 +128,6 @@ public class Category {
     }
 
     public boolean isAtivo() {
-        return active;
+        return this.active;
     }
 }
