@@ -1,0 +1,226 @@
+{
+  "type": "controller",
+  "name": "LicenseType",
+  "module": "licenciamento",
+  "description": "gestao de tipos licenciamento",
+  "basePath": "api/v1/license-types",
+  "actions": [
+    {
+      "actionName": "getLicenseTypes",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListLicenseType",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "requestParams": [
+        {
+          "type": "string",
+          "name": "categoryId",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "licensingModel",
+          "isRequired": false
+        },
+        {
+          "type": "boolean",
+          "name": "active",
+          "isRequired": false
+        },
+        {
+          "type": "boolean",
+          "name": "renewable",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "name",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "code",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "pageNumber",
+          "isRequired": true
+        },
+        {
+          "type": "string",
+          "name": "pageSize",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getLicenseTypeById",
+      "path": "{licenseTypeId}",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "LicenseTypeResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "licenseTypeId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "createLicenseType",
+      "method": "POST",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "LicencaRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "LicenseTypeResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "actionName": "updateLicenseType",
+      "path": "{licenseTypeId}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "LicenseTypeRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "LicencaResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "licenseTypeId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "ativarLicenseType",
+      "path": "{licenseTypeId}/ativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "licenseTypeId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "desativarLicenseType",
+      "path": "{licenseTypeId}/desativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "licenseTypeId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    }
+  ],
+  "id": "t2h5fa23ea"
+}

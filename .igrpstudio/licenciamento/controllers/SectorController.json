@@ -1,0 +1,216 @@
+{
+  "type": "controller",
+  "name": "Sector",
+  "module": "licenciamento",
+  "description": "gestao de sectores",
+  "basePath": "api/v1/sectors",
+  "actions": [
+    {
+      "actionName": "getSectores",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "WrapperListSector",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "requestParams": [
+        {
+          "type": "string",
+          "name": "sectorType",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "name",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "code",
+          "isRequired": false
+        },
+        {
+          "type": "boolean",
+          "name": "active",
+          "isRequired": false
+        },
+        {
+          "type": "string",
+          "name": "pageNumber",
+          "isRequired": true
+        },
+        {
+          "type": "string",
+          "name": "pageSize",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "createSector",
+      "method": "POST",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "SectorRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "SectorResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "actionName": "updateSector",
+      "path": "{sectorId}",
+      "method": "PUT",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "SectorRequest",
+              "collectionType": "none",
+              "name": "data",
+              "objectType": "dto",
+              "module": "licenciamento"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "SectorResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "sectorId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "getSectorById",
+      "path": "{sectorId}",
+      "method": "GET",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "SectorResponse",
+                "objectType": "dto",
+                "name": "data",
+                "collectionType": "none",
+                "module": "licenciamento"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "sectorId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "ativarSector",
+      "path": "{sectorId}/ativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "map"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "sectorId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "actionName": "desativarSector",
+      "path": "{sectorId}/desativar",
+      "method": "PATCH",
+      "responses": {
+        "200": {
+          "name": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "name": "data",
+                "collectionType": "collection"
+              }
+            }
+          }
+        }
+      },
+      "pathVariables": [
+        {
+          "name": "sectorId",
+          "type": "string",
+          "isRequired": true
+        }
+      ]
+    }
+  ],
+  "id": "6t70cqkq49"
+}
