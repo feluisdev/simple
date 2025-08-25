@@ -2,6 +2,9 @@ package cv.igrp.simple.licenciamento.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
+import cv.igrp.simple.licenciamento.domain.license2.repository.CategoryRepository;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -14,14 +17,30 @@ public class MoveCategoryLicenciamentoCommandHandler implements CommandHandler<M
 
    private static final Logger LOGGER = LoggerFactory.getLogger(MoveCategoryLicenciamentoCommandHandler.class);
 
-   public MoveCategoryLicenciamentoCommandHandler() {
+   private final CategoryRepository categoryRepository;
 
+   public MoveCategoryLicenciamentoCommandHandler(CategoryRepository categoryRepository) {
+
+       this.categoryRepository = categoryRepository;
    }
 
    @IgrpCommandHandler
    public ResponseEntity<Map<String, ?>> handle(MoveCategoryLicenciamentoCommand command) {
-      // TODO: Implement the command handling logic here
-      return null;
+      var categoryId = Identificador.from(command.getCategoryId());
+
+      var category = categoryRepository.findById(categoryId)
+              .orElseThrow(() -> IgrpResponseStatusException.notFound(
+                      "Category with ID '" + command.getCategoryId() + "' not found"));
+
+      Identificador newParentId = command.getMovecategory().getNewParentId() != null
+              ? Identificador.from(command.getMovecategory().getNewParentId())
+              : null;
+
+      category.move(newParentId);
+
+      categoryRepository.save(category);
+
+      return ResponseEntity.ok(Map.of("message", "Category moved successfully"));
    }
 
 }

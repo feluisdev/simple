@@ -1,5 +1,9 @@
 package cv.igrp.simple.licenciamento.application.queries;
 
+import cv.igrp.simple.licenciamento.domain.license2.repository.CategoryRepository;
+import cv.igrp.simple.licenciamento.infrastructure.mappers.CategoryMapper;
+import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
+import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
@@ -15,15 +19,27 @@ public class GetCategoryLicenciamentoByIdQueryHandler implements QueryHandler<Ge
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GetCategoryLicenciamentoByIdQueryHandler.class);
 
+  private final CategoryRepository categoryRepository;
+  private final CategoryMapper categoryMapper;
 
-  public GetCategoryLicenciamentoByIdQueryHandler() {
 
+  public GetCategoryLicenciamentoByIdQueryHandler(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+
+      this.categoryRepository = categoryRepository;
+      this.categoryMapper = categoryMapper;
   }
 
    @IgrpQueryHandler
   public ResponseEntity<CategoryResponseDTO> handle(GetCategoryLicenciamentoByIdQuery query) {
-    // TODO: Implement the query handling logic here
-    return null;
+     var categoryId = Identificador.from(query.getCategoryId());
+
+     var category = categoryRepository.findById(categoryId)
+             .orElseThrow(() -> IgrpResponseStatusException.notFound(
+                     "Category with ID '" + query.getCategoryId() + "' not found"));
+
+     var responseDTO = categoryMapper.toDTO(category);
+
+     return ResponseEntity.ok(responseDTO);
   }
 
 }

@@ -78,6 +78,28 @@ public class Category {
         );
     }
 
+    public void atualizar(String name,
+                          String description,
+                          String code,
+                          Integer level,
+                          Integer sortOrder,
+                          Metadata metadata,
+                          String path,
+                          Identificador parentId,
+                          Sector sector) {
+
+        this.name = Objects.requireNonNull(name, "Nome não pode ser nulo");
+        this.description = description;
+        this.code = Objects.requireNonNull(code, "Código não pode ser nulo");
+        this.level = level;
+        this.sortOrder = sortOrder;
+        this.metadata = metadata;
+        this.path = path;
+        this.parentId = parentId;
+        this.sector = sector;
+    }
+
+
     public static Category reconstruir(
             Identificador id,
             String name,
