@@ -36,7 +36,7 @@ public class SectorResponseDTO  {
   private String sectorType ;
   
   
-  private String active ;
+  private boolean active ;
   
   
   private Integer sortOrder ;

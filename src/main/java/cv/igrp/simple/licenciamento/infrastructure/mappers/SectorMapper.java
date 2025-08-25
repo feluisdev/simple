@@ -3,6 +3,7 @@ package cv.igrp.simple.licenciamento.infrastructure.mappers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cv.igrp.simple.licenciamento.application.dto.SectorResponseDTO;
 import cv.igrp.simple.licenciamento.domain.license2.models.Sector;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.domain.valueobject.Metadata;
@@ -45,4 +46,20 @@ public class SectorMapper {
         entity.setMetadata(metadataMapper.toEntity(domain.getMetadata()));
         return entity;
     }
+
+    public SectorResponseDTO toResponseDTO(Sector sector) {
+        if (sector == null) return null;
+
+        SectorResponseDTO dto = new SectorResponseDTO();
+        dto.setId(sector.getId().getStringValor());
+        dto.setName(sector.getName());
+        dto.setDescription(sector.getDescription());
+        dto.setCode(sector.getCode());
+        dto.setSectorType(sector.getSectorTypeKey());
+        dto.setActive(sector.isActive());
+        dto.setSortOrder(sector.getSortOrder());
+
+        return dto;
+    }
+
 }
