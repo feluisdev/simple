@@ -49,6 +49,10 @@ public class LicenseTypeEntity extends AuditEntity {
     private Integer validityPeriod;
 
   
+    @Column(name="validity_unit_key")
+    private String validityUnitKey;
+
+  
     @Column(name="renewable")
     private boolean renewable;
 
