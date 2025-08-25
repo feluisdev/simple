@@ -2,9 +2,9 @@ package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
 import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseDTO;
 import cv.igrp.simple.licenciamento.application.dto.EstabelecimentoResponseLigthDTO;
-import cv.igrp.simple.licenciamento.domain.models.Classe;
-import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
-import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.Classe;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.Estabelecimento;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.TipoAtividade;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.ClasseEntity;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.EstabelecimentoEntity;

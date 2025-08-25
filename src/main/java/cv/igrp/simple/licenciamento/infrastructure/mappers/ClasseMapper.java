@@ -1,7 +1,7 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
 import cv.igrp.simple.licenciamento.application.dto.ClasseResponseDTO;
-import cv.igrp.simple.licenciamento.domain.models.Classe;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.Classe;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.ClasseEntity;
 import org.springframework.stereotype.Component;

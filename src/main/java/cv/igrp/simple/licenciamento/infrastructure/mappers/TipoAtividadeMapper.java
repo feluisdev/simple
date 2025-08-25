@@ -1,7 +1,7 @@
 package cv.igrp.simple.licenciamento.infrastructure.mappers;
 
 import cv.igrp.simple.licenciamento.application.dto.TipoAtividadeResponseDTO;
-import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.TipoAtividade;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.TipoAtividadeEntity;
 import org.springframework.stereotype.Component;

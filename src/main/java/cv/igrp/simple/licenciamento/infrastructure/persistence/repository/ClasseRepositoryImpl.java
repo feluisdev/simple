@@ -1,8 +1,8 @@
 package cv.igrp.simple.licenciamento.infrastructure.persistence.repository;
 
-import cv.igrp.simple.licenciamento.domain.filter.ClasseFilter;
-import cv.igrp.simple.licenciamento.domain.models.Classe;
-import cv.igrp.simple.licenciamento.domain.repository.ClasseRepository;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.filter.ClasseFilter;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.Classe;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.repository.ClasseRepository;
 import cv.igrp.simple.licenciamento.infrastructure.mappers.ClasseMapper;
 import cv.igrp.simple.shared.application.constants.Estado;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;

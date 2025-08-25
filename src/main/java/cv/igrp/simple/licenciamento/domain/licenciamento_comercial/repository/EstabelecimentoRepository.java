@@ -1,7 +1,7 @@
-package cv.igrp.simple.licenciamento.domain.repository;
+package cv.igrp.simple.licenciamento.domain.licenciamento_comercial.repository;
 
-import cv.igrp.simple.licenciamento.domain.filter.EstabelecimentoFilter;
-import cv.igrp.simple.licenciamento.domain.models.Estabelecimento;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.filter.EstabelecimentoFilter;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.Estabelecimento;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
 
 import java.util.List;

@@ -2,8 +2,8 @@ package cv.igrp.simple.licenciamento.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
-import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
-import cv.igrp.simple.licenciamento.domain.repository.TipoAtividadeRepository;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.TipoAtividade;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.repository.TipoAtividadeRepository;
 import cv.igrp.simple.licenciamento.infrastructure.mappers.TipoAtividadeMapper;
 import cv.igrp.simple.shared.domain.exceptions.IgrpResponseStatusException;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;

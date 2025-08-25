@@ -1,15 +1,14 @@
 package cv.igrp.simple.licenciamento.application.queries;
 
-import cv.igrp.simple.licenciamento.domain.filter.TipoAtividadeFilter;
-import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
-import cv.igrp.simple.licenciamento.domain.repository.TipoAtividadeRepository;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.filter.TipoAtividadeFilter;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.TipoAtividade;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.repository.TipoAtividadeRepository;
 import cv.igrp.simple.licenciamento.infrastructure.mappers.TipoAtividadeMapper;
 import cv.igrp.simple.shared.application.constants.Estado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cv.igrp.framework.core.domain.QueryHandler;
 import cv.igrp.framework.stereotype.IgrpQueryHandler;
-import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

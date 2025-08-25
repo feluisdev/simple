@@ -1,15 +1,15 @@
-package cv.igrp.simple.licenciamento.domain.filter;
+package cv.igrp.simple.licenciamento.domain.licenciamento_comercial.filter;
 
 import cv.igrp.simple.shared.application.constants.Estado;
 import lombok.Builder;
 import lombok.Getter;
 
-@Getter
 @Builder
-public class EstabelecimentoFilter {
+@Getter
+public class TipoAtividadeFilter {
 
     private String nome;
-    private String gerente;
+    private String codigo;
     private Estado estado;
     private Integer pageNumber;
     private Integer pageSize;

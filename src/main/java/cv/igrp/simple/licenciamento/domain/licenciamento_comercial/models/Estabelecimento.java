@@ -1,4 +1,4 @@
-package cv.igrp.simple.licenciamento.domain.models;
+package cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models;
 
 import cv.igrp.simple.shared.application.constants.Estado;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;

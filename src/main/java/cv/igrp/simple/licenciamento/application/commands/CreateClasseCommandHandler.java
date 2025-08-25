@@ -2,9 +2,8 @@ package cv.igrp.simple.licenciamento.application.commands;
 
 import cv.igrp.framework.core.domain.CommandHandler;
 import cv.igrp.framework.stereotype.IgrpCommandHandler;
-import cv.igrp.simple.licenciamento.application.dto.ClasseRequestDTO;
-import cv.igrp.simple.licenciamento.domain.models.Classe;
-import cv.igrp.simple.licenciamento.domain.repository.ClasseRepository;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.Classe;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.repository.ClasseRepository;
 import cv.igrp.simple.licenciamento.infrastructure.mappers.ClasseMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package cv.igrp.simple.licenciamento.infrastructure.persistence.repository;
 
 
-import cv.igrp.simple.licenciamento.domain.filter.TipoAtividadeFilter;
-import cv.igrp.simple.licenciamento.domain.models.TipoAtividade;
-import cv.igrp.simple.licenciamento.domain.repository.TipoAtividadeRepository;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.filter.TipoAtividadeFilter;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.models.TipoAtividade;
+import cv.igrp.simple.licenciamento.domain.licenciamento_comercial.repository.TipoAtividadeRepository;
 import cv.igrp.simple.licenciamento.infrastructure.mappers.TipoAtividadeMapper;
 import cv.igrp.simple.shared.application.constants.Estado;
 import cv.igrp.simple.shared.domain.valueobject.Identificador;
