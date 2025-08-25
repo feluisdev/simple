@@ -130,4 +130,9 @@ public class Category {
     public boolean isAtivo() {
         return this.active;
     }
+
+    public void move(Identificador newParentId) {
+        this.parentId = newParentId;
+    }
+
 }

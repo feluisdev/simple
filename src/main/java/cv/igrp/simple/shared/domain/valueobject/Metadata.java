@@ -24,8 +24,16 @@ public class Metadata {
     /**
      * Factory para criar Metadata a partir de um Map
      */
-    public static Metadata fromMap(Map<String, Object> map) {
+    /*public static Metadata fromMap(Map<String, Object> map) {
         return new Metadata(map);
+    }*/
+
+    public static Metadata fromMap(Map<String, ?> map) {
+        Map<String, Object> metadataMap = new HashMap<>();
+        if (map != null) {
+            metadataMap.putAll(map);
+        }
+        return new Metadata(metadataMap);
     }
 
     /**
