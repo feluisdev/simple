@@ -43,7 +43,8 @@
         {
           "type": "boolean",
           "name": "active",
-          "isRequired": false
+          "isRequired": false,
+          "value": "true"
         },
         {
           "type": "string",
@@ -214,5 +215,5 @@
       ]
     }
   ],
-  "id": "6t70cqkq49-getSectores"
+  "id": "6t70cqkq49-getSectores-getSectores"
 }

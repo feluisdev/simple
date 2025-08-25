@@ -73,7 +73,7 @@ public class CategoryController {
     @RequestParam(value = "level", required = false) Integer level,
     @RequestParam(value = "name", required = false) String name,
     @RequestParam(value = "code", required = false) String code,
-    @RequestParam(value = "active", required = false) boolean active,
+    @RequestParam(value = "active", required = false, defaultValue = "true") boolean active,
     @RequestParam(value = "pageNumber", defaultValue = "0") String pageNumber,
     @RequestParam(value = "pageSize", defaultValue = "20") String pageSize)
   {

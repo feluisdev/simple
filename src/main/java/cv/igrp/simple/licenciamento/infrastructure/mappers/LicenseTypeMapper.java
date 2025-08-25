@@ -9,6 +9,7 @@ import cv.igrp.simple.shared.domain.valueobject.Identificador;
 import cv.igrp.simple.shared.domain.valueobject.Metadata;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.CategoryEntity;
 import cv.igrp.simple.shared.infrastructure.persistence.entity.LicenseTypeEntity;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -19,8 +20,11 @@ public class LicenseTypeMapper {
 
     private final MetadataMapper metadataMapper;
 
-    public LicenseTypeMapper(MetadataMapper metadataMapper) {
+    private final EntityManager entityManager;
+
+    public LicenseTypeMapper(MetadataMapper metadataMapper, EntityManager entityManager) {
         this.metadataMapper = metadataMapper;
+        this.entityManager = entityManager;
     }
 
 
@@ -71,8 +75,10 @@ public class LicenseTypeMapper {
 
         // Relacionamento com Category
         if (domain.getCategoryId() != null) {
-            CategoryEntity parentEntity = new CategoryEntity();
-            entity.setCategoryId(parentEntity);
+            entity.setCategoryId(entityManager
+                    .getReference(CategoryEntity.class, domain.getCategoryId().getValor()));
+            /*CategoryEntity parentEntity = new CategoryEntity();
+            entity.setCategoryId(parentEntity);*/
         }
         return entity;
     }

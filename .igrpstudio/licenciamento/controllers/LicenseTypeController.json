@@ -38,7 +38,8 @@
         {
           "type": "boolean",
           "name": "active",
-          "isRequired": false
+          "isRequired": false,
+          "value": "true"
         },
         {
           "type": "boolean",
@@ -224,5 +225,5 @@
       ]
     }
   ],
-  "id": "t2h5fa23ea-createLicenseType-updateLicenseType-getLicenseTypes"
+  "id": "t2h5fa23ea-createLicenseType-updateLicenseType-getLicenseTypes-getLicenseTypes"
 }

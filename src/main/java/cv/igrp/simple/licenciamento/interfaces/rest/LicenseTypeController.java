@@ -69,7 +69,7 @@ public class LicenseTypeController {
   public ResponseEntity<WrapperListLicenseTypeDTO> getLicenseTypes(
     @RequestParam(value = "categoryId", required = false) String categoryId,
     @RequestParam(value = "licensingModel", required = false) String licensingModel,
-    @RequestParam(value = "active", required = false) boolean active,
+    @RequestParam(value = "active", required = false, defaultValue = "true") boolean active,
     @RequestParam(value = "renewable", required = false) boolean renewable,
     @RequestParam(value = "name", required = false) String name,
     @RequestParam(value = "code", required = false) String code,
