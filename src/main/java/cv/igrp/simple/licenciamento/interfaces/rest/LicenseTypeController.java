@@ -24,9 +24,7 @@ import cv.igrp.simple.licenciamento.application.queries.*;
 
 import cv.igrp.simple.licenciamento.application.dto.WrapperListLicenseTypeDTO;
 import cv.igrp.simple.licenciamento.application.dto.LicenseTypeResponseDTO;
-import cv.igrp.simple.licenciamento.application.dto.LicencaRequestDTO;
 import cv.igrp.simple.licenciamento.application.dto.LicenseTypeRequestDTO;
-import cv.igrp.simple.licenciamento.application.dto.LicencaResponseDTO;
 import java.util.Map;
 
 @IgrpController
@@ -148,7 +146,7 @@ public class LicenseTypeController {
     }
   )
   
-  public ResponseEntity<LicenseTypeResponseDTO> createLicenseType(@Valid @RequestBody LicencaRequestDTO createLicenseTypeRequest
+  public ResponseEntity<LicenseTypeResponseDTO> createLicenseType(@Valid @RequestBody LicenseTypeRequestDTO createLicenseTypeRequest
     )
   {
 
@@ -178,14 +176,14 @@ public class LicenseTypeController {
           content = @Content(
               mediaType = "application/json",
               schema = @Schema(
-                  implementation = LicencaResponseDTO.class,
+                  implementation = LicenseTypeResponseDTO.class,
                   type = "object")
           )
       )
     }
   )
   
-  public ResponseEntity<LicencaResponseDTO> updateLicenseType(@Valid @RequestBody LicenseTypeRequestDTO updateLicenseTypeRequest
+  public ResponseEntity<LicenseTypeResponseDTO> updateLicenseType(@Valid @RequestBody LicenseTypeRequestDTO updateLicenseTypeRequest
     , @PathVariable(value = "licenseTypeId") String licenseTypeId)
   {
 
@@ -193,7 +191,7 @@ public class LicenseTypeController {
 
       final var command = new UpdateLicenseTypeCommand(updateLicenseTypeRequest, licenseTypeId);
 
-       ResponseEntity<LicencaResponseDTO> response = commandBus.send(command);
+       ResponseEntity<LicenseTypeResponseDTO> response = commandBus.send(command);
 
        LOGGER.debug("Operation finished");
 

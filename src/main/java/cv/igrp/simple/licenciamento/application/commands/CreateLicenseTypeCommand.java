@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import cv.igrp.simple.licenciamento.application.dto.LicencaRequestDTO;
+import cv.igrp.simple.licenciamento.application.dto.LicenseTypeRequestDTO;
 
 @Data
 @NoArgsConstructor
@@ -13,6 +13,6 @@ import cv.igrp.simple.licenciamento.application.dto.LicencaRequestDTO;
 public class CreateLicenseTypeCommand implements Command {
 
   
-  private LicencaRequestDTO licencarequest;
+  private LicenseTypeRequestDTO licensetyperequest;
 
 }

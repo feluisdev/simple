@@ -56,6 +56,7 @@ public class LicenseType {
         this.code = Objects.requireNonNull(code, "Código não pode ser nulo");
         this.licensingModelKey = Objects.requireNonNull(licensingModelKey, "LicensingModelKey não pode ser nulo");
         this.validityPeriod = validityPeriod;
+        this.validityUnitKey = validityUnitKey;
         this.renewable = renewable;
         this.autoRenewal = autoRenewal;
         this.requiresInspection = requiresInspection;

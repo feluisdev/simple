@@ -102,7 +102,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "LicencaRequest",
+              "type": "LicenseTypeRequest",
               "collectionType": "none",
               "name": "data",
               "objectType": "dto",
@@ -151,7 +151,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "LicencaResponse",
+                "type": "LicenseTypeResponse",
                 "objectType": "dto",
                 "name": "data",
                 "collectionType": "none",
@@ -222,5 +222,5 @@
       ]
     }
   ],
-  "id": "t2h5fa23ea"
+  "id": "t2h5fa23ea-createLicenseType-updateLicenseType"
 }
