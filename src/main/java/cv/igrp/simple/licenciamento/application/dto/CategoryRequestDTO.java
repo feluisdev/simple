@@ -9,7 +9,8 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -37,5 +38,8 @@ public class CategoryRequestDTO  {
   
   
   private Integer sortOrder ;
+  
+  
+  private Map<String, ?> metadata = new HashMap<>();
 
 }
